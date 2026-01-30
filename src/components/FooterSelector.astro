@@ -1,0 +1,104 @@
+---
+import Footer from './Footer.astro';
+import FooterRSCA from './FooterRSCA.astro';
+---
+
+<div class="footer-wrapper">
+  <div class="footer-selector">
+    <label for="footer-style">Footer stijl:</label>
+    <select id="footer-style">
+      <option value="realmadrid">Real Madrid</option>
+      <option value="rsca">RSCA (Anderlecht)</option>
+    </select>
+  </div>
+
+  <div id="footer-realmadrid" class="footer-variant active">
+    <Footer />
+  </div>
+
+  <div id="footer-rsca" class="footer-variant">
+    <FooterRSCA />
+  </div>
+</div>
+
+<style>
+  .footer-wrapper {
+    grid-column: span 12;
+  }
+
+  .footer-selector {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    padding: 1rem;
+    background: rgba(255,255,255,0.05);
+    border-radius: 12px;
+    margin-bottom: 1rem;
+  }
+
+  .footer-selector label {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    opacity: 0.6;
+  }
+
+  .footer-selector select {
+    background: var(--navy);
+    color: var(--white);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 8px;
+    padding: 0.6rem 1rem;
+    font-size: 0.9rem;
+    cursor: pointer;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+
+  .footer-selector select:hover,
+  .footer-selector select:focus {
+    border-color: var(--red);
+  }
+
+  .footer-variant {
+    display: none;
+  }
+
+  .footer-variant.active {
+    display: block;
+  }
+
+  .footer-variant :global(footer) {
+    margin-top: 0;
+  }
+</style>
+
+<script>
+  const select = document.getElementById('footer-style') as HTMLSelectElement;
+  const footerRM = document.getElementById('footer-realmadrid');
+  const footerRSCA = document.getElementById('footer-rsca');
+
+  // Load saved preference
+  const saved = localStorage.getItem('footer-style');
+  if (saved) {
+    select.value = saved;
+    updateFooter(saved);
+  }
+
+  select.addEventListener('change', (e) => {
+    const value = (e.target as HTMLSelectElement).value;
+    localStorage.setItem('footer-style', value);
+    updateFooter(value);
+  });
+
+  function updateFooter(style: string) {
+    if (style === 'rsca') {
+      footerRM?.classList.remove('active');
+      footerRSCA?.classList.add('active');
+    } else {
+      footerRSCA?.classList.remove('active');
+      footerRM?.classList.add('active');
+    }
+  }
+</script>
