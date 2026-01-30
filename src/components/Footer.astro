@@ -26,10 +26,18 @@ const footerLinks = {
 };
 
 const sponsors = [
-  { name: 'Sponsor 1', logo: '🏪' },
-  { name: 'Sponsor 2', logo: '🏢' },
-  { name: 'Sponsor 3', logo: '🏭' },
-  { name: 'Sponsor 4', logo: '🏬' },
+  { name: 'KwadrO', logo: '/sponsors/kwadro.png' },
+  { name: 'Schilderwerken Hermans', logo: '/sponsors/schilderwerken-hermans.png' },
+  { name: 'Groep Hendrickx', logo: '/sponsors/groep-hendrickx.png' },
+  { name: 'Tom Feytons', logo: '/sponsors/tom-feytons.png' },
+  { name: 'MCB Events', logo: '/sponsors/mcb-events.png' },
+  { name: 'Stevens Houttechniek', logo: '/sponsors/stevens-houttechniek.png' },
+  { name: 'Fyto Vrancken', logo: '/sponsors/fyto-vrancken.png' },
+  { name: 'SEE-IT', logo: '/sponsors/see-it.png' },
+  { name: 'Advivo', logo: '/sponsors/advivo.png' },
+  { name: 'Joris', logo: '/sponsors/joris.png' },
+  { name: 'Drankenhandel GOS', logo: '/sponsors/drankenhandel-gos.png' },
+  { name: 'Glowww', logo: '/sponsors/glowww.png' },
 ];
 
 const legalLinks = [
@@ -46,7 +54,7 @@ const legalLinks = [
     <div class="sponsors-grid">
       {sponsors.map(sponsor => (
         <a href="#" class="sponsor">
-          <span class="sponsor-logo">{sponsor.logo}</span>
+          <img src={sponsor.logo} alt={sponsor.name} class="sponsor-logo" />
         </a>
       ))}
     </div>
@@ -146,8 +154,10 @@ const legalLinks = [
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 3rem;
+    gap: 2rem;
     flex-wrap: wrap;
+    max-width: 1200px;
+    margin: 0 auto;
   }
   .sponsor {
     text-decoration: none;
@@ -158,7 +168,10 @@ const legalLinks = [
     opacity: 1;
   }
   .sponsor-logo {
-    font-size: 2.5rem;
+    height: 40px;
+    width: auto;
+    max-width: 120px;
+    object-fit: contain;
     filter: grayscale(100%);
     transition: filter 0.2s;
   }
