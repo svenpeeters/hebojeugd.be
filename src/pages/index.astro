@@ -1,6 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Card from '../components/Card.astro';
+import Footer from '../components/Footer.astro';
 
 const teams = ['U6', 'U7', 'U9', 'U10', 'U11', 'U12', 'U15', 'U17'];
 
@@ -93,9 +94,7 @@ const terreinen = [
     </Card>
 
     <!-- Footer -->
-    <div class="footer">
-      © 2026 VC HEBO Jeugd — Heers & Bovelingen
-    </div>
+    <Footer />
   </div>
 </Layout>
 
@@ -300,15 +299,6 @@ const terreinen = [
   }
   :global(.card-link:hover) .arrow {
     transform: translateX(10px);
-  }
-
-  /* Footer */
-  .footer {
-    grid-column: span 12;
-    text-align: center;
-    padding: 2rem;
-    opacity: 0.4;
-    font-size: 0.85rem;
   }
 
   /* Responsive */
