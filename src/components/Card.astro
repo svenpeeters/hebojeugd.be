@@ -1,0 +1,50 @@
+---
+interface Props {
+  variant?: 'default' | 'dark' | 'red';
+  class?: string;
+  href?: string;
+}
+
+const { variant = 'default', class: className = '', href } = Astro.props;
+
+const variantClasses = {
+  default: '',
+  dark: 'card-dark',
+  red: 'card-red'
+};
+
+const Element = href ? 'a' : 'div';
+---
+
+<Element 
+  class:list={['card', variantClasses[variant], className]}
+  href={href}
+  target={href ? '_blank' : undefined}
+>
+  <slot />
+</Element>
+
+<style>
+  .card {
+    background: var(--light);
+    color: var(--navy);
+    border-radius: 16px;
+    padding: 2rem;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.4s cubic-bezier(0.2, 0, 0, 1);
+    text-decoration: none;
+  }
+  .card:hover {
+    transform: scale(1.02);
+  }
+  .card-dark {
+    background: var(--navy);
+    color: var(--white);
+    border: 1px solid #3a4a7a;
+  }
+  .card-red {
+    background: var(--red);
+    color: var(--white);
+  }
+</style>

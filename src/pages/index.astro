@@ -1,0 +1,333 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Card from '../components/Card.astro';
+
+const teams = ['U6', 'U7', 'U9', 'U10', 'U11', 'U12', 'U15', 'U17'];
+
+const terreinen = [
+  { naam: 'Heers VV', adres: 'Raes van Heerslaan', plaats: '3870 Heers', variant: 'default' as const },
+  { naam: 'EMBO', adres: 'Gelindenstraat z/n', plaats: '3870 Mechelen-Bovelingen', variant: 'dark' as const }
+];
+---
+
+<Layout title="VC HEBO Jeugd">
+  <div class="bento">
+    <!-- Hero -->
+    <div class="card card-hero">
+      <img src="/logo.png" alt="HEBO Jeugd" class="logo" />
+      <h1>HEBO<br /><span>JEUGD</span></h1>
+    </div>
+
+    <!-- Stamnummer -->
+    <Card variant="dark" class="card-side stat">
+      <div>
+        <div class="stat-number">09827</div>
+        <div class="stat-label">Stamnummer</div>
+      </div>
+    </Card>
+
+    <!-- Since -->
+    <Card variant="red" class="card-side stat">
+      <div>
+        <div class="stat-number">2024</div>
+        <div class="stat-label">Samen sterk sinds</div>
+      </div>
+    </Card>
+
+    <!-- About -->
+    <Card class="card-teams">
+      <p class="overline">Over ons</p>
+      <p class="body-text">
+        Sinds 2024 zijn de jeugdclubs van Heers & EMBO één krachtig team geworden. 
+        Samen bouwen we aan de toekomst van onze spelers, met respect en teamgeest als kernwaarden.
+      </p>
+      <a href="https://www.voetbalvlaanderen.be/club/9732/komende-wedstrijden" target="_blank" class="cta">
+        Bekijk wedstrijden <span>→</span>
+      </a>
+    </Card>
+
+    <!-- Teams -->
+    <Card variant="dark" class="card-teams">
+      <p class="overline dim">Teams</p>
+      <h2 class="headline">Van U6 tot U17</h2>
+      <div class="teams-flex">
+        {teams.map(team => <span class="team-tag">{team}</span>)}
+      </div>
+    </Card>
+
+    <!-- Terreinen -->
+    {terreinen.map(terrein => (
+      <Card variant={terrein.variant} class="card-location">
+        <div class="location-icon">📍</div>
+        <div>
+          <p class={`overline ${terrein.variant === 'dark' ? 'dim' : ''}`}>Terrein</p>
+          <h3 class="headline">{terrein.naam}</h3>
+          <p class="body-text location-address">
+            {terrein.adres}<br />{terrein.plaats}
+          </p>
+        </div>
+      </Card>
+    ))}
+
+    <!-- Quote -->
+    <Card variant="red" class="card-quote">
+      <div class="quote-text">Respect.<br />Teamgeest.<br />Plezier.</div>
+    </Card>
+
+    <!-- Link Voetbal Vlaanderen -->
+    <Card variant="red" class="card-link" href="https://www.voetbalvlaanderen.be/club/9732">
+      <div>
+        <p class="overline bright">Extern</p>
+        <h3 class="headline">Voetbal Vlaanderen</h3>
+      </div>
+      <span class="arrow">→</span>
+    </Card>
+
+    <!-- Link Wedstrijden -->
+    <Card variant="dark" class="card-link" href="https://www.voetbalvlaanderen.be/club/9732/komende-wedstrijden">
+      <div>
+        <p class="overline dim">Agenda</p>
+        <h3 class="headline">Wedstrijden</h3>
+      </div>
+      <span class="arrow">→</span>
+    </Card>
+
+    <!-- Footer -->
+    <div class="footer">
+      © 2026 VC HEBO Jeugd — Heers & Bovelingen
+    </div>
+  </div>
+</Layout>
+
+<style>
+  /* Bento Grid */
+  .bento {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 1rem;
+    padding: 1rem;
+    min-height: 100vh;
+  }
+
+  /* Hero Card */
+  .card-hero {
+    grid-column: span 8;
+    grid-row: span 2;
+    background: var(--white);
+    color: var(--navy);
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    min-height: 500px;
+    padding: 3rem;
+    position: relative;
+    transition: transform 0.4s cubic-bezier(0.2, 0, 0, 1);
+  }
+  .card-hero:hover {
+    transform: scale(1.02);
+  }
+  .card-hero .logo {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -60%);
+    width: 280px;
+    opacity: 0.9;
+    transition: transform 0.6s cubic-bezier(0.2, 0, 0, 1);
+  }
+  .card-hero:hover .logo {
+    transform: translate(-50%, -60%) scale(1.05);
+  }
+  .card-hero h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(4rem, 10vw, 8rem);
+    line-height: 0.9;
+    letter-spacing: -2px;
+    text-transform: uppercase;
+  }
+  .card-hero h1 span {
+    color: var(--red);
+  }
+
+  /* Side Cards */
+  .card-side {
+    grid-column: span 4;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 240px;
+  }
+
+  /* Typography */
+  .overline {
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    opacity: 0.6;
+    margin-bottom: 0.5rem;
+  }
+  .overline.dim {
+    opacity: 0.4;
+  }
+  .overline.bright {
+    opacity: 0.7;
+  }
+  .headline {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2.5rem;
+    line-height: 1;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+  .body-text {
+    font-size: 1rem;
+    line-height: 1.6;
+    opacity: 0.8;
+  }
+
+  /* Stat */
+  .stat {
+    text-align: center;
+  }
+  .stat-number {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 5rem;
+    line-height: 1;
+    letter-spacing: 2px;
+  }
+  .stat-label {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    opacity: 0.6;
+    margin-top: 0.5rem;
+  }
+
+  /* CTA Button */
+  .cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: var(--navy);
+    color: var(--white);
+    padding: 1rem 2rem;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+    margin-top: 1rem;
+  }
+  .cta:hover {
+    background: var(--red);
+    gap: 1rem;
+  }
+
+  /* Teams Grid */
+  .card-teams {
+    grid-column: span 6;
+  }
+  .teams-flex {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 1.5rem;
+  }
+  .team-tag {
+    background: var(--white);
+    color: var(--navy);
+    padding: 0.6rem 1.2rem;
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 0.85rem;
+    letter-spacing: 1px;
+  }
+
+  /* Location Cards */
+  .card-location {
+    grid-column: span 3;
+  }
+  .location-icon {
+    width: 48px;
+    height: 48px;
+    background: var(--navy);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    margin-bottom: 1.5rem;
+  }
+  :global(.card-dark) .location-icon {
+    background: var(--white);
+  }
+  .location-address {
+    margin-top: 0.5rem;
+  }
+
+  /* Quote Card */
+  .card-quote {
+    grid-column: span 6;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+  .quote-text {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 3rem;
+    line-height: 1.1;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+
+  /* Link Card */
+  .card-link {
+    grid-column: span 4;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .arrow {
+    font-size: 2rem;
+    align-self: flex-end;
+    transition: transform 0.3s ease;
+  }
+  :global(.card-link:hover) .arrow {
+    transform: translateX(10px);
+  }
+
+  /* Footer */
+  .footer {
+    grid-column: span 12;
+    text-align: center;
+    padding: 2rem;
+    opacity: 0.4;
+    font-size: 0.85rem;
+  }
+
+  /* Responsive */
+  @media (max-width: 1024px) {
+    .card-hero { grid-column: span 12; }
+    .card-side { grid-column: span 6; }
+    .card-teams { grid-column: span 12; }
+    .card-location { grid-column: span 6; }
+    .card-quote { grid-column: span 12; }
+    .card-link { grid-column: span 6; }
+  }
+  @media (max-width: 600px) {
+    .bento { gap: 0.75rem; padding: 0.75rem; }
+    .card-hero { min-height: 400px; }
+    .card-hero .logo { width: 180px; }
+    .card-hero h1 { font-size: 3rem; }
+    .card-side, .card-location, .card-link { grid-column: span 12; }
+    .headline { font-size: 2rem; }
+    .stat-number { font-size: 3.5rem; }
+    .quote-text { font-size: 2rem; }
+  }
+</style>
