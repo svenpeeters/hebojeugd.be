@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import Footer from '../components/Footer.astro';
 ---
 
 <Layout title="VC HEBO Jeugd">
@@ -105,22 +106,7 @@ import Layout from '../layouts/Layout.astro';
     </section>
 
     <!-- Footer -->
-    <footer class="footer">
-      <div class="footer-top">
-        <div class="footer-brand">
-          <img src="/logo.png" alt="HEBO Jeugd" />
-          <span>HEBO Jeugd</span>
-        </div>
-        <div class="footer-links">
-          <a href="https://www.voetbalvlaanderen.be/club/9732" target="_blank">Voetbal Vlaanderen</a>
-          <a href="https://www.voetbalvlaanderen.be/club/9732/komende-wedstrijden" target="_blank">Wedstrijden</a>
-        </div>
-      </div>
-      <div class="footer-bottom">
-        <span>© 2026 VC HEBO Jeugd</span>
-        <span>Heers × Bovelingen</span>
-      </div>
-    </footer>
+    <Footer />
   </main>
 </Layout>
 
@@ -452,60 +438,6 @@ import Layout from '../layouts/Layout.astro';
     line-height: 1;
   }
 
-  /* Footer */
-  .footer {
-    background: #0a0f1a;
-    color: #fff;
-    padding: 4rem 8vw;
-  }
-
-  .footer-top {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding-bottom: 3rem;
-    border-bottom: 1px solid #222;
-  }
-
-  .footer-brand {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-  }
-
-  .footer-brand img {
-    width: 50px;
-  }
-
-  .footer-brand span {
-    font-weight: 700;
-    font-size: 1.2rem;
-  }
-
-  .footer-links {
-    display: flex;
-    gap: 2rem;
-  }
-
-  .footer-links a {
-    color: #fff;
-    text-decoration: none;
-    opacity: 0.6;
-    transition: opacity 0.2s;
-  }
-
-  .footer-links a:hover {
-    opacity: 1;
-  }
-
-  .footer-bottom {
-    display: flex;
-    justify-content: space-between;
-    padding-top: 2rem;
-    font-size: 0.85rem;
-    opacity: 0.4;
-  }
-
   /* Responsive */
   @media (max-width: 900px) {
     .hero {
@@ -567,21 +499,5 @@ import Layout from '../layouts/Layout.astro';
       transform: rotate(0deg);
     }
 
-    .footer {
-      padding: 3rem 2rem;
-    }
-
-    .footer-top {
-      flex-direction: column;
-      gap: 2rem;
-      text-align: center;
-    }
-
-    .footer-bottom {
-      flex-direction: column;
-      align-items: center;
-      gap: 0.5rem;
-      text-align: center;
-    }
   }
 </style>
