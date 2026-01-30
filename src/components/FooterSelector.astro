@@ -1,6 +1,7 @@
 ---
 import Footer from './Footer.astro';
 import FooterRSCA from './FooterRSCA.astro';
+import FooterFull from './FooterFull.astro';
 ---
 
 <div class="footer-wrapper">
@@ -8,7 +9,8 @@ import FooterRSCA from './FooterRSCA.astro';
     <label for="footer-style">Footer stijl:</label>
     <select id="footer-style">
       <option value="realmadrid">Real Madrid</option>
-      <option value="rsca">RSCA (Anderlecht)</option>
+      <option value="rsca">RSCA Minimal</option>
+      <option value="full">RSCA Full</option>
     </select>
   </div>
 
@@ -18,6 +20,10 @@ import FooterRSCA from './FooterRSCA.astro';
 
   <div id="footer-rsca" class="footer-variant">
     <FooterRSCA />
+  </div>
+
+  <div id="footer-full" class="footer-variant">
+    <FooterFull />
   </div>
 </div>
 
@@ -76,12 +82,11 @@ import FooterRSCA from './FooterRSCA.astro';
 
 <script>
   const select = document.getElementById('footer-style') as HTMLSelectElement;
-  const footerRM = document.getElementById('footer-realmadrid');
-  const footerRSCA = document.getElementById('footer-rsca');
+  const variants = ['realmadrid', 'rsca', 'full'];
 
   // Load saved preference
   const saved = localStorage.getItem('footer-style');
-  if (saved) {
+  if (saved && variants.includes(saved)) {
     select.value = saved;
     updateFooter(saved);
   }
@@ -93,12 +98,11 @@ import FooterRSCA from './FooterRSCA.astro';
   });
 
   function updateFooter(style: string) {
-    if (style === 'rsca') {
-      footerRM?.classList.remove('active');
-      footerRSCA?.classList.add('active');
-    } else {
-      footerRSCA?.classList.remove('active');
-      footerRM?.classList.add('active');
-    }
+    variants.forEach(v => {
+      const el = document.getElementById(`footer-${v}`);
+      if (el) {
+        el.classList.toggle('active', v === style);
+      }
+    });
   }
 </script>
