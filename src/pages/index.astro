@@ -79,23 +79,64 @@ const upcomingMatches = matches.slice(0, 6);
     <!-- Matches Section -->
     <section class="matches">
       <div class="matches-header">
-        <h2 class="section-title">Komende wedstrijden</h2>
+        <div class="matches-header-left">
+          <h2 class="section-title">Komende wedstrijden</h2>
+          <div class="matches-selector">
+            <select id="matches-style">
+              <option value="cards">Big Cards</option>
+              <option value="ticker">Ticker</option>
+              <option value="minimal">Minimal List</option>
+            </select>
+          </div>
+        </div>
         <a href="https://www.voetbalvlaanderen.be/club/9732/komende-wedstrijden" target="_blank" class="matches-link">Alle wedstrijden →</a>
       </div>
-      <div class="matches-grid">
+
+      <!-- Style 1: Big Cards -->
+      <div class="matches-view matches-cards active" id="view-cards">
+        {upcomingMatches.slice(0, 3).map((match, i) => (
+          <div class={`big-card ${match.isHome ? 'home' : 'away'}`}>
+            <div class="big-card-num">0{i + 1}</div>
+            <div class="big-card-content">
+              <div class="big-card-team">{match.team}</div>
+              <div class="big-card-versus">
+                <span>{match.home}</span>
+                <span class="vs">vs</span>
+                <span>{match.away}</span>
+              </div>
+              <div class="big-card-meta">
+                <span class="big-card-date">{new Date(match.date).toLocaleDateString('nl-BE', { weekday: 'long', day: 'numeric', month: 'long' })}</span>
+                <span class="big-card-time">{match.time}</span>
+              </div>
+            </div>
+            <div class="big-card-badge">{match.isHome ? 'THUIS' : 'UIT'}</div>
+          </div>
+        ))}
+      </div>
+
+      <!-- Style 2: Ticker -->
+      <div class="matches-view matches-ticker" id="view-ticker">
+        <div class="ticker-track">
+          {[...upcomingMatches, ...upcomingMatches].map(match => (
+            <div class="ticker-item">
+              <span class="ticker-team">{match.team}</span>
+              <span class="ticker-match">{match.home} vs {match.away}</span>
+              <span class="ticker-date">{new Date(match.date).toLocaleDateString('nl-BE', { day: 'numeric', month: 'short' })} • {match.time}</span>
+              <span class="ticker-divider">◆</span>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- Style 3: Minimal List -->
+      <div class="matches-view matches-minimal" id="view-minimal">
         {upcomingMatches.map(match => (
-          <div class={`match-card ${match.isHome ? 'home' : 'away'}`}>
-            <div class="match-date">
-              <span class="match-day">{new Date(match.date).toLocaleDateString('nl-BE', { weekday: 'short' })}</span>
-              <span class="match-num">{new Date(match.date).getDate()}</span>
-              <span class="match-month">{new Date(match.date).toLocaleDateString('nl-BE', { month: 'short' })}</span>
-            </div>
-            <div class="match-info">
-              <span class="match-team">{match.team}</span>
-              <span class="match-versus">{match.home} vs {match.away}</span>
-              <span class="match-meta">{match.time} • {match.location}</span>
-            </div>
-            <div class="match-badge">{match.isHome ? 'THUIS' : 'UIT'}</div>
+          <div class={`minimal-row ${match.isHome ? 'home' : ''}`}>
+            <span class="minimal-date">{new Date(match.date).toLocaleDateString('nl-BE', { day: '2-digit', month: '2-digit' })}</span>
+            <span class="minimal-team">{match.team}</span>
+            <span class="minimal-versus">{match.home} — {match.away}</span>
+            <span class="minimal-time">{match.time}</span>
+            <span class="minimal-badge">{match.isHome ? '⌂' : '→'}</span>
           </div>
         ))}
       </div>
@@ -406,8 +447,14 @@ const upcomingMatches = matches.slice(0, 6);
   .matches-header {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-start;
     margin-bottom: 3rem;
+  }
+
+  .matches-header-left {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
   }
 
   .matches-header .section-title {
@@ -415,77 +462,206 @@ const upcomingMatches = matches.slice(0, 6);
     color: #1a1a1a;
   }
 
+  .matches-selector select {
+    background: #1a1a1a;
+    color: #fff;
+    border: none;
+    padding: 0.5rem 1rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+  }
+
   .matches-link {
     color: #c8202f;
     text-decoration: none;
     font-weight: 600;
-    transition: gap 0.2s;
   }
 
   .matches-link:hover {
     text-decoration: underline;
   }
 
-  .matches-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1rem;
+  .matches-view {
+    display: none;
   }
 
-  .match-card {
+  .matches-view.active {
+    display: block;
+  }
+
+  /* Big Cards Style */
+  .matches-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    background: #e0e0e0;
+  }
+
+  .big-card {
     display: grid;
-    grid-template-columns: auto 1fr auto;
-    gap: 1.5rem;
-    padding: 1.5rem;
+    grid-template-columns: 100px 1fr auto;
     background: #fafafa;
-    border-left: 4px solid #1e3264;
-    align-items: center;
-    transition: all 0.2s ease;
+    padding: 3rem;
+    position: relative;
+    transition: all 0.3s ease;
   }
 
-  .match-card:hover {
+  .big-card:hover {
     background: #f0f0f0;
   }
 
-  .match-card.home {
-    border-left-color: #c8202f;
+  .big-card-num {
+    font-size: 4rem;
+    font-weight: 900;
+    color: #e0e0e0;
+    line-height: 1;
   }
 
-  .match-date {
+  .big-card.home .big-card-num {
+    color: #fde0e0;
+  }
+
+  .big-card-content {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    min-width: 60px;
+    justify-content: center;
+    gap: 0.5rem;
   }
 
-  .match-day {
-    font-size: 0.7rem;
+  .big-card-team {
+    font-size: 0.75rem;
+    font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 1px;
-    opacity: 0.5;
+    letter-spacing: 2px;
+    color: #c8202f;
   }
 
-  .match-num {
-    font-size: 2rem;
-    font-weight: 800;
-    line-height: 1;
+  .big-card-versus {
+    font-size: 1.5rem;
+    font-weight: 700;
     color: #1a1a1a;
   }
 
-  .match-month {
-    font-size: 0.75rem;
-    text-transform: uppercase;
-    letter-spacing: 1px;
+  .big-card-versus .vs {
+    opacity: 0.3;
+    margin: 0 0.5rem;
+    font-weight: 400;
+  }
+
+  .big-card-meta {
+    display: flex;
+    gap: 2rem;
+    font-size: 0.9rem;
     opacity: 0.5;
   }
 
-  .match-info {
-    display: flex;
-    flex-direction: column;
-    gap: 0.25rem;
+  .big-card-badge {
+    align-self: center;
+    font-size: 0.7rem;
+    font-weight: 800;
+    letter-spacing: 3px;
+    padding: 0.5rem 1rem;
+    background: #1e3264;
+    color: #fff;
   }
 
-  .match-team {
+  .big-card.home .big-card-badge {
+    background: #c8202f;
+  }
+
+  /* Ticker Style */
+  .matches-ticker {
+    overflow: hidden;
+    background: #1a1a1a;
+    padding: 2rem 0;
+  }
+
+  .matches-view.active.matches-ticker {
+    display: block;
+  }
+
+  .ticker-track {
+    display: flex;
+    animation: ticker 30s linear infinite;
+    white-space: nowrap;
+  }
+
+  @keyframes ticker {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  .ticker-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0 2rem;
+    color: #fff;
+  }
+
+  .ticker-team {
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #c8202f;
+  }
+
+  .ticker-match {
+    font-size: 1.1rem;
+    font-weight: 600;
+  }
+
+  .ticker-date {
+    font-size: 0.85rem;
+    opacity: 0.5;
+  }
+
+  .ticker-divider {
+    font-size: 0.5rem;
+    opacity: 0.2;
+  }
+
+  /* Minimal List Style */
+  .matches-minimal {
+    border-top: 2px solid #1a1a1a;
+  }
+
+  .matches-view.active.matches-minimal {
+    display: block;
+  }
+
+  .minimal-row {
+    display: grid;
+    grid-template-columns: 80px 60px 1fr 60px 40px;
+    gap: 2rem;
+    padding: 1.5rem 0;
+    border-bottom: 1px solid #eee;
+    align-items: center;
+    transition: all 0.2s;
+  }
+
+  .minimal-row:hover {
+    background: #fafafa;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .minimal-row.home {
+    border-left: 3px solid #c8202f;
+    padding-left: 1rem;
+  }
+
+  .minimal-date {
+    font-family: monospace;
+    font-size: 0.9rem;
+    opacity: 0.4;
+  }
+
+  .minimal-team {
     font-size: 0.75rem;
     font-weight: 700;
     text-transform: uppercase;
@@ -493,29 +669,19 @@ const upcomingMatches = matches.slice(0, 6);
     color: #c8202f;
   }
 
-  .match-versus {
-    font-size: 1rem;
-    font-weight: 600;
-    color: #1a1a1a;
+  .minimal-versus {
+    font-weight: 500;
   }
 
-  .match-meta {
-    font-size: 0.8rem;
-    opacity: 0.5;
+  .minimal-time {
+    font-family: monospace;
+    font-size: 0.9rem;
+    opacity: 0.4;
   }
 
-  .match-badge {
-    font-size: 0.65rem;
-    font-weight: 700;
-    letter-spacing: 2px;
-    padding: 0.4rem 0.8rem;
-    background: #1e3264;
-    color: #fff;
-    border-radius: 2px;
-  }
-
-  .match-card.home .match-badge {
-    background: #c8202f;
+  .minimal-badge {
+    font-size: 1.2rem;
+    opacity: 0.3;
   }
 
   /* Locations */
@@ -820,18 +986,47 @@ const upcomingMatches = matches.slice(0, 6);
     .matches-header {
       flex-direction: column;
       gap: 1rem;
+      align-items: center;
       text-align: center;
     }
 
-    .matches-grid {
-      grid-template-columns: 1fr;
+    .matches-header-left {
+      align-items: center;
     }
 
-    .match-card {
-      grid-template-columns: auto 1fr;
+    .big-card {
+      grid-template-columns: 60px 1fr;
+      padding: 2rem;
     }
 
-    .match-badge {
+    .big-card-num {
+      font-size: 2.5rem;
+    }
+
+    .big-card-badge {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      font-size: 0.6rem;
+      padding: 0.3rem 0.6rem;
+    }
+
+    .big-card-versus {
+      font-size: 1.1rem;
+    }
+
+    .big-card-meta {
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+
+    .minimal-row {
+      grid-template-columns: 60px 50px 1fr 50px;
+      gap: 1rem;
+      font-size: 0.9rem;
+    }
+
+    .minimal-badge {
       display: none;
     }
 
@@ -879,3 +1074,30 @@ const upcomingMatches = matches.slice(0, 6);
     }
   }
 </style>
+
+<script>
+  const select = document.getElementById('matches-style') as HTMLSelectElement;
+  const views = ['cards', 'ticker', 'minimal'];
+
+  // Load saved preference
+  const saved = localStorage.getItem('matches-style');
+  if (saved && views.includes(saved)) {
+    select.value = saved;
+    updateView(saved);
+  }
+
+  select.addEventListener('change', (e) => {
+    const value = (e.target as HTMLSelectElement).value;
+    localStorage.setItem('matches-style', value);
+    updateView(value);
+  });
+
+  function updateView(style: string) {
+    views.forEach(v => {
+      const el = document.getElementById(`view-${v}`);
+      if (el) {
+        el.classList.toggle('active', v === style);
+      }
+    });
+  }
+</script>
