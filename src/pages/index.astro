@@ -1,6 +1,5 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import Footer from '../components/Footer.astro';
 ---
 
 <Layout title="VC HEBO Jeugd">
@@ -106,7 +105,71 @@ import Footer from '../components/Footer.astro';
     </section>
 
     <!-- Footer -->
-    <Footer />
+    <footer class="footer">
+      <div class="footer-grid">
+        <div class="footer-col footer-brand-col">
+          <img src="/logo.png" alt="HEBO Jeugd" class="footer-logo" />
+          <p class="footer-manifesto">
+            Niet zomaar een voetbalclub.<br/>
+            <span>Een beweging.</span>
+          </p>
+        </div>
+        
+        <div class="footer-col">
+          <h4>Navigate</h4>
+          <a href="#" class="footer-link-big">Home</a>
+          <a href="#" class="footer-link-big">Teams</a>
+          <a href="#" class="footer-link-big">Contact</a>
+        </div>
+        
+        <div class="footer-col">
+          <h4>Extern</h4>
+          <a href="https://www.voetbalvlaanderen.be/club/9732" target="_blank" class="footer-link-big">Voetbal Vlaanderen ↗</a>
+          <a href="https://www.voetbalvlaanderen.be/club/9732/komende-wedstrijden" target="_blank" class="footer-link-big">Wedstrijden ↗</a>
+        </div>
+        
+        <div class="footer-col">
+          <h4>Sociaal</h4>
+          <a href="#" class="footer-link-big">Facebook</a>
+          <a href="#" class="footer-link-big">Instagram</a>
+        </div>
+      </div>
+      
+      <div class="footer-bottom">
+        <div class="footer-locations">
+          <span>Heers VV</span>
+          <span class="dot">•</span>
+          <span>EMBO</span>
+        </div>
+        <div class="footer-stamp">
+          STAMNR 09827
+        </div>
+        <div class="footer-copy">
+          © 2026
+        </div>
+      </div>
+      
+      <div class="footer-marquee">
+        <div class="marquee-content">
+          <span>HEBO JEUGD</span>
+          <span>•</span>
+          <span>RESPECT</span>
+          <span>•</span>
+          <span>TEAMGEEST</span>
+          <span>•</span>
+          <span>PLEZIER</span>
+          <span>•</span>
+          <span>HEBO JEUGD</span>
+          <span>•</span>
+          <span>RESPECT</span>
+          <span>•</span>
+          <span>TEAMGEEST</span>
+          <span>•</span>
+          <span>PLEZIER</span>
+          <span>•</span>
+        </div>
+      </div>
+    </footer>
   </main>
 </Layout>
 
@@ -438,6 +501,121 @@ import Footer from '../components/Footer.astro';
     line-height: 1;
   }
 
+  /* Footer */
+  .footer {
+    background: #0a0f1a;
+    color: #fff;
+    padding: 8rem 8vw 0;
+  }
+
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 4rem;
+    padding-bottom: 6rem;
+    border-bottom: 1px solid #222;
+  }
+
+  .footer-col h4 {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    opacity: 0.4;
+    margin-bottom: 2rem;
+  }
+
+  .footer-brand-col {
+    padding-right: 4rem;
+  }
+
+  .footer-logo {
+    width: 100px;
+    margin-bottom: 2rem;
+  }
+
+  .footer-manifesto {
+    font-size: 1.5rem;
+    line-height: 1.4;
+    opacity: 0.6;
+    margin: 0;
+  }
+
+  .footer-manifesto span {
+    color: #c8202f;
+    opacity: 1;
+    font-weight: 700;
+  }
+
+  .footer-link-big {
+    display: block;
+    color: #fff;
+    text-decoration: none;
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    transition: all 0.2s ease;
+  }
+
+  .footer-link-big:hover {
+    color: #c8202f;
+    transform: translateX(10px);
+  }
+
+  .footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 3rem 0;
+  }
+
+  .footer-locations {
+    display: flex;
+    gap: 1rem;
+    font-size: 0.85rem;
+    opacity: 0.5;
+  }
+
+  .footer-locations .dot {
+    opacity: 0.3;
+  }
+
+  .footer-stamp {
+    font-size: 0.75rem;
+    letter-spacing: 4px;
+    opacity: 0.3;
+  }
+
+  .footer-copy {
+    font-size: 0.85rem;
+    opacity: 0.3;
+  }
+
+  .footer-marquee {
+    background: #c8202f;
+    margin: 0 -8vw;
+    padding: 1.5rem 0;
+    overflow: hidden;
+  }
+
+  .marquee-content {
+    display: flex;
+    gap: 2rem;
+    animation: marquee 20s linear infinite;
+    white-space: nowrap;
+  }
+
+  .marquee-content span {
+    font-size: 1rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+  }
+
+  @keyframes marquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
   /* Responsive */
   @media (max-width: 900px) {
     .hero {
@@ -499,5 +677,36 @@ import Footer from '../components/Footer.astro';
       transform: rotate(0deg);
     }
 
+    .footer {
+      padding: 4rem 2rem 0;
+    }
+
+    .footer-grid {
+      grid-template-columns: 1fr;
+      gap: 3rem;
+      text-align: center;
+    }
+
+    .footer-brand-col {
+      padding-right: 0;
+    }
+
+    .footer-link-big {
+      font-size: 1.1rem;
+    }
+
+    .footer-link-big:hover {
+      transform: none;
+    }
+
+    .footer-bottom {
+      flex-direction: column;
+      gap: 1rem;
+      text-align: center;
+    }
+
+    .footer-marquee {
+      margin: 0 -2rem;
+    }
   }
 </style>
