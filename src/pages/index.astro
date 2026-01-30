@@ -1,5 +1,9 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import matches from '../data/matches.json';
+
+// Get upcoming matches (next 6)
+const upcomingMatches = matches.slice(0, 6);
 ---
 
 <Layout title="VC HEBO Jeugd">
@@ -69,6 +73,31 @@ import Layout from '../layouts/Layout.astro';
         <span class="value-number">03</span>
         <h3 class="value-title">Plezier</h3>
         <p class="value-desc">Want waarom spelen we anders?</p>
+      </div>
+    </section>
+
+    <!-- Matches Section -->
+    <section class="matches">
+      <div class="matches-header">
+        <h2 class="section-title">Komende wedstrijden</h2>
+        <a href="https://www.voetbalvlaanderen.be/club/9732/komende-wedstrijden" target="_blank" class="matches-link">Alle wedstrijden →</a>
+      </div>
+      <div class="matches-grid">
+        {upcomingMatches.map(match => (
+          <div class={`match-card ${match.isHome ? 'home' : 'away'}`}>
+            <div class="match-date">
+              <span class="match-day">{new Date(match.date).toLocaleDateString('nl-BE', { weekday: 'short' })}</span>
+              <span class="match-num">{new Date(match.date).getDate()}</span>
+              <span class="match-month">{new Date(match.date).toLocaleDateString('nl-BE', { month: 'short' })}</span>
+            </div>
+            <div class="match-info">
+              <span class="match-team">{match.team}</span>
+              <span class="match-versus">{match.home} vs {match.away}</span>
+              <span class="match-meta">{match.time} • {match.location}</span>
+            </div>
+            <div class="match-badge">{match.isHome ? 'THUIS' : 'UIT'}</div>
+          </div>
+        ))}
       </div>
     </section>
 
@@ -368,6 +397,127 @@ import Layout from '../layouts/Layout.astro';
     margin: 0;
   }
 
+  /* Matches */
+  .matches {
+    padding: 8rem 8vw;
+    background: #fff;
+  }
+
+  .matches-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 3rem;
+  }
+
+  .matches-header .section-title {
+    margin-bottom: 0;
+    color: #1a1a1a;
+  }
+
+  .matches-link {
+    color: #c8202f;
+    text-decoration: none;
+    font-weight: 600;
+    transition: gap 0.2s;
+  }
+
+  .matches-link:hover {
+    text-decoration: underline;
+  }
+
+  .matches-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+
+  .match-card {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 1.5rem;
+    padding: 1.5rem;
+    background: #fafafa;
+    border-left: 4px solid #1e3264;
+    align-items: center;
+    transition: all 0.2s ease;
+  }
+
+  .match-card:hover {
+    background: #f0f0f0;
+  }
+
+  .match-card.home {
+    border-left-color: #c8202f;
+  }
+
+  .match-date {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 60px;
+  }
+
+  .match-day {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    opacity: 0.5;
+  }
+
+  .match-num {
+    font-size: 2rem;
+    font-weight: 800;
+    line-height: 1;
+    color: #1a1a1a;
+  }
+
+  .match-month {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    opacity: 0.5;
+  }
+
+  .match-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .match-team {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #c8202f;
+  }
+
+  .match-versus {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #1a1a1a;
+  }
+
+  .match-meta {
+    font-size: 0.8rem;
+    opacity: 0.5;
+  }
+
+  .match-badge {
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    padding: 0.4rem 0.8rem;
+    background: #1e3264;
+    color: #fff;
+    border-radius: 2px;
+  }
+
+  .match-card.home .match-badge {
+    background: #c8202f;
+  }
+
   /* Locations */
   .locations {
     padding: 8rem 8vw;
@@ -661,6 +811,28 @@ import Layout from '../layouts/Layout.astro';
 
     .locations-grid {
       grid-template-columns: 1fr;
+    }
+
+    .matches {
+      padding: 4rem 2rem;
+    }
+
+    .matches-header {
+      flex-direction: column;
+      gap: 1rem;
+      text-align: center;
+    }
+
+    .matches-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .match-card {
+      grid-template-columns: auto 1fr;
+    }
+
+    .match-badge {
+      display: none;
     }
 
     .cta {
