@@ -1,0 +1,390 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PaastoernooiTicker from '../components/PaastoernooiTicker.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout title="Nieuws | VC HEBO Jeugd">
+  <main>
+    <PaastoernooiTicker />
+
+    <div class="paper">
+      <!-- Masthead -->
+      <header class="masthead">
+        <div class="masthead__left">Vol. 1</div>
+        <div class="masthead__center">
+          <div class="masthead__title">HEBO GAZETTE</div>
+          <div class="masthead__sub">Het officieuze clubblad van VC HEBO Jeugd</div>
+        </div>
+        <div class="masthead__right">Jan '26</div>
+      </header>
+
+      <!-- Headlines -->
+      <section class="headlines">
+        <div class="headline headline--main">
+          <span class="headline__cat">Hoofdverhaal</span>
+          <h1>PAASTOERNOOI KEERT TERUG</h1>
+          <p class="headline__deck">Van 7 tot 9 april 2026 verwelkomen we opnieuw honderden jonge voetballers voor drie dagen vol sport, spanning en plezier</p>
+          <div class="headline__meta">
+            <span>Door de redactie</span>
+            <span>•</span>
+            <span>3 min leestijd</span>
+          </div>
+        </div>
+        <div class="headline headline--side">
+          <img src="/team-photo.jpg" alt="" class="headline__img" />
+          <p class="headline__caption">Archief: Paastoernooi 2025</p>
+        </div>
+      </section>
+
+      <!-- Columns -->
+      <section class="columns">
+        <article class="col">
+          <h2 class="col__title">Nieuwe trainingsuren</h2>
+          <p class="col__meta">15 januari 2026</p>
+          <p>Vanaf februari veranderen de trainingstijden voor meerdere leeftijdsgroepen. De wijziging komt er na overleg met trainers en ouders, met als doel een betere spreiding over de beschikbare velden.</p>
+          <p>"We merkten dat sommige groepen te vaak moesten wachten," aldus de coördinator. "Nu krijgt iedereen meer effectieve speeltijd."</p>
+          <p class="col__more">Lees verder op pagina 2 →</p>
+        </article>
+
+        <article class="col col--border">
+          <h2 class="col__title">Eindejaarstoernooi: een terugblik</h2>
+          <p class="col__meta">10 januari 2026</p>
+          <p>Meer dan 200 jonge voetballers namen deel aan het eindejaarstoernooi in december. Het evenement werd een groot succes ondanks het wisselvallige weer.</p>
+          <p>De organisatie ontving lovende reacties van deelnemende clubs. "De sfeer was fantastisch," vertelt een bezoekende trainer. "Hier draait jeugdvoetbal om."</p>
+          <p class="col__more">Fotoverslag op pagina 4 →</p>
+        </article>
+
+        <article class="col">
+          <h2 class="col__title">Vrijwilligers gezocht</h2>
+          <p class="col__meta">5 januari 2026</p>
+          <p>Voor het Paastoernooi zoeken we enthousiaste helpers. Geen ervaring vereist, wel een gezonde dosis goesting.</p>
+          <div class="col__box">
+            <strong>Gezocht:</strong><br/>
+            • Scheidsrechters<br/>
+            • Terreinbeheer<br/>
+            • Catering<br/>
+            • Onthaal
+          </div>
+          <p>Interesse? Mail naar info@hebojeugd.be</p>
+        </article>
+      </section>
+
+      <!-- Bottom Section -->
+      <section class="bottom">
+        <div class="bottom__quote">
+          <span class="bottom__quote-mark">"</span>
+          <p>Geen geschreeuw. Geen druk. Wel plezier.</p>
+          <cite>De HEBO-filosofie</cite>
+        </div>
+        <div class="bottom__links">
+          <a href="/paastoernooi">Paastoernooi info →</a>
+          <a href="mailto:info@hebojeugd.be">Contact →</a>
+          <a href="https://www.voetbalvlaanderen.be/club/9732">Voetbal Vlaanderen →</a>
+        </div>
+      </section>
+
+      <div class="edition">HEBO GAZETTE — Uitgave 01 — Gratis</div>
+    </div>
+
+    <Footer />
+  </main>
+</Layout>
+
+<style>
+  main {
+    background: #d4d0c8;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    padding: 2rem;
+  }
+
+  .paper {
+    background: #fffef9;
+    max-width: 1200px;
+    margin: 0 auto;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Masthead */
+  .masthead {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    padding: 2rem;
+    border-bottom: 4px double #0a0a0a;
+  }
+
+  .masthead__left,
+  .masthead__right {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+  }
+
+  .masthead__right {
+    text-align: right;
+  }
+
+  .masthead__center {
+    text-align: center;
+  }
+
+  .masthead__title {
+    font-family: 'Times New Roman', Georgia, serif;
+    font-size: clamp(2rem, 6vw, 4rem);
+    font-weight: 700;
+    letter-spacing: 8px;
+  }
+
+  .masthead__sub {
+    font-size: 0.7rem;
+    font-style: italic;
+    margin-top: 0.25rem;
+    opacity: 0.7;
+  }
+
+  /* Headlines */
+  .headlines {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    border-bottom: 2px solid #0a0a0a;
+  }
+
+  .headline--main {
+    padding: 2rem;
+    border-right: 1px solid #0a0a0a;
+  }
+
+  .headline__cat {
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    background: #0a0a0a;
+    color: #fff;
+    padding: 0.25rem 0.75rem;
+    display: inline-block;
+    margin-bottom: 1rem;
+  }
+
+  .headline--main h1 {
+    font-family: 'Times New Roman', Georgia, serif;
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    font-weight: 700;
+    line-height: 0.95;
+    margin: 0 0 1rem 0;
+    letter-spacing: -1px;
+  }
+
+  .headline__deck {
+    font-size: 1.1rem;
+    line-height: 1.5;
+    margin: 0 0 1rem 0;
+  }
+
+  .headline__meta {
+    font-size: 0.75rem;
+    opacity: 0.6;
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  .headline--side {
+    padding: 0;
+  }
+
+  .headline__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(100%);
+  }
+
+  .headline__caption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0,0,0,0.7);
+    color: #fff;
+    padding: 0.5rem;
+    font-size: 0.65rem;
+    font-style: italic;
+    margin: 0;
+  }
+
+  .headline--side {
+    position: relative;
+  }
+
+  /* Columns */
+  .columns {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    flex: 1;
+  }
+
+  .col {
+    padding: 1.5rem;
+    font-family: 'Times New Roman', Georgia, serif;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    column-count: 1;
+  }
+
+  .col--border {
+    border-left: 1px solid #ccc;
+    border-right: 1px solid #ccc;
+  }
+
+  .col__title {
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin: 0 0 0.5rem 0;
+    line-height: 1.2;
+  }
+
+  .col__meta {
+    font-size: 0.7rem;
+    font-style: italic;
+    opacity: 0.6;
+    margin: 0 0 1rem 0;
+  }
+
+  .col p {
+    margin: 0 0 1rem 0;
+    text-align: justify;
+    hyphens: auto;
+  }
+
+  .col__more {
+    font-style: italic;
+    font-size: 0.85rem;
+  }
+
+  .col__box {
+    background: #f5f5f0;
+    padding: 1rem;
+    margin: 1rem 0;
+    font-family: system-ui, sans-serif;
+    font-size: 0.85rem;
+    line-height: 1.8;
+  }
+
+  /* Bottom */
+  .bottom {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    border-top: 2px solid #0a0a0a;
+  }
+
+  .bottom__quote {
+    background: #c8202f;
+    color: #fff;
+    padding: 2rem;
+    text-align: center;
+  }
+
+  .bottom__quote-mark {
+    font-size: 4rem;
+    line-height: 0;
+    opacity: 0.3;
+    display: block;
+    margin-bottom: 1rem;
+    font-family: Georgia, serif;
+  }
+
+  .bottom__quote p {
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin: 0;
+  }
+
+  .bottom__quote cite {
+    display: block;
+    margin-top: 1rem;
+    font-style: normal;
+    font-size: 0.75rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    opacity: 0.7;
+  }
+
+  .bottom__links {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 2rem;
+    gap: 0.75rem;
+  }
+
+  .bottom__links a {
+    color: #0a0a0a;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: padding-left 0.2s;
+  }
+
+  .bottom__links a:hover {
+    padding-left: 1rem;
+  }
+
+  .edition {
+    text-align: center;
+    padding: 1rem;
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    border-top: 1px solid #ddd;
+    opacity: 0.5;
+  }
+
+  @media (max-width: 768px) {
+    main {
+      padding: 0;
+    }
+
+    .masthead {
+      grid-template-columns: 1fr;
+      text-align: center;
+      gap: 0.5rem;
+    }
+
+    .masthead__left,
+    .masthead__right {
+      text-align: center;
+    }
+
+    .headlines {
+      grid-template-columns: 1fr;
+    }
+
+    .headline--main {
+      border-right: none;
+      border-bottom: 1px solid #0a0a0a;
+    }
+
+    .headline--side {
+      height: 200px;
+    }
+
+    .columns {
+      grid-template-columns: 1fr;
+    }
+
+    .col--border {
+      border-left: none;
+      border-right: none;
+      border-top: 1px solid #ccc;
+      border-bottom: 1px solid #ccc;
+    }
+
+    .bottom {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
