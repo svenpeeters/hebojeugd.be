@@ -36,6 +36,7 @@ const upcomingMatches = matches;
   <div class="footer__bottom">
     <div class="footer__stamp">STAMNR 09827</div>
     <div class="footer__copy">© 2026</div>
+    <div class="footer__signature">website by <a href="https://svenpeeters.be" target="_blank">Sven Peeters</a></div>
   </div>
   
   <div class="footer__ticker">
@@ -133,6 +134,22 @@ const upcomingMatches = matches;
   .footer__copy {
     font-size: 0.85rem;
     opacity: 0.3;
+  }
+
+  .footer__signature {
+    font-size: 0.75rem;
+    opacity: 0.4;
+  }
+
+  .footer__signature a {
+    color: #fff;
+    text-decoration: none;
+    transition: opacity 0.2s ease;
+  }
+
+  .footer__signature a:hover {
+    opacity: 1;
+    text-decoration: underline;
   }
 
   /* Ticker */
