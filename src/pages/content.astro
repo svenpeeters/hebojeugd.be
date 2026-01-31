@@ -8,67 +8,108 @@ import Footer from '../components/Footer.astro';
   <main>
     <PaastoernooiTicker />
 
-    <!-- Hero -->
-    <section class="hero">
-      <div class="hero__container">
-        <div class="hero__eyebrow">Nieuws & Updates</div>
-        <h1 class="hero__title">Blijf op de hoogte</h1>
-        <p class="hero__intro">Het laatste nieuws van VC HEBO Jeugd</p>
+    <!-- Header -->
+    <header class="header">
+      <a href="/" class="header__logo">
+        <img src="/logo.png" alt="HEBO Jeugd" />
+      </a>
+      <nav class="header__nav">
+        <a href="/">Home</a>
+        <a href="/paastoernooi">Paastoernooi</a>
+        <a href="/content" class="active">Nieuws</a>
+      </nav>
+    </header>
+
+    <!-- Featured Article -->
+    <article class="featured">
+      <div class="featured__container">
+        <div class="featured__meta">
+          <span class="featured__tag">Evenement</span>
+          <span class="featured__dot">·</span>
+          <span class="featured__date">31 jan 2026</span>
+          <span class="featured__dot">·</span>
+          <span class="featured__read">3 min read</span>
+        </div>
+        <h1 class="featured__title">Paastoernooi 2026: Drie dagen voetbalplezier voor de jeugd</h1>
+        <p class="featured__excerpt">Van 7 tot 9 april verwelkomen we opnieuw honderden jonge voetballers voor ons jaarlijks Paastoernooi. Een traditie die blijft groeien.</p>
+        <div class="featured__author">
+          <div class="featured__avatar">SV</div>
+          <div class="featured__author-info">
+            <span class="featured__author-name">Secretariaat</span>
+            <span class="featured__author-role">VC HEBO Jeugd</span>
+          </div>
+        </div>
       </div>
-    </section>
+      <div class="featured__image">
+        <img src="/team-photo.jpg" alt="Team foto" />
+      </div>
+    </article>
 
-    <!-- Content Grid -->
-    <section class="content">
-      <div class="content__container">
-        <article class="card card--featured">
-          <div class="card__image">
-            <img src="/team-photo.jpg" alt="Team foto" />
-          </div>
-          <div class="card__body">
-            <div class="card__meta">
-              <span class="card__tag">Nieuws</span>
-              <span class="card__date">31 januari 2026</span>
+    <!-- Article List -->
+    <section class="articles">
+      <div class="articles__container">
+        <article class="article">
+          <div class="article__content">
+            <div class="article__meta">
+              <span class="article__tag">Club nieuws</span>
+              <span class="article__dot">·</span>
+              <span class="article__read">2 min read</span>
             </div>
-            <h2 class="card__title">Paastoernooi 2026: Inschrijvingen geopend!</h2>
-            <p class="card__excerpt">Van 7 tot 9 april organiseren wij ons jaarlijks Paastoernooi voor U6 tot en met U13. Schrijf nu je team in en beleef drie dagen vol voetbalplezier.</p>
-            <a href="/paastoernooi" class="card__link">Meer info →</a>
+            <h2 class="article__title">Nieuwe trainingsuren vanaf februari</h2>
+            <p class="article__excerpt">We passen de trainingsuren aan voor een betere verdeling over de velden. Check hier de nieuwe planning voor jouw team.</p>
+            <div class="article__footer">
+              <span class="article__date">15 jan 2026</span>
+            </div>
           </div>
+          <div class="article__thumb"></div>
         </article>
 
-        <article class="card">
-          <div class="card__body">
-            <div class="card__meta">
-              <span class="card__tag">Club</span>
-              <span class="card__date">15 januari 2026</span>
+        <article class="article">
+          <div class="article__content">
+            <div class="article__meta">
+              <span class="article__tag">Terugblik</span>
+              <span class="article__dot">·</span>
+              <span class="article__read">4 min read</span>
             </div>
-            <h2 class="card__title">Nieuwe trainingsuren voorjaar</h2>
-            <p class="card__excerpt">Vanaf februari wijzigen de trainingsuren voor enkele leeftijdsgroepen. Check de planning voor jouw team.</p>
-            <a href="#" class="card__link">Lees meer →</a>
+            <h2 class="article__title">Eindejaarstoernooi was een schot in de roos</h2>
+            <p class="article__excerpt">Meer dan 200 jonge voetballers en hun supporters kwamen samen voor een fantastisch weekend vol sport en plezier.</p>
+            <div class="article__footer">
+              <span class="article__date">10 jan 2026</span>
+            </div>
           </div>
+          <div class="article__thumb"></div>
         </article>
 
-        <article class="card">
-          <div class="card__body">
-            <div class="card__meta">
-              <span class="card__tag">Wedstrijden</span>
-              <span class="card__date">10 januari 2026</span>
+        <article class="article">
+          <div class="article__content">
+            <div class="article__meta">
+              <span class="article__tag">Oproep</span>
+              <span class="article__dot">·</span>
+              <span class="article__read">1 min read</span>
             </div>
-            <h2 class="card__title">Terugblik: Eindejaarstoernooi</h2>
-            <p class="card__excerpt">Wat een succes! Meer dan 200 jonge voetballers namen deel aan ons eindejaarstoernooi in december.</p>
-            <a href="#" class="card__link">Lees meer →</a>
+            <h2 class="article__title">Vrijwilligers gezocht voor Paastoernooi</h2>
+            <p class="article__excerpt">Wil jij meehelpen om ons Paastoernooi tot een succes te maken? We zoeken enthousiaste helpende handen!</p>
+            <div class="article__footer">
+              <span class="article__date">5 jan 2026</span>
+            </div>
           </div>
+          <div class="article__thumb"></div>
         </article>
 
-        <article class="card">
-          <div class="card__body">
-            <div class="card__meta">
-              <span class="card__tag">Vrijwilligers</span>
-              <span class="card__date">5 januari 2026</span>
+        <article class="article">
+          <div class="article__content">
+            <div class="article__meta">
+              <span class="article__tag">Bestuur</span>
+              <span class="article__dot">·</span>
+              <span class="article__read">2 min read</span>
             </div>
-            <h2 class="card__title">Gezocht: Hulp bij tornooien</h2>
-            <p class="card__excerpt">Voor onze tornooien zijn we altijd op zoek naar extra helpende handen. Interesse? Neem contact op!</p>
-            <a href="mailto:info@hebojeugd.be" class="card__link">Contact →</a>
+            <h2 class="article__title">Vooruitblik: Onze plannen voor 2026</h2>
+            <p class="article__excerpt">Het nieuwe jaar is gestart en we hebben ambitieuze plannen. Van infrastructuur tot nieuwe samenwerkingen.</p>
+            <div class="article__footer">
+              <span class="article__date">2 jan 2026</span>
+            </div>
           </div>
+          <div class="article__thumb"></div>
         </article>
       </div>
     </section>
@@ -79,172 +120,261 @@ import Footer from '../components/Footer.astro';
 
 <style>
   main {
-    background: #fafafa;
+    background: #fff;
     color: #1a1a1a;
   }
 
-  /* Hero */
-  .hero {
-    background: linear-gradient(135deg, #0a0f1a 0%, #1e3264 100%);
-    color: #fff;
-    padding: 8rem 2rem 6rem;
-    text-align: center;
-  }
-
-  .hero__container {
-    max-width: 800px;
-    margin: 0 auto;
-  }
-
-  .hero__eyebrow {
-    font-size: 0.85rem;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    opacity: 0.7;
-    margin-bottom: 1rem;
-  }
-
-  .hero__title {
-    font-size: clamp(2rem, 5vw, 3.5rem);
-    font-weight: 800;
-    margin: 0 0 1rem 0;
-  }
-
-  .hero__intro {
-    font-size: 1.1rem;
-    opacity: 0.8;
-    margin: 0;
-  }
-
-  /* Content Grid */
-  .content {
-    padding: 4rem 2rem;
-  }
-
-  .content__container {
+  /* Header */
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 2rem;
     max-width: 1200px;
     margin: 0 auto;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    border-bottom: 1px solid #eee;
+  }
+
+  .header__logo img {
+    height: 48px;
+  }
+
+  .header__nav {
+    display: flex;
     gap: 2rem;
   }
 
-  /* Cards */
-  .card {
-    background: #fff;
-    border-radius: 4px;
-    overflow: hidden;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  .header__nav a {
+    color: #1a1a1a;
+    text-decoration: none;
+    font-size: 0.95rem;
+    opacity: 0.6;
+    transition: opacity 0.2s;
   }
 
-  .card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 12px 40px rgba(0,0,0,0.1);
+  .header__nav a:hover,
+  .header__nav a.active {
+    opacity: 1;
   }
 
-  .card--featured {
-    grid-column: 1 / -1;
+  /* Featured */
+  .featured {
     display: grid;
     grid-template-columns: 1fr 1fr;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 4rem 2rem;
+    gap: 4rem;
+    align-items: center;
   }
 
-  .card__image {
+  .featured__container {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .featured__meta {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.85rem;
+    color: #666;
+  }
+
+  .featured__tag {
+    color: #c8202f;
+    font-weight: 600;
+  }
+
+  .featured__dot {
+    opacity: 0.3;
+  }
+
+  .featured__title {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    font-weight: 700;
+    line-height: 1.2;
+    margin: 0;
+    letter-spacing: -0.5px;
+  }
+
+  .featured__excerpt {
+    font-size: 1.15rem;
+    line-height: 1.7;
+    color: #555;
+    margin: 0;
+  }
+
+  .featured__author {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-top: 0.5rem;
+  }
+
+  .featured__avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #1e3264;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.85rem;
+    font-weight: 600;
+  }
+
+  .featured__author-info {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .featured__author-name {
+    font-weight: 600;
+    font-size: 0.9rem;
+  }
+
+  .featured__author-role {
+    font-size: 0.8rem;
+    color: #666;
+  }
+
+  .featured__image {
+    aspect-ratio: 4/3;
     overflow: hidden;
+    border-radius: 4px;
   }
 
-  .card__image img {
+  .featured__image img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.3s ease;
   }
 
-  .card:hover .card__image img {
-    transform: scale(1.05);
+  /* Articles */
+  .articles {
+    border-top: 1px solid #eee;
+    padding: 3rem 2rem;
   }
 
-  .card__body {
-    padding: 2rem;
+  .articles__container {
+    max-width: 800px;
+    margin: 0 auto;
     display: flex;
     flex-direction: column;
-    gap: 1rem;
   }
 
-  .card--featured .card__body {
-    justify-content: center;
+  .article {
+    display: flex;
+    justify-content: space-between;
+    gap: 2rem;
+    padding: 2rem 0;
+    border-bottom: 1px solid #eee;
+    cursor: pointer;
+    transition: background 0.2s;
   }
 
-  .card__meta {
+  .article:hover {
+    background: #fafafa;
+    margin: 0 -1rem;
+    padding: 2rem 1rem;
+  }
+
+  .article__content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .article__meta {
     display: flex;
     align-items: center;
-    gap: 1rem;
+    gap: 0.5rem;
     font-size: 0.8rem;
+    color: #666;
   }
 
-  .card__tag {
-    background: #c8202f;
-    color: #fff;
-    padding: 0.25rem 0.75rem;
-    border-radius: 2px;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    font-size: 0.7rem;
+  .article__tag {
+    color: #1a1a1a;
+    font-weight: 500;
   }
 
-  .card__date {
-    opacity: 0.5;
+  .article__dot {
+    opacity: 0.3;
   }
 
-  .card__title {
-    font-size: 1.4rem;
+  .article__title {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 1.3rem;
     font-weight: 700;
     margin: 0;
     line-height: 1.3;
+    letter-spacing: -0.3px;
   }
 
-  .card--featured .card__title {
-    font-size: 1.8rem;
-  }
-
-  .card__excerpt {
+  .article__excerpt {
     font-size: 0.95rem;
-    line-height: 1.7;
-    opacity: 0.7;
+    line-height: 1.6;
+    color: #555;
     margin: 0;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
   }
 
-  .card__link {
-    color: #c8202f;
-    text-decoration: none;
-    font-weight: 600;
-    font-size: 0.9rem;
-    transition: gap 0.2s ease;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.25rem;
+  .article__footer {
+    margin-top: auto;
+    padding-top: 0.5rem;
   }
 
-  .card__link:hover {
-    gap: 0.5rem;
+  .article__date {
+    font-size: 0.8rem;
+    color: #999;
+  }
+
+  .article__thumb {
+    width: 120px;
+    height: 80px;
+    background: linear-gradient(135deg, #e8e8e8 0%, #d0d0d0 100%);
+    border-radius: 4px;
+    flex-shrink: 0;
   }
 
   /* Responsive */
   @media (max-width: 768px) {
-    .hero {
-      padding: 6rem 2rem 4rem;
+    .header {
+      flex-direction: column;
+      gap: 1rem;
     }
 
-    .card--featured {
+    .featured {
       grid-template-columns: 1fr;
+      padding: 2rem;
+      gap: 2rem;
     }
 
-    .card__image {
-      height: 200px;
+    .featured__image {
+      order: -1;
     }
 
-    .card--featured .card__title {
-      font-size: 1.4rem;
+    .article {
+      flex-direction: column-reverse;
+      gap: 1rem;
+    }
+
+    .article__thumb {
+      width: 100%;
+      height: 160px;
+    }
+
+    .article:hover {
+      margin: 0;
+      padding: 2rem 0;
     }
   }
 </style>
