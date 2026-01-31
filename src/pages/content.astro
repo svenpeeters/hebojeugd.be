@@ -102,6 +102,9 @@ import Footer from '../components/Footer.astro';
   main {
     background: #fff;
     color: #0a0a0a;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
   }
 
   /* Masthead */
@@ -229,6 +232,7 @@ import Footer from '../components/Footer.astro';
     grid-template-columns: repeat(3, 1fr);
     max-width: 1400px;
     margin: 0 auto;
+    flex: 1;
   }
 
   .item {
