@@ -1,9 +1,27 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import PaastoernooiTicker from '../components/PaastoernooiTicker.astro';
 ---
 
 <Layout title="Paastoernooi 2026 | VC HEBO Jeugd">
   <main class="paastoernooi">
+    <!-- Ticker -->
+    <PaastoernooiTicker href="#inschrijven" />
+
+    <!-- Mobile Photo Strip -->
+    <div class="mobile-strip">
+      <div class="mobile-strip__track" id="mobileStrip"></div>
+    </div>
+    <script>
+      const allPhotos = Array.from({length: 59}, (_, i) => `/images/paastoernooi-2025/${String(i + 1).padStart(2, '0')}.jpg`);
+      const shuffled = allPhotos.sort(() => Math.random() - 0.5).slice(0, 20);
+      const doubled = [...shuffled, ...shuffled];
+      const track = document.getElementById('mobileStrip');
+      if (track) {
+        track.innerHTML = doubled.map(src => `<img src="${src}" alt="" />`).join('');
+      }
+    </script>
+
     <!-- Polaroid Tracks -->
     <div class="polaroid-track polaroid-track--left">
       <div class="polaroid-scroll polaroid-scroll--up">
@@ -139,7 +157,7 @@ import Layout from '../layouts/Layout.astro';
     <section class="hero">
       <div class="hero__container">
         <div class="hero__content">
-          <div class="hero__eyebrow">7-9 april 2026 • EMBO Heers</div>
+          <div class="hero__eyebrow">7-9 april 2026</div>
           <h1 class="hero__title">
             <span class="hero__line">Paastoernooi</span>
             <span class="hero__line hero__line--accent">VC HEBO Jeugd</span>
@@ -171,11 +189,7 @@ import Layout from '../layouts/Layout.astro';
         </div>
         <div class="values__card values__card--featured">
           <h3 class="values__title">Waar</h3>
-          <p class="values__desc">EMBO Sportcomplex<br/><strong>Gelindenstraat<br/>3870 Heers</strong></p>
-        </div>
-        <div class="values__card">
-          <h3 class="values__title">Contact</h3>
-          <p class="values__desc">Andy Bex: +32 490 58 23 12<br/>Mijke Vrancken: +32 473 24 01 48<br/><strong>sportief@hebojeugd.be</strong></p>
+          <p class="values__desc"><strong>Gelindenstraat<br/>3870 Heers</strong></p>
         </div>
       </div>
     </section>
@@ -249,7 +263,6 @@ import Layout from '../layouts/Layout.astro';
           <h4>Navigate</h4>
           <a href="/" class="footer__link">Home</a>
           <a href="/paastoernooi" class="footer__link">Paastoernooi</a>
-          <a href="#" class="footer__link">Contact</a>
         </div>
         
         <div class="footer__col">
@@ -266,11 +279,6 @@ import Layout from '../layouts/Layout.astro';
       </div>
       
       <div class="footer__bottom">
-        <div class="footer__locations">
-          <span>Heers VV</span>
-          <span class="footer__dot">•</span>
-          <span>EMBO</span>
-        </div>
         <div class="footer__stamp">STAMNR 09827</div>
         <div class="footer__copy">© 2026</div>
       </div>
@@ -441,7 +449,7 @@ import Layout from '../layouts/Layout.astro';
   /* Values */
   .values__container {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     max-width: 900px;
     margin: 0 auto;
   }
@@ -733,14 +741,53 @@ import Layout from '../layouts/Layout.astro';
     }
   }
 
+  /* Mobile Strip - Hidden on desktop */
+  .mobile-strip {
+    display: none;
+  }
+
   @media (max-width: 900px) {
+    .mobile-strip {
+      display: block;
+      overflow: hidden;
+      background: #1e3264;
+      padding: 0.5rem 0;
+    }
+
+    .mobile-strip__track {
+      display: flex;
+      gap: 0.75rem;
+      animation: stripScroll 12s linear infinite;
+    }
+
+    .mobile-strip__track img:where(img) {
+      width: 100px;
+      height: 70px;
+      object-fit: cover;
+      border-radius: 3px;
+      flex-shrink: 0;
+    }
+
+    :global(.mobile-strip__track img) {
+      width: 100px;
+      height: 70px;
+      object-fit: cover;
+      border-radius: 3px;
+      flex-shrink: 0;
+    }
+
+    @keyframes stripScroll {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
     .polaroid-track {
       display: none;
     }
 
     .hero {
-      min-height: 500px;
-      height: 60vh;
+      min-height: 400px;
+      height: auto;
     }
 
     .hero__content {
@@ -757,13 +804,47 @@ import Layout from '../layouts/Layout.astro';
       border-bottom: 1px solid #eee;
     }
 
+    .match-card {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.5rem;
+      padding: 1.25rem;
+    }
+
     .match-card__num {
-      font-size: 1rem;
-      width: 4rem;
+      font-size: 0.85rem;
+      font-weight: 700;
+      width: auto;
+      color: #c8202f;
+      text-align: left;
+    }
+
+    .match-card--home .match-card__num {
+      color: #c8202f;
+    }
+
+    .match-card__content {
+      gap: 0.25rem;
     }
 
     .match-card__opponent {
       font-size: 1.1rem;
+    }
+
+    .match-card__team {
+      font-size: 0.7rem;
+    }
+
+    .match-card__meta {
+      font-size: 0.8rem;
+    }
+
+    .matches {
+      padding: 3rem 0;
+    }
+
+    .matches__header {
+      margin-bottom: 1.5rem;
     }
 
     .footer {

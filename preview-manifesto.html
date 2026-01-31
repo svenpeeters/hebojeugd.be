@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Manifesto Opties</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { 
+      font-family: system-ui, -apple-system, sans-serif; 
+      background: #1a1a1a;
+      color: #fff;
+      padding: 2rem;
+    }
+    h1 { text-align: center; margin-bottom: 2rem; font-size: 1.5rem; opacity: 0.6; }
+    .options { display: flex; flex-direction: column; gap: 2rem; max-width: 900px; margin: 0 auto; }
+    .option { 
+      border: 2px solid #333; 
+      border-radius: 12px; 
+      overflow: hidden;
+      cursor: pointer;
+      transition: border-color 0.3s;
+    }
+    .option:hover { border-color: #c8202f; }
+    .option.selected { border-color: #c8202f; box-shadow: 0 0 20px rgba(200, 32, 47, 0.3); }
+    .option-label {
+      background: #222;
+      padding: 1rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .option-label span { opacity: 0.6; font-weight: 400; font-size: 0.9rem; }
+    
+    /* Option 1: Quote style */
+    .manifesto-1 {
+      background: #fafafa;
+      color: #1a1a1a;
+      padding: 5rem 4rem;
+      display: flex;
+      gap: 2rem;
+    }
+    .manifesto-1 .quote-line {
+      width: 4px;
+      background: #c8202f;
+      flex-shrink: 0;
+    }
+    .manifesto-1 .text {
+      font-size: 1.5rem;
+      line-height: 1.8;
+    }
+    .manifesto-1 .highlight {
+      color: #c8202f;
+      font-weight: 700;
+    }
+
+    /* Option 2: Dark background */
+    .manifesto-2 {
+      background: linear-gradient(135deg, #0a0f1a 0%, #1e3264 100%);
+      color: #fff;
+      padding: 5rem 4rem;
+      text-align: center;
+    }
+    .manifesto-2 .text {
+      font-size: 1.5rem;
+      line-height: 2;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    .manifesto-2 .highlight {
+      color: #c8202f;
+      font-weight: 700;
+    }
+
+    /* Option 3: Split layout */
+    .manifesto-3 {
+      background: #fafafa;
+      color: #1a1a1a;
+      padding: 4rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: center;
+    }
+    .manifesto-3 .left {
+      font-size: 2.5rem;
+      font-weight: 700;
+      line-height: 1.3;
+    }
+    .manifesto-3 .left .highlight {
+      color: #c8202f;
+      display: block;
+    }
+    .manifesto-3 .right {
+      font-size: 1.1rem;
+      line-height: 1.8;
+      opacity: 0.7;
+    }
+
+    .btn-container {
+      text-align: center;
+      margin-top: 2rem;
+    }
+    .btn {
+      background: #c8202f;
+      color: #fff;
+      border: none;
+      padding: 1rem 3rem;
+      font-size: 1rem;
+      font-weight: 600;
+      border-radius: 8px;
+      cursor: pointer;
+      opacity: 0.5;
+      pointer-events: none;
+    }
+    .btn.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .btn.active:hover {
+      background: #a01a27;
+    }
+    #result {
+      text-align: center;
+      margin-top: 1rem;
+      color: #4ade80;
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+  <h1>Kies een manifesto stijl</h1>
+  
+  <div class="options">
+    <div class="option" data-option="1" onclick="selectOption(1)">
+      <div class="option-label">1️⃣ Quote-stijl <span>— Verticale rode lijn, statement gevoel</span></div>
+      <div class="manifesto-1">
+        <div class="quote-line"></div>
+        <div class="text">
+          <span class="highlight">Vergeet alles</span> wat je weet over jeugdvoetbal.<br>
+          Geen ouders die schreeuwen langs de lijn.<br>
+          Geen trainers die winnen belangrijker vinden dan groeien.<br><br>
+          <span class="highlight">Hier telt maar één ding:</span> plezier in het spel.
+        </div>
+      </div>
+    </div>
+
+    <div class="option" data-option="2" onclick="selectOption(2)">
+      <div class="option-label">2️⃣ Donkere achtergrond <span>— Hero gradient, meer contrast</span></div>
+      <div class="manifesto-2">
+        <div class="text">
+          <span class="highlight">Vergeet alles</span> wat je weet over jeugdvoetbal.<br>
+          Geen ouders die schreeuwen langs de lijn.<br>
+          Geen trainers die winnen belangrijker vinden dan groeien.<br><br>
+          <span class="highlight">Hier telt maar één ding:</span> plezier in het spel.
+        </div>
+      </div>
+    </div>
+
+    <div class="option" data-option="3" onclick="selectOption(3)">
+      <div class="option-label">3️⃣ Split layout <span>— Highlights links, tekst rechts</span></div>
+      <div class="manifesto-3">
+        <div class="left">
+          <span class="highlight">Vergeet alles.</span>
+          <span class="highlight">Hier telt maar één ding.</span>
+        </div>
+        <div class="right">
+          Wat je weet over jeugdvoetbal.<br>
+          Geen ouders die schreeuwen langs de lijn.<br>
+          Geen trainers die winnen belangrijker vinden dan groeien.<br><br>
+          Plezier in het spel.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="btn-container">
+    <button class="btn" id="confirmBtn" onclick="confirmChoice()">Bevestig keuze</button>
+  </div>
+  <div id="result"></div>
+
+  <script>
+    let selected = null;
+    function selectOption(n) {
+      document.querySelectorAll('.option').forEach(el => el.classList.remove('selected'));
+      document.querySelector('[data-option="'+n+'"]').classList.add('selected');
+      document.getElementById('confirmBtn').classList.add('active');
+      selected = n;
+    }
+    function confirmChoice() {
+      if (selected) {
+        document.getElementById('result').textContent = '✓ Optie ' + selected + ' geselecteerd!';
+      }
+    }
+  </script>
+</body>
+</html>

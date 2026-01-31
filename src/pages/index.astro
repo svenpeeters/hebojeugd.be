@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import PaastoernooiTicker from '../components/PaastoernooiTicker.astro';
 import matches from '../data/matches.json';
 
 // Get all upcoming matches for ticker
@@ -23,6 +24,9 @@ const weekendMatches = matches.filter(m => {
 
 <Layout title="VC HEBO Jeugd">
   <main>
+    <!-- Paastoernooi Promo -->
+    <PaastoernooiTicker />
+
     <!-- Hero Section -->
     <section class="hero">
       <div class="hero__container">
