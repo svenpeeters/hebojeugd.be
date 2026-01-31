@@ -2,190 +2,187 @@
 import Layout from '../layouts/Layout.astro';
 import matches from '../data/matches.json';
 
-// Get upcoming matches (next 6)
-const upcomingMatches = matches.slice(0, 6);
+// Get all upcoming matches for ticker
+const upcomingMatches = matches;
+
+// Get weekend matches (Saturday + Sunday of the first match's weekend)
+const firstMatchDate = new Date(matches[0]?.date);
+const saturday = new Date(firstMatchDate);
+saturday.setDate(firstMatchDate.getDate() - firstMatchDate.getDay() + 6); // Get Saturday
+const sunday = new Date(saturday);
+sunday.setDate(saturday.getDate() + 1); // Get Sunday
+
+const weekendMatches = matches.filter(m => {
+  const d = new Date(m.date);
+  const dateStr = d.toISOString().split('T')[0];
+  const satStr = saturday.toISOString().split('T')[0];
+  const sunStr = sunday.toISOString().split('T')[0];
+  return dateStr === satStr || dateStr === sunStr;
+});
 ---
 
 <Layout title="VC HEBO Jeugd">
   <main>
     <!-- Hero Section -->
     <section class="hero">
-      <div class="hero-content">
-        <div class="hero-eyebrow">Est. 2024 — Heers × Eendracht Mechelen-Bovelingen</div>
-        <h1 class="hero-title">
-          <span class="line">We don't just</span>
-          <span class="line accent">play football.</span>
-          <span class="line">We raise</span>
-          <span class="line accent">future legends.</span>
-        </h1>
-      </div>
-      <div class="hero-visual">
-        <div class="logo-container">
-          <img src="/logo.png" alt="HEBO Jeugd" class="floating-logo" />
+      <div class="hero__container">
+        <div class="hero__content">
+          <div class="hero__eyebrow">Est. 2024 — Heers × Eendracht Mechelen-Bovelingen</div>
+          <h1 class="hero__title">
+            <span class="hero__line">Limburgse roots.</span>
+            <span class="hero__line hero__line--accent">Grenzeloos talent.</span>
+          </h1>
         </div>
-        <div class="hero-stats">
-          <div class="stat-item">
-            <span class="stat-value">8</span>
-            <span class="stat-label">Teams</span>
-          </div>
-          <div class="stat-item">
-            <span class="stat-value">200+</span>
-            <span class="stat-label">Spelers</span>
-          </div>
-          <div class="stat-item">
-            <span class="stat-value">2</span>
-            <span class="stat-label">Terreinen</span>
+        <div class="hero__visual">
+          <div class="hero__logo-container">
+            <img src="/logo.png" alt="HEBO Jeugd" class="hero__logo" />
           </div>
         </div>
       </div>
-      <div class="scroll-indicator">
+      <div class="hero__scroll">
         <span>Scroll</span>
-        <div class="scroll-line"></div>
+        <div class="hero__scroll-line"></div>
       </div>
     </section>
 
     <!-- Manifesto Section -->
     <section class="manifesto">
-      <div class="manifesto-content">
-        <p class="manifesto-text">
-          <span class="highlight">Vergeet alles</span> wat je weet over jeugdvoetbal. 
-          Geen ouders die schreeuwen langs de lijn. 
-          Geen trainers die winnen belangrijker vinden dan groeien.
-          <span class="highlight">Hier telt maar één ding:</span> 
-          plezier in het spel.
-        </p>
+      <div class="manifesto__container">
+        <div class="manifesto__text">
+          <span class="manifesto__highlight">Vergeet alles</span> wat je weet over jeugdvoetbal.<br>
+          Geen ouders die schreeuwen langs de lijn.<br>
+          Geen trainers die winnen belangrijker vinden dan groeien.<br><br>
+          <span class="manifesto__highlight">Hier telt maar één ding:</span> plezier in het spel.
+        </div>
       </div>
     </section>
 
     <!-- Values Section -->
     <section class="values">
-      <div class="value-card">
-        <span class="value-number">01</span>
-        <h3 class="value-title">Respect</h3>
-        <p class="value-desc">Voor jezelf, je team, je tegenstander.</p>
-      </div>
-      <div class="value-card featured">
-        <span class="value-number">02</span>
-        <h3 class="value-title">Teamgeest</h3>
-        <p class="value-desc">Alleen ga je sneller. Samen kom je verder.</p>
-      </div>
-      <div class="value-card">
-        <span class="value-number">03</span>
-        <h3 class="value-title">Plezier</h3>
-        <p class="value-desc">Want waarom spelen we anders?</p>
+      <div class="values__container">
+        <div class="values__card">
+          <h3 class="values__title">Respect</h3>
+          <p class="values__desc">Voor jezelf, je team, je tegenstander.</p>
+        </div>
+        <div class="values__card values__card--featured">
+          <h3 class="values__title">Teamgeest</h3>
+          <p class="values__desc">Alleen ga je sneller. Samen kom je verder.</p>
+        </div>
+        <div class="values__card">
+          <h3 class="values__title">Plezier</h3>
+          <p class="values__desc">Want waarom spelen we anders?</p>
+        </div>
       </div>
     </section>
 
     <!-- Matches Section -->
     <section class="matches">
-      <div class="matches-header">
-        <h2 class="section-title">Komende wedstrijden</h2>
-        <a href="https://www.voetbalvlaanderen.be/club/9732/komende-wedstrijden" target="_blank" class="matches-link">Alle wedstrijden →</a>
-      </div>
-
-      <div class="matches-cards">
-        {upcomingMatches.slice(0, 3).map((match, i) => (
-          <div class={`big-card ${match.isHome ? 'home' : 'away'}`}>
-            <div class="big-card-num">0{i + 1}</div>
-            <div class="big-card-content">
-              <div class="big-card-team">{match.team}</div>
-              <div class="big-card-versus">
-                <span>{match.home}</span>
-                <span class="vs">vs</span>
-                <span>{match.away}</span>
+      <div class="matches__container">
+        <div class="matches__header">
+          <h2 class="matches__title">Komende wedstrijden</h2>
+          <a href="https://www.voetbalvlaanderen.be/club/9732/komende-wedstrijden" target="_blank" class="matches__link">Alle wedstrijden →</a>
+        </div>
+        <div class="matches__list">
+          {weekendMatches.map((match, i) => (
+            <div class={`match-card ${match.isHome ? 'match-card--home' : 'match-card--away'}`}>
+              <div class="match-card__num">{match.team}</div>
+              <div class="match-card__content">
+                <div class="match-card__team">{match.team}</div>
+                <div class="match-card__opponent">{match.isHome ? match.away : match.home}</div>
+                <div class="match-card__meta">
+                  <span class="match-card__date">{new Date(match.date).toLocaleDateString('nl-BE', { weekday: 'long', day: 'numeric', month: 'long' })}</span>
+                  <span class="match-card__time">{match.time}</span>
+                </div>
               </div>
-              <div class="big-card-meta">
-                <span class="big-card-date">{new Date(match.date).toLocaleDateString('nl-BE', { weekday: 'long', day: 'numeric', month: 'long' })}</span>
-                <span class="big-card-time">{match.time}</span>
-              </div>
+              <div class="match-card__badge">{match.isHome ? 'THUIS' : 'UIT'}</div>
             </div>
-            <div class="big-card-badge">{match.isHome ? 'THUIS' : 'UIT'}</div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </section>
 
     <!-- Locations Section -->
     <section class="locations">
-      <h2 class="section-title">Waar vind je ons?</h2>
-      <div class="locations-grid">
-        <a href="https://maps.google.com/?q=Raes+van+Heerslaan+Heers" target="_blank" class="location-card">
-          <div class="location-name">Heers VV</div>
-          <div class="location-address">Raes van Heerslaan, 3870 Heers</div>
-          <div class="location-arrow">↗</div>
-        </a>
-        <a href="https://maps.google.com/?q=Gelindenstraat+Mechelen-Bovelingen" target="_blank" class="location-card">
-          <div class="location-name">EMBO</div>
-          <div class="location-address">Gelindenstraat z/n, 3870 Mechelen-Bovelingen</div>
-          <div class="location-arrow">↗</div>
-        </a>
+      <div class="locations__container">
+        <h2 class="locations__title">Waar vind je ons?</h2>
+        <div class="locations__grid">
+          <a href="https://maps.google.com/?q=Raes+van+Heerslaan+Heers" target="_blank" class="location-card">
+            <div class="location-card__name">Heers VV</div>
+            <div class="location-card__address">Raes van Heerslaan, 3870 Heers</div>
+            <div class="location-card__arrow">↗</div>
+          </a>
+          <a href="https://maps.google.com/?q=Gelindenstraat+Mechelen-Bovelingen" target="_blank" class="location-card">
+            <div class="location-card__name">EMBO</div>
+            <div class="location-card__address">Gelindenstraat z/n, 3870 Mechelen-Bovelingen</div>
+            <div class="location-card__arrow">↗</div>
+          </a>
+        </div>
       </div>
     </section>
 
     <!-- CTA Section -->
     <section class="cta">
-      <div class="cta-content">
-        <h2 class="cta-title">Klaar om<br/>mee te doen?</h2>
-        <a href="https://www.voetbalvlaanderen.be/club/9732/komende-wedstrijden" target="_blank" class="cta-button">
-          <span>Bekijk wedstrijden</span>
-          <span class="btn-arrow">→</span>
-        </a>
+      <div class="cta__container">
+        <div class="cta__content">
+          <h2 class="cta__title">Klaar om<br/>mee te doen?</h2>
+          <a href="https://www.voetbalvlaanderen.be/club/9732/komende-wedstrijden" target="_blank" class="cta__button">
+            <span>Bekijk wedstrijden</span>
+            <span class="cta__arrow">→</span>
+          </a>
+        </div>
       </div>
     </section>
 
     <!-- Footer -->
     <footer class="footer">
-      <div class="footer-grid">
-        <div class="footer-col footer-brand-col">
-          <img src="/logo.png" alt="HEBO Jeugd" class="footer-logo" />
-          <p class="footer-manifesto">
+      <div class="footer__grid">
+        <div class="footer__col footer__col--brand">
+          <img src="/logo.png" alt="HEBO Jeugd" class="footer__logo" />
+          <p class="footer__manifesto">
             Geboren uit fusie.<br/>
             <span>Gedreven door passie.</span>
           </p>
         </div>
         
-        <div class="footer-col">
+        <div class="footer__col">
           <h4>Navigate</h4>
-          <a href="#" class="footer-link-big">Home</a>
-          <a href="#" class="footer-link-big">Teams</a>
-          <a href="#" class="footer-link-big">Contact</a>
+          <a href="/" class="footer__link">Home</a>
+          <a href="/paastoernooi" class="footer__link">Paastoernooi</a>
+          <a href="#" class="footer__link">Contact</a>
         </div>
         
-        <div class="footer-col">
+        <div class="footer__col">
           <h4>Extern</h4>
-          <a href="https://www.voetbalvlaanderen.be/club/9732" target="_blank" class="footer-link-big">Voetbal Vlaanderen ↗</a>
-          <a href="https://www.voetbalvlaanderen.be/club/9732/komende-wedstrijden" target="_blank" class="footer-link-big">Wedstrijden ↗</a>
+          <a href="https://www.voetbalvlaanderen.be/club/9732" target="_blank" class="footer__link">Voetbal Vlaanderen ↗</a>
+          <a href="https://www.voetbalvlaanderen.be/club/9732/komende-wedstrijden" target="_blank" class="footer__link">Wedstrijden ↗</a>
         </div>
         
-        <div class="footer-col">
+        <div class="footer__col">
           <h4>Sociaal</h4>
-          <a href="#" class="footer-link-big">Facebook</a>
-          <a href="#" class="footer-link-big">Instagram</a>
+          <a href="#" class="footer__link">Facebook</a>
+          <a href="#" class="footer__link">Instagram</a>
         </div>
       </div>
       
-      <div class="footer-bottom">
-        <div class="footer-locations">
+      <div class="footer__bottom">
+        <div class="footer__locations">
           <span>Heers VV</span>
-          <span class="dot">•</span>
+          <span class="footer__dot">•</span>
           <span>EMBO</span>
         </div>
-        <div class="footer-stamp">
-          STAMNR 09827
-        </div>
-        <div class="footer-copy">
-          © 2026
-        </div>
+        <div class="footer__stamp">STAMNR 09827</div>
+        <div class="footer__copy">© 2026</div>
       </div>
       
-      <div class="footer-ticker">
-        <div class="ticker-track">
+      <div class="ticker">
+        <div class="ticker__track">
           {[...upcomingMatches, ...upcomingMatches].map(match => (
-            <div class="ticker-item">
-              <span class="ticker-team">{match.team}</span>
-              <span class="ticker-match">{match.home} vs {match.away}</span>
-              <span class="ticker-date">{new Date(match.date).toLocaleDateString('nl-BE', { day: 'numeric', month: 'short' })} • {match.time}</span>
-              <span class="ticker-divider">◆</span>
+            <div class="ticker__item">
+              <span class="ticker__team">{match.team}</span>
+              <span class="ticker__match">{match.isHome ? match.away : match.home}</span>
+              <span class="ticker__date">{new Date(match.date).toLocaleDateString('nl-BE', { day: 'numeric', month: 'short' })} • {match.time}</span>
+              <span class="ticker__badge">{match.isHome ? 'THUIS' : 'UIT'}</span>
+              <span class="ticker__divider">◆</span>
             </div>
           ))}
         </div>
@@ -205,46 +202,80 @@ const upcomingMatches = matches.slice(0, 6);
   /* Hero */
   .hero {
     min-height: 100vh;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
     position: relative;
     background: linear-gradient(135deg, #0a0f1a 0%, #1e3264 100%);
     color: #fff;
+    overflow: hidden;
   }
 
-  .hero-content {
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('/team-photo.jpg') center center / cover no-repeat;
+    opacity: 0.4;
+    pointer-events: none;
+  }
+
+  .hero::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(10,15,26,0.6) 0%, rgba(30,50,100,0.5) 100%);
+    pointer-events: none;
+  }
+
+  .hero > * {
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero__container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 100vh;
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+
+  .hero__content {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding: 4rem;
-    padding-left: 8vw;
+    padding: 4rem 0;
   }
 
-  .hero-eyebrow {
+  .hero__eyebrow {
     font-size: 0.85rem;
     letter-spacing: 3px;
     text-transform: uppercase;
-    opacity: 0.6;
+    opacity: 0.85;
     margin-bottom: 2rem;
   }
 
-  .hero-title {
+  .hero__title {
     font-size: clamp(2.5rem, 5vw, 4.5rem);
     font-weight: 800;
     line-height: 1.1;
     margin: 0;
   }
 
-  .hero-title .line {
+  .hero__line {
     display: block;
   }
 
-  .hero-title .accent {
+  .hero__line--accent {
     color: #c8202f;
-    font-style: italic;
   }
 
-  .hero-visual {
+  .hero__visual {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -252,11 +283,11 @@ const upcomingMatches = matches.slice(0, 6);
     position: relative;
   }
 
-  .logo-container {
+  .hero__logo-container {
     position: relative;
   }
 
-  .floating-logo {
+  .hero__logo {
     width: 300px;
     animation: float 6s ease-in-out infinite;
     filter: drop-shadow(0 30px 60px rgba(0,0,0,0.4));
@@ -267,31 +298,7 @@ const upcomingMatches = matches.slice(0, 6);
     50% { transform: translateY(-20px) rotate(3deg); }
   }
 
-  .hero-stats {
-    display: flex;
-    gap: 3rem;
-    margin-top: 4rem;
-  }
-
-  .stat-item {
-    text-align: center;
-  }
-
-  .stat-value {
-    display: block;
-    font-size: 3rem;
-    font-weight: 800;
-    line-height: 1;
-  }
-
-  .stat-label {
-    font-size: 0.75rem;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    opacity: 0.6;
-  }
-
-  .scroll-indicator {
+  .hero__scroll {
     position: absolute;
     bottom: 2rem;
     left: 50%;
@@ -302,14 +309,14 @@ const upcomingMatches = matches.slice(0, 6);
     gap: 0.5rem;
   }
 
-  .scroll-indicator span {
+  .hero__scroll span {
     font-size: 0.7rem;
     text-transform: uppercase;
     letter-spacing: 2px;
     opacity: 0.5;
   }
 
-  .scroll-line {
+  .hero__scroll-line {
     width: 1px;
     height: 40px;
     background: linear-gradient(to bottom, #fff, transparent);
@@ -323,31 +330,40 @@ const upcomingMatches = matches.slice(0, 6);
 
   /* Manifesto */
   .manifesto {
-    padding: 10rem 8vw;
     background: #fafafa;
   }
 
-  .manifesto-text {
-    font-size: clamp(1.5rem, 3vw, 2.5rem);
-    line-height: 1.6;
-    max-width: 900px;
+  .manifesto__container {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 6rem 2rem;
+  }
+
+  .manifesto__text {
+    font-size: clamp(1rem, 2.5vw, 1.8rem);
+    line-height: 1.8;
+    max-width: 800px;
     margin: 0;
     color: #333;
   }
 
-  .manifesto-text .highlight {
+  .manifesto__highlight {
     color: #c8202f;
     font-weight: 700;
   }
 
   /* Values */
   .values {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    min-height: 60vh;
   }
 
-  .value-card {
+  .values__container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    max-width: 1440px;
+    margin: 0 auto;
+  }
+
+  .values__card {
     padding: 4rem;
     display: flex;
     flex-direction: column;
@@ -357,37 +373,30 @@ const upcomingMatches = matches.slice(0, 6);
     transition: background 0.4s ease;
   }
 
-  .value-card:last-child {
+  .values__card:last-child {
     border-right: none;
   }
 
-  .value-card:hover {
+  .values__card:hover {
     background: #f5f5f5;
   }
 
-  .value-card.featured {
+  .values__card--featured {
     background: #1e3264;
     color: #fff;
   }
 
-  .value-card.featured:hover {
+  .values__card--featured:hover {
     background: #2a4080;
   }
 
-  .value-number {
-    font-size: 0.75rem;
-    letter-spacing: 2px;
-    opacity: 0.4;
-    margin-bottom: auto;
-  }
-
-  .value-title {
+  .values__title {
     font-size: 2.5rem;
     font-weight: 800;
     margin: 0 0 1rem 0;
   }
 
-  .value-desc {
+  .values__desc {
     font-size: 1rem;
     opacity: 0.7;
     margin: 0;
@@ -395,72 +404,87 @@ const upcomingMatches = matches.slice(0, 6);
 
   /* Matches */
   .matches {
-    padding: 8rem 8vw;
+    padding: 8rem 0;
     background: #fff;
   }
 
-  .matches-header {
+  .matches__container {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+
+  .matches__header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 3rem;
   }
 
-  .matches-header .section-title {
-    margin-bottom: 0;
+  .matches__title {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    opacity: 0.5;
+    margin: 0;
     color: #1a1a1a;
   }
 
-  .matches-link {
+  .matches__link {
     color: #c8202f;
     text-decoration: none;
     font-weight: 600;
   }
 
-  .matches-link:hover {
+  .matches__link:hover {
     text-decoration: underline;
   }
 
-  /* Big Cards Style */
-  .matches-cards {
+  .matches__list {
     display: flex;
     flex-direction: column;
     gap: 1px;
     background: #e0e0e0;
   }
 
-  .big-card {
-    display: grid;
-    grid-template-columns: 100px 1fr auto;
+  /* Match Card */
+  .match-card {
+    display: flex;
+    align-items: center;
+    gap: clamp(1rem, 3vw, 2rem);
     background: #fafafa;
-    padding: 3rem;
-    position: relative;
+    padding: clamp(1.5rem, 4vw, 3rem);
     transition: all 0.3s ease;
   }
 
-  .big-card:hover {
+  .match-card:hover {
     background: #f0f0f0;
   }
 
-  .big-card-num {
-    font-size: 4rem;
+  .match-card__num {
+    font-size: clamp(2rem, 8vw, 4rem);
     font-weight: 900;
     color: #e0e0e0;
     line-height: 1;
+    flex-shrink: 0;
+    width: clamp(4rem, 12vw, 6rem);
+    text-align: right;
   }
 
-  .big-card.home .big-card-num {
+  .match-card--home .match-card__num {
     color: #fde0e0;
   }
 
-  .big-card-content {
+  .match-card__content {
     display: flex;
     flex-direction: column;
     justify-content: center;
     gap: 0.5rem;
+    flex: 1;
+    min-width: 0;
   }
 
-  .big-card-team {
+  .match-card__team {
     font-size: 0.75rem;
     font-weight: 700;
     text-transform: uppercase;
@@ -468,26 +492,20 @@ const upcomingMatches = matches.slice(0, 6);
     color: #c8202f;
   }
 
-  .big-card-versus {
+  .match-card__opponent {
     font-size: 1.5rem;
     font-weight: 700;
     color: #1a1a1a;
   }
 
-  .big-card-versus .vs {
-    opacity: 0.3;
-    margin: 0 0.5rem;
-    font-weight: 400;
-  }
-
-  .big-card-meta {
+  .match-card__meta {
     display: flex;
     gap: 2rem;
     font-size: 0.9rem;
     opacity: 0.5;
   }
 
-  .big-card-badge {
+  .match-card__badge {
     align-self: center;
     font-size: 0.7rem;
     font-weight: 800;
@@ -497,18 +515,24 @@ const upcomingMatches = matches.slice(0, 6);
     color: #fff;
   }
 
-  .big-card.home .big-card-badge {
+  .match-card--home .match-card__badge {
     background: #c8202f;
   }
 
   /* Locations */
   .locations {
-    padding: 8rem 8vw;
-    background: #1a1a1a;
+    padding: 8rem 0;
+    background: #1e3264;
     color: #fff;
   }
 
-  .section-title {
+  .locations__container {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+
+  .locations__title {
     font-size: 0.85rem;
     text-transform: uppercase;
     letter-spacing: 3px;
@@ -516,7 +540,7 @@ const upcomingMatches = matches.slice(0, 6);
     margin-bottom: 3rem;
   }
 
-  .locations-grid {
+  .locations__grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 2rem;
@@ -524,7 +548,8 @@ const upcomingMatches = matches.slice(0, 6);
 
   .location-card {
     padding: 3rem;
-    border: 1px solid #333;
+    border: 1px solid rgba(255,255,255,0.2);
+    background: rgba(255,255,255,0.05);
     text-decoration: none;
     color: #fff;
     display: flex;
@@ -535,22 +560,21 @@ const upcomingMatches = matches.slice(0, 6);
   }
 
   .location-card:hover {
-    background: #fff;
-    color: #1a1a1a;
-    border-color: #fff;
+    background: rgba(255,255,255,0.1);
+    border-color: rgba(255,255,255,0.4);
   }
 
-  .location-name {
+  .location-card__name {
     font-size: 2rem;
     font-weight: 800;
   }
 
-  .location-address {
+  .location-card__address {
     opacity: 0.6;
     font-size: 0.95rem;
   }
 
-  .location-arrow {
+  .location-card__arrow {
     position: absolute;
     top: 2rem;
     right: 2rem;
@@ -560,31 +584,34 @@ const upcomingMatches = matches.slice(0, 6);
     transition: all 0.3s ease;
   }
 
-  .location-card:hover .location-arrow {
+  .location-card:hover .location-card__arrow {
     opacity: 1;
     transform: translate(0, 0);
   }
 
   /* CTA */
   .cta {
-    padding: 10rem 8vw;
+    padding: 10rem 0;
     background: #c8202f;
     color: #fff;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
     position: relative;
     overflow: hidden;
   }
 
-  .cta-title {
+  .cta__container {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+
+  .cta__title {
     font-size: clamp(3rem, 8vw, 7rem);
     font-weight: 800;
     line-height: 1;
     margin: 0 0 2rem 0;
   }
 
-  .cta-button {
+  .cta__button {
     display: inline-flex;
     align-items: center;
     gap: 1rem;
@@ -597,55 +624,38 @@ const upcomingMatches = matches.slice(0, 6);
     transition: all 0.3s ease;
   }
 
-  .cta-button:hover {
+  .cta__button:hover {
     background: #1a1a1a;
     color: #fff;
     gap: 1.5rem;
   }
 
-  .btn-arrow {
+  .cta__arrow {
     transition: transform 0.3s ease;
   }
 
-  .cta-button:hover .btn-arrow {
+  .cta__button:hover .cta__arrow {
     transform: translateX(5px);
-  }
-
-  .cta-stamp {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    opacity: 0.3;
-    transform: rotate(12deg);
-  }
-
-  .cta-stamp span:first-child {
-    font-size: 0.7rem;
-    letter-spacing: 3px;
-  }
-
-  .stamp-number {
-    font-size: 4rem;
-    font-weight: 900;
-    line-height: 1;
   }
 
   /* Footer */
   .footer {
-    background: #0a0f1a;
+    background: #141f3d;
     color: #fff;
     padding: 8rem 8vw 0;
   }
 
-  .footer-grid {
+  .footer__grid {
     display: grid;
     grid-template-columns: 2fr 1fr 1fr 1fr;
     gap: 4rem;
     padding-bottom: 6rem;
     border-bottom: 1px solid #222;
+    max-width: 1440px;
+    margin: 0 auto;
   }
 
-  .footer-col h4 {
+  .footer__col h4 {
     font-size: 0.7rem;
     text-transform: uppercase;
     letter-spacing: 3px;
@@ -653,30 +663,29 @@ const upcomingMatches = matches.slice(0, 6);
     margin-bottom: 2rem;
   }
 
-  .footer-brand-col {
+  .footer__col--brand {
     padding-right: 4rem;
   }
 
-  .footer-logo {
-    width: 25%;
-    max-width: 250px;
+  .footer__logo {
+    width: 31%;
+    max-width: 300px;
     margin-bottom: 2rem;
   }
 
-  .footer-manifesto {
+  .footer__manifesto {
     font-size: 1.5rem;
     line-height: 1.4;
-    opacity: 0.6;
     margin: 0;
+    color: #fff;
   }
 
-  .footer-manifesto span {
+  .footer__manifesto span {
     color: #c8202f;
-    opacity: 1;
     font-weight: 700;
   }
 
-  .footer-link-big {
+  .footer__link {
     display: block;
     color: #fff;
     text-decoration: none;
@@ -686,50 +695,53 @@ const upcomingMatches = matches.slice(0, 6);
     transition: all 0.2s ease;
   }
 
-  .footer-link-big:hover {
+  .footer__link:hover {
     color: #c8202f;
     transform: translateX(10px);
   }
 
-  .footer-bottom {
+  .footer__bottom {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 3rem 0;
+    max-width: 1440px;
+    margin: 0 auto;
   }
 
-  .footer-locations {
+  .footer__locations {
     display: flex;
     gap: 1rem;
     font-size: 0.85rem;
     opacity: 0.5;
   }
 
-  .footer-locations .dot {
+  .footer__dot {
     opacity: 0.3;
   }
 
-  .footer-stamp {
+  .footer__stamp {
     font-size: 0.75rem;
     letter-spacing: 4px;
     opacity: 0.3;
   }
 
-  .footer-copy {
+  .footer__copy {
     font-size: 0.85rem;
     opacity: 0.3;
   }
 
-  .footer-ticker {
+  /* Ticker */
+  .ticker {
     background: #2a4080;
     margin: 0 -8vw;
     padding: 1.5rem 0;
     overflow: hidden;
   }
 
-  .ticker-track {
+  .ticker__track {
     display: flex;
-    animation: ticker 40s linear infinite;
+    animation: ticker 20s linear infinite;
     white-space: nowrap;
   }
 
@@ -738,109 +750,111 @@ const upcomingMatches = matches.slice(0, 6);
     100% { transform: translateX(-50%); }
   }
 
-  .ticker-item {
+  .ticker__item {
     display: flex;
     align-items: center;
-    gap: 1rem;
-    padding: 0 2rem;
+    gap: 0.5rem;
+    padding: 0 1rem;
     color: #fff;
   }
 
-  .ticker-team {
+  .ticker__team {
     font-size: 0.7rem;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 2px;
-    color: #fff;
-    opacity: 0.6;
+    color: #c8202f;
+    background: #fff;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
   }
 
-  .ticker-match {
+  .ticker__badge {
+    font-size: 0.6rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    opacity: 0.5;
+  }
+
+  .ticker__match {
     font-size: 1rem;
     font-weight: 600;
   }
 
-  .ticker-date {
+  .ticker__date {
     font-size: 0.85rem;
     opacity: 0.5;
   }
 
-  .ticker-divider {
+  .ticker__divider {
     font-size: 0.5rem;
     opacity: 0.3;
   }
 
   /* Responsive */
   @media (max-width: 900px) {
-    .hero {
+    .hero__container {
       grid-template-columns: 1fr;
       min-height: auto;
     }
 
-    .hero-content {
+    .hero__content {
       padding: 6rem 2rem 3rem;
       text-align: center;
     }
 
-    .hero-visual {
+    .hero__visual {
       padding: 3rem 2rem 6rem;
     }
 
-    .floating-logo {
+    .hero__logo {
       width: 200px;
     }
 
-    .hero-stats {
-      gap: 2rem;
-    }
-
-    .stat-value {
-      font-size: 2rem;
-    }
-
-    .manifesto {
+    .manifesto__container {
       padding: 5rem 2rem;
     }
 
-    .values {
+    .values__container {
       grid-template-columns: 1fr;
     }
 
-    .value-card {
+    .values__card {
       padding: 3rem 2rem;
       border-right: none;
       border-bottom: 1px solid #eee;
     }
 
     .locations {
-      padding: 4rem 2rem;
+      padding: 4rem 0;
     }
 
-    .locations-grid {
+    .locations__grid {
       grid-template-columns: 1fr;
     }
 
     .matches {
-      padding: 4rem 2rem;
+      padding: 4rem 0;
     }
 
-    .matches-header {
+    .matches__header {
       flex-direction: column;
       gap: 1rem;
       align-items: center;
       text-align: center;
     }
 
-    .big-card {
-      grid-template-columns: 60px 1fr;
+    .match-card {
       padding: 2rem;
+      position: relative;
     }
 
-    .big-card-num {
-      font-size: 2.5rem;
+    .match-card__num {
+      display: none;
     }
 
-    .big-card-badge {
+    .match-card__badge {
       position: absolute;
       top: 1rem;
       right: 1rem;
@@ -848,60 +862,57 @@ const upcomingMatches = matches.slice(0, 6);
       padding: 0.3rem 0.6rem;
     }
 
-    .big-card-versus {
+    .match-card__opponent {
       font-size: 1.1rem;
     }
 
-    .big-card-meta {
+    .match-card__meta {
       flex-direction: column;
       gap: 0.25rem;
     }
 
-    .footer-ticker {
+    .ticker {
       margin: 0 -2rem;
     }
 
-    .cta {
-      padding: 5rem 2rem;
-      flex-direction: column;
-      text-align: center;
-      gap: 3rem;
+    .ticker__track {
+      animation: ticker 10s linear infinite;
     }
 
-    .cta-stamp {
-      transform: rotate(0deg);
+    .cta {
+      padding: 5rem 0;
+    }
+
+    .cta__content {
+      text-align: center;
     }
 
     .footer {
       padding: 4rem 2rem 0;
     }
 
-    .footer-grid {
+    .footer__grid {
       grid-template-columns: 1fr;
       gap: 3rem;
       text-align: center;
     }
 
-    .footer-brand-col {
+    .footer__col--brand {
       padding-right: 0;
     }
 
-    .footer-link-big {
+    .footer__link {
       font-size: 1.1rem;
     }
 
-    .footer-link-big:hover {
+    .footer__link:hover {
       transform: none;
     }
 
-    .footer-bottom {
+    .footer__bottom {
       flex-direction: column;
       gap: 1rem;
       text-align: center;
-    }
-
-    .footer-marquee {
-      margin: 0 -2rem;
     }
   }
 </style>
