@@ -154,14 +154,14 @@ import Footer from '../components/Footer.astro';
     line-height: 0.95;
     margin: 0;
     letter-spacing: -4px;
-    color: #0a0a0a;
   }
 
   .hero__word {
     display: block;
     transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     position: relative;
-    color: #0a0a0a;
+    -webkit-text-stroke: 2px #c0c0c0;
+    color: transparent;
   }
 
   .hero__word::before {
@@ -181,8 +181,8 @@ import Footer from '../components/Footer.astro';
   }
 
   .hero__word--outline {
-    -webkit-text-stroke: 3px #0a0a0a;
-    color: transparent !important;
+    -webkit-text-stroke: 0;
+    color: #0a0a0a !important;
   }
 
   .hero__bottom {
