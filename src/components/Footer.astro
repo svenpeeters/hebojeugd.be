@@ -1,300 +1,254 @@
 ---
-const footerLinks = {
-  club: [
-    { label: 'Over ons', href: '#' },
-    { label: 'Bestuur', href: '#' },
-    { label: 'Geschiedenis', href: '#' },
-    { label: 'Contact', href: '#' },
-  ],
-  teams: [
-    { label: 'Alle teams', href: '#' },
-    { label: 'Trainers', href: '#' },
-    { label: 'Wedstrijden', href: 'https://www.voetbalvlaanderen.be/club/9732/komende-wedstrijden' },
-    { label: 'Klassementen', href: 'https://www.voetbalvlaanderen.be/club/9732/klassement' },
-  ],
-  info: [
-    { label: 'Inschrijven', href: '#' },
-    { label: 'Lidgeld', href: '#' },
-    { label: 'Kledij', href: '#' },
-    { label: 'Documenten', href: '#' },
-  ],
-  volg: [
-    { label: 'Facebook', href: '#' },
-    { label: 'Instagram', href: '#' },
-    { label: 'Voetbal Vlaanderen', href: 'https://www.voetbalvlaanderen.be/club/9732' },
-  ],
-};
+import matches from '../data/matches.json';
 
-const sponsors = [
-  { name: 'KwadrO', logo: '/sponsors/kwadro.png' },
-  { name: 'Schilderwerken Hermans', logo: '/sponsors/schilderwerken-hermans.png' },
-  { name: 'Groep Hendrickx', logo: '/sponsors/groep-hendrickx.png' },
-  { name: 'Tom Feytons', logo: '/sponsors/tom-feytons.png' },
-  { name: 'MCB Events', logo: '/sponsors/mcb-events.png' },
-  { name: 'Stevens Houttechniek', logo: '/sponsors/stevens-houttechniek.png' },
-  { name: 'Fyto Vrancken', logo: '/sponsors/fyto-vrancken.png' },
-  { name: 'SEE-IT', logo: '/sponsors/see-it.png' },
-  { name: 'Advivo', logo: '/sponsors/advivo.png' },
-  { name: 'Joris', logo: '/sponsors/joris.png' },
-  { name: 'Drankenhandel GOS', logo: '/sponsors/drankenhandel-gos.png' },
-  { name: 'Glowww', logo: '/sponsors/glowww.png' },
-];
-
-const legalLinks = [
-  { label: 'Privacy', href: '#' },
-  { label: 'Cookies', href: '#' },
-  { label: 'Gedragscode', href: '#' },
-];
+const upcomingMatches = matches;
 ---
 
 <footer class="footer">
-  <!-- Main Footer -->
-  <div class="footer-main">
-    <div class="footer-brand">
-      <img src="/logo.png" alt="HEBO Jeugd" class="footer-logo" />
-      <p class="footer-tagline">Samen sterk sinds 2024</p>
-      <div class="footer-socials">
-        <a href="#" class="social-link" aria-label="Facebook">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
-        </a>
-        <a href="#" class="social-link" aria-label="Instagram">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
-        </a>
-      </div>
+  <div class="footer__grid">
+    <div class="footer__col footer__col--brand">
+      <img src="/logo.png" alt="HEBO Jeugd" class="footer__logo" />
+      <p class="footer__manifesto">
+        Geboren uit fusie.<br/>
+        <span>Gedreven door passie.</span>
+      </p>
     </div>
-
-    <div class="footer-links">
-      <div class="footer-column">
-        <h4>Club</h4>
-        <ul>
-          {footerLinks.club.map(link => (
-            <li><a href={link.href}>{link.label}</a></li>
-          ))}
-        </ul>
-      </div>
-      <div class="footer-column">
-        <h4>Teams</h4>
-        <ul>
-          {footerLinks.teams.map(link => (
-            <li><a href={link.href}>{link.label}</a></li>
-          ))}
-        </ul>
-      </div>
-      <div class="footer-column">
-        <h4>Info</h4>
-        <ul>
-          {footerLinks.info.map(link => (
-            <li><a href={link.href}>{link.label}</a></li>
-          ))}
-        </ul>
-      </div>
-      <div class="footer-column">
-        <h4>Volg ons</h4>
-        <ul>
-          {footerLinks.volg.map(link => (
-            <li><a href={link.href}>{link.label}</a></li>
-          ))}
-        </ul>
-      </div>
+    
+    <div class="footer__col">
+      <h4>Navigate</h4>
+      <a href="/" class="footer__link">Home</a>
+      <a href="/paastoernooi" class="footer__link">Paastoernooi</a>
+      <a href="#" class="footer__link">Contact</a>
+    </div>
+    
+    <div class="footer__col">
+      <h4>Extern</h4>
+      <a href="https://www.voetbalvlaanderen.be/club/9732" target="_blank" class="footer__link">Voetbal Vlaanderen ↗</a>
+      <a href="https://www.voetbalvlaanderen.be/club/9732/komende-wedstrijden" target="_blank" class="footer__link">Wedstrijden ↗</a>
+    </div>
+    
+    <div class="footer__col">
+      <h4>Sociaal</h4>
+      <a href="#" class="footer__link">Facebook</a>
+      <a href="#" class="footer__link">Instagram</a>
     </div>
   </div>
-
-  <!-- Bottom Bar -->
-  <div class="footer-bottom">
-    <div class="footer-legal">
-      {legalLinks.map((link, i) => (
-        <>
-          <a href={link.href}>{link.label}</a>
-          {i < legalLinks.length - 1 && <span class="divider">|</span>}
-        </>
+  
+  <div class="footer__bottom">
+    <div class="footer__locations">
+      <span>Heers VV</span>
+      <span class="footer__dot">•</span>
+      <span>EMBO</span>
+    </div>
+    <div class="footer__stamp">STAMNR 09827</div>
+    <div class="footer__copy">© 2026</div>
+  </div>
+  
+  <div class="footer__ticker">
+    <div class="footer__ticker-track">
+      {[...upcomingMatches, ...upcomingMatches].map(match => (
+        <div class="footer__ticker-item">
+          <span class="footer__ticker-team">{match.team}</span>
+          <span class="footer__ticker-match">{match.isHome ? match.away : match.home}</span>
+          <span class="footer__ticker-date">{new Date(match.date).toLocaleDateString('nl-BE', { day: 'numeric', month: 'short' })} • {match.time}</span>
+          <span class="footer__ticker-badge">{match.isHome ? 'THUIS' : 'UIT'}</span>
+          <span class="footer__ticker-divider">◆</span>
+        </div>
       ))}
     </div>
-    <p class="footer-copyright">
-      © 2026 VC HEBO Jeugd — Stamnr. 09827 — Heers & Bovelingen
-    </p>
   </div>
 </footer>
 
 <style>
   .footer {
-    background: #0d1a33;
-    overflow: hidden;
+    background: #141f3d;
+    color: #fff;
+    padding: 8rem 8vw 0;
   }
 
-  /* Sponsors */
-  .sponsors {
-    background: var(--white);
-    padding: 2.5rem 2rem;
-    text-align: center;
-  }
-  .sponsors-title {
-    font-size: 0.75rem;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    color: var(--navy);
-    opacity: 0.5;
-    margin-bottom: 1rem;
-  }
-  .sponsors-grid {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 3rem;
-    flex-wrap: wrap;
-    max-width: 1400px;
+  .footer__grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 4rem;
+    padding-bottom: 6rem;
+    border-bottom: 1px solid #222;
+    max-width: 1440px;
     margin: 0 auto;
   }
-  .sponsor {
-    text-decoration: none;
-    opacity: 0.6;
-    transition: opacity 0.2s;
-  }
-  .sponsor:hover {
-    opacity: 1;
-  }
-  .sponsor-logo {
-    height: 70px;
-    width: auto;
-    max-width: 180px;
-    object-fit: contain;
-    filter: grayscale(100%);
-    transition: filter 0.2s;
-  }
-  .sponsor:hover .sponsor-logo {
-    filter: grayscale(0%);
-  }
 
-  /* Main Footer */
-  .footer-main {
-    display: grid;
-    grid-template-columns: 1fr 2fr;
-    gap: 3rem;
-    padding: 3rem;
-    border-bottom: 1px solid rgba(255,255,255,0.1);
-  }
-  .footer-brand {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-  }
-  .footer-logo {
-    width: 80px;
-    margin-bottom: 1rem;
-  }
-  .footer-tagline {
-    font-size: 0.9rem;
-    opacity: 0.6;
-    margin-bottom: 1.5rem;
-  }
-  .footer-socials {
-    display: flex;
-    gap: 1rem;
-  }
-  .social-link {
-    width: 40px;
-    height: 40px;
-    background: rgba(255,255,255,0.1);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--white);
-    transition: background 0.2s;
-  }
-  .social-link:hover {
-    background: var(--red);
-  }
-  .social-link svg {
-    width: 18px;
-    height: 18px;
-  }
-
-  /* Footer Links */
-  .footer-links {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 2rem;
-  }
-  .footer-column h4 {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 1.2rem;
-    letter-spacing: 1px;
+  .footer__col h4 {
+    font-size: 0.7rem;
     text-transform: uppercase;
-    margin-bottom: 1rem;
-    color: var(--white);
-  }
-  .footer-column ul {
-    list-style: none;
-  }
-  .footer-column li {
-    margin-bottom: 0.5rem;
-  }
-  .footer-column a {
-    color: var(--white);
-    opacity: 0.6;
-    text-decoration: none;
-    font-size: 0.9rem;
-    transition: opacity 0.2s;
-  }
-  .footer-column a:hover {
-    opacity: 1;
+    letter-spacing: 3px;
+    opacity: 0.4;
+    margin-bottom: 2rem;
   }
 
-  /* Bottom Bar */
-  .footer-bottom {
+  .footer__col--brand {
+    padding-right: 4rem;
+  }
+
+  .footer__logo {
+    width: 31%;
+    max-width: 300px;
+    margin-bottom: 2rem;
+  }
+
+  .footer__manifesto {
+    font-size: 1.5rem;
+    line-height: 1.4;
+    margin: 0;
+    color: #fff;
+  }
+
+  .footer__manifesto span {
+    color: #c8202f;
+    font-weight: 700;
+  }
+
+  .footer__link {
+    display: block;
+    color: #fff;
+    text-decoration: none;
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    transition: all 0.2s ease;
+  }
+
+  .footer__link:hover {
+    color: #c8202f;
+    transform: translateX(10px);
+  }
+
+  .footer__bottom {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1.5rem 3rem;
-    font-size: 0.8rem;
-    color: var(--white);
+    padding: 3rem 0;
+    max-width: 1440px;
+    margin: 0 auto;
+  }
+
+  .footer__locations {
+    display: flex;
+    gap: 1rem;
+    font-size: 0.85rem;
     opacity: 0.5;
   }
-  .footer-legal {
+
+  .footer__dot {
+    opacity: 0.3;
+  }
+
+  .footer__stamp {
+    font-size: 0.75rem;
+    letter-spacing: 4px;
+    opacity: 0.3;
+  }
+
+  .footer__copy {
+    font-size: 0.85rem;
+    opacity: 0.3;
+  }
+
+  /* Ticker */
+  .footer__ticker {
+    background: #2a4080;
+    margin: 0 -8vw;
+    padding: 1.5rem 0;
+    overflow: hidden;
+  }
+
+  .footer__ticker-track {
     display: flex;
+    animation: footerTicker 20s linear infinite;
+    white-space: nowrap;
+  }
+
+  @keyframes footerTicker {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  .footer__ticker-item {
+    display: flex;
+    align-items: center;
     gap: 0.5rem;
+    padding: 0 1rem;
+    color: #fff;
   }
-  .footer-legal a {
-    color: var(--white);
-    text-decoration: none;
-    transition: opacity 0.2s;
+
+  .footer__ticker-team {
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #c8202f;
+    background: #fff;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
   }
-  .footer-legal a:hover {
-    opacity: 0.8;
+
+  .footer__ticker-badge {
+    font-size: 0.6rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    opacity: 0.5;
   }
-  .divider {
+
+  .footer__ticker-match {
+    font-size: 1rem;
+    font-weight: 600;
+  }
+
+  .footer__ticker-date {
+    font-size: 0.85rem;
+    opacity: 0.5;
+  }
+
+  .footer__ticker-divider {
+    font-size: 0.5rem;
     opacity: 0.3;
   }
 
   /* Responsive */
-  @media (max-width: 1024px) {
-    .footer-main {
+  @media (max-width: 900px) {
+    .footer {
+      padding: 4rem 2rem 0;
+    }
+
+    .footer__grid {
       grid-template-columns: 1fr;
+      gap: 3rem;
       text-align: center;
     }
-    .footer-brand {
-      align-items: center;
+
+    .footer__col--brand {
+      padding-right: 0;
     }
-    .footer-links {
-      grid-template-columns: repeat(2, 1fr);
+
+    .footer__link {
+      font-size: 1.1rem;
     }
-  }
-  @media (max-width: 600px) {
-    .footer-main {
-      padding: 2rem 1.5rem;
+
+    .footer__link:hover {
+      transform: none;
     }
-    .footer-links {
-      grid-template-columns: 1fr 1fr;
-      gap: 1.5rem;
-    }
-    .footer-bottom {
+
+    .footer__bottom {
       flex-direction: column;
-      gap: 0.5rem;
-      padding: 1.5rem;
+      gap: 1rem;
       text-align: center;
     }
-    .sponsors-grid {
-      gap: 1.5rem;
+
+    .footer__ticker {
+      margin: 0 -2rem;
+    }
+
+    .footer__ticker-track {
+      animation: footerTicker 10s linear infinite;
     }
   }
 </style>

@@ -1,6 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import PaastoernooiTicker from '../components/PaastoernooiTicker.astro';
+import Footer from '../components/Footer.astro';
 ---
 
 <Layout title="Paastoernooi 2026 | VC HEBO Jeugd">
@@ -249,40 +250,7 @@ import PaastoernooiTicker from '../components/PaastoernooiTicker.astro';
     </section>
 
     <!-- Footer -->
-    <footer class="footer">
-      <div class="footer__grid">
-        <div class="footer__col footer__col--brand">
-          <img src="/logo.png" alt="HEBO Jeugd" class="footer__logo" />
-          <p class="footer__manifesto">
-            Geboren uit fusie.<br/>
-            <span>Gedreven door passie.</span>
-          </p>
-        </div>
-        
-        <div class="footer__col">
-          <h4>Navigate</h4>
-          <a href="/" class="footer__link">Home</a>
-          <a href="/paastoernooi" class="footer__link">Paastoernooi</a>
-        </div>
-        
-        <div class="footer__col">
-          <h4>Extern</h4>
-          <a href="https://www.voetbalvlaanderen.be/club/9732" target="_blank" class="footer__link">Voetbal Vlaanderen ↗</a>
-          <a href="https://www.voetbalvlaanderen.be/club/9732/komende-wedstrijden" target="_blank" class="footer__link">Wedstrijden ↗</a>
-        </div>
-        
-        <div class="footer__col">
-          <h4>Sociaal</h4>
-          <a href="#" class="footer__link">Facebook</a>
-          <a href="#" class="footer__link">Instagram</a>
-        </div>
-      </div>
-      
-      <div class="footer__bottom">
-        <div class="footer__stamp">STAMNR 09827</div>
-        <div class="footer__copy">© 2026</div>
-      </div>
-    </footer>
+    <Footer />
   </main>
 </Layout>
 
@@ -637,99 +605,6 @@ import PaastoernooiTicker from '../components/PaastoernooiTicker.astro';
     transform: translateX(5px);
   }
 
-  /* Footer */
-  .footer {
-    background: #141f3d;
-    color: #fff;
-    padding: 8rem 8vw 0;
-  }
-
-  .footer__grid {
-    display: grid;
-    grid-template-columns: 2fr 1fr 1fr 1fr;
-    gap: 4rem;
-    padding-bottom: 6rem;
-    border-bottom: 1px solid #222;
-    max-width: 900px;
-    margin: 0 auto;
-  }
-
-  .footer__col h4 {
-    font-size: 0.7rem;
-    text-transform: uppercase;
-    letter-spacing: 3px;
-    opacity: 0.4;
-    margin-bottom: 2rem;
-  }
-
-  .footer__col--brand {
-    padding-right: 4rem;
-  }
-
-  .footer__logo {
-    width: 50%;
-    max-width: 200px;
-    margin-bottom: 2rem;
-  }
-
-  .footer__manifesto {
-    font-size: 1.3rem;
-    line-height: 1.4;
-    margin: 0;
-    color: #fff;
-  }
-
-  .footer__manifesto span {
-    color: #c8202f;
-    font-weight: 700;
-  }
-
-  .footer__link {
-    display: block;
-    color: #fff;
-    text-decoration: none;
-    font-size: 1.1rem;
-    font-weight: 600;
-    margin-bottom: 1rem;
-    transition: all 0.2s ease;
-  }
-
-  .footer__link:hover {
-    color: #c8202f;
-    transform: translateX(10px);
-  }
-
-  .footer__bottom {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 3rem 0;
-    max-width: 900px;
-    margin: 0 auto;
-  }
-
-  .footer__locations {
-    display: flex;
-    gap: 1rem;
-    font-size: 0.85rem;
-    opacity: 0.5;
-  }
-
-  .footer__dot {
-    opacity: 0.3;
-  }
-
-  .footer__stamp {
-    font-size: 0.75rem;
-    letter-spacing: 4px;
-    opacity: 0.3;
-  }
-
-  .footer__copy {
-    font-size: 0.85rem;
-    opacity: 0.3;
-  }
-
   /* Responsive */
   @media (max-width: 1200px) {
     .polaroid-track {
@@ -845,34 +720,6 @@ import PaastoernooiTicker from '../components/PaastoernooiTicker.astro';
 
     .matches__header {
       margin-bottom: 1.5rem;
-    }
-
-    .footer {
-      padding: 4rem 2rem 0;
-    }
-
-    .footer__grid {
-      grid-template-columns: 1fr;
-      gap: 3rem;
-      text-align: center;
-    }
-
-    .footer__col--brand {
-      padding-right: 0;
-    }
-
-    .footer__link {
-      font-size: 1.1rem;
-    }
-
-    .footer__link:hover {
-      transform: none;
-    }
-
-    .footer__bottom {
-      flex-direction: column;
-      gap: 1rem;
-      text-align: center;
     }
   }
 </style>
