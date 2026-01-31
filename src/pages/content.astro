@@ -1,0 +1,250 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PaastoernooiTicker from '../components/PaastoernooiTicker.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout title="Content | VC HEBO Jeugd">
+  <main>
+    <PaastoernooiTicker />
+
+    <!-- Hero -->
+    <section class="hero">
+      <div class="hero__container">
+        <div class="hero__eyebrow">Nieuws & Updates</div>
+        <h1 class="hero__title">Blijf op de hoogte</h1>
+        <p class="hero__intro">Het laatste nieuws van VC HEBO Jeugd</p>
+      </div>
+    </section>
+
+    <!-- Content Grid -->
+    <section class="content">
+      <div class="content__container">
+        <article class="card card--featured">
+          <div class="card__image">
+            <img src="/team-photo.jpg" alt="Team foto" />
+          </div>
+          <div class="card__body">
+            <div class="card__meta">
+              <span class="card__tag">Nieuws</span>
+              <span class="card__date">31 januari 2026</span>
+            </div>
+            <h2 class="card__title">Paastoernooi 2026: Inschrijvingen geopend!</h2>
+            <p class="card__excerpt">Van 7 tot 9 april organiseren wij ons jaarlijks Paastoernooi voor U6 tot en met U13. Schrijf nu je team in en beleef drie dagen vol voetbalplezier.</p>
+            <a href="/paastoernooi" class="card__link">Meer info →</a>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card__body">
+            <div class="card__meta">
+              <span class="card__tag">Club</span>
+              <span class="card__date">15 januari 2026</span>
+            </div>
+            <h2 class="card__title">Nieuwe trainingsuren voorjaar</h2>
+            <p class="card__excerpt">Vanaf februari wijzigen de trainingsuren voor enkele leeftijdsgroepen. Check de planning voor jouw team.</p>
+            <a href="#" class="card__link">Lees meer →</a>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card__body">
+            <div class="card__meta">
+              <span class="card__tag">Wedstrijden</span>
+              <span class="card__date">10 januari 2026</span>
+            </div>
+            <h2 class="card__title">Terugblik: Eindejaarstoernooi</h2>
+            <p class="card__excerpt">Wat een succes! Meer dan 200 jonge voetballers namen deel aan ons eindejaarstoernooi in december.</p>
+            <a href="#" class="card__link">Lees meer →</a>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card__body">
+            <div class="card__meta">
+              <span class="card__tag">Vrijwilligers</span>
+              <span class="card__date">5 januari 2026</span>
+            </div>
+            <h2 class="card__title">Gezocht: Hulp bij tornooien</h2>
+            <p class="card__excerpt">Voor onze tornooien zijn we altijd op zoek naar extra helpende handen. Interesse? Neem contact op!</p>
+            <a href="mailto:info@hebojeugd.be" class="card__link">Contact →</a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <Footer />
+  </main>
+</Layout>
+
+<style>
+  main {
+    background: #fafafa;
+    color: #1a1a1a;
+  }
+
+  /* Hero */
+  .hero {
+    background: linear-gradient(135deg, #0a0f1a 0%, #1e3264 100%);
+    color: #fff;
+    padding: 8rem 2rem 6rem;
+    text-align: center;
+  }
+
+  .hero__container {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .hero__eyebrow {
+    font-size: 0.85rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    opacity: 0.7;
+    margin-bottom: 1rem;
+  }
+
+  .hero__title {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 800;
+    margin: 0 0 1rem 0;
+  }
+
+  .hero__intro {
+    font-size: 1.1rem;
+    opacity: 0.8;
+    margin: 0;
+  }
+
+  /* Content Grid */
+  .content {
+    padding: 4rem 2rem;
+  }
+
+  .content__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+  }
+
+  /* Cards */
+  .card {
+    background: #fff;
+    border-radius: 4px;
+    overflow: hidden;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.1);
+  }
+
+  .card--featured {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .card__image {
+    overflow: hidden;
+  }
+
+  .card__image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+  }
+
+  .card:hover .card__image img {
+    transform: scale(1.05);
+  }
+
+  .card__body {
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .card--featured .card__body {
+    justify-content: center;
+  }
+
+  .card__meta {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-size: 0.8rem;
+  }
+
+  .card__tag {
+    background: #c8202f;
+    color: #fff;
+    padding: 0.25rem 0.75rem;
+    border-radius: 2px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 0.7rem;
+  }
+
+  .card__date {
+    opacity: 0.5;
+  }
+
+  .card__title {
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin: 0;
+    line-height: 1.3;
+  }
+
+  .card--featured .card__title {
+    font-size: 1.8rem;
+  }
+
+  .card__excerpt {
+    font-size: 0.95rem;
+    line-height: 1.7;
+    opacity: 0.7;
+    margin: 0;
+  }
+
+  .card__link {
+    color: #c8202f;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: gap 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+  }
+
+  .card__link:hover {
+    gap: 0.5rem;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .hero {
+      padding: 6rem 2rem 4rem;
+    }
+
+    .card--featured {
+      grid-template-columns: 1fr;
+    }
+
+    .card__image {
+      height: 200px;
+    }
+
+    .card--featured .card__title {
+      font-size: 1.4rem;
+    }
+  }
+</style>
