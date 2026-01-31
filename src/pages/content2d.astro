@@ -1,0 +1,295 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PaastoernooiTicker from '../components/PaastoernooiTicker.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout title="Nieuws | VC HEBO Jeugd">
+  <main>
+    <PaastoernooiTicker />
+
+    <!-- 3D STACK -->
+    <section class="scene">
+      <div class="stack">
+        <article class="layer layer--1">
+          <div class="layer__content">
+            <span class="layer__num">01</span>
+            <h2>PAASTOERNOOI 2026</h2>
+            <p>7—9 April</p>
+          </div>
+        </article>
+
+        <article class="layer layer--2">
+          <div class="layer__content">
+            <span class="layer__num">02</span>
+            <h2>TRAININGEN</h2>
+            <p>Nieuwe uren</p>
+          </div>
+        </article>
+
+        <article class="layer layer--3">
+          <div class="layer__content">
+            <span class="layer__num">03</span>
+            <h2>FILOSOFIE</h2>
+            <p>Plezier eerst</p>
+          </div>
+        </article>
+
+        <article class="layer layer--4">
+          <div class="layer__content">
+            <span class="layer__num">04</span>
+            <h2>EINDEJAARS</h2>
+            <p>200+ spelers</p>
+          </div>
+        </article>
+
+        <article class="layer layer--5">
+          <div class="layer__content">
+            <span class="layer__num">05</span>
+            <h2>VRIJWILLIGERS</h2>
+            <p>Help mee</p>
+          </div>
+        </article>
+      </div>
+
+      <div class="scene__caption">
+        <p>Scroll of hover om te verkennen</p>
+      </div>
+    </section>
+
+    <!-- Side stats -->
+    <section class="stats">
+      <div class="stat">
+        <span class="stat__num">06</span>
+        <span class="stat__value">2024</span>
+        <span class="stat__label">Opgericht</span>
+      </div>
+      <div class="stat">
+        <span class="stat__num">07</span>
+        <span class="stat__value">200+</span>
+        <span class="stat__label">Spelers</span>
+      </div>
+      <div class="stat">
+        <span class="stat__num">08</span>
+        <span class="stat__value">∞</span>
+        <span class="stat__label">Plezier</span>
+      </div>
+    </section>
+
+    <Footer />
+  </main>
+</Layout>
+
+<style>
+  main {
+    background: linear-gradient(135deg, #0a0a0a 0%, #1e3264 100%);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+  }
+
+  /* 3D Scene */
+  .scene {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 4rem;
+    perspective: 1500px;
+  }
+
+  .stack {
+    position: relative;
+    width: 100%;
+    max-width: 600px;
+    height: 400px;
+    transform-style: preserve-3d;
+    transform: rotateX(10deg) rotateY(-15deg);
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .stack:hover {
+    transform: rotateX(0deg) rotateY(0deg);
+  }
+
+  .layer {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+    overflow: hidden;
+  }
+
+  .layer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: #c8202f;
+  }
+
+  .layer--1 {
+    transform: translateZ(0px);
+    background: #1e3264;
+    color: #fff;
+  }
+
+  .layer--2 {
+    transform: translateZ(-30px) translateY(10px);
+  }
+
+  .layer--3 {
+    transform: translateZ(-60px) translateY(20px);
+    background: #c8202f;
+    color: #fff;
+  }
+
+  .layer--4 {
+    transform: translateZ(-90px) translateY(30px);
+  }
+
+  .layer--5 {
+    transform: translateZ(-120px) translateY(40px);
+    background: #1e3264;
+    color: #fff;
+  }
+
+  .stack:hover .layer--1 { transform: translateZ(100px) translateX(-50px) rotateY(10deg); }
+  .stack:hover .layer--2 { transform: translateZ(50px) translateX(-25px) rotateY(5deg); }
+  .stack:hover .layer--3 { transform: translateZ(0px); }
+  .stack:hover .layer--4 { transform: translateZ(-50px) translateX(25px) rotateY(-5deg); }
+  .stack:hover .layer--5 { transform: translateZ(-100px) translateX(50px) rotateY(-10deg); }
+
+  .layer:hover {
+    z-index: 100;
+    transform: translateZ(150px) scale(1.1) !important;
+  }
+
+  .layer__content {
+    padding: 3rem;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+  }
+
+  .layer__num {
+    font-size: 0.7rem;
+    letter-spacing: 3px;
+    opacity: 0.4;
+    margin-bottom: auto;
+  }
+
+  .layer h2 {
+    font-size: 2rem;
+    font-weight: 900;
+    margin: 0;
+    letter-spacing: -1px;
+  }
+
+  .layer p {
+    font-size: 1rem;
+    opacity: 0.7;
+    margin: 0.5rem 0 0 0;
+  }
+
+  .scene__caption {
+    margin-top: 4rem;
+    color: #fff;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    opacity: 0.4;
+  }
+
+  /* Stats */
+  .stats {
+    display: flex;
+    border-top: 1px solid rgba(255,255,255,0.1);
+  }
+
+  .stat {
+    flex: 1;
+    padding: 3rem;
+    text-align: center;
+    color: #fff;
+    border-right: 1px solid rgba(255,255,255,0.1);
+    transition: background 0.3s;
+    cursor: pointer;
+  }
+
+  .stat:last-child {
+    border-right: none;
+  }
+
+  .stat:hover {
+    background: rgba(255,255,255,0.05);
+  }
+
+  .stat__num {
+    font-size: 0.65rem;
+    letter-spacing: 2px;
+    opacity: 0.3;
+    display: block;
+    margin-bottom: 1rem;
+  }
+
+  .stat__value {
+    font-size: 3rem;
+    font-weight: 900;
+    display: block;
+  }
+
+  .stat__label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    opacity: 0.5;
+    display: block;
+    margin-top: 0.5rem;
+  }
+
+  @media (max-width: 900px) {
+    .scene {
+      padding: 2rem;
+      perspective: none;
+    }
+
+    .stack {
+      transform: none;
+      height: auto;
+    }
+
+    .stack:hover {
+      transform: none;
+    }
+
+    .layer {
+      position: relative;
+      transform: none !important;
+      margin-bottom: 1rem;
+      height: auto;
+    }
+
+    .layer:hover {
+      transform: translateX(10px) !important;
+    }
+
+    .stats {
+      flex-direction: column;
+    }
+
+    .stat {
+      border-right: none;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+  }
+</style>

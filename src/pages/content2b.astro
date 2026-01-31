@@ -1,0 +1,183 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PaastoernooiTicker from '../components/PaastoernooiTicker.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout title="Nieuws | VC HEBO Jeugd">
+  <main>
+    <PaastoernooiTicker />
+
+    <!-- DIAGONAL SLICES -->
+    <section class="slices">
+      <div class="slice slice--1">
+        <div class="slice__content">
+          <span class="slice__num">01</span>
+          <h2 class="slice__title">PAASTOERNOOI</h2>
+          <span class="slice__sub">7—9 April 2026</span>
+        </div>
+      </div>
+
+      <div class="slice slice--2">
+        <div class="slice__content">
+          <span class="slice__num">02</span>
+          <h2 class="slice__title">TRAININGEN</h2>
+          <span class="slice__sub">Nieuwe uren feb '26</span>
+        </div>
+      </div>
+
+      <div class="slice slice--3">
+        <div class="slice__content">
+          <span class="slice__num">03</span>
+          <h2 class="slice__title">FILOSOFIE</h2>
+          <span class="slice__sub">Plezier eerst</span>
+        </div>
+      </div>
+
+      <div class="slice slice--4">
+        <div class="slice__content">
+          <span class="slice__num">04</span>
+          <h2 class="slice__title">EINDEJAARS</h2>
+          <span class="slice__sub">200+ spelers</span>
+        </div>
+      </div>
+
+      <div class="slice slice--5">
+        <div class="slice__content">
+          <span class="slice__num">05</span>
+          <h2 class="slice__title">HELP MEE</h2>
+          <span class="slice__sub">Vrijwilligers</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Scroll indicator -->
+    <div class="scroll-hint">
+      <span>Hover de vlakken</span>
+    </div>
+
+    <Footer />
+  </main>
+</Layout>
+
+<style>
+  main {
+    background: #0a0a0a;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .slices {
+    flex: 1;
+    display: flex;
+    overflow: hidden;
+  }
+
+  .slice {
+    flex: 1;
+    position: relative;
+    cursor: pointer;
+    transition: flex 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: hidden;
+    clip-path: polygon(15% 0, 100% 0, 85% 100%, 0% 100%);
+    margin-left: -5%;
+  }
+
+  .slice:first-child {
+    clip-path: polygon(0 0, 100% 0, 85% 100%, 0% 100%);
+    margin-left: 0;
+  }
+
+  .slice:last-child {
+    clip-path: polygon(15% 0, 100% 0, 100% 100%, 0% 100%);
+  }
+
+  .slice:hover {
+    flex: 2;
+  }
+
+  .slice--1 { background: #1e3264; }
+  .slice--2 { background: #c8202f; }
+  .slice--3 { background: #fff; color: #0a0a0a; }
+  .slice--4 { background: #1e3264; }
+  .slice--5 { background: #c8202f; }
+
+  .slice__content {
+    position: absolute;
+    bottom: 4rem;
+    left: 50%;
+    transform: translateX(-50%) rotate(-90deg);
+    transform-origin: center;
+    white-space: nowrap;
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .slice:hover .slice__content {
+    transform: translateX(-50%) rotate(0deg);
+  }
+
+  .slice__num {
+    font-size: 0.7rem;
+    letter-spacing: 3px;
+    opacity: 0.5;
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+
+  .slice__title {
+    font-size: clamp(1.5rem, 3vw, 2.5rem);
+    font-weight: 900;
+    margin: 0;
+    letter-spacing: -1px;
+  }
+
+  .slice__sub {
+    font-size: 0.85rem;
+    opacity: 0.7;
+    display: block;
+    margin-top: 0.5rem;
+  }
+
+  .scroll-hint {
+    text-align: center;
+    padding: 2rem;
+    color: #fff;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    opacity: 0.4;
+  }
+
+  @media (max-width: 900px) {
+    .slices {
+      flex-direction: column;
+    }
+
+    .slice {
+      clip-path: polygon(0 10%, 100% 0, 100% 90%, 0 100%);
+      margin-left: 0;
+      margin-top: -5%;
+      min-height: 150px;
+    }
+
+    .slice:first-child {
+      clip-path: polygon(0 0, 100% 0, 100% 90%, 0 100%);
+      margin-top: 0;
+    }
+
+    .slice:last-child {
+      clip-path: polygon(0 10%, 100% 0, 100% 100%, 0 100%);
+    }
+
+    .slice__content {
+      transform: translateX(-50%) rotate(0deg);
+      bottom: 50%;
+      transform: translate(-50%, 50%);
+    }
+
+    .slice:hover .slice__content {
+      transform: translate(-50%, 50%);
+    }
+  }
+</style>
