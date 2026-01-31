@@ -276,8 +276,20 @@ import Footer from '../components/Footer.astro';
     color: #fff;
   }
 
+  .item--highlight .item__num,
+  .item--highlight .item__sub,
+  .item--highlight .item__cat {
+    opacity: 0.7;
+  }
+
   .item--highlight:hover {
     background: #0a0a0a;
+  }
+
+  .item:hover .item__num,
+  .item:hover .item__sub,
+  .item:hover .item__cat {
+    opacity: 0.7;
   }
 
   .item__num {
