@@ -1,0 +1,198 @@
+---
+interface Props {
+  transparent?: boolean;
+}
+
+const { transparent = false } = Astro.props;
+---
+
+<nav class:list={["navbar", { "navbar--transparent": transparent }]}>
+  <div class="navbar__container">
+    <a href="/" class="navbar__logo">
+      <img src="/logo.png" alt="VC HEBO Jeugd" />
+      <span class="navbar__logo-text">VC HEBO Jeugd</span>
+    </a>
+    
+    <button class="navbar__toggle" id="navToggle" aria-label="Menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+    <div class="navbar__menu" id="navMenu">
+      <a href="/" class="navbar__link">Home</a>
+      <a href="/paastoernooi" class="navbar__link">Paastoernooi</a>
+      <a href="https://www.voetbalvlaanderen.be/club/9732/komende-wedstrijden" target="_blank" class="navbar__link">Wedstrijden</a>
+      <a href="https://www.voetbalvlaanderen.be/club/9732" target="_blank" class="navbar__link">Club</a>
+    </div>
+  </div>
+</nav>
+
+<script>
+  const toggle = document.getElementById('navToggle');
+  const menu = document.getElementById('navMenu');
+  
+  toggle?.addEventListener('click', () => {
+    menu?.classList.toggle('navbar__menu--open');
+    toggle?.classList.toggle('navbar__toggle--active');
+  });
+
+  // Close menu on link click (mobile)
+  document.querySelectorAll('.navbar__link').forEach(link => {
+    link.addEventListener('click', () => {
+      menu?.classList.remove('navbar__menu--open');
+      toggle?.classList.remove('navbar__toggle--active');
+    });
+  });
+</script>
+
+<style>
+  .navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    background: #0a0f1a;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    transition: background 0.3s ease;
+  }
+
+  .navbar--transparent {
+    background: transparent;
+    border-bottom: none;
+  }
+
+  .navbar__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .navbar__logo {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    text-decoration: none;
+    color: #fff;
+  }
+
+  .navbar__logo img {
+    height: 45px;
+    width: auto;
+  }
+
+  .navbar__logo-text {
+    font-size: 1.1rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+  }
+
+  .navbar__menu {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .navbar__link {
+    color: rgba(255,255,255,0.8);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 600;
+    padding: 0.6rem 1.2rem;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+  }
+
+  .navbar__link:hover {
+    color: #fff;
+    background: rgba(255,255,255,0.1);
+  }
+
+  .navbar__toggle {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    width: 30px;
+    height: 30px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+  }
+
+  .navbar__toggle span {
+    display: block;
+    width: 100%;
+    height: 2px;
+    background: #fff;
+    transition: all 0.3s ease;
+  }
+
+  .navbar__toggle--active span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+  }
+
+  .navbar__toggle--active span:nth-child(2) {
+    opacity: 0;
+  }
+
+  .navbar__toggle--active span:nth-child(3) {
+    transform: rotate(-45deg) translate(5px, -5px);
+  }
+
+  @media (max-width: 768px) {
+    .navbar__container {
+      height: 60px;
+    }
+
+    .navbar__logo img {
+      height: 36px;
+    }
+
+    .navbar__logo-text {
+      display: none;
+    }
+
+    .navbar__toggle {
+      display: flex;
+    }
+
+    .navbar__menu {
+      position: fixed;
+      top: 60px;
+      left: 0;
+      right: 0;
+      background: #0a0f1a;
+      flex-direction: column;
+      padding: 1rem;
+      gap: 0;
+      transform: translateY(-100%);
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.3s ease;
+    }
+
+    .navbar__menu--open {
+      transform: translateY(0);
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .navbar__link {
+      width: 100%;
+      padding: 1rem;
+      text-align: center;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .navbar__link:last-child {
+      border-bottom: none;
+    }
+  }
+</style>
