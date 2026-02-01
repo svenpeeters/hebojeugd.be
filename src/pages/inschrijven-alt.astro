@@ -1,0 +1,616 @@
+---
+import Layout from '../layouts/Layout.astro';
+import NavbarAlt from '../components/NavbarAlt.astro';
+---
+
+<Layout title="Lid worden | VC HEBO Jeugd">
+  <main>
+    <NavbarAlt />
+
+    <!-- Section 1: Giant Question -->
+    <section class="section section--question">
+      <div class="giant-text">
+        <span class="giant-text__line">KLAAR</span>
+        <span class="giant-text__line">OM TE</span>
+        <span class="giant-text__line giant-text__line--accent">SCOREN?</span>
+      </div>
+      <div class="scroll-hint">
+        <span>Scroll</span>
+        <div class="scroll-hint__arrow">↓</div>
+      </div>
+    </section>
+
+    <!-- Section 2: Price Reveal -->
+    <section class="section section--price">
+      <div class="price-reveal">
+        <div class="price-reveal__label">Vanaf</div>
+        <div class="price-reveal__amount">
+          <span class="price-reveal__currency">€</span>
+          <span class="price-reveal__number" id="priceCounter">75</span>
+        </div>
+        <div class="price-reveal__per">per seizoen</div>
+      </div>
+      <div class="price-note">
+        <span>Inclusief volledig kledijpakket</span>
+        <span class="price-note__discount">-€25 voor 2e kind</span>
+      </div>
+    </section>
+
+    <!-- Section 3: Age Selector -->
+    <section class="section section--age">
+      <div class="age-selector">
+        <h2 class="age-selector__title">Hoe oud is je voetballer?</h2>
+        <div class="age-grid">
+          <button class="age-card" data-price="75" data-group="kleuters">
+            <span class="age-card__age">3-5</span>
+            <span class="age-card__label">Kleuters</span>
+            <span class="age-card__teams">U5</span>
+          </button>
+          <button class="age-card" data-price="250" data-group="onderbouw">
+            <span class="age-card__age">5-9</span>
+            <span class="age-card__label">Onderbouw</span>
+            <span class="age-card__teams">U6 U7 U8 U9</span>
+          </button>
+          <button class="age-card" data-price="250" data-group="middenbouw">
+            <span class="age-card__age">9-13</span>
+            <span class="age-card__label">Middenbouw</span>
+            <span class="age-card__teams">U10 U11 U12 U13</span>
+          </button>
+          <button class="age-card" data-price="275" data-group="bovenbouw">
+            <span class="age-card__age">13-17</span>
+            <span class="age-card__label">Bovenbouw</span>
+            <span class="age-card__teams">U14 U15 U17</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 4: What You Get (Reveal) -->
+    <section class="section section--stuff">
+      <div class="stuff-reveal">
+        <div class="stuff-reveal__header">
+          <span class="stuff-reveal__count" id="stuffCount">9</span>
+          <span class="stuff-reveal__label">items in je pakket</span>
+        </div>
+        <div class="stuff-grid" id="stuffGrid">
+          <div class="stuff-item" style="--delay: 0">👕 Wedstrijd-shirt</div>
+          <div class="stuff-item" style="--delay: 1">🩳 Wedstrijd-short</div>
+          <div class="stuff-item" style="--delay: 2">👔 Wedstrijd-polo</div>
+          <div class="stuff-item" style="--delay: 3">🧦 2x Kousen</div>
+          <div class="stuff-item" style="--delay: 4">🦺 Trainingsvest</div>
+          <div class="stuff-item" style="--delay: 5">👖 Trainingsbroek</div>
+          <div class="stuff-item" style="--delay: 6">🧥 Regenjas</div>
+          <div class="stuff-item" style="--delay: 7">⚽ Voetbal</div>
+          <div class="stuff-item" style="--delay: 8">🥤 Drinkbus</div>
+        </div>
+        <div class="stuff-bonus">
+          <span>NIEUW LID?</span>
+          <span class="stuff-bonus__item">+ 🎒 Voetbaltas</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 5: Checklist -->
+    <section class="section section--checklist">
+      <div class="checklist">
+        <h2 class="checklist__title">CHECK</h2>
+        <div class="checklist__items">
+          <label class="check-item">
+            <input type="checkbox" />
+            <span class="check-item__box"></span>
+            <span class="check-item__text">Voetbalschoenen</span>
+          </label>
+          <label class="check-item check-item--required">
+            <input type="checkbox" />
+            <span class="check-item__box"></span>
+            <span class="check-item__text">Scheenbeschermers</span>
+            <span class="check-item__badge">!</span>
+          </label>
+          <label class="check-item">
+            <input type="checkbox" />
+            <span class="check-item__box"></span>
+            <span class="check-item__text">Goesting om te leren</span>
+          </label>
+          <label class="check-item">
+            <input type="checkbox" />
+            <span class="check-item__box"></span>
+            <span class="check-item__text">Zin in plezier</span>
+          </label>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 6: Final CTA -->
+    <section class="section section--cta">
+      <div class="final-cta">
+        <div class="final-cta__text">
+          <span class="final-cta__line">DOE</span>
+          <span class="final-cta__line">MEE</span>
+        </div>
+        <a href="mailto:info@hebojeugd.be" class="final-cta__button">
+          <span>Contact opnemen</span>
+          <span class="final-cta__arrow">→</span>
+        </a>
+      </div>
+    </section>
+
+  </main>
+</Layout>
+
+<script>
+  // Intersection Observer for animations
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in-view');
+      }
+    });
+  }, { threshold: 0.3 });
+
+  document.querySelectorAll('.section').forEach(section => {
+    observer.observe(section);
+  });
+
+  // Age card selection
+  document.querySelectorAll('.age-card').forEach(card => {
+    card.addEventListener('click', () => {
+      document.querySelectorAll('.age-card').forEach(c => c.classList.remove('age-card--selected'));
+      card.classList.add('age-card--selected');
+      const price = card.dataset.price;
+      const counter = document.getElementById('priceCounter');
+      if (counter) counter.textContent = price;
+    });
+  });
+
+  // Checklist interactivity
+  document.querySelectorAll('.check-item input').forEach(input => {
+    input.addEventListener('change', () => {
+      const allChecked = [...document.querySelectorAll('.check-item input')].every(i => i.checked);
+      if (allChecked) {
+        document.querySelector('.section--cta')?.classList.add('all-checked');
+      }
+    });
+  });
+</script>
+
+<style>
+  main {
+    background: #0a0f1a;
+    color: #fff;
+  }
+
+  .section {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 4rem 2rem;
+    position: relative;
+    opacity: 0.3;
+    transform: translateY(50px);
+    transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .section.in-view {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Section 1: Question */
+  .section--question {
+    background: linear-gradient(135deg, #c8202f 0%, #7f1d1d 100%);
+    opacity: 1;
+    transform: none;
+  }
+
+  .giant-text {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .giant-text__line {
+    font-size: clamp(4rem, 20vw, 15rem);
+    font-weight: 900;
+    line-height: 0.85;
+    letter-spacing: -0.02em;
+  }
+
+  .giant-text__line--accent {
+    color: #fff;
+    -webkit-text-stroke: 3px #fff;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .scroll-hint {
+    position: absolute;
+    bottom: 3rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    opacity: 0.7;
+    animation: bounce 2s infinite;
+  }
+
+  @keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(10px); }
+  }
+
+  /* Section 2: Price */
+  .section--price {
+    background: #0a0f1a;
+  }
+
+  .price-reveal {
+    text-align: center;
+  }
+
+  .price-reveal__label {
+    font-size: 1.5rem;
+    text-transform: uppercase;
+    letter-spacing: 5px;
+    opacity: 0.5;
+  }
+
+  .price-reveal__amount {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    margin: 1rem 0;
+  }
+
+  .price-reveal__currency {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-top: 1rem;
+    color: #c8202f;
+  }
+
+  .price-reveal__number {
+    font-size: clamp(8rem, 30vw, 20rem);
+    font-weight: 900;
+    line-height: 1;
+    transition: all 0.5s ease;
+  }
+
+  .price-reveal__per {
+    font-size: 1.2rem;
+    opacity: 0.6;
+  }
+
+  .price-note {
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    font-size: 1rem;
+    opacity: 0.7;
+  }
+
+  .price-note__discount {
+    background: #c8202f;
+    padding: 0.5rem 1.5rem;
+    border-radius: 100px;
+    font-weight: 700;
+    opacity: 1;
+  }
+
+  /* Section 3: Age Selector */
+  .section--age {
+    background: #1e3264;
+  }
+
+  .age-selector__title {
+    font-size: clamp(1.5rem, 5vw, 3rem);
+    font-weight: 800;
+    margin-bottom: 3rem;
+    text-align: center;
+  }
+
+  .age-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    max-width: 900px;
+    width: 100%;
+  }
+
+  .age-card {
+    background: rgba(255,255,255,0.1);
+    border: 2px solid transparent;
+    padding: 2.5rem 2rem;
+    border-radius: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    color: #fff;
+    font-family: inherit;
+  }
+
+  .age-card:hover {
+    background: rgba(255,255,255,0.2);
+    transform: translateY(-5px);
+  }
+
+  .age-card--selected {
+    border-color: #c8202f;
+    background: rgba(200, 32, 47, 0.3);
+  }
+
+  .age-card__age {
+    font-size: 3rem;
+    font-weight: 900;
+  }
+
+  .age-card__label {
+    font-size: 1.1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+
+  .age-card__teams {
+    font-size: 0.85rem;
+    opacity: 0.6;
+    letter-spacing: 1px;
+  }
+
+  /* Section 4: Stuff */
+  .section--stuff {
+    background: #0a0f1a;
+  }
+
+  .stuff-reveal {
+    text-align: center;
+    max-width: 800px;
+  }
+
+  .stuff-reveal__header {
+    margin-bottom: 3rem;
+  }
+
+  .stuff-reveal__count {
+    font-size: 8rem;
+    font-weight: 900;
+    color: #c8202f;
+    line-height: 1;
+  }
+
+  .stuff-reveal__label {
+    display: block;
+    font-size: 1.5rem;
+    opacity: 0.7;
+  }
+
+  .stuff-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+  }
+
+  .stuff-item {
+    background: rgba(255,255,255,0.1);
+    padding: 1rem 1.5rem;
+    border-radius: 100px;
+    font-weight: 600;
+    opacity: 0;
+    transform: scale(0.8);
+    animation: popIn 0.5s forwards;
+    animation-delay: calc(var(--delay) * 0.1s);
+  }
+
+  .section--stuff.in-view .stuff-item {
+    animation-play-state: running;
+  }
+
+  @keyframes popIn {
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  .stuff-bonus {
+    margin-top: 3rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    opacity: 0.7;
+  }
+
+  .stuff-bonus__item {
+    font-size: 1.5rem;
+    color: #4ade80;
+    font-weight: 700;
+    opacity: 1;
+  }
+
+  /* Section 5: Checklist */
+  .section--checklist {
+    background: #fff;
+    color: #0a0f1a;
+  }
+
+  .checklist__title {
+    font-size: clamp(5rem, 20vw, 12rem);
+    font-weight: 900;
+    margin-bottom: 2rem;
+    color: #1e3264;
+  }
+
+  .checklist__items {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .check-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    cursor: pointer;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    transition: background 0.2s ease;
+  }
+
+  .check-item:hover {
+    background: #f5f5f5;
+  }
+
+  .check-item input {
+    display: none;
+  }
+
+  .check-item__box {
+    width: 2rem;
+    height: 2rem;
+    border: 3px solid #1e3264;
+    border-radius: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    flex-shrink: 0;
+  }
+
+  .check-item input:checked + .check-item__box {
+    background: #4ade80;
+    border-color: #4ade80;
+  }
+
+  .check-item input:checked + .check-item__box::after {
+    content: '✓';
+    color: #fff;
+    font-weight: 700;
+  }
+
+  .check-item__text {
+    font-size: 1.5rem;
+    font-weight: 700;
+  }
+
+  .check-item--required .check-item__text {
+    color: #c8202f;
+  }
+
+  .check-item__badge {
+    background: #c8202f;
+    color: #fff;
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 1rem;
+  }
+
+  /* Section 6: CTA */
+  .section--cta {
+    background: linear-gradient(135deg, #1e3264 0%, #0a0f1a 100%);
+    min-height: 80vh;
+  }
+
+  .final-cta {
+    text-align: center;
+  }
+
+  .final-cta__text {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .final-cta__line {
+    font-size: clamp(5rem, 25vw, 18rem);
+    font-weight: 900;
+    line-height: 0.85;
+  }
+
+  .final-cta__line:last-child {
+    color: #c8202f;
+  }
+
+  .final-cta__button {
+    display: inline-flex;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 3rem;
+    padding: 1.5rem 3rem;
+    background: #c8202f;
+    color: #fff;
+    text-decoration: none;
+    font-size: 1.2rem;
+    font-weight: 700;
+    border-radius: 100px;
+    transition: all 0.3s ease;
+  }
+
+  .final-cta__button:hover {
+    background: #fff;
+    color: #c8202f;
+    transform: scale(1.05);
+  }
+
+  .final-cta__arrow {
+    font-size: 1.5rem;
+    transition: transform 0.3s ease;
+  }
+
+  .final-cta__button:hover .final-cta__arrow {
+    transform: translateX(5px);
+  }
+
+  .section--cta.all-checked .final-cta__button {
+    animation: pulse 1s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(200, 32, 47, 0.5); }
+    50% { box-shadow: 0 0 0 20px rgba(200, 32, 47, 0); }
+  }
+
+  /* Responsive */
+  @media (max-width: 600px) {
+    .section {
+      padding: 3rem 1.5rem;
+    }
+
+    .age-grid {
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    .age-card {
+      padding: 1.5rem 1rem;
+    }
+
+    .age-card__age {
+      font-size: 2rem;
+    }
+
+    .check-item__text {
+      font-size: 1.1rem;
+    }
+
+    .stuff-item {
+      padding: 0.75rem 1rem;
+      font-size: 0.9rem;
+    }
+  }
+</style>
