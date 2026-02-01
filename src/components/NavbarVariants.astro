@@ -9,6 +9,11 @@
     <option value="sidedock">Side Dock</option>
     <option value="bottombar">Bottom Bar</option>
     <option value="corner">Corner Expand</option>
+    <option value="orbital">Orbital</option>
+    <option value="diagonal">Diagonal Slice</option>
+    <option value="typewriter">Typewriter</option>
+    <option value="cards">Floating Cards</option>
+    <option value="cube">3D Cube</option>
   </select>
 </div>
 
@@ -94,6 +99,99 @@
   </div>
 </div>
 
+<!-- VARIANT 5: Orbital -->
+<div class="nav-variant nav-variant--orbital" style="display:none;">
+  <div class="orbital">
+    <button class="orbital__center" aria-label="Menu">
+      <img src="/logo.png" alt="Menu" />
+    </button>
+    <nav class="orbital__ring">
+      <a href="/" class="orbital__item" style="--i:0">Home</a>
+      <a href="/paastoernooi" class="orbital__item" style="--i:1">Paastoernooi</a>
+      <a href="https://www.voetbalvlaanderen.be/club/9732/komende-wedstrijden" target="_blank" class="orbital__item" style="--i:2">Wedstrijden</a>
+      <a href="https://www.voetbalvlaanderen.be/club/9732" target="_blank" class="orbital__item" style="--i:3">Club</a>
+    </nav>
+  </div>
+</div>
+
+<!-- VARIANT 6: Diagonal Slice -->
+<div class="nav-variant nav-variant--diagonal" style="display:none;">
+  <div class="diagonal">
+    <button class="diagonal__trigger" aria-label="Menu">
+      <span>MENU</span>
+    </button>
+    <div class="diagonal__panel">
+      <nav class="diagonal__nav">
+        <a href="/" class="diagonal__link">Home</a>
+        <a href="/paastoernooi" class="diagonal__link">Paastoernooi</a>
+        <a href="https://www.voetbalvlaanderen.be/club/9732/komende-wedstrijden" target="_blank" class="diagonal__link">Wedstrijden</a>
+        <a href="https://www.voetbalvlaanderen.be/club/9732" target="_blank" class="diagonal__link">Club</a>
+      </nav>
+      <div class="diagonal__footer">
+        <img src="/logo.png" alt="VC HEBO Jeugd" />
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- VARIANT 7: Typewriter -->
+<div class="nav-variant nav-variant--typewriter" style="display:none;">
+  <div class="typewriter">
+    <div class="typewriter__screen">
+      <div class="typewriter__prompt">~/hebo&gt; <span class="typewriter__cursor">_</span></div>
+      <nav class="typewriter__nav">
+        <a href="/" class="typewriter__link"><span class="typewriter__cmd">01</span> home</a>
+        <a href="/paastoernooi" class="typewriter__link"><span class="typewriter__cmd">02</span> paastoernooi</a>
+        <a href="https://www.voetbalvlaanderen.be/club/9732/komende-wedstrijden" target="_blank" class="typewriter__link"><span class="typewriter__cmd">03</span> wedstrijden</a>
+        <a href="https://www.voetbalvlaanderen.be/club/9732" target="_blank" class="typewriter__link"><span class="typewriter__cmd">04</span> club</a>
+      </nav>
+    </div>
+  </div>
+</div>
+
+<!-- VARIANT 8: Floating Cards -->
+<div class="nav-variant nav-variant--cards" style="display:none;">
+  <div class="cardnav">
+    <button class="cardnav__trigger" aria-label="Menu">⚡</button>
+    <nav class="cardnav__stack">
+      <a href="/" class="cardnav__card" style="--i:0">
+        <span class="cardnav__num">01</span>
+        <span class="cardnav__title">Home</span>
+      </a>
+      <a href="/paastoernooi" class="cardnav__card" style="--i:1">
+        <span class="cardnav__num">02</span>
+        <span class="cardnav__title">Paastoernooi</span>
+      </a>
+      <a href="https://www.voetbalvlaanderen.be/club/9732/komende-wedstrijden" target="_blank" class="cardnav__card" style="--i:2">
+        <span class="cardnav__num">03</span>
+        <span class="cardnav__title">Wedstrijden</span>
+      </a>
+      <a href="https://www.voetbalvlaanderen.be/club/9732" target="_blank" class="cardnav__card" style="--i:3">
+        <span class="cardnav__num">04</span>
+        <span class="cardnav__title">Club</span>
+      </a>
+    </nav>
+  </div>
+</div>
+
+<!-- VARIANT 9: 3D Cube -->
+<div class="nav-variant nav-variant--cube" style="display:none;">
+  <div class="cubenav">
+    <div class="cubenav__scene">
+      <div class="cubenav__cube">
+        <a href="/" class="cubenav__face cubenav__face--front">Home</a>
+        <a href="/paastoernooi" class="cubenav__face cubenav__face--right">Paastoernooi</a>
+        <a href="https://www.voetbalvlaanderen.be/club/9732/komende-wedstrijden" target="_blank" class="cubenav__face cubenav__face--back">Wedstrijden</a>
+        <a href="https://www.voetbalvlaanderen.be/club/9732" target="_blank" class="cubenav__face cubenav__face--left">Club</a>
+      </div>
+    </div>
+    <div class="cubenav__controls">
+      <button class="cubenav__btn" data-dir="prev">←</button>
+      <button class="cubenav__btn" data-dir="next">→</button>
+    </div>
+  </div>
+</div>
+
 <script>
   // Variant selector
   document.getElementById('navVariantSelect')?.addEventListener('change', (e) => {
@@ -134,11 +232,46 @@
     });
   });
 
+  // Orbital
+  document.querySelectorAll('.orbital__center').forEach(btn => {
+    btn.addEventListener('click', () => {
+      btn.closest('.orbital')?.classList.toggle('orbital--open');
+    });
+  });
+
+  // Diagonal
+  document.querySelectorAll('.diagonal__trigger').forEach(btn => {
+    btn.addEventListener('click', () => {
+      btn.closest('.diagonal')?.classList.toggle('diagonal--open');
+    });
+  });
+
+  // Cards
+  document.querySelectorAll('.cardnav__trigger').forEach(btn => {
+    btn.addEventListener('click', () => {
+      btn.closest('.cardnav')?.classList.toggle('cardnav--open');
+    });
+  });
+
+  // 3D Cube
+  let cubeRotation = 0;
+  document.querySelectorAll('.cubenav__btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const dir = btn.getAttribute('data-dir');
+      cubeRotation += dir === 'next' ? -90 : 90;
+      const cube = document.querySelector('.cubenav__cube') as HTMLElement;
+      if (cube) cube.style.transform = `rotateY(${cubeRotation}deg)`;
+    });
+  });
+
   // Close on escape
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') {
       document.querySelectorAll('.nav-fullscreen').forEach(el => el.classList.remove('nav-fullscreen--open'));
       document.querySelectorAll('.cornerexp').forEach(el => el.classList.remove('cornerexp--open'));
+      document.querySelectorAll('.orbital').forEach(el => el.classList.remove('orbital--open'));
+      document.querySelectorAll('.diagonal').forEach(el => el.classList.remove('diagonal--open'));
+      document.querySelectorAll('.cardnav').forEach(el => el.classList.remove('cardnav--open'));
       document.body.style.overflow = '';
     }
   });
@@ -552,6 +685,347 @@
     transform: translateX(-10px);
   }
 
+  /* ========== VARIANT 5: Orbital ========== */
+  .orbital {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    z-index: 1000;
+  }
+
+  .orbital__center {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background: #c8202f;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 8px 30px rgba(200,32,47,0.4);
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    position: relative;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .orbital__center img {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+  }
+
+  .orbital__center:hover { transform: scale(1.1); }
+  .orbital--open .orbital__center { background: #1e3264; }
+
+  .orbital__ring {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 70px;
+    height: 70px;
+  }
+
+  .orbital__item {
+    position: absolute;
+    bottom: 50%;
+    right: 50%;
+    transform: translate(50%, 50%);
+    background: #0a0f1a;
+    color: #fff;
+    text-decoration: none;
+    padding: 0.75rem 1.25rem;
+    border-radius: 100px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    white-space: nowrap;
+    opacity: 0;
+    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+  }
+
+  .orbital--open .orbital__item {
+    opacity: 1;
+  }
+
+  .orbital--open .orbital__item:nth-child(1) { transform: translate(50%, 50%) translate(0, -100px); transition-delay: 0.05s; }
+  .orbital--open .orbital__item:nth-child(2) { transform: translate(50%, 50%) translate(-100px, -70px); transition-delay: 0.1s; }
+  .orbital--open .orbital__item:nth-child(3) { transform: translate(50%, 50%) translate(-130px, 0); transition-delay: 0.15s; }
+  .orbital--open .orbital__item:nth-child(4) { transform: translate(50%, 50%) translate(-100px, 70px); transition-delay: 0.2s; }
+
+  .orbital__item:hover { background: #c8202f; transform: scale(1.05) !important; }
+
+  /* ========== VARIANT 6: Diagonal Slice ========== */
+  .diagonal {
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: 1000;
+  }
+
+  .diagonal__trigger {
+    position: relative;
+    background: #c8202f;
+    color: #fff;
+    border: none;
+    padding: 2rem 3rem 2rem 4rem;
+    font-size: 0.75rem;
+    font-weight: 800;
+    letter-spacing: 3px;
+    cursor: pointer;
+    clip-path: polygon(30% 0, 100% 0, 100% 100%, 0% 100%);
+    transition: all 0.3s ease;
+  }
+
+  .diagonal__trigger:hover { background: #1e3264; padding-right: 4rem; }
+
+  .diagonal__panel {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 50vw;
+    height: 100vh;
+    background: #0a0f1a;
+    clip-path: polygon(20% 0, 100% 0, 100% 100%, 0% 100%);
+    transform: translateX(100%);
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 4rem;
+    padding-left: 25%;
+  }
+
+  .diagonal--open .diagonal__panel { transform: translateX(0); }
+  .diagonal--open .diagonal__trigger { opacity: 0; pointer-events: none; }
+
+  .diagonal__nav {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .diagonal__link {
+    color: #fff;
+    text-decoration: none;
+    font-size: 2.5rem;
+    font-weight: 900;
+    padding: 0.5rem 0;
+    opacity: 0;
+    transform: translateX(40px);
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .diagonal--open .diagonal__link { opacity: 1; transform: translateX(0); }
+  .diagonal--open .diagonal__link:nth-child(1) { transition-delay: 0.2s; }
+  .diagonal--open .diagonal__link:nth-child(2) { transition-delay: 0.25s; }
+  .diagonal--open .diagonal__link:nth-child(3) { transition-delay: 0.3s; }
+  .diagonal--open .diagonal__link:nth-child(4) { transition-delay: 0.35s; }
+  .diagonal__link:hover { color: #c8202f; padding-left: 1rem; }
+
+  .diagonal__footer {
+    position: absolute;
+    bottom: 3rem;
+    right: 3rem;
+  }
+
+  .diagonal__footer img { height: 50px; opacity: 0.5; }
+
+  /* ========== VARIANT 7: Typewriter ========== */
+  .typewriter {
+    position: fixed;
+    top: 1.5rem;
+    right: 1.5rem;
+    z-index: 1000;
+  }
+
+  .typewriter__screen {
+    background: #0a0f1a;
+    border: 2px solid #1e3264;
+    border-radius: 12px;
+    padding: 1.25rem 1.5rem;
+    font-family: 'Monaco', 'Consolas', monospace;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.4), inset 0 0 60px rgba(30,50,100,0.1);
+  }
+
+  .typewriter__prompt {
+    color: #4ade80;
+    font-size: 0.8rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .typewriter__cursor {
+    animation: blink 1s infinite;
+  }
+
+  @keyframes blink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
+  }
+
+  .typewriter__nav {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .typewriter__link {
+    color: #fff;
+    text-decoration: none;
+    font-size: 0.85rem;
+    padding: 0.4rem 0.6rem;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+    display: flex;
+    gap: 1rem;
+  }
+
+  .typewriter__link:hover { background: #1e3264; }
+  .typewriter__cmd { color: #c8202f; }
+
+  /* ========== VARIANT 8: Floating Cards ========== */
+  .cardnav {
+    position: fixed;
+    top: 2rem;
+    right: 2rem;
+    z-index: 1000;
+  }
+
+  .cardnav__trigger {
+    width: 55px;
+    height: 55px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #c8202f, #e02535);
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    box-shadow: 0 6px 25px rgba(200,32,47,0.4);
+    transition: all 0.3s ease;
+    position: relative;
+    z-index: 10;
+  }
+
+  .cardnav__trigger:hover { transform: rotate(15deg) scale(1.1); }
+  .cardnav--open .cardnav__trigger { transform: rotate(45deg); background: #1e3264; }
+
+  .cardnav__stack {
+    position: absolute;
+    top: 70px;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .cardnav__card {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background: #fff;
+    color: #0a0f1a;
+    text-decoration: none;
+    padding: 1rem 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+    opacity: 0;
+    transform: translateY(-20px) translateX(calc(var(--i) * 10px)) rotate(calc(var(--i) * -2deg));
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .cardnav--open .cardnav__card {
+    opacity: 1;
+    transform: translateY(0) translateX(0) rotate(0);
+  }
+
+  .cardnav--open .cardnav__card:nth-child(1) { transition-delay: 0.05s; }
+  .cardnav--open .cardnav__card:nth-child(2) { transition-delay: 0.1s; }
+  .cardnav--open .cardnav__card:nth-child(3) { transition-delay: 0.15s; }
+  .cardnav--open .cardnav__card:nth-child(4) { transition-delay: 0.2s; }
+
+  .cardnav__card:hover { transform: translateX(-10px); box-shadow: 0 12px 40px rgba(0,0,0,0.2); }
+
+  .cardnav__num {
+    font-size: 0.75rem;
+    font-weight: 800;
+    color: #c8202f;
+  }
+
+  .cardnav__title {
+    font-size: 0.95rem;
+    font-weight: 700;
+  }
+
+  /* ========== VARIANT 9: 3D Cube ========== */
+  .cubenav {
+    position: fixed;
+    top: 50%;
+    right: 3rem;
+    transform: translateY(-50%);
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+  }
+
+  .cubenav__scene {
+    width: 140px;
+    height: 60px;
+    perspective: 400px;
+  }
+
+  .cubenav__cube {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .cubenav__face {
+    position: absolute;
+    width: 140px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #0a0f1a;
+    color: #fff;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 700;
+    border: 2px solid #1e3264;
+    border-radius: 8px;
+    backface-visibility: hidden;
+    transition: background 0.3s ease;
+  }
+
+  .cubenav__face:hover { background: #c8202f; border-color: #c8202f; }
+
+  .cubenav__face--front  { transform: rotateY(0deg) translateZ(70px); }
+  .cubenav__face--right  { transform: rotateY(90deg) translateZ(70px); }
+  .cubenav__face--back   { transform: rotateY(180deg) translateZ(70px); }
+  .cubenav__face--left   { transform: rotateY(-90deg) translateZ(70px); }
+
+  .cubenav__controls {
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  .cubenav__btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #1e3264;
+    color: #fff;
+    border: none;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .cubenav__btn:hover { background: #c8202f; transform: scale(1.1); }
+
   /* Mobile adjustments */
   @media (max-width: 768px) {
     .nav-trigger__text { display: none; }
@@ -591,5 +1065,30 @@
     
     .cornerexp { bottom: 1.5rem; right: 1.5rem; }
     .cornerexp__trigger { width: 50px; height: 50px; }
+    
+    .orbital { bottom: 1.5rem; right: 1.5rem; }
+    .orbital__center { width: 55px; height: 55px; }
+    .orbital__center img { width: 30px; height: 30px; }
+    .orbital--open .orbital__item:nth-child(1) { transform: translate(50%, 50%) translate(0, -80px); }
+    .orbital--open .orbital__item:nth-child(2) { transform: translate(50%, 50%) translate(-80px, -50px); }
+    .orbital--open .orbital__item:nth-child(3) { transform: translate(50%, 50%) translate(-100px, 20px); }
+    .orbital--open .orbital__item:nth-child(4) { transform: translate(50%, 50%) translate(-70px, 80px); }
+    
+    .diagonal__panel { width: 85vw; padding-left: 15%; clip-path: polygon(10% 0, 100% 0, 100% 100%, 0% 100%); }
+    .diagonal__link { font-size: 1.8rem; }
+    
+    .typewriter { top: auto; bottom: 1rem; right: 1rem; left: 1rem; }
+    .typewriter__screen { padding: 1rem; }
+    
+    .cardnav { top: 1rem; right: 1rem; }
+    .cardnav__trigger { width: 45px; height: 45px; font-size: 1.2rem; }
+    
+    .cubenav { right: 1rem; }
+    .cubenav__scene { width: 110px; }
+    .cubenav__face { width: 110px; font-size: 0.8rem; }
+    .cubenav__face--front  { transform: rotateY(0deg) translateZ(55px); }
+    .cubenav__face--right  { transform: rotateY(90deg) translateZ(55px); }
+    .cubenav__face--back   { transform: rotateY(180deg) translateZ(55px); }
+    .cubenav__face--left   { transform: rotateY(-90deg) translateZ(55px); }
   }
 </style>
