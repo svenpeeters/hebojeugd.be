@@ -9,24 +9,42 @@ import Footer from '../components/Footer.astro';
     <!-- Ticker -->
     <PaastoernooiTicker href="#inschrijven" />
 
-    <!-- Photo Strip -->
-    <div class="photo-strip">
-      <div class="photo-strip__track" id="photoStrip"></div>
+    <!-- Hero Variant Selector -->
+    <div class="hero-selector">
+      <select id="heroVariant">
+        <option value="strip">Photo strip</option>
+        <option value="masonry">Masonry grid</option>
+      </select>
     </div>
-    <script>
-      const allPhotos = Array.from({length: 59}, (_, i) => `/images/paastoernooi-2025/${String(i + 1).padStart(2, '0')}.jpg`);
-      const shuffled = allPhotos.sort(() => Math.random() - 0.5).slice(0, 25);
-      const doubled = [...shuffled, ...shuffled];
-      const track = document.getElementById('photoStrip');
-      if (track) {
-        track.innerHTML = doubled.map(src => `<img src="${src}" alt="" />`).join('');
-      }
-    </script>
 
-    <!-- Hero -->
-    <section class="hero">
-      <div class="hero__container">
-        <div class="hero__content">
+    <!-- Hero Variant: Strip -->
+    <div class="hero-variant hero-variant--strip">
+      <div class="photo-strip">
+        <div class="photo-strip__track" id="photoStrip"></div>
+      </div>
+      <section class="hero">
+        <div class="hero__container">
+          <div class="hero__content">
+            <div class="hero__eyebrow">7-9 april 2026</div>
+            <h1 class="hero__title">
+              <span class="hero__line">Paastoernooi</span>
+              <span class="hero__line hero__line--accent">VC HEBO Jeugd</span>
+            </h1>
+            <p class="hero__subtitle">U6 t/m U13 • 3 avonden voetbalplezier</p>
+            <div class="hero__cta">
+              <a href="https://tournifyapp.com/live/vchebojeugdpaastoernooi2026" target="_blank" class="hero__button">Inschrijven →</a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- Hero Variant: Masonry -->
+    <div class="hero-variant hero-variant--masonry" style="display: none;">
+      <section class="hero-masonry">
+        <div class="masonry-bg" id="masonryBg"></div>
+        <div class="masonry-overlay"></div>
+        <div class="hero-masonry__content">
           <div class="hero__eyebrow">7-9 april 2026</div>
           <h1 class="hero__title">
             <span class="hero__line">Paastoernooi</span>
@@ -37,8 +55,39 @@ import Footer from '../components/Footer.astro';
             <a href="https://tournifyapp.com/live/vchebojeugdpaastoernooi2026" target="_blank" class="hero__button">Inschrijven →</a>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </div>
+
+    <script>
+      // Photo strip
+      const allPhotos = Array.from({length: 59}, (_, i) => `/images/paastoernooi-2025/${String(i + 1).padStart(2, '0')}.jpg`);
+      const shuffled = allPhotos.sort(() => Math.random() - 0.5);
+      const stripPhotos = shuffled.slice(0, 25);
+      const doubled = [...stripPhotos, ...stripPhotos];
+      const track = document.getElementById('photoStrip');
+      if (track) {
+        track.innerHTML = doubled.map(src => `<img src="${src}" alt="" />`).join('');
+      }
+
+      // Masonry grid
+      const masonryPhotos = shuffled.slice(0, 20);
+      const masonryBg = document.getElementById('masonryBg');
+      if (masonryBg) {
+        masonryBg.innerHTML = masonryPhotos.map((src, i) => 
+          `<div class="masonry-item masonry-item--${(i % 5) + 1}"><img src="${src}" alt="" /></div>`
+        ).join('');
+      }
+
+      // Variant switcher
+      document.getElementById('heroVariant')?.addEventListener('change', (e) => {
+        const val = (e.target as HTMLSelectElement).value;
+        document.querySelectorAll('.hero-variant').forEach(el => {
+          (el as HTMLElement).style.display = 'none';
+        });
+        const target = document.querySelector(`.hero-variant--${val}`);
+        if (target) (target as HTMLElement).style.display = '';
+      });
+    </script>
 
     <!-- Manifesto -->
     <section class="manifesto">
@@ -164,6 +213,25 @@ import Footer from '../components/Footer.astro';
     position: relative;
   }
 
+  /* Hero Selector */
+  .hero-selector {
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+    z-index: 1000;
+  }
+
+  .hero-selector select {
+    padding: 0.5rem 1rem;
+    font-size: 0.85rem;
+    border: 2px solid #1e3264;
+    background: #fff;
+    color: #1e3264;
+    font-weight: 600;
+    cursor: pointer;
+    border-radius: 4px;
+  }
+
   /* Photo Strip */
   .photo-strip {
     overflow: hidden;
@@ -275,6 +343,75 @@ import Footer from '../components/Footer.astro';
     background: #fff;
     color: #c8202f;
     transform: scale(1.05);
+  }
+
+  /* Hero Masonry */
+  .hero-masonry {
+    min-height: 100vh;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .masonry-bg {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-auto-rows: minmax(150px, auto);
+    gap: 8px;
+    padding: 8px;
+  }
+
+  .masonry-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      135deg,
+      rgba(10, 15, 26, 0.92) 0%,
+      rgba(30, 50, 100, 0.88) 100%
+    );
+    z-index: 1;
+  }
+
+  .hero-masonry__content {
+    position: relative;
+    z-index: 10;
+    text-align: center;
+    color: #fff;
+    padding: 2rem;
+    max-width: 900px;
+  }
+
+  :global(.masonry-item) {
+    overflow: hidden;
+  }
+
+  :global(.masonry-item img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  :global(.masonry-item--1) { grid-row: span 2; }
+  :global(.masonry-item--2) { grid-row: span 1; }
+  :global(.masonry-item--3) { grid-row: span 2; }
+  :global(.masonry-item--4) { grid-row: span 1; }
+  :global(.masonry-item--5) { grid-row: span 2; }
+
+  @media (max-width: 900px) {
+    .masonry-bg {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  @media (max-width: 600px) {
+    .masonry-bg {
+      grid-template-columns: repeat(2, 1fr);
+      grid-auto-rows: minmax(100px, auto);
+    }
   }
 
   /* Content sections */
