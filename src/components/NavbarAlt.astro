@@ -1,0 +1,326 @@
+---
+// NOT ANOTHER NAVIGATION TOPBAR
+// A bold corner menu that expands into full-screen takeover
+---
+
+<div class="nav-corner" id="navCorner">
+  <button class="nav-trigger" id="navTrigger" aria-label="Menu">
+    <span class="nav-trigger__text">MENU</span>
+    <span class="nav-trigger__icon">
+      <span></span>
+      <span></span>
+    </span>
+  </button>
+</div>
+
+<div class="nav-fullscreen" id="navFullscreen">
+  <div class="nav-fullscreen__bg"></div>
+  <nav class="nav-fullscreen__content">
+    <a href="/" class="nav-fullscreen__link" data-num="01">
+      <span class="nav-fullscreen__link-text">Home</span>
+    </a>
+    <a href="/paastoernooi" class="nav-fullscreen__link" data-num="02">
+      <span class="nav-fullscreen__link-text">Paastoernooi</span>
+    </a>
+    <a href="https://www.voetbalvlaanderen.be/club/9732/komende-wedstrijden" target="_blank" class="nav-fullscreen__link" data-num="03">
+      <span class="nav-fullscreen__link-text">Wedstrijden</span>
+    </a>
+    <a href="https://www.voetbalvlaanderen.be/club/9732" target="_blank" class="nav-fullscreen__link" data-num="04">
+      <span class="nav-fullscreen__link-text">Club</span>
+    </a>
+  </nav>
+  <div class="nav-fullscreen__footer">
+    <img src="/logo.png" alt="VC HEBO Jeugd" class="nav-fullscreen__logo" />
+    <span>VC HEBO Jeugd</span>
+  </div>
+  <button class="nav-close" id="navClose" aria-label="Sluiten">
+    <span></span>
+    <span></span>
+  </button>
+</div>
+
+<script>
+  const trigger = document.getElementById('navTrigger');
+  const close = document.getElementById('navClose');
+  const fullscreen = document.getElementById('navFullscreen');
+  const corner = document.getElementById('navCorner');
+
+  function openNav() {
+    fullscreen?.classList.add('nav-fullscreen--open');
+    corner?.classList.add('nav-corner--hidden');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeNav() {
+    fullscreen?.classList.remove('nav-fullscreen--open');
+    corner?.classList.remove('nav-corner--hidden');
+    document.body.style.overflow = '';
+  }
+
+  trigger?.addEventListener('click', openNav);
+  close?.addEventListener('click', closeNav);
+
+  // Close on link click
+  document.querySelectorAll('.nav-fullscreen__link').forEach(link => {
+    link.addEventListener('click', () => {
+      setTimeout(closeNav, 100);
+    });
+  });
+
+  // Close on escape
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeNav();
+  });
+</script>
+
+<style>
+  /* Corner Trigger */
+  .nav-corner {
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: 1000;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .nav-corner--hidden {
+    transform: translateX(100%);
+  }
+
+  .nav-trigger {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background: #c8202f;
+    color: #fff;
+    border: none;
+    padding: 1.25rem 1.5rem;
+    font-size: 0.75rem;
+    font-weight: 800;
+    letter-spacing: 3px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .nav-trigger:hover {
+    background: #1e3264;
+    padding-right: 2rem;
+  }
+
+  .nav-trigger__icon {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    width: 24px;
+  }
+
+  .nav-trigger__icon span {
+    display: block;
+    height: 2px;
+    background: #fff;
+    transition: width 0.3s ease;
+  }
+
+  .nav-trigger__icon span:first-child {
+    width: 100%;
+  }
+
+  .nav-trigger__icon span:last-child {
+    width: 60%;
+  }
+
+  .nav-trigger:hover .nav-trigger__icon span:last-child {
+    width: 100%;
+  }
+
+  /* Fullscreen Menu */
+  .nav-fullscreen {
+    position: fixed;
+    inset: 0;
+    z-index: 999;
+    pointer-events: none;
+    opacity: 0;
+    visibility: hidden;
+  }
+
+  .nav-fullscreen--open {
+    pointer-events: all;
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .nav-fullscreen__bg {
+    position: absolute;
+    inset: 0;
+    background: #0a0f1a;
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .nav-fullscreen--open .nav-fullscreen__bg {
+    transform: scaleX(1);
+  }
+
+  .nav-fullscreen__content {
+    position: relative;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+    padding: 4rem;
+    padding-left: 10vw;
+  }
+
+  .nav-fullscreen__link {
+    display: flex;
+    align-items: baseline;
+    gap: 2rem;
+    color: #fff;
+    text-decoration: none;
+    font-size: clamp(2.5rem, 8vw, 6rem);
+    font-weight: 900;
+    line-height: 1.1;
+    padding: 0.5rem 0;
+    opacity: 0;
+    transform: translateX(60px);
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .nav-fullscreen--open .nav-fullscreen__link {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  .nav-fullscreen--open .nav-fullscreen__link:nth-child(1) { transition-delay: 0.15s; }
+  .nav-fullscreen--open .nav-fullscreen__link:nth-child(2) { transition-delay: 0.2s; }
+  .nav-fullscreen--open .nav-fullscreen__link:nth-child(3) { transition-delay: 0.25s; }
+  .nav-fullscreen--open .nav-fullscreen__link:nth-child(4) { transition-delay: 0.3s; }
+
+  .nav-fullscreen__link::before {
+    content: attr(data-num);
+    font-size: 0.9rem;
+    font-weight: 600;
+    letter-spacing: 2px;
+    color: #c8202f;
+    opacity: 0.8;
+  }
+
+  .nav-fullscreen__link-text {
+    position: relative;
+  }
+
+  .nav-fullscreen__link-text::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0.1em;
+    width: 0;
+    height: 0.08em;
+    background: #c8202f;
+    transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .nav-fullscreen__link:hover .nav-fullscreen__link-text::after {
+    width: 100%;
+  }
+
+  .nav-fullscreen__link:hover {
+    color: #c8202f;
+  }
+
+  /* Footer */
+  .nav-fullscreen__footer {
+    position: absolute;
+    bottom: 3rem;
+    left: 10vw;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    color: rgba(255,255,255,0.5);
+    font-size: 0.85rem;
+    font-weight: 600;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1) 0.35s;
+  }
+
+  .nav-fullscreen--open .nav-fullscreen__footer {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .nav-fullscreen__logo {
+    height: 40px;
+    width: auto;
+    opacity: 0.7;
+  }
+
+  /* Close Button */
+  .nav-close {
+    position: absolute;
+    top: 2rem;
+    right: 2rem;
+    width: 50px;
+    height: 50px;
+    background: none;
+    border: 2px solid rgba(255,255,255,0.3);
+    border-radius: 50%;
+    cursor: pointer;
+    opacity: 0;
+    transform: rotate(-90deg);
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1) 0.2s;
+  }
+
+  .nav-fullscreen--open .nav-close {
+    opacity: 1;
+    transform: rotate(0);
+  }
+
+  .nav-close:hover {
+    border-color: #c8202f;
+    background: #c8202f;
+  }
+
+  .nav-close span {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 20px;
+    height: 2px;
+    background: #fff;
+  }
+
+  .nav-close span:first-child {
+    transform: translate(-50%, -50%) rotate(45deg);
+  }
+
+  .nav-close span:last-child {
+    transform: translate(-50%, -50%) rotate(-45deg);
+  }
+
+  /* Mobile */
+  @media (max-width: 768px) {
+    .nav-trigger__text {
+      display: none;
+    }
+
+    .nav-trigger {
+      padding: 1rem;
+    }
+
+    .nav-fullscreen__content {
+      padding: 6rem 2rem;
+      padding-left: 2rem;
+    }
+
+    .nav-fullscreen__link::before {
+      display: none;
+    }
+
+    .nav-fullscreen__footer {
+      left: 2rem;
+    }
+  }
+</style>
