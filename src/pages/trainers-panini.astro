@@ -23,39 +23,43 @@ const trainers = [
   <main>
     <NavbarAlt />
 
-    <!-- Header -->
     <section class="header">
       <h1>Trainersstaf</h1>
       <p>Seizoen 2024-25</p>
     </section>
 
-    <!-- Cards Grid -->
     <section class="cards">
       <div class="cards__grid">
         {trainers.map((trainer, i) => (
-          <div class={`card ${trainer.image ? 'card--has-image' : ''}`} style={`--accent: ${trainer.color}; --delay: ${i * 0.05}s`}>
-            <div class="card__top">
-              <span class="card__badge">⚽</span>
-              {trainer.image ? (
-                <img src={trainer.image} alt={trainer.name} class="card__image" />
-              ) : (
-                <div class="card__avatar">
-                  <span>{trainer.name.split(' ').map(n => n[0]).join('')}</span>
-                </div>
-              )}
-            </div>
-            
-            <div class="card__middle">
-              <h2 class="card__name">{trainer.name}</h2>
-              <span class="card__role">{trainer.role}</span>
-            </div>
-
-            <div class="card__bottom">
-              <div class="card__info">
-                <span class="card__team">{trainer.team}</span>
+          <div class="card" style={`--accent: ${trainer.color}; --delay: ${i * 0.05}s`}>
+            <div class="card__inner">
+              <!-- Top area with badge -->
+              <div class="card__top">
+                <span class="card__badge">⚽ {trainer.team}</span>
               </div>
-              <div class="card__group">
-                <span>{trainer.group}</span>
+
+              <!-- Avatar - breaks out of card -->
+              <div class="card__avatar-wrap">
+                {trainer.image ? (
+                  <img src={trainer.image} alt={trainer.name} class="card__avatar-img" />
+                ) : (
+                  <div class="card__avatar-placeholder">
+                    <span>{trainer.name.split(' ').map(n => n[0]).join('')}</span>
+                  </div>
+                )}
+              </div>
+
+              <!-- Name banner - rotated -->
+              <div class="card__banner">
+                <div class="card__banner-inner">
+                  <h2 class="card__name">{trainer.name}</h2>
+                  <span class="card__role">{trainer.role}</span>
+                </div>
+              </div>
+
+              <!-- Bottom section -->
+              <div class="card__bottom">
+                <span class="card__group">{trainer.group}</span>
               </div>
             </div>
           </div>
@@ -73,7 +77,6 @@ const trainers = [
     min-height: 100vh;
   }
 
-  /* Header */
   .header {
     padding: 4rem 2rem 2rem;
     text-align: center;
@@ -89,10 +92,8 @@ const trainers = [
   .header p {
     margin: 0.5rem 0 0;
     opacity: 0.6;
-    font-size: 1rem;
   }
 
-  /* Cards Grid */
   .cards {
     padding: 2rem;
     max-width: 1400px;
@@ -101,158 +102,163 @@ const trainers = [
 
   .cards__grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 2rem;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 3rem 2rem;
   }
 
   /* Card */
   .card {
-    background: #fff;
-    border-radius: 20px;
-    overflow: visible;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+    aspect-ratio: 3/4;
     animation: fadeUp 0.5s ease-out backwards;
     animation-delay: var(--delay);
-    transition: transform 0.3s ease;
-    position: relative;
-  }
-
-  .card:hover {
-    transform: translateY(-10px);
-    z-index: 50;
-  }
-
-  .card--has-image .card__top {
-    overflow: visible;
   }
 
   @keyframes fadeUp {
-    from {
-      opacity: 0;
-      transform: translateY(30px);
-    }
+    from { opacity: 0; transform: translateY(30px); }
   }
 
-  /* Card Top */
-  .card__top {
-    background: var(--accent);
-    padding: 2rem;
+  .card__inner {
     position: relative;
-    min-height: 200px;
-    display: flex;
-    align-items: flex-end;
-    justify-content: center;
+    width: 100%;
+    height: 100%;
+    background: var(--accent);
+    border-radius: 12px;
     overflow: visible;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+    transition: transform 0.3s ease;
   }
 
-  .card__badge {
+  .card:hover .card__inner {
+    transform: scale(1.02);
+  }
+
+  /* Top badge */
+  .card__top {
     position: absolute;
     top: 1rem;
     left: 1rem;
-    font-size: 1.5rem;
-    background: rgba(255,255,255,0.3);
-    width: 40px;
-    height: 40px;
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    z-index: 5;
   }
 
-  .card__avatar {
-    width: 140px;
-    height: 140px;
-    background: rgba(255,255,255,0.3);
+  .card__badge {
+    background: rgba(255,255,255,0.25);
+    backdrop-filter: blur(10px);
+    padding: 0.4rem 0.8rem;
+    border-radius: 8px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: #fff;
+  }
+
+  /* Avatar */
+  .card__avatar-wrap {
+    position: absolute;
+    bottom: 45%;
+    right: -10%;
+    width: 80%;
+    height: 70%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    z-index: 10;
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    pointer-events: none;
+  }
+
+  .card:hover .card__avatar-wrap {
+    transform: translateY(-20px) scale(1.05);
+  }
+
+  .card__avatar-img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    object-position: right bottom;
+    filter: drop-shadow(0 20px 30px rgba(0,0,0,0.3));
+  }
+
+  .card__avatar-placeholder {
+    width: 120px;
+    height: 120px;
+    background: rgba(255,255,255,0.2);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 3rem;
+    font-size: 2.5rem;
     font-weight: 900;
-    color: rgba(0,0,0,0.3);
-    border: 4px solid rgba(255,255,255,0.5);
+    color: rgba(255,255,255,0.5);
+    margin-right: 20%;
+    margin-bottom: 20%;
   }
 
-  .card__image {
+  /* Banner */
+  .card__banner {
     position: absolute;
-    bottom: -20px;
-    right: -40px;
-    height: 320px;
-    width: auto;
-    object-fit: contain;
-    filter: drop-shadow(0 20px 40px rgba(0,0,0,0.3));
-    z-index: 10;
-    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    bottom: 30%;
+    left: 0;
+    right: 0;
+    z-index: 15;
+    transform: rotate(-3deg);
+    transition: transform 0.3s ease;
   }
 
-  .card:hover .card__image {
-    transform: scale(1.1) rotate(5deg) translateX(-10px);
+  .card:hover .card__banner {
+    transform: rotate(-2deg) translateY(-5px);
   }
 
-  /* Card Middle */
-  .card__middle {
-    padding: 1.5rem 1.5rem 1rem;
-    text-align: center;
-    border-bottom: 2px solid #eee;
+  .card__banner-inner {
+    background: #fff;
+    border-top: 3px solid #1a1a1a;
+    border-bottom: 3px solid #1a1a1a;
+    padding: 0.75rem 1rem;
+    margin: 0 -0.5rem;
+    text-align: right;
   }
 
   .card__name {
-    font-size: 1.4rem;
+    font-size: 1.3rem;
     font-weight: 900;
     margin: 0;
     color: #1a1a1a;
     text-transform: uppercase;
-    letter-spacing: -0.5px;
+    line-height: 1.1;
   }
 
   .card__role {
-    display: block;
-    margin-top: 0.25rem;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     color: #666;
     font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 1px;
   }
 
-  /* Card Bottom */
+  /* Bottom */
   .card__bottom {
-    padding: 1rem 1.5rem;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 30%;
+    background: rgba(255,255,255,0.15);
+    backdrop-filter: blur(10px);
+    border-radius: 0 0 12px 12px;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: color-mix(in srgb, var(--accent) 15%, white);
-  }
-
-  .card__info {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-  }
-
-  .card__team {
-    font-size: 1.1rem;
-    font-weight: 800;
-    color: #1a1a1a;
+    align-items: flex-end;
+    padding: 1rem;
   }
 
   .card__group {
-    font-size: 0.75rem;
-    font-weight: 700;
-    color: color-mix(in srgb, var(--accent) 80%, black);
+    font-size: 0.9rem;
+    font-weight: 800;
+    color: #fff;
     text-transform: uppercase;
-    letter-spacing: 1px;
+    letter-spacing: 2px;
   }
 
   @media (max-width: 600px) {
     .cards__grid {
       grid-template-columns: 1fr;
-      max-width: 350px;
+      max-width: 320px;
       margin: 0 auto;
-    }
-
-    .card__name {
-      font-size: 1.2rem;
     }
   }
 </style>
