@@ -1,0 +1,582 @@
+---
+// Navigation Variants Selector + 4 different navigation styles
+---
+
+<!-- Variant Selector -->
+<div class="nav-selector">
+  <select id="navVariantSelect">
+    <option value="fullscreen">Fullscreen Takeover</option>
+    <option value="sidedock">Side Dock</option>
+    <option value="bottombar">Bottom Bar</option>
+    <option value="corner">Corner Expand</option>
+  </select>
+</div>
+
+<!-- VARIANT 1: Fullscreen Takeover -->
+<div class="nav-variant nav-variant--fullscreen">
+  <div class="nav-corner" id="navCorner1">
+    <button class="nav-trigger" aria-label="Menu">
+      <span class="nav-trigger__text">MENU</span>
+      <span class="nav-trigger__icon"><span></span><span></span></span>
+    </button>
+  </div>
+  <div class="nav-fullscreen">
+    <div class="nav-fullscreen__bg"></div>
+    <nav class="nav-fullscreen__content">
+      <a href="/" class="nav-fullscreen__link" data-num="01"><span>Home</span></a>
+      <a href="/paastoernooi" class="nav-fullscreen__link" data-num="02"><span>Paastoernooi</span></a>
+      <a href="https://www.voetbalvlaanderen.be/club/9732/komende-wedstrijden" target="_blank" class="nav-fullscreen__link" data-num="03"><span>Wedstrijden</span></a>
+      <a href="https://www.voetbalvlaanderen.be/club/9732" target="_blank" class="nav-fullscreen__link" data-num="04"><span>Club</span></a>
+    </nav>
+    <div class="nav-fullscreen__footer">
+      <img src="/logo.png" alt="VC HEBO Jeugd" />
+      <span>VC HEBO Jeugd</span>
+    </div>
+    <button class="nav-close" aria-label="Sluiten"><span></span><span></span></button>
+  </div>
+</div>
+
+<!-- VARIANT 2: Side Dock -->
+<div class="nav-variant nav-variant--sidedock" style="display:none;">
+  <nav class="sidedock">
+    <a href="/" class="sidedock__item" data-tooltip="Home">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+    </a>
+    <a href="/paastoernooi" class="sidedock__item" data-tooltip="Paastoernooi">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
+    </a>
+    <a href="https://www.voetbalvlaanderen.be/club/9732/komende-wedstrijden" target="_blank" class="sidedock__item" data-tooltip="Wedstrijden">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+    </a>
+    <a href="https://www.voetbalvlaanderen.be/club/9732" target="_blank" class="sidedock__item" data-tooltip="Club">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+    </a>
+    <div class="sidedock__logo">
+      <img src="/logo.png" alt="VC HEBO Jeugd" />
+    </div>
+  </nav>
+</div>
+
+<!-- VARIANT 3: Bottom Bar -->
+<div class="nav-variant nav-variant--bottombar" style="display:none;">
+  <nav class="bottombar">
+    <a href="/" class="bottombar__item">
+      <span class="bottombar__icon">⌂</span>
+      <span class="bottombar__label">Home</span>
+    </a>
+    <a href="/paastoernooi" class="bottombar__item bottombar__item--featured">
+      <span class="bottombar__icon">⚽</span>
+      <span class="bottombar__label">Paastoernooi</span>
+    </a>
+    <a href="https://www.voetbalvlaanderen.be/club/9732/komende-wedstrijden" target="_blank" class="bottombar__item">
+      <span class="bottombar__icon">📅</span>
+      <span class="bottombar__label">Wedstrijden</span>
+    </a>
+    <a href="https://www.voetbalvlaanderen.be/club/9732" target="_blank" class="bottombar__item">
+      <span class="bottombar__icon">🏟</span>
+      <span class="bottombar__label">Club</span>
+    </a>
+  </nav>
+</div>
+
+<!-- VARIANT 4: Corner Expand -->
+<div class="nav-variant nav-variant--corner" style="display:none;">
+  <div class="cornerexp">
+    <button class="cornerexp__trigger" aria-label="Menu">
+      <span class="cornerexp__plus"></span>
+    </button>
+    <nav class="cornerexp__menu">
+      <a href="/" class="cornerexp__link">Home</a>
+      <a href="/paastoernooi" class="cornerexp__link">Paastoernooi</a>
+      <a href="https://www.voetbalvlaanderen.be/club/9732/komende-wedstrijden" target="_blank" class="cornerexp__link">Wedstrijden</a>
+      <a href="https://www.voetbalvlaanderen.be/club/9732" target="_blank" class="cornerexp__link">Club</a>
+    </nav>
+  </div>
+</div>
+
+<script>
+  // Variant selector
+  document.getElementById('navVariantSelect')?.addEventListener('change', (e) => {
+    const val = (e.target as HTMLSelectElement).value;
+    document.querySelectorAll('.nav-variant').forEach(el => {
+      (el as HTMLElement).style.display = 'none';
+    });
+    const target = document.querySelector(`.nav-variant--${val}`);
+    if (target) (target as HTMLElement).style.display = '';
+    
+    // Reset states
+    document.querySelectorAll('.nav-fullscreen, .cornerexp').forEach(el => {
+      el.classList.remove('nav-fullscreen--open', 'cornerexp--open');
+    });
+    document.body.style.overflow = '';
+  });
+
+  // Fullscreen nav
+  document.querySelectorAll('.nav-variant--fullscreen .nav-trigger').forEach(trigger => {
+    trigger.addEventListener('click', () => {
+      const fullscreen = trigger.closest('.nav-variant')?.querySelector('.nav-fullscreen');
+      fullscreen?.classList.add('nav-fullscreen--open');
+      document.body.style.overflow = 'hidden';
+    });
+  });
+
+  document.querySelectorAll('.nav-fullscreen .nav-close').forEach(close => {
+    close.addEventListener('click', () => {
+      close.closest('.nav-fullscreen')?.classList.remove('nav-fullscreen--open');
+      document.body.style.overflow = '';
+    });
+  });
+
+  // Corner expand
+  document.querySelectorAll('.cornerexp__trigger').forEach(trigger => {
+    trigger.addEventListener('click', () => {
+      trigger.closest('.cornerexp')?.classList.toggle('cornerexp--open');
+    });
+  });
+
+  // Close on escape
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      document.querySelectorAll('.nav-fullscreen').forEach(el => el.classList.remove('nav-fullscreen--open'));
+      document.querySelectorAll('.cornerexp').forEach(el => el.classList.remove('cornerexp--open'));
+      document.body.style.overflow = '';
+    }
+  });
+</script>
+
+<style>
+  /* Selector */
+  .nav-selector {
+    position: fixed;
+    top: 1rem;
+    left: 1rem;
+    z-index: 1001;
+  }
+
+  .nav-selector select {
+    padding: 0.5rem 1rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    border: 2px solid #1e3264;
+    background: #fff;
+    color: #1e3264;
+    cursor: pointer;
+    border-radius: 4px;
+  }
+
+  /* ========== VARIANT 1: Fullscreen ========== */
+  .nav-corner {
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: 1000;
+  }
+
+  .nav-trigger {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background: #c8202f;
+    color: #fff;
+    border: none;
+    padding: 1.25rem 1.5rem;
+    font-size: 0.75rem;
+    font-weight: 800;
+    letter-spacing: 3px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .nav-trigger:hover { background: #1e3264; }
+
+  .nav-trigger__icon {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    width: 24px;
+  }
+
+  .nav-trigger__icon span {
+    display: block;
+    height: 2px;
+    background: #fff;
+  }
+
+  .nav-trigger__icon span:first-child { width: 100%; }
+  .nav-trigger__icon span:last-child { width: 60%; }
+
+  .nav-fullscreen {
+    position: fixed;
+    inset: 0;
+    z-index: 999;
+    pointer-events: none;
+    opacity: 0;
+    visibility: hidden;
+  }
+
+  .nav-fullscreen--open {
+    pointer-events: all;
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .nav-fullscreen__bg {
+    position: absolute;
+    inset: 0;
+    background: #0a0f1a;
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .nav-fullscreen--open .nav-fullscreen__bg { transform: scaleX(1); }
+
+  .nav-fullscreen__content {
+    position: relative;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+    padding: 4rem 10vw;
+  }
+
+  .nav-fullscreen__link {
+    display: flex;
+    align-items: baseline;
+    gap: 2rem;
+    color: #fff;
+    text-decoration: none;
+    font-size: clamp(2.5rem, 8vw, 5rem);
+    font-weight: 900;
+    padding: 0.5rem 0;
+    opacity: 0;
+    transform: translateX(60px);
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .nav-fullscreen--open .nav-fullscreen__link {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  .nav-fullscreen--open .nav-fullscreen__link:nth-child(1) { transition-delay: 0.15s; }
+  .nav-fullscreen--open .nav-fullscreen__link:nth-child(2) { transition-delay: 0.2s; }
+  .nav-fullscreen--open .nav-fullscreen__link:nth-child(3) { transition-delay: 0.25s; }
+  .nav-fullscreen--open .nav-fullscreen__link:nth-child(4) { transition-delay: 0.3s; }
+
+  .nav-fullscreen__link::before {
+    content: attr(data-num);
+    font-size: 0.9rem;
+    color: #c8202f;
+  }
+
+  .nav-fullscreen__link:hover { color: #c8202f; }
+
+  .nav-fullscreen__footer {
+    position: absolute;
+    bottom: 3rem;
+    left: 10vw;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    color: rgba(255,255,255,0.5);
+    font-size: 0.85rem;
+    opacity: 0;
+    transition: opacity 0.4s 0.35s;
+  }
+
+  .nav-fullscreen--open .nav-fullscreen__footer { opacity: 1; }
+  .nav-fullscreen__footer img { height: 40px; opacity: 0.7; }
+
+  .nav-close {
+    position: absolute;
+    top: 2rem;
+    right: 2rem;
+    width: 50px;
+    height: 50px;
+    background: none;
+    border: 2px solid rgba(255,255,255,0.3);
+    border-radius: 50%;
+    cursor: pointer;
+    opacity: 0;
+    transition: all 0.4s 0.2s;
+  }
+
+  .nav-fullscreen--open .nav-close { opacity: 1; }
+  .nav-close:hover { border-color: #c8202f; background: #c8202f; }
+
+  .nav-close span {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 20px;
+    height: 2px;
+    background: #fff;
+  }
+
+  .nav-close span:first-child { transform: translate(-50%, -50%) rotate(45deg); }
+  .nav-close span:last-child { transform: translate(-50%, -50%) rotate(-45deg); }
+
+  /* ========== VARIANT 2: Side Dock ========== */
+  .sidedock {
+    position: fixed;
+    left: 1.5rem;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    background: #0a0f1a;
+    padding: 1rem 0.75rem;
+    border-radius: 2rem;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+    z-index: 1000;
+  }
+
+  .sidedock__item {
+    position: relative;
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(255,255,255,0.6);
+    border-radius: 50%;
+    transition: all 0.3s ease;
+  }
+
+  .sidedock__item svg {
+    width: 22px;
+    height: 22px;
+  }
+
+  .sidedock__item:hover {
+    background: #c8202f;
+    color: #fff;
+    transform: scale(1.1);
+  }
+
+  .sidedock__item::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    left: 100%;
+    margin-left: 1rem;
+    background: #1e3264;
+    color: #fff;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateX(-10px);
+    transition: all 0.3s ease;
+  }
+
+  .sidedock__item:hover::after {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  .sidedock__logo {
+    margin-top: 0.5rem;
+    padding-top: 0.75rem;
+    border-top: 1px solid rgba(255,255,255,0.1);
+  }
+
+  .sidedock__logo img {
+    width: 36px;
+    height: 36px;
+    object-fit: contain;
+    opacity: 0.7;
+  }
+
+  /* ========== VARIANT 3: Bottom Bar ========== */
+  .bottombar {
+    position: fixed;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 0.5rem;
+    background: #0a0f1a;
+    padding: 0.75rem 1rem;
+    border-radius: 100px;
+    box-shadow: 0 10px 50px rgba(0,0,0,0.4);
+    z-index: 1000;
+  }
+
+  .bottombar__item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.25rem;
+    padding: 0.75rem 1.5rem;
+    color: rgba(255,255,255,0.6);
+    text-decoration: none;
+    border-radius: 50px;
+    transition: all 0.3s ease;
+  }
+
+  .bottombar__item:hover {
+    color: #fff;
+    background: rgba(255,255,255,0.1);
+  }
+
+  .bottombar__item--featured {
+    background: #c8202f;
+    color: #fff;
+  }
+
+  .bottombar__item--featured:hover {
+    background: #e02535;
+  }
+
+  .bottombar__icon {
+    font-size: 1.3rem;
+  }
+
+  .bottombar__label {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+  }
+
+  /* ========== VARIANT 4: Corner Expand ========== */
+  .cornerexp {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    z-index: 1000;
+  }
+
+  .cornerexp__trigger {
+    width: 60px;
+    height: 60px;
+    background: #c8202f;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 6px 30px rgba(200, 32, 47, 0.4);
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    position: relative;
+    z-index: 10;
+  }
+
+  .cornerexp__trigger:hover {
+    transform: scale(1.1);
+    box-shadow: 0 8px 40px rgba(200, 32, 47, 0.5);
+  }
+
+  .cornerexp--open .cornerexp__trigger {
+    background: #1e3264;
+    transform: rotate(45deg);
+  }
+
+  .cornerexp__plus {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 24px;
+    height: 24px;
+    transform: translate(-50%, -50%);
+  }
+
+  .cornerexp__plus::before,
+  .cornerexp__plus::after {
+    content: '';
+    position: absolute;
+    background: #fff;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .cornerexp__plus::before {
+    width: 24px;
+    height: 3px;
+  }
+
+  .cornerexp__plus::after {
+    width: 3px;
+    height: 24px;
+  }
+
+  .cornerexp__menu {
+    position: absolute;
+    bottom: 80px;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.75rem;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .cornerexp--open .cornerexp__menu {
+    opacity: 1;
+    pointer-events: all;
+  }
+
+  .cornerexp__link {
+    background: #0a0f1a;
+    color: #fff;
+    text-decoration: none;
+    padding: 1rem 1.5rem;
+    font-size: 0.9rem;
+    font-weight: 700;
+    border-radius: 100px;
+    white-space: nowrap;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    transform: translateY(20px) scale(0.8);
+    opacity: 0;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .cornerexp--open .cornerexp__link {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+
+  .cornerexp--open .cornerexp__link:nth-child(1) { transition-delay: 0.05s; }
+  .cornerexp--open .cornerexp__link:nth-child(2) { transition-delay: 0.1s; }
+  .cornerexp--open .cornerexp__link:nth-child(3) { transition-delay: 0.15s; }
+  .cornerexp--open .cornerexp__link:nth-child(4) { transition-delay: 0.2s; }
+
+  .cornerexp__link:hover {
+    background: #c8202f;
+    transform: translateX(-10px);
+  }
+
+  /* Mobile adjustments */
+  @media (max-width: 768px) {
+    .nav-trigger__text { display: none; }
+    .nav-trigger { padding: 1rem; }
+    .nav-fullscreen__content { padding: 6rem 2rem; }
+    .nav-fullscreen__link::before { display: none; }
+    .nav-fullscreen__footer { left: 2rem; }
+    
+    .sidedock {
+      left: 0.75rem;
+      padding: 0.75rem 0.5rem;
+    }
+    .sidedock__item { width: 40px; height: 40px; }
+    .sidedock__item svg { width: 18px; height: 18px; }
+    .sidedock__item::after { display: none; }
+    
+    .bottombar {
+      bottom: 1rem;
+      padding: 0.5rem;
+      gap: 0.25rem;
+    }
+    .bottombar__item { padding: 0.5rem 1rem; }
+    .bottombar__label { font-size: 0.6rem; }
+    
+    .cornerexp { bottom: 1.5rem; right: 1.5rem; }
+    .cornerexp__trigger { width: 50px; height: 50px; }
+  }
+</style>
