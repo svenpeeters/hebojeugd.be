@@ -7,6 +7,20 @@ import NavbarAlt from '../components/NavbarAlt.astro';
   <main>
     <NavbarAlt />
 
+    <!-- Photo Strip -->
+    <div class="photo-strip">
+      <div class="photo-strip__track" id="photoStrip"></div>
+    </div>
+    <script>
+      const allPhotos = Array.from({length: 59}, (_, i) => `/images/paastoernooi-2025/${String(i + 1).padStart(2, '0')}.jpg`);
+      const shuffled = allPhotos.sort(() => Math.random() - 0.5).slice(0, 25);
+      const doubled = [...shuffled, ...shuffled];
+      const track = document.getElementById('photoStrip');
+      if (track) {
+        track.innerHTML = doubled.map(src => `<img src="${src}" alt="" />`).join('');
+      }
+    </script>
+
     <!-- Section 1: Giant Question -->
     <section class="section section--question">
       <div class="giant-text">
@@ -20,81 +34,117 @@ import NavbarAlt from '../components/NavbarAlt.astro';
       </div>
     </section>
 
-    <!-- Section 2: Price Reveal -->
-    <section class="section section--price">
-      <div class="price-reveal">
-        <div class="price-reveal__label">Vanaf</div>
-        <div class="price-reveal__amount">
-          <span class="price-reveal__currency">€</span>
-          <span class="price-reveal__number" id="priceCounter">75</span>
-        </div>
-        <div class="price-reveal__per">per seizoen</div>
-      </div>
-      <div class="price-note">
-        <span>Inclusief volledig kledijpakket</span>
-        <span class="price-note__discount">-€25 voor 2e kind</span>
-      </div>
-    </section>
-
-    <!-- Section 3: Age Selector -->
-    <section class="section section--age">
-      <div class="age-selector">
-        <h2 class="age-selector__title">Hoe oud is je voetballer?</h2>
+    <!-- Section 2: Age + Price Combined -->
+    <section class="section section--select">
+      <div class="select-container">
+        <h2 class="select-title">Kies je team</h2>
+        
         <div class="age-grid">
-          <button class="age-card" data-price="75" data-group="kleuters">
+          <button class="age-card" data-price="75" data-price-new="75">
             <span class="age-card__age">3-5</span>
             <span class="age-card__label">Kleuters</span>
             <span class="age-card__teams">U5</span>
+            <div class="age-card__price">
+              <span class="age-card__price-label">Lidgeld</span>
+              <span class="age-card__price-amount">€75</span>
+            </div>
           </button>
-          <button class="age-card" data-price="250" data-group="onderbouw">
+          <button class="age-card" data-price="250" data-price-new="275">
             <span class="age-card__age">5-9</span>
             <span class="age-card__label">Onderbouw</span>
             <span class="age-card__teams">U6 U7 U8 U9</span>
+            <div class="age-card__price">
+              <span class="age-card__price-label">Lidgeld</span>
+              <span class="age-card__price-amount">€250</span>
+            </div>
           </button>
-          <button class="age-card" data-price="250" data-group="middenbouw">
+          <button class="age-card" data-price="250" data-price-new="275">
             <span class="age-card__age">9-13</span>
             <span class="age-card__label">Middenbouw</span>
             <span class="age-card__teams">U10 U11 U12 U13</span>
+            <div class="age-card__price">
+              <span class="age-card__price-label">Lidgeld</span>
+              <span class="age-card__price-amount">€250</span>
+            </div>
           </button>
-          <button class="age-card" data-price="275" data-group="bovenbouw">
+          <button class="age-card" data-price="275" data-price-new="300">
             <span class="age-card__age">13-17</span>
             <span class="age-card__label">Bovenbouw</span>
             <span class="age-card__teams">U14 U15 U17</span>
+            <div class="age-card__price">
+              <span class="age-card__price-label">Lidgeld</span>
+              <span class="age-card__price-amount">€275</span>
+            </div>
           </button>
         </div>
+
+        <div class="discount-badge">
+          <span>🎉</span>
+          <span>2e kind? -€25 korting!</span>
+        </div>
       </div>
     </section>
 
-    <!-- Section 4: What You Get (Reveal) -->
+    <!-- Section 3: What You Get -->
     <section class="section section--stuff">
-      <div class="stuff-reveal">
-        <div class="stuff-reveal__header">
-          <span class="stuff-reveal__count" id="stuffCount">9</span>
-          <span class="stuff-reveal__label">items in je pakket</span>
+      <div class="stuff-container">
+        <div class="stuff-header">
+          <h2 class="stuff-title">Volledig uitgerust<br/>vanaf dag één</h2>
+          <p class="stuff-subtitle">Elk lid krijgt een compleet kledijpakket. Alles wat je nodig hebt om er als een echte HEBO-speler uit te zien.</p>
         </div>
-        <div class="stuff-grid" id="stuffGrid">
-          <div class="stuff-item" style="--delay: 0">👕 Wedstrijd-shirt</div>
-          <div class="stuff-item" style="--delay: 1">🩳 Wedstrijd-short</div>
-          <div class="stuff-item" style="--delay: 2">👔 Wedstrijd-polo</div>
-          <div class="stuff-item" style="--delay: 3">🧦 2x Kousen</div>
-          <div class="stuff-item" style="--delay: 4">🦺 Trainingsvest</div>
-          <div class="stuff-item" style="--delay: 5">👖 Trainingsbroek</div>
-          <div class="stuff-item" style="--delay: 6">🧥 Regenjas</div>
-          <div class="stuff-item" style="--delay: 7">⚽ Voetbal</div>
-          <div class="stuff-item" style="--delay: 8">🥤 Drinkbus</div>
+        
+        <div class="stuff-grid">
+          <div class="stuff-item" style="--delay: 0">
+            <span class="stuff-item__icon">👕</span>
+            <span class="stuff-item__name">Wedstrijd-shirt</span>
+          </div>
+          <div class="stuff-item" style="--delay: 1">
+            <span class="stuff-item__icon">🩳</span>
+            <span class="stuff-item__name">Wedstrijd-short</span>
+          </div>
+          <div class="stuff-item" style="--delay: 2">
+            <span class="stuff-item__icon">👔</span>
+            <span class="stuff-item__name">Wedstrijd-polo</span>
+          </div>
+          <div class="stuff-item" style="--delay: 3">
+            <span class="stuff-item__icon">🧦</span>
+            <span class="stuff-item__name">2× Kousen</span>
+          </div>
+          <div class="stuff-item" style="--delay: 4">
+            <span class="stuff-item__icon">🦺</span>
+            <span class="stuff-item__name">Trainingsvest</span>
+          </div>
+          <div class="stuff-item" style="--delay: 5">
+            <span class="stuff-item__icon">👖</span>
+            <span class="stuff-item__name">Trainingsbroek</span>
+          </div>
+          <div class="stuff-item" style="--delay: 6">
+            <span class="stuff-item__icon">🧥</span>
+            <span class="stuff-item__name">Regenjas</span>
+          </div>
+          <div class="stuff-item" style="--delay: 7">
+            <span class="stuff-item__icon">⚽</span>
+            <span class="stuff-item__name">Voetbal</span>
+          </div>
+          <div class="stuff-item" style="--delay: 8">
+            <span class="stuff-item__icon">🥤</span>
+            <span class="stuff-item__name">Drinkbus</span>
+          </div>
         </div>
+
         <div class="stuff-bonus">
-          <span>NIEUW LID?</span>
-          <span class="stuff-bonus__item">+ 🎒 Voetbaltas</span>
+          <span class="stuff-bonus__badge">NIEUW LID?</span>
+          <span class="stuff-bonus__text">Je krijgt er een voetbaltas bij! 🎒</span>
         </div>
       </div>
     </section>
 
-    <!-- Section 5: Checklist -->
+    <!-- Section 4: Checklist -->
     <section class="section section--checklist">
-      <div class="checklist">
-        <h2 class="checklist__title">CHECK</h2>
-        <div class="checklist__items">
+      <div class="checklist-container">
+        <h2 class="checklist-title">Ben je er klaar voor?</h2>
+        
+        <div class="checklist-items">
           <label class="check-item">
             <input type="checkbox" />
             <span class="check-item__box"></span>
@@ -104,7 +154,7 @@ import NavbarAlt from '../components/NavbarAlt.astro';
             <input type="checkbox" />
             <span class="check-item__box"></span>
             <span class="check-item__text">Scheenbeschermers</span>
-            <span class="check-item__badge">!</span>
+            <span class="check-item__badge">Verplicht!</span>
           </label>
           <label class="check-item">
             <input type="checkbox" />
@@ -117,19 +167,25 @@ import NavbarAlt from '../components/NavbarAlt.astro';
             <span class="check-item__text">Zin in plezier</span>
           </label>
         </div>
+        
+        <div class="checklist-note">
+          <span>💡</span>
+          <span>Indoorschoenen nodig voor indoortrainingen</span>
+        </div>
       </div>
     </section>
 
-    <!-- Section 6: Final CTA -->
+    <!-- Section 5: Final CTA -->
     <section class="section section--cta">
-      <div class="final-cta">
-        <div class="final-cta__text">
-          <span class="final-cta__line">DOE</span>
-          <span class="final-cta__line">MEE</span>
+      <div class="cta-container">
+        <div class="cta-text">
+          <span class="cta-line">DOE</span>
+          <span class="cta-line cta-line--accent">MEE</span>
         </div>
-        <a href="mailto:info@hebojeugd.be" class="final-cta__button">
+        <p class="cta-subtitle">Word lid van VC HEBO Jeugd</p>
+        <a href="mailto:info@hebojeugd.be" class="cta-button">
           <span>Contact opnemen</span>
-          <span class="final-cta__arrow">→</span>
+          <span class="cta-arrow">→</span>
         </a>
       </div>
     </section>
@@ -145,7 +201,7 @@ import NavbarAlt from '../components/NavbarAlt.astro';
         entry.target.classList.add('in-view');
       }
     });
-  }, { threshold: 0.3 });
+  }, { threshold: 0.2 });
 
   document.querySelectorAll('.section').forEach(section => {
     observer.observe(section);
@@ -156,9 +212,6 @@ import NavbarAlt from '../components/NavbarAlt.astro';
     card.addEventListener('click', () => {
       document.querySelectorAll('.age-card').forEach(c => c.classList.remove('age-card--selected'));
       card.classList.add('age-card--selected');
-      const price = card.dataset.price;
-      const counter = document.getElementById('priceCounter');
-      if (counter) counter.textContent = price;
     });
   });
 
@@ -177,6 +230,32 @@ import NavbarAlt from '../components/NavbarAlt.astro';
   main {
     background: #0a0f1a;
     color: #fff;
+  }
+
+  /* Photo Strip */
+  .photo-strip {
+    overflow: hidden;
+    background: #1e3264;
+    padding: 0.75rem 0;
+  }
+
+  .photo-strip__track {
+    display: flex;
+    gap: 1rem;
+    animation: stripScroll 20s linear infinite;
+  }
+
+  @keyframes stripScroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  :global(.photo-strip__track img) {
+    width: 160px;
+    height: 110px;
+    object-fit: cover;
+    border-radius: 6px;
+    flex-shrink: 0;
   }
 
   .section {
@@ -211,7 +290,7 @@ import NavbarAlt from '../components/NavbarAlt.astro';
   }
 
   .giant-text__line {
-    font-size: clamp(4rem, 20vw, 15rem);
+    font-size: clamp(4rem, 18vw, 14rem);
     font-weight: 900;
     line-height: 0.85;
     letter-spacing: -0.02em;
@@ -242,90 +321,34 @@ import NavbarAlt from '../components/NavbarAlt.astro';
     50% { transform: translateY(10px); }
   }
 
-  /* Section 2: Price */
-  .section--price {
+  /* Section 2: Select */
+  .section--select {
     background: #0a0f1a;
+    padding: 6rem 2rem;
   }
 
-  .price-reveal {
+  .select-container {
+    max-width: 1000px;
+    width: 100%;
     text-align: center;
   }
 
-  .price-reveal__label {
-    font-size: 1.5rem;
-    text-transform: uppercase;
-    letter-spacing: 5px;
-    opacity: 0.5;
-  }
-
-  .price-reveal__amount {
-    display: flex;
-    align-items: flex-start;
-    justify-content: center;
-    margin: 1rem 0;
-  }
-
-  .price-reveal__currency {
-    font-size: 3rem;
-    font-weight: 700;
-    margin-top: 1rem;
-    color: #c8202f;
-  }
-
-  .price-reveal__number {
-    font-size: clamp(8rem, 30vw, 20rem);
+  .select-title {
+    font-size: clamp(2rem, 5vw, 3.5rem);
     font-weight: 900;
-    line-height: 1;
-    transition: all 0.5s ease;
-  }
-
-  .price-reveal__per {
-    font-size: 1.2rem;
-    opacity: 0.6;
-  }
-
-  .price-note {
-    margin-top: 2rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1rem;
-    font-size: 1rem;
-    opacity: 0.7;
-  }
-
-  .price-note__discount {
-    background: #c8202f;
-    padding: 0.5rem 1.5rem;
-    border-radius: 100px;
-    font-weight: 700;
-    opacity: 1;
-  }
-
-  /* Section 3: Age Selector */
-  .section--age {
-    background: #1e3264;
-  }
-
-  .age-selector__title {
-    font-size: clamp(1.5rem, 5vw, 3rem);
-    font-weight: 800;
     margin-bottom: 3rem;
-    text-align: center;
   }
 
   .age-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
     gap: 1.5rem;
-    max-width: 900px;
-    width: 100%;
   }
 
   .age-card {
-    background: rgba(255,255,255,0.1);
-    border: 2px solid transparent;
-    padding: 2.5rem 2rem;
+    background: rgba(255,255,255,0.05);
+    border: 2px solid rgba(255,255,255,0.1);
+    padding: 2rem;
     border-radius: 1.5rem;
     display: flex;
     flex-direction: column;
@@ -338,124 +361,181 @@ import NavbarAlt from '../components/NavbarAlt.astro';
   }
 
   .age-card:hover {
-    background: rgba(255,255,255,0.2);
+    background: rgba(255,255,255,0.1);
+    border-color: rgba(255,255,255,0.2);
     transform: translateY(-5px);
   }
 
   .age-card--selected {
     border-color: #c8202f;
-    background: rgba(200, 32, 47, 0.3);
+    background: rgba(200, 32, 47, 0.2);
   }
 
   .age-card__age {
-    font-size: 3rem;
+    font-size: 3.5rem;
     font-weight: 900;
+    line-height: 1;
   }
 
   .age-card__label {
-    font-size: 1.1rem;
+    font-size: 1rem;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 2px;
+    color: #c8202f;
   }
 
   .age-card__teams {
     font-size: 0.85rem;
-    opacity: 0.6;
+    opacity: 0.5;
     letter-spacing: 1px;
   }
 
-  /* Section 4: Stuff */
+  .age-card__price {
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    width: 100%;
+  }
+
+  .age-card__price-label {
+    display: block;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    opacity: 0.5;
+    margin-bottom: 0.25rem;
+  }
+
+  .age-card__price-amount {
+    font-size: 1.8rem;
+    font-weight: 900;
+  }
+
+  .discount-badge {
+    margin-top: 2rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    background: #c8202f;
+    padding: 1rem 2rem;
+    border-radius: 100px;
+    font-weight: 700;
+  }
+
+  /* Section 3: Stuff */
   .section--stuff {
-    background: #0a0f1a;
+    background: #1e3264;
+    padding: 6rem 2rem;
   }
 
-  .stuff-reveal {
+  .stuff-container {
+    max-width: 900px;
+    width: 100%;
+  }
+
+  .stuff-header {
     text-align: center;
-    max-width: 800px;
-  }
-
-  .stuff-reveal__header {
     margin-bottom: 3rem;
   }
 
-  .stuff-reveal__count {
-    font-size: 8rem;
+  .stuff-title {
+    font-size: clamp(2rem, 5vw, 3.5rem);
     font-weight: 900;
-    color: #c8202f;
-    line-height: 1;
+    line-height: 1.1;
+    margin-bottom: 1rem;
   }
 
-  .stuff-reveal__label {
-    display: block;
-    font-size: 1.5rem;
+  .stuff-subtitle {
+    font-size: 1.1rem;
     opacity: 0.7;
+    max-width: 500px;
+    margin: 0 auto;
+    line-height: 1.6;
   }
 
   .stuff-grid {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
     gap: 1rem;
   }
 
   .stuff-item {
     background: rgba(255,255,255,0.1);
-    padding: 1rem 1.5rem;
-    border-radius: 100px;
-    font-weight: 600;
+    padding: 1.5rem;
+    border-radius: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    text-align: center;
     opacity: 0;
-    transform: scale(0.8);
-    animation: popIn 0.5s forwards;
-    animation-delay: calc(var(--delay) * 0.1s);
+    transform: translateY(20px);
+    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    transition-delay: calc(var(--delay) * 0.08s);
   }
 
   .section--stuff.in-view .stuff-item {
-    animation-play-state: running;
+    opacity: 1;
+    transform: translateY(0);
   }
 
-  @keyframes popIn {
-    to {
-      opacity: 1;
-      transform: scale(1);
-    }
+  .stuff-item__icon {
+    font-size: 2rem;
+  }
+
+  .stuff-item__name {
+    font-size: 0.9rem;
+    font-weight: 600;
   }
 
   .stuff-bonus {
     margin-top: 3rem;
+    text-align: center;
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
-    font-size: 1rem;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    opacity: 0.7;
+    align-items: center;
+    gap: 0.75rem;
   }
 
-  .stuff-bonus__item {
-    font-size: 1.5rem;
-    color: #4ade80;
+  .stuff-bonus__badge {
+    background: #c8202f;
+    padding: 0.5rem 1.5rem;
+    border-radius: 100px;
+    font-size: 0.8rem;
+    font-weight: 800;
+    letter-spacing: 1px;
+  }
+
+  .stuff-bonus__text {
+    font-size: 1.3rem;
     font-weight: 700;
-    opacity: 1;
   }
 
-  /* Section 5: Checklist */
+  /* Section 4: Checklist */
   .section--checklist {
     background: #fff;
     color: #0a0f1a;
+    padding: 6rem 2rem;
   }
 
-  .checklist__title {
-    font-size: clamp(5rem, 20vw, 12rem);
+  .checklist-container {
+    max-width: 600px;
+    width: 100%;
+  }
+
+  .checklist-title {
+    font-size: clamp(2rem, 5vw, 3rem);
     font-weight: 900;
     margin-bottom: 2rem;
+    text-align: center;
     color: #1e3264;
   }
 
-  .checklist__items {
+  .checklist-items {
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    gap: 0.75rem;
   }
 
   .check-item {
@@ -463,13 +543,14 @@ import NavbarAlt from '../components/NavbarAlt.astro';
     align-items: center;
     gap: 1rem;
     cursor: pointer;
-    padding: 1rem;
-    border-radius: 0.5rem;
-    transition: background 0.2s ease;
+    padding: 1.25rem 1.5rem;
+    background: #f5f5f5;
+    border-radius: 1rem;
+    transition: all 0.2s ease;
   }
 
   .check-item:hover {
-    background: #f5f5f5;
+    background: #eee;
   }
 
   .check-item input {
@@ -477,8 +558,8 @@ import NavbarAlt from '../components/NavbarAlt.astro';
   }
 
   .check-item__box {
-    width: 2rem;
-    height: 2rem;
+    width: 1.75rem;
+    height: 1.75rem;
     border: 3px solid #1e3264;
     border-radius: 0.5rem;
     display: flex;
@@ -500,8 +581,13 @@ import NavbarAlt from '../components/NavbarAlt.astro';
   }
 
   .check-item__text {
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     font-weight: 700;
+    flex: 1;
+  }
+
+  .check-item--required {
+    background: #fef2f2;
   }
 
   .check-item--required .check-item__text {
@@ -511,72 +597,84 @@ import NavbarAlt from '../components/NavbarAlt.astro';
   .check-item__badge {
     background: #c8202f;
     color: #fff;
-    width: 1.5rem;
-    height: 1.5rem;
-    border-radius: 50%;
+    padding: 0.25rem 0.75rem;
+    border-radius: 100px;
+    font-size: 0.75rem;
+    font-weight: 700;
+  }
+
+  .checklist-note {
+    margin-top: 2rem;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-weight: 700;
-    font-size: 1rem;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+    color: #666;
   }
 
-  /* Section 6: CTA */
+  /* Section 5: CTA */
   .section--cta {
     background: linear-gradient(135deg, #1e3264 0%, #0a0f1a 100%);
     min-height: 80vh;
+    padding: 6rem 2rem;
   }
 
-  .final-cta {
+  .cta-container {
     text-align: center;
   }
 
-  .final-cta__text {
+  .cta-text {
     display: flex;
     flex-direction: column;
   }
 
-  .final-cta__line {
-    font-size: clamp(5rem, 25vw, 18rem);
+  .cta-line {
+    font-size: clamp(5rem, 22vw, 16rem);
     font-weight: 900;
     line-height: 0.85;
   }
 
-  .final-cta__line:last-child {
+  .cta-line--accent {
     color: #c8202f;
   }
 
-  .final-cta__button {
+  .cta-subtitle {
+    font-size: 1.2rem;
+    opacity: 0.7;
+    margin: 1.5rem 0 2.5rem;
+  }
+
+  .cta-button {
     display: inline-flex;
     align-items: center;
     gap: 1rem;
-    margin-top: 3rem;
-    padding: 1.5rem 3rem;
+    padding: 1.25rem 2.5rem;
     background: #c8202f;
     color: #fff;
     text-decoration: none;
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     font-weight: 700;
     border-radius: 100px;
     transition: all 0.3s ease;
   }
 
-  .final-cta__button:hover {
+  .cta-button:hover {
     background: #fff;
     color: #c8202f;
     transform: scale(1.05);
   }
 
-  .final-cta__arrow {
-    font-size: 1.5rem;
+  .cta-arrow {
+    font-size: 1.3rem;
     transition: transform 0.3s ease;
   }
 
-  .final-cta__button:hover .final-cta__arrow {
+  .cta-button:hover .cta-arrow {
     transform: translateX(5px);
   }
 
-  .section--cta.all-checked .final-cta__button {
+  .section--cta.all-checked .cta-button {
     animation: pulse 1s infinite;
   }
 
@@ -588,7 +686,7 @@ import NavbarAlt from '../components/NavbarAlt.astro';
   /* Responsive */
   @media (max-width: 600px) {
     .section {
-      padding: 3rem 1.5rem;
+      padding: 4rem 1.5rem;
     }
 
     .age-grid {
@@ -601,16 +699,29 @@ import NavbarAlt from '../components/NavbarAlt.astro';
     }
 
     .age-card__age {
-      font-size: 2rem;
+      font-size: 2.5rem;
     }
 
-    .check-item__text {
-      font-size: 1.1rem;
+    .stuff-grid {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.75rem;
     }
 
     .stuff-item {
-      padding: 0.75rem 1rem;
-      font-size: 0.9rem;
+      padding: 1rem;
+    }
+
+    .stuff-item__icon {
+      font-size: 1.5rem;
+    }
+
+    .stuff-item__name {
+      font-size: 0.75rem;
+    }
+
+    :global(.photo-strip__track img) {
+      width: 120px;
+      height: 85px;
     }
   }
 </style>
