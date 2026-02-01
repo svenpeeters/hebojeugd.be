@@ -6,7 +6,7 @@ import Footer from '../components/Footer.astro';
 const trainers = [
   { num: '01', team: 'U5', name: 'Claudine Hartjesveld', role: 'Trainer', group: 'Onderbouw', color: '#7dd3c0' },
   { num: '02', team: 'U6', name: 'Kenji Jossa', role: 'Trainer', group: 'Onderbouw', color: '#7dd3c0' },
-  { num: '03', team: 'U7', name: 'Timothy Fontaine', role: 'Trainer', group: 'Onderbouw', color: '#7dd3c0' },
+  { num: '03', team: 'U7', name: 'Timothy Fontaine', role: 'Trainer', group: 'Onderbouw', color: '#7dd3c0', image: '/images/trainers/timothy-fontaine.png' },
   { num: '04', team: 'U9', name: 'Dave Daniels', role: 'Trainer', group: 'Onderbouw', color: '#7dd3c0' },
   { num: '05', team: 'U10', name: 'Willy Missotten', role: 'Trainer', group: 'Middenbouw', color: '#f9c74f' },
   { num: '06', team: 'U10', name: 'Jurgen Polders', role: 'Trainer', group: 'Middenbouw', color: '#f9c74f' },
@@ -36,9 +36,13 @@ const trainers = [
           <div class="card" style={`--accent: ${trainer.color}; --delay: ${i * 0.05}s`}>
             <div class="card__top">
               <span class="card__badge">⚽</span>
-              <div class="card__avatar">
-                <span>{trainer.name.split(' ').map(n => n[0]).join('')}</span>
-              </div>
+              {trainer.image ? (
+                <img src={trainer.image} alt={trainer.name} class="card__image" />
+              ) : (
+                <div class="card__avatar">
+                  <span>{trainer.name.split(' ').map(n => n[0]).join('')}</span>
+                </div>
+              )}
             </div>
             
             <div class="card__middle">
@@ -160,6 +164,13 @@ const trainers = [
     font-weight: 900;
     color: rgba(0,0,0,0.3);
     border: 4px solid rgba(255,255,255,0.5);
+  }
+
+  .card__image {
+    height: 180px;
+    width: auto;
+    object-fit: contain;
+    filter: drop-shadow(0 10px 20px rgba(0,0,0,0.2));
   }
 
   /* Card Middle */
