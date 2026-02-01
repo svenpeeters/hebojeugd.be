@@ -1,0 +1,400 @@
+---
+import Layout from '../layouts/Layout.astro';
+import NavbarAlt from '../components/NavbarAlt.astro';
+import Footer from '../components/Footer.astro';
+
+const trainers = [
+  { num: '01', team: 'U5', name: 'Claudine Hartjesveld', role: 'Trainer', color: '#4CAF50' },
+  { num: '02', team: 'U6', name: 'Kenji Jossa', role: 'Trainer', color: '#4CAF50' },
+  { num: '03', team: 'U7', name: 'Timothy Fontaine', role: 'Trainer', color: '#4CAF50' },
+  { num: '04', team: 'U9', name: 'Dave Daniels', role: 'Trainer', color: '#4CAF50' },
+  { num: '05', team: 'U10', name: 'Willy Missotten', role: 'Trainer', color: '#FF9800' },
+  { num: '06', team: 'U10', name: 'Jurgen Polders', role: 'Trainer', color: '#FF9800' },
+  { num: '07', team: 'U11/12', name: 'Andy Bex', role: 'Trainer', color: '#FF9800' },
+  { num: '08', team: 'U11/12', name: 'Frank Missotten', role: 'Trainer', color: '#FF9800' },
+  { num: '09', team: 'U15', name: 'Jean-Marie Cloesen', role: 'Trainer', color: '#c8202f' },
+  { num: '10', team: 'U15', name: 'Roger Vanhaeren', role: 'Trainer', color: '#c8202f' },
+  { num: '11', team: 'U17', name: 'Joeri Fontaine', role: 'Trainer', color: '#c8202f' },
+  { num: '12', team: 'Keepers', name: 'Gilles Vanswijgenhoven', role: 'Keeperstrainer', color: '#1e3264' },
+];
+---
+
+<Layout title="Trainersstaf | VC HEBO Jeugd">
+  <main>
+    <NavbarAlt />
+
+    <!-- Album Cover -->
+    <section class="album-cover">
+      <div class="album-cover__content">
+        <div class="album-cover__badge">OFFICIEEL</div>
+        <h1 class="album-cover__title">
+          <span>HEBO JEUGD</span>
+          <span class="album-cover__year">2024-25</span>
+        </h1>
+        <div class="album-cover__subtitle">TRAINERSSTAF</div>
+        <div class="album-cover__logo">
+          <img src="/logo.png" alt="HEBO Jeugd" />
+        </div>
+        <div class="album-cover__count">12 STICKERS</div>
+      </div>
+      <div class="album-cover__shine"></div>
+    </section>
+
+    <!-- Sticker Album -->
+    <section class="album">
+      <div class="album__page">
+        <div class="stickers">
+          {trainers.map((trainer, i) => (
+            <div class="sticker" style={`--delay: ${i * 0.05}s; --accent: ${trainer.color}`}>
+              <div class="sticker__inner">
+                <div class="sticker__front">
+                  <div class="sticker__header">
+                    <span class="sticker__num">{trainer.num}</span>
+                    <span class="sticker__team">{trainer.team}</span>
+                  </div>
+                  <div class="sticker__photo">
+                    <div class="sticker__placeholder">
+                      <span>{trainer.name.split(' ').map(n => n[0]).join('')}</span>
+                    </div>
+                  </div>
+                  <div class="sticker__info">
+                    <span class="sticker__name">{trainer.name}</span>
+                    <span class="sticker__role">{trainer.role}</span>
+                  </div>
+                  <div class="sticker__club">
+                    <img src="/logo.png" alt="" />
+                    <span>VC HEBO JEUGD</span>
+                  </div>
+                </div>
+                <div class="sticker__shine"></div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div class="album__footer">
+        <span>Collectie 2024-25</span>
+        <span>•</span>
+        <span>VC HEBO Jeugd</span>
+      </div>
+    </section>
+
+    <Footer />
+  </main>
+</Layout>
+
+<style>
+  main {
+    background: #2a2a2a;
+    min-height: 100vh;
+  }
+
+  /* Album Cover */
+  .album-cover {
+    background: linear-gradient(135deg, #1e3264 0%, #0a1628 100%);
+    padding: 6rem 2rem;
+    text-align: center;
+    color: #fff;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .album-cover__content {
+    position: relative;
+    z-index: 1;
+  }
+
+  .album-cover__badge {
+    display: inline-block;
+    background: #c8202f;
+    padding: 0.4rem 1.5rem;
+    font-size: 0.7rem;
+    font-weight: 800;
+    letter-spacing: 3px;
+    border-radius: 2px;
+    margin-bottom: 2rem;
+  }
+
+  .album-cover__title {
+    font-size: clamp(3rem, 10vw, 6rem);
+    font-weight: 900;
+    line-height: 1;
+    margin: 0;
+    text-shadow: 4px 4px 0 rgba(0,0,0,0.3);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .album-cover__year {
+    font-size: 0.4em;
+    font-weight: 400;
+    letter-spacing: 8px;
+    opacity: 0.7;
+    margin-top: 0.5rem;
+  }
+
+  .album-cover__subtitle {
+    font-size: 1.5rem;
+    font-weight: 800;
+    letter-spacing: 10px;
+    margin-top: 1rem;
+    color: #ffd700;
+  }
+
+  .album-cover__logo {
+    margin: 2rem auto;
+  }
+
+  .album-cover__logo img {
+    height: 120px;
+    filter: drop-shadow(0 10px 30px rgba(0,0,0,0.5));
+  }
+
+  .album-cover__count {
+    font-size: 0.85rem;
+    letter-spacing: 3px;
+    opacity: 0.6;
+  }
+
+  .album-cover__shine {
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+      45deg,
+      transparent 40%,
+      rgba(255,255,255,0.1) 50%,
+      transparent 60%
+    );
+    animation: shine 3s ease-in-out infinite;
+  }
+
+  @keyframes shine {
+    0%, 100% { transform: translateX(-100%) rotate(25deg); }
+    50% { transform: translateX(100%) rotate(25deg); }
+  }
+
+  /* Album */
+  .album {
+    padding: 3rem 2rem;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  .album__page {
+    background: linear-gradient(145deg, #f5f0e6 0%, #e8e0d0 100%);
+    border-radius: 8px;
+    padding: 2rem;
+    box-shadow: 
+      0 20px 60px rgba(0,0,0,0.4),
+      inset 0 0 100px rgba(0,0,0,0.05);
+    position: relative;
+  }
+
+  .album__page::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 2px;
+    height: 100%;
+    background: rgba(0,0,0,0.1);
+    box-shadow: -1px 0 0 rgba(255,255,255,0.5);
+  }
+
+  /* Stickers Grid */
+  .stickers {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 1.5rem;
+    padding: 1rem;
+  }
+
+  /* Sticker */
+  .sticker {
+    aspect-ratio: 3/4;
+    perspective: 1000px;
+    cursor: pointer;
+    animation: dropIn 0.5s ease-out backwards;
+    animation-delay: var(--delay);
+  }
+
+  @keyframes dropIn {
+    from {
+      opacity: 0;
+      transform: translateY(-30px) rotate(-5deg);
+    }
+  }
+
+  .sticker__inner {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transition: transform 0.3s ease;
+  }
+
+  .sticker:hover .sticker__inner {
+    transform: scale(1.05) rotate(-2deg);
+  }
+
+  .sticker__front {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(180deg, #fff 0%, #f0f0f0 100%);
+    border-radius: 8px;
+    padding: 0.75rem;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 
+      0 4px 15px rgba(0,0,0,0.2),
+      0 0 0 3px #fff,
+      0 0 0 5px var(--accent);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .sticker__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+  }
+
+  .sticker__num {
+    background: var(--accent);
+    color: #fff;
+    font-size: 0.7rem;
+    font-weight: 800;
+    padding: 0.2rem 0.5rem;
+    border-radius: 3px;
+  }
+
+  .sticker__team {
+    font-size: 0.7rem;
+    font-weight: 800;
+    color: var(--accent);
+    letter-spacing: 1px;
+  }
+
+  .sticker__photo {
+    flex: 1;
+    background: linear-gradient(135deg, #e0e0e0 0%, #c0c0c0 100%);
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .sticker__placeholder {
+    width: 80%;
+    height: 80%;
+    background: linear-gradient(135deg, var(--accent) 0%, color-mix(in srgb, var(--accent) 70%, black) 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 2rem;
+    font-weight: 900;
+    text-shadow: 2px 2px 0 rgba(0,0,0,0.2);
+  }
+
+  .sticker__info {
+    text-align: center;
+    padding: 0.75rem 0 0.5rem;
+  }
+
+  .sticker__name {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 800;
+    color: #1a1a1a;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    line-height: 1.2;
+  }
+
+  .sticker__role {
+    display: block;
+    font-size: 0.65rem;
+    color: #666;
+    margin-top: 0.25rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  .sticker__club {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding-top: 0.5rem;
+    border-top: 1px solid #e0e0e0;
+  }
+
+  .sticker__club img {
+    height: 20px;
+  }
+
+  .sticker__club span {
+    font-size: 0.55rem;
+    font-weight: 700;
+    color: #1e3264;
+    letter-spacing: 1px;
+  }
+
+  .sticker__shine {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+      135deg,
+      transparent 40%,
+      rgba(255,255,255,0.4) 45%,
+      rgba(255,255,255,0.6) 50%,
+      rgba(255,255,255,0.4) 55%,
+      transparent 60%
+    );
+    pointer-events: none;
+    border-radius: 8px;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .sticker:hover .sticker__shine {
+    opacity: 1;
+  }
+
+  /* Album Footer */
+  .album__footer {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    padding: 2rem;
+    color: #888;
+    font-size: 0.8rem;
+    letter-spacing: 2px;
+  }
+
+  @media (max-width: 600px) {
+    .stickers {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+    }
+
+    .album__page::before {
+      display: none;
+    }
+
+    .sticker__name {
+      font-size: 0.75rem;
+    }
+  }
+</style>
