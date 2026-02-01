@@ -171,9 +171,12 @@
     height: 100%;
     padding: 4rem;
     padding-left: 10vw;
+    padding-top: 120px;
+    pointer-events: none;
   }
 
   .nav-fullscreen__link {
+    pointer-events: all;
     display: flex;
     align-items: baseline;
     gap: 2rem;
@@ -244,6 +247,7 @@
     opacity: 0;
     transform: translateY(20px);
     transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1) 0.35s;
+    pointer-events: none;
   }
 
   .nav-fullscreen--open .nav-fullscreen__footer {
