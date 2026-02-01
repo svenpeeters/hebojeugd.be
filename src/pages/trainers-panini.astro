@@ -33,7 +33,7 @@ const trainers = [
     <section class="cards">
       <div class="cards__grid">
         {trainers.map((trainer, i) => (
-          <div class="card" style={`--accent: ${trainer.color}; --delay: ${i * 0.05}s`}>
+          <div class={`card ${trainer.image ? 'card--has-image' : ''}`} style={`--accent: ${trainer.color}; --delay: ${i * 0.05}s`}>
             <div class="card__top">
               <span class="card__badge">⚽</span>
               {trainer.image ? (
@@ -109,15 +109,21 @@ const trainers = [
   .card {
     background: #fff;
     border-radius: 20px;
-    overflow: hidden;
+    overflow: visible;
     box-shadow: 0 20px 40px rgba(0,0,0,0.3);
     animation: fadeUp 0.5s ease-out backwards;
     animation-delay: var(--delay);
     transition: transform 0.3s ease;
+    position: relative;
   }
 
   .card:hover {
-    transform: translateY(-10px) rotate(-1deg);
+    transform: translateY(-10px);
+    z-index: 50;
+  }
+
+  .card--has-image .card__top {
+    overflow: visible;
   }
 
   @keyframes fadeUp {
@@ -134,8 +140,9 @@ const trainers = [
     position: relative;
     min-height: 200px;
     display: flex;
-    align-items: center;
+    align-items: flex-end;
     justify-content: center;
+    overflow: visible;
   }
 
   .card__badge {
@@ -167,10 +174,19 @@ const trainers = [
   }
 
   .card__image {
-    height: 180px;
+    position: absolute;
+    bottom: -20px;
+    right: -40px;
+    height: 320px;
     width: auto;
     object-fit: contain;
-    filter: drop-shadow(0 10px 20px rgba(0,0,0,0.2));
+    filter: drop-shadow(0 20px 40px rgba(0,0,0,0.3));
+    z-index: 10;
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  .card:hover .card__image {
+    transform: scale(1.1) rotate(5deg) translateX(-10px);
   }
 
   /* Card Middle */
