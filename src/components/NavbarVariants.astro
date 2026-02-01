@@ -561,12 +561,25 @@
     .nav-fullscreen__footer { left: 2rem; }
     
     .sidedock {
-      left: 0.75rem;
-      padding: 0.75rem 0.5rem;
+      left: 50%;
+      top: auto;
+      bottom: 1.5rem;
+      transform: translateX(-50%);
+      flex-direction: row;
+      padding: 0.75rem 1rem;
+      border-radius: 100px;
     }
-    .sidedock__item { width: 40px; height: 40px; }
-    .sidedock__item svg { width: 18px; height: 18px; }
+    .sidedock__item { width: 44px; height: 44px; }
+    .sidedock__item svg { width: 20px; height: 20px; }
     .sidedock__item::after { display: none; }
+    .sidedock__logo {
+      margin-top: 0;
+      margin-left: 0.5rem;
+      padding-top: 0;
+      padding-left: 0.75rem;
+      border-top: none;
+      border-left: 1px solid rgba(255,255,255,0.1);
+    }
     
     .bottombar {
       bottom: 1rem;
