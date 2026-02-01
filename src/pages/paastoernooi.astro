@@ -245,13 +245,16 @@ import Footer from '../components/Footer.astro';
         <!-- Variant: Bento Cards -->
         <div class="matches__list variant-bento" style="display: none;">
           <div class="bento-grid">
-            <div class="bento-card bento-card--accent">
-              <div class="bento-card__date">
-                <span class="bento-card__day">7</span>
-                <span class="bento-card__month">apr</span>
+            <div class="bento-card">
+              <div class="bento-card__header">
+                <div class="bento-card__date">
+                  <span class="bento-card__day">7</span>
+                  <span class="bento-card__month">april</span>
+                </div>
+                <span class="bento-card__weekday">Dinsdag</span>
               </div>
               <div class="bento-card__info">
-                <div class="bento-card__time">18:00 - 20:30</div>
+                <div class="bento-card__time">18:00 — 20:30</div>
                 <div class="bento-card__categories">
                   <span class="bento-badge">U6</span>
                   <span class="bento-badge">U8</span>
@@ -265,12 +268,15 @@ import Footer from '../components/Footer.astro';
               </div>
             </div>
             <div class="bento-card">
-              <div class="bento-card__date">
-                <span class="bento-card__day">8</span>
-                <span class="bento-card__month">apr</span>
+              <div class="bento-card__header">
+                <div class="bento-card__date">
+                  <span class="bento-card__day">8</span>
+                  <span class="bento-card__month">april</span>
+                </div>
+                <span class="bento-card__weekday">Woensdag</span>
               </div>
               <div class="bento-card__info">
-                <div class="bento-card__time">18:00 - 20:30</div>
+                <div class="bento-card__time">18:00 — 20:30</div>
                 <div class="bento-card__categories">
                   <span class="bento-badge">U7</span>
                   <span class="bento-badge">U9</span>
@@ -283,13 +289,16 @@ import Footer from '../components/Footer.astro';
                 </div>
               </div>
             </div>
-            <div class="bento-card bento-card--accent">
-              <div class="bento-card__date">
-                <span class="bento-card__day">9</span>
-                <span class="bento-card__month">apr</span>
+            <div class="bento-card">
+              <div class="bento-card__header">
+                <div class="bento-card__date">
+                  <span class="bento-card__day">9</span>
+                  <span class="bento-card__month">april</span>
+                </div>
+                <span class="bento-card__weekday">Donderdag</span>
               </div>
               <div class="bento-card__info">
-                <div class="bento-card__time">18:00 - 21:00</div>
+                <div class="bento-card__time">18:00 — 21:00</div>
                 <div class="bento-card__categories">
                   <span class="bento-badge">U12</span>
                   <span class="bento-badge">U13</span>
@@ -655,53 +664,99 @@ import Footer from '../components/Footer.astro';
   /* Bento Variant */
   .bento-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: 1.2fr 1fr;
+    grid-template-rows: auto auto;
     gap: 1rem;
   }
 
   .bento-card {
     background: #fff;
-    border: 1px solid #e0e0e0;
-    padding: 2rem;
+    padding: 2.5rem;
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
     gap: 1.5rem;
+    border-radius: 1.5rem;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    min-height: 220px;
   }
 
-  .bento-card--accent {
-    background: #1e3264;
+  .bento-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(30,50,100,0.12);
+  }
+
+  .bento-card:nth-child(1) {
+    grid-row: span 2;
+    background: linear-gradient(145deg, #1e3264 0%, #0f1932 100%);
     color: #fff;
-    border: none;
+    min-height: 100%;
+  }
+
+  .bento-card:nth-child(2) {
+    background: #fff;
+  }
+
+  .bento-card:nth-child(3) {
+    background: #c8202f;
+    color: #fff;
+  }
+
+  .bento-card__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
   }
 
   .bento-card__date {
     display: flex;
-    align-items: baseline;
-    gap: 0.25rem;
+    flex-direction: column;
   }
 
   .bento-card__day {
-    font-size: 4rem;
+    font-size: 5rem;
     font-weight: 900;
-    line-height: 1;
+    line-height: 0.85;
+    letter-spacing: -3px;
+  }
+
+  .bento-card:nth-child(1) .bento-card__day {
+    font-size: 7rem;
   }
 
   .bento-card__month {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
+    font-weight: 700;
     text-transform: uppercase;
-    opacity: 0.6;
+    letter-spacing: 3px;
+    opacity: 0.5;
+    margin-top: 0.25rem;
+  }
+
+  .bento-card__weekday {
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    opacity: 0.4;
+    padding: 0.4rem 0.8rem;
+    background: rgba(255,255,255,0.1);
+    border-radius: 2rem;
+  }
+
+  .bento-card:nth-child(2) .bento-card__weekday {
+    background: rgba(30,50,100,0.08);
+    color: #1e3264;
   }
 
   .bento-card__time {
-    font-size: 0.85rem;
+    font-size: 0.8rem;
     font-weight: 700;
-    color: #c8202f;
     text-transform: uppercase;
-    letter-spacing: 1px;
-  }
-
-  .bento-card--accent .bento-card__time {
-    color: rgba(255,255,255,0.7);
+    letter-spacing: 2px;
+    opacity: 0.6;
+    margin-bottom: 0.75rem;
   }
 
   .bento-card__categories {
@@ -711,23 +766,27 @@ import Footer from '../components/Footer.astro';
   }
 
   .bento-badge {
-    background: #c8202f;
-    color: #fff;
-    padding: 0.3rem 0.8rem;
-    font-size: 0.85rem;
-    font-weight: 700;
+    background: rgba(255,255,255,0.15);
+    color: inherit;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    font-weight: 800;
+    border-radius: 0.5rem;
+    backdrop-filter: blur(4px);
   }
 
-  .bento-card--accent .bento-badge {
-    background: #fff;
-    color: #1e3264;
+  .bento-card:nth-child(2) .bento-badge {
+    background: #1e3264;
+    color: #fff;
   }
 
   .bento-card__formats {
     display: flex;
-    gap: 1rem;
+    gap: 1.5rem;
     font-size: 0.85rem;
-    opacity: 0.7;
+    opacity: 0.5;
+    font-weight: 500;
+    margin-top: 0.5rem;
   }
 
   /* Timeline Variant */
@@ -863,8 +922,18 @@ import Footer from '../components/Footer.astro';
       grid-template-columns: 1fr;
     }
 
-    .bento-card__day {
-      font-size: 3rem;
+    .bento-card {
+      min-height: auto;
+      padding: 2rem;
+    }
+
+    .bento-card:nth-child(1) {
+      grid-row: span 1;
+    }
+
+    .bento-card__day,
+    .bento-card:nth-child(1) .bento-card__day {
+      font-size: 4rem;
     }
 
     .timeline {
