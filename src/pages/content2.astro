@@ -1,11 +1,13 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
 import PaastoernooiTicker from '../components/PaastoernooiTicker.astro';
 import Footer from '../components/Footer.astro';
 ---
 
 <Layout title="Nieuws | VC HEBO Jeugd">
   <main>
+    <Navbar />
     <PaastoernooiTicker />
 
     <!-- Stacked Strips -->
@@ -79,6 +81,13 @@ import Footer from '../components/Footer.astro';
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+    padding-top: 70px;
+  }
+
+  @media (max-width: 768px) {
+    main {
+      padding-top: 60px;
+    }
   }
 
   .strip {
