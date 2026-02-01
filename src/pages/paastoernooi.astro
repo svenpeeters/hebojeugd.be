@@ -200,200 +200,74 @@ import Footer from '../components/Footer.astro';
       <div class="matches__container">
         <div class="matches__header">
           <h2 class="matches__title">Programma</h2>
-          <select id="variantSelect" class="variant-select">
-            <option value="original">Origineel</option>
-            <option value="bento">Bento cards</option>
-            <option value="timeline">Timeline</option>
-            <option value="bold">Bold minimal</option>
-          </select>
         </div>
-
-        <!-- Variant: Original -->
-        <div class="matches__list variant-original">
-          <div class="match-card match-card--home">
-            <div class="match-card__num">7/4</div>
-            <div class="match-card__content">
-              <div class="match-card__team">18:00 - 20:30</div>
-              <div class="match-card__opponent">U6 • U8 • U10</div>
-              <div class="match-card__meta">
-                <span>U6: 2vs2 • U8: 5vs5 • U10: 8vs8</span>
+        <div class="bento-grid">
+          <div class="bento-card">
+            <div class="bento-card__header">
+              <div class="bento-card__date">
+                <span class="bento-card__day">7</span>
+                <span class="bento-card__month">april</span>
+              </div>
+              <span class="bento-card__weekday">Dinsdag</span>
+            </div>
+            <div class="bento-card__info">
+              <div class="bento-card__time">18:00 — 20:30</div>
+              <div class="bento-card__categories">
+                <span class="bento-badge">U6</span>
+                <span class="bento-badge">U8</span>
+                <span class="bento-badge">U10</span>
+              </div>
+              <div class="bento-card__formats">
+                <span>2vs2</span>
+                <span>5vs5</span>
+                <span>8vs8</span>
               </div>
             </div>
           </div>
-          <div class="match-card">
-            <div class="match-card__num">8/4</div>
-            <div class="match-card__content">
-              <div class="match-card__team">18:00 - 20:30</div>
-              <div class="match-card__opponent">U7 • U9 • U11</div>
-              <div class="match-card__meta">
-                <span>U7: 3vs3 • U9: 5vs5 • U11: 8vs8</span>
+          <div class="bento-card">
+            <div class="bento-card__header">
+              <div class="bento-card__date">
+                <span class="bento-card__day">8</span>
+                <span class="bento-card__month">april</span>
+              </div>
+              <span class="bento-card__weekday">Woensdag</span>
+            </div>
+            <div class="bento-card__info">
+              <div class="bento-card__time">18:00 — 20:30</div>
+              <div class="bento-card__categories">
+                <span class="bento-badge">U7</span>
+                <span class="bento-badge">U9</span>
+                <span class="bento-badge">U11</span>
+              </div>
+              <div class="bento-card__formats">
+                <span>3vs3</span>
+                <span>5vs5</span>
+                <span>8vs8</span>
               </div>
             </div>
           </div>
-          <div class="match-card match-card--home">
-            <div class="match-card__num">9/4</div>
-            <div class="match-card__content">
-              <div class="match-card__team">18:00 - 21:00</div>
-              <div class="match-card__opponent">U12 • U13</div>
-              <div class="match-card__meta">
+          <div class="bento-card">
+            <div class="bento-card__header">
+              <div class="bento-card__date">
+                <span class="bento-card__day">9</span>
+                <span class="bento-card__month">april</span>
+              </div>
+              <span class="bento-card__weekday">Donderdag</span>
+            </div>
+            <div class="bento-card__info">
+              <div class="bento-card__time">18:00 — 21:00</div>
+              <div class="bento-card__categories">
+                <span class="bento-badge">U12</span>
+                <span class="bento-badge">U13</span>
+              </div>
+              <div class="bento-card__formats">
                 <span>8vs8 formaat</span>
               </div>
             </div>
           </div>
         </div>
-
-        <!-- Variant: Bento Cards -->
-        <div class="matches__list variant-bento" style="display: none;">
-          <div class="bento-grid">
-            <div class="bento-card">
-              <div class="bento-card__header">
-                <div class="bento-card__date">
-                  <span class="bento-card__day">7</span>
-                  <span class="bento-card__month">april</span>
-                </div>
-                <span class="bento-card__weekday">Dinsdag</span>
-              </div>
-              <div class="bento-card__info">
-                <div class="bento-card__time">18:00 — 20:30</div>
-                <div class="bento-card__categories">
-                  <span class="bento-badge">U6</span>
-                  <span class="bento-badge">U8</span>
-                  <span class="bento-badge">U10</span>
-                </div>
-                <div class="bento-card__formats">
-                  <span>2vs2</span>
-                  <span>5vs5</span>
-                  <span>8vs8</span>
-                </div>
-              </div>
-            </div>
-            <div class="bento-card">
-              <div class="bento-card__header">
-                <div class="bento-card__date">
-                  <span class="bento-card__day">8</span>
-                  <span class="bento-card__month">april</span>
-                </div>
-                <span class="bento-card__weekday">Woensdag</span>
-              </div>
-              <div class="bento-card__info">
-                <div class="bento-card__time">18:00 — 20:30</div>
-                <div class="bento-card__categories">
-                  <span class="bento-badge">U7</span>
-                  <span class="bento-badge">U9</span>
-                  <span class="bento-badge">U11</span>
-                </div>
-                <div class="bento-card__formats">
-                  <span>3vs3</span>
-                  <span>5vs5</span>
-                  <span>8vs8</span>
-                </div>
-              </div>
-            </div>
-            <div class="bento-card">
-              <div class="bento-card__header">
-                <div class="bento-card__date">
-                  <span class="bento-card__day">9</span>
-                  <span class="bento-card__month">april</span>
-                </div>
-                <span class="bento-card__weekday">Donderdag</span>
-              </div>
-              <div class="bento-card__info">
-                <div class="bento-card__time">18:00 — 21:00</div>
-                <div class="bento-card__categories">
-                  <span class="bento-badge">U12</span>
-                  <span class="bento-badge">U13</span>
-                </div>
-                <div class="bento-card__formats">
-                  <span>8vs8 formaat</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Variant: Timeline -->
-        <div class="matches__list variant-timeline" style="display: none;">
-          <div class="timeline">
-            <div class="timeline-item">
-              <div class="timeline-marker"></div>
-              <div class="timeline-content">
-                <div class="timeline-date">Dinsdag 7 april</div>
-                <div class="timeline-time">18:00 - 20:30</div>
-                <div class="timeline-categories">U6 • U8 • U10</div>
-                <div class="timeline-details">
-                  <div class="timeline-detail"><strong>U6</strong> 2vs2</div>
-                  <div class="timeline-detail"><strong>U8</strong> 5vs5</div>
-                  <div class="timeline-detail"><strong>U10</strong> 8vs8</div>
-                </div>
-              </div>
-            </div>
-            <div class="timeline-item">
-              <div class="timeline-marker"></div>
-              <div class="timeline-content">
-                <div class="timeline-date">Woensdag 8 april</div>
-                <div class="timeline-time">18:00 - 20:30</div>
-                <div class="timeline-categories">U7 • U9 • U11</div>
-                <div class="timeline-details">
-                  <div class="timeline-detail"><strong>U7</strong> 3vs3</div>
-                  <div class="timeline-detail"><strong>U9</strong> 5vs5</div>
-                  <div class="timeline-detail"><strong>U11</strong> 8vs8</div>
-                </div>
-              </div>
-            </div>
-            <div class="timeline-item">
-              <div class="timeline-marker"></div>
-              <div class="timeline-content">
-                <div class="timeline-date">Donderdag 9 april</div>
-                <div class="timeline-time">18:00 - 21:00</div>
-                <div class="timeline-categories">U12 • U13</div>
-                <div class="timeline-details">
-                  <div class="timeline-detail"><strong>U12 & U13</strong> 8vs8 formaat</div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Variant: Bold Minimal -->
-        <div class="matches__list variant-bold" style="display: none;">
-          <div class="bold-list">
-            <div class="bold-item">
-              <div class="bold-date">07<span class="bold-slash">/</span>04</div>
-              <div class="bold-content">
-                <div class="bold-categories">U6 U8 U10</div>
-                <div class="bold-time">18:00—20:30</div>
-              </div>
-            </div>
-            <div class="bold-item">
-              <div class="bold-date">08<span class="bold-slash">/</span>04</div>
-              <div class="bold-content">
-                <div class="bold-categories">U7 U9 U11</div>
-                <div class="bold-time">18:00—20:30</div>
-              </div>
-            </div>
-            <div class="bold-item">
-              <div class="bold-date">09<span class="bold-slash">/</span>04</div>
-              <div class="bold-content">
-                <div class="bold-categories">U12 U13</div>
-                <div class="bold-time">18:00—21:00</div>
-              </div>
-            </div>
-          </div>
-        </div>
-
       </div>
     </section>
-
-    <script>
-      document.getElementById('variantSelect')?.addEventListener('change', (e) => {
-        const val = (e.target as HTMLSelectElement).value;
-        document.querySelectorAll('.matches__list').forEach(el => {
-          (el as HTMLElement).style.display = 'none';
-        });
-        const target = document.querySelector(`.variant-${val}`);
-        if (target) (target as HTMLElement).style.display = '';
-      });
-    </script>
 
     <!-- CTA -->
     <section class="cta">
@@ -639,33 +513,7 @@ import Footer from '../components/Footer.astro';
     margin: 0;
   }
 
-  .matches__header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  .variant-select {
-    padding: 0.5rem 1rem;
-    font-size: 0.9rem;
-    border: 2px solid #1e3264;
-    background: #fff;
-    color: #1e3264;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.2s;
-  }
-
-  .variant-select:hover {
-    background: #1e3264;
-    color: #fff;
-  }
-
-  /* Bento Variant */
-  .variant-bento {
-    background: transparent;
-  }
-
+  /* Bento Grid */
   .bento-grid {
     display: grid;
     grid-template-columns: 1.2fr 1fr;
@@ -793,134 +641,7 @@ import Footer from '../components/Footer.astro';
     margin-top: 0.5rem;
   }
 
-  /* Timeline Variant */
-  .timeline {
-    position: relative;
-    padding-left: 3rem;
-  }
-
-  .timeline::before {
-    content: '';
-    position: absolute;
-    left: 0.5rem;
-    top: 0;
-    bottom: 0;
-    width: 3px;
-    background: linear-gradient(to bottom, #c8202f, #1e3264);
-  }
-
-  .timeline-item {
-    position: relative;
-    padding: 2rem 0;
-    border-bottom: 1px solid #eee;
-  }
-
-  .timeline-item:last-child {
-    border-bottom: none;
-  }
-
-  .timeline-marker {
-    position: absolute;
-    left: -2.5rem;
-    top: 2.3rem;
-    width: 1rem;
-    height: 1rem;
-    background: #c8202f;
-    border-radius: 50%;
-    border: 3px solid #fff;
-    box-shadow: 0 0 0 3px #c8202f;
-  }
-
-  .timeline-date {
-    font-size: 1.4rem;
-    font-weight: 800;
-    color: #1e3264;
-    margin-bottom: 0.25rem;
-  }
-
-  .timeline-time {
-    font-size: 0.85rem;
-    color: #c8202f;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    margin-bottom: 0.75rem;
-  }
-
-  .timeline-categories {
-    font-size: 1.8rem;
-    font-weight: 800;
-    margin-bottom: 1rem;
-  }
-
-  .timeline-details {
-    display: flex;
-    gap: 1.5rem;
-    flex-wrap: wrap;
-  }
-
-  .timeline-detail {
-    font-size: 0.9rem;
-    color: #666;
-  }
-
-  .timeline-detail strong {
-    color: #1e3264;
-  }
-
-  /* Bold Minimal Variant */
-  .bold-list {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .bold-item {
-    display: flex;
-    align-items: center;
-    padding: 3rem 0;
-    border-bottom: 1px solid #e0e0e0;
-    gap: 3rem;
-  }
-
-  .bold-item:last-child {
-    border-bottom: none;
-  }
-
-  .bold-date {
-    font-size: 5rem;
-    font-weight: 900;
-    color: #1e3264;
-    line-height: 1;
-    font-family: 'Bebas Neue', sans-serif;
-    letter-spacing: -2px;
-  }
-
-  .bold-slash {
-    color: #c8202f;
-  }
-
-  .bold-content {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-  }
-
-  .bold-categories {
-    font-size: 2.5rem;
-    font-weight: 900;
-    color: #1a1a1a;
-    letter-spacing: 0.5rem;
-  }
-
-  .bold-time {
-    font-size: 1rem;
-    color: #c8202f;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-  }
-
-  /* Responsive for variants */
+  /* Responsive */
   @media (max-width: 900px) {
     .bento-grid {
       grid-template-columns: 1fr;
@@ -940,90 +661,6 @@ import Footer from '../components/Footer.astro';
       font-size: 4rem;
     }
 
-    .timeline {
-      padding-left: 2.5rem;
-    }
-
-    .timeline-marker {
-      left: -2rem;
-    }
-
-    .bold-item {
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 1rem;
-      padding: 2rem 0;
-    }
-
-    .bold-date {
-      font-size: 3rem;
-    }
-
-    .bold-categories {
-      font-size: 1.5rem;
-      letter-spacing: 0.25rem;
-    }
-
-    .matches__header {
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 1rem;
-    }
-  }
-
-  .matches__list {
-    display: flex;
-    flex-direction: column;
-    gap: 1px;
-    background: #e0e0e0;
-  }
-
-  .match-card {
-    display: flex;
-    align-items: center;
-    gap: clamp(1rem, 3vw, 2rem);
-    background: #fafafa;
-    padding: clamp(1.5rem, 4vw, 2.5rem);
-  }
-
-  .match-card__num {
-    font-size: clamp(1.2rem, 4vw, 1.8rem);
-    font-weight: 900;
-    color: #b0b0b0;
-    line-height: 1;
-    flex-shrink: 0;
-    width: clamp(4rem, 12vw, 6rem);
-    text-align: right;
-  }
-
-  .match-card--home .match-card__num {
-    color: #e8a0a0;
-  }
-
-  .match-card__content {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-    flex: 1;
-  }
-
-  .match-card__team {
-    font-size: 0.75rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    color: #c8202f;
-  }
-
-  .match-card__opponent {
-    font-size: 1.4rem;
-    font-weight: 700;
-    color: #1a1a1a;
-  }
-
-  .match-card__meta {
-    font-size: 0.9rem;
-    opacity: 0.7;
   }
 
   /* Manifesto */
@@ -1168,41 +805,6 @@ import Footer from '../components/Footer.astro';
       padding: 2.5rem 2rem;
       border-right: none;
       border-bottom: 1px solid #eee;
-    }
-
-    .match-card {
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 0.5rem;
-      padding: 1.25rem;
-    }
-
-    .match-card__num {
-      font-size: 0.85rem;
-      font-weight: 700;
-      width: auto;
-      color: #c8202f;
-      text-align: left;
-    }
-
-    .match-card--home .match-card__num {
-      color: #c8202f;
-    }
-
-    .match-card__content {
-      gap: 0.25rem;
-    }
-
-    .match-card__opponent {
-      font-size: 1.1rem;
-    }
-
-    .match-card__team {
-      font-size: 0.7rem;
-    }
-
-    .match-card__meta {
-      font-size: 0.8rem;
     }
 
     .matches {
