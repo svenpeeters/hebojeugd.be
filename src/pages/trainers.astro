@@ -1,0 +1,251 @@
+---
+import Layout from '../layouts/Layout.astro';
+import NavbarAlt from '../components/NavbarAlt.astro';
+import Footer from '../components/Footer.astro';
+
+const trainers = {
+  onderbouw: [
+    { team: 'U5', name: 'Claudine Hartjesveld', phone: '0478 81 30 94' },
+    { team: 'U6', name: 'Kenji Jossa', phone: '0468 01 16 73' },
+    { team: 'U7', name: 'Timothy Fontaine', phone: '0496 21 24 41' },
+    { team: 'U9', name: 'Dave Daniels', phone: '0486 62 83 52' },
+  ],
+  middenbouw: [
+    { team: 'U10', name: 'Willy Missotten', phone: '0478 81 30 94' },
+    { team: 'U10', name: 'Jurgen Polders', phone: '0499 82 01 41' },
+    { team: 'U11/12', name: 'Andy Bex', phone: '0490 58 23 12' },
+    { team: 'U11/12', name: 'Frank Missotten', phone: '0469 65 82 72' },
+  ],
+  bovenbouw: [
+    { team: 'U15', name: 'Jean-Marie Cloesen', phone: '0498 48 80 92' },
+    { team: 'U15', name: 'Roger Vanhaeren', phone: '0476 27 77 62' },
+    { team: 'U17', name: 'Joeri Fontaine', phone: '0488 49 67 10' },
+  ],
+  keepers: [
+    { team: 'Alle teams', name: 'Gilles Vanswijgenhoven', phone: '0471 91 34 82' },
+  ],
+};
+---
+
+<Layout title="Trainersstaf | VC HEBO Jeugd">
+  <main>
+    <NavbarAlt />
+
+    <!-- Hero -->
+    <section class="hero">
+      <div class="hero__container">
+        <h1 class="hero__title">Trainersstaf</h1>
+        <p class="hero__subtitle">De mensen die elke week het beste uit onze spelers halen</p>
+      </div>
+    </section>
+
+    <!-- Trainers -->
+    <section class="trainers">
+      <div class="trainers__container">
+        
+        <!-- Onderbouw -->
+        <div class="trainers__group">
+          <div class="trainers__header trainers__header--green">
+            <h2>Onderbouw</h2>
+            <span>U5 - U9</span>
+          </div>
+          <div class="trainers__grid">
+            {trainers.onderbouw.map(t => (
+              <div class="trainer-card">
+                <span class="trainer-card__team">{t.team}</span>
+                <span class="trainer-card__name">{t.name}</span>
+                <a href={`tel:${t.phone.replace(/\s/g, '')}`} class="trainer-card__phone">{t.phone}</a>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <!-- Middenbouw -->
+        <div class="trainers__group">
+          <div class="trainers__header trainers__header--orange">
+            <h2>Middenbouw</h2>
+            <span>U10 - U13</span>
+          </div>
+          <div class="trainers__grid">
+            {trainers.middenbouw.map(t => (
+              <div class="trainer-card">
+                <span class="trainer-card__team">{t.team}</span>
+                <span class="trainer-card__name">{t.name}</span>
+                <a href={`tel:${t.phone.replace(/\s/g, '')}`} class="trainer-card__phone">{t.phone}</a>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <!-- Bovenbouw -->
+        <div class="trainers__group">
+          <div class="trainers__header trainers__header--red">
+            <h2>Bovenbouw</h2>
+            <span>U14 - U17</span>
+          </div>
+          <div class="trainers__grid">
+            {trainers.bovenbouw.map(t => (
+              <div class="trainer-card">
+                <span class="trainer-card__team">{t.team}</span>
+                <span class="trainer-card__name">{t.name}</span>
+                <a href={`tel:${t.phone.replace(/\s/g, '')}`} class="trainer-card__phone">{t.phone}</a>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <!-- Keeperstrainer -->
+        <div class="trainers__group">
+          <div class="trainers__header trainers__header--navy">
+            <h2>Keeperstrainer</h2>
+            <span>Alle teams</span>
+          </div>
+          <div class="trainers__grid">
+            {trainers.keepers.map(t => (
+              <div class="trainer-card trainer-card--featured">
+                <span class="trainer-card__team">🧤 {t.team}</span>
+                <span class="trainer-card__name">{t.name}</span>
+                <a href={`tel:${t.phone.replace(/\s/g, '')}`} class="trainer-card__phone">{t.phone}</a>
+              </div>
+            ))}
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <Footer />
+  </main>
+</Layout>
+
+<style>
+  main {
+    background: #fafafa;
+    color: #1a1a1a;
+  }
+
+  .hero {
+    background: linear-gradient(135deg, #1e3264 0%, #0a0f1a 100%);
+    color: #fff;
+    padding: 8rem 2rem 4rem;
+    text-align: center;
+  }
+
+  .hero__container {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .hero__title {
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    font-weight: 900;
+    margin: 0 0 1rem;
+  }
+
+  .hero__subtitle {
+    font-size: 1.2rem;
+    opacity: 0.8;
+    margin: 0;
+  }
+
+  /* Trainers */
+  .trainers {
+    padding: 4rem 2rem;
+  }
+
+  .trainers__container {
+    max-width: 1000px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+  }
+
+  .trainers__group {
+    background: #fff;
+    border-radius: 1rem;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  }
+
+  .trainers__header {
+    padding: 1.5rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #fff;
+  }
+
+  .trainers__header h2 {
+    font-size: 1.3rem;
+    font-weight: 800;
+    margin: 0;
+  }
+
+  .trainers__header span {
+    font-size: 0.9rem;
+    opacity: 0.8;
+    font-weight: 600;
+  }
+
+  .trainers__header--green { background: linear-gradient(135deg, #4ade80, #22c55e); }
+  .trainers__header--orange { background: linear-gradient(135deg, #f59e0b, #d97706); }
+  .trainers__header--red { background: linear-gradient(135deg, #c8202f, #991b1b); }
+  .trainers__header--navy { background: linear-gradient(135deg, #1e3264, #0a0f1a); }
+
+  .trainers__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1px;
+    background: #eee;
+  }
+
+  .trainer-card {
+    background: #fff;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .trainer-card--featured {
+    background: #f8fafc;
+  }
+
+  .trainer-card__team {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: #c8202f;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  .trainer-card__name {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #1e3264;
+  }
+
+  .trainer-card__phone {
+    font-size: 0.95rem;
+    color: #666;
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+
+  .trainer-card__phone:hover {
+    color: #c8202f;
+  }
+
+  @media (max-width: 600px) {
+    .hero {
+      padding: 6rem 1.5rem 3rem;
+    }
+
+    .trainers__header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.25rem;
+    }
+  }
+</style>

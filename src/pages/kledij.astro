@@ -1,0 +1,409 @@
+---
+import Layout from '../layouts/Layout.astro';
+import NavbarAlt from '../components/NavbarAlt.astro';
+import Footer from '../components/Footer.astro';
+
+const items = [
+  'Wedstrijd-shirt',
+  'Wedstrijd-short', 
+  'Wedstrijd-polo',
+  '2x Kousen',
+  'Trainingsvest',
+  'Trainingsbroek',
+  'Regenjas',
+  'Voetbal',
+  'Drinkbus',
+];
+---
+
+<Layout title="Kledij & Uitrusting | VC HEBO Jeugd">
+  <main>
+    <NavbarAlt />
+
+    <!-- Hero -->
+    <section class="hero">
+      <div class="hero__container">
+        <h1 class="hero__title">Kledij & Uitrusting</h1>
+        <p class="hero__subtitle">Alles wat je nodig hebt om er als een echte HEBO-speler uit te zien</p>
+      </div>
+    </section>
+
+    <!-- Pakket -->
+    <section class="package">
+      <div class="package__container">
+        <h2 class="section-title">Jouw kledijpakket</h2>
+        <p class="package__intro">Elk lid ontvangt bij inschrijving een compleet kledijpakket. Nieuwe leden krijgen er ook een voetbaltas bij!</p>
+        
+        <div class="package__grid">
+          {items.map(item => (
+            <div class="package__item">
+              <span class="package__check">✓</span>
+              <span class="package__name">{item}</span>
+            </div>
+          ))}
+        </div>
+
+        <div class="package__extra">
+          <span class="package__extra-badge">Nieuw lid?</span>
+          <span class="package__extra-text">+ Voetbaltas inbegrepen!</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Extra bestellen -->
+    <section class="order">
+      <div class="order__container">
+        <div class="order__content">
+          <h2 class="order__title">Extra trainingsmateriaal bestellen?</h2>
+          <p class="order__text">Wil je extra sokken, een extra trainingsshirt of een reservebroek? Geen probleem! Via de club kan je aanvullend trainingsmateriaal bijbestellen, zodat je altijd in volledige HEBO-uitrusting op het veld staat.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Wat meebrengen -->
+    <section class="bring">
+      <div class="bring__container">
+        <h2 class="section-title">Wat breng je zelf mee?</h2>
+        
+        <div class="bring__grid">
+          <div class="bring__item">
+            <span class="bring__icon">👟</span>
+            <div class="bring__info">
+              <span class="bring__name">Voetbalschoenen</span>
+              <span class="bring__desc">Noppen of kunstgras, afhankelijk van het veld</span>
+            </div>
+          </div>
+          
+          <div class="bring__item bring__item--required">
+            <span class="bring__icon">🦵</span>
+            <div class="bring__info">
+              <span class="bring__name">Scheenbeschermers</span>
+              <span class="bring__desc">Verplicht tijdens trainingen én wedstrijden</span>
+            </div>
+            <span class="bring__badge">Verplicht</span>
+          </div>
+          
+          <div class="bring__item">
+            <span class="bring__icon">🧥</span>
+            <div class="bring__info">
+              <span class="bring__name">Regenjas / Winterjas</span>
+              <span class="bring__desc">Voor de koudere maanden</span>
+            </div>
+          </div>
+          
+          <div class="bring__item">
+            <span class="bring__icon">🏠</span>
+            <div class="bring__info">
+              <span class="bring__name">Indoorschoenen</span>
+              <span class="bring__desc">Voor indoortrainingen</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section class="contact">
+      <div class="contact__container">
+        <div class="contact__card">
+          <div class="contact__info">
+            <h3 class="contact__title">Vragen over kledij?</h3>
+            <p class="contact__text">Spreek gerust Jurgen aan of stuur een mailtje. Hij helpt je graag verder!</p>
+            <a href="mailto:jurgen@hebojeugd.be" class="contact__button">jurgen@hebojeugd.be</a>
+          </div>
+          <div class="contact__signature">
+            <span class="contact__name">Jurgen</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <Footer />
+  </main>
+</Layout>
+
+<style>
+  main {
+    background: #fafafa;
+    color: #1a1a1a;
+  }
+
+  .hero {
+    background: linear-gradient(135deg, #1e3264 0%, #0a0f1a 100%);
+    color: #fff;
+    padding: 8rem 2rem 4rem;
+    text-align: center;
+  }
+
+  .hero__container {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .hero__title {
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    font-weight: 900;
+    margin: 0 0 1rem;
+  }
+
+  .hero__subtitle {
+    font-size: 1.2rem;
+    opacity: 0.8;
+    margin: 0;
+  }
+
+  .section-title {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: #c8202f;
+    margin: 0 0 2rem;
+  }
+
+  /* Package */
+  .package {
+    padding: 4rem 2rem;
+    background: #fff;
+  }
+
+  .package__container {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .package__intro {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: #333;
+    margin: 0 0 2rem;
+  }
+
+  .package__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1rem;
+  }
+
+  .package__item {
+    background: #fce4e6;
+    padding: 1rem 1.25rem;
+    border-radius: 100px;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .package__check {
+    color: #22c55e;
+    font-weight: 700;
+  }
+
+  .package__name {
+    font-weight: 700;
+    color: #1e3264;
+  }
+
+  .package__extra {
+    margin-top: 2rem;
+    padding: 1.5rem;
+    background: #1e3264;
+    border-radius: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    color: #fff;
+  }
+
+  .package__extra-badge {
+    background: #c8202f;
+    padding: 0.5rem 1rem;
+    border-radius: 100px;
+    font-size: 0.8rem;
+    font-weight: 700;
+  }
+
+  .package__extra-text {
+    font-size: 1.1rem;
+    font-weight: 700;
+  }
+
+  /* Order */
+  .order {
+    padding: 4rem 2rem;
+  }
+
+  .order__container {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .order__content {
+    background: #f5f5f5;
+    padding: 2.5rem;
+    border-radius: 1rem;
+  }
+
+  .order__title {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: #1e3264;
+    margin: 0 0 1rem;
+  }
+
+  .order__text {
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: #555;
+    margin: 0;
+  }
+
+  /* Bring */
+  .bring {
+    padding: 4rem 2rem;
+    background: #fff;
+  }
+
+  .bring__container {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .bring__grid {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .bring__item {
+    background: #fafafa;
+    padding: 1.5rem;
+    border-radius: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+  }
+
+  .bring__item--required {
+    border: 2px solid #c8202f;
+    background: #fff;
+  }
+
+  .bring__icon {
+    font-size: 2rem;
+    flex-shrink: 0;
+  }
+
+  .bring__info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .bring__name {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #1e3264;
+  }
+
+  .bring__desc {
+    font-size: 0.9rem;
+    color: #666;
+  }
+
+  .bring__badge {
+    background: #c8202f;
+    color: #fff;
+    padding: 0.4rem 1rem;
+    border-radius: 100px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+
+  /* Contact */
+  .contact {
+    padding: 4rem 2rem;
+  }
+
+  .contact__container {
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  .contact__card {
+    background: linear-gradient(135deg, #1e3264, #0a0f1a);
+    color: #fff;
+    padding: 2.5rem;
+    border-radius: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2rem;
+  }
+
+  .contact__title {
+    font-size: 1.3rem;
+    font-weight: 800;
+    color: #c8202f;
+    margin: 0 0 0.75rem;
+  }
+
+  .contact__text {
+    font-size: 1rem;
+    opacity: 0.8;
+    margin: 0 0 1.25rem;
+    line-height: 1.6;
+  }
+
+  .contact__button {
+    display: inline-block;
+    background: #c8202f;
+    color: #fff;
+    padding: 0.75rem 1.5rem;
+    text-decoration: none;
+    font-weight: 700;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+  }
+
+  .contact__button:hover {
+    background: #fff;
+    color: #c8202f;
+  }
+
+  .contact__signature {
+    text-align: right;
+  }
+
+  .contact__name {
+    font-size: 2rem;
+    font-family: 'Brush Script MT', cursive;
+    opacity: 0.7;
+  }
+
+  @media (max-width: 600px) {
+    .hero {
+      padding: 6rem 1.5rem 3rem;
+    }
+
+    .contact__card {
+      flex-direction: column;
+      text-align: center;
+    }
+
+    .contact__signature {
+      text-align: center;
+    }
+
+    .bring__item {
+      flex-wrap: wrap;
+    }
+
+    .bring__badge {
+      width: 100%;
+      text-align: center;
+      margin-top: 0.5rem;
+    }
+  }
+</style>
