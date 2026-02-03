@@ -59,26 +59,26 @@ const createContactCard = ({
   return container;
 };
 
-export const Default = {
+export const Timothy = {
   render: (args) => createContactCard(args),
   args: {
     title: 'Vragen over de sportieve werking?',
     description: 'Timothy en de leden van de sportieve cel helpen je graag verder!',
     buttonText: 'timothy@hebojeugd.be',
     buttonHref: 'mailto:timothy@hebojeugd.be',
-    imageSrc: 'https://placehold.co/200x340/1e3264/ffffff?text=Contact',
+    imageSrc: '/images/jeugdwerking-contact.png',
     imageAlt: 'Timothy',
   },
 };
 
-export const AlternativeContact = {
+export const Jurgen = {
   render: (args) => createContactCard(args),
   args: {
-    title: 'Vragen over inschrijvingen?',
-    description: 'Neem contact op met ons secretariaat voor alle administratieve vragen.',
-    buttonText: 'info@hebojeugd.be',
-    buttonHref: 'mailto:info@hebojeugd.be',
-    imageSrc: 'https://placehold.co/200x340/c8202f/ffffff?text=Info',
-    imageAlt: 'Secretariaat',
+    title: 'Vragen over kledij?',
+    description: 'Spreek gerust Jurgen aan of stuur een mailtje. Hij helpt je graag verder!',
+    buttonText: 'jurgen@hebojeugd.be',
+    buttonHref: 'mailto:jurgen@hebojeugd.be',
+    imageSrc: '/images/kledij-contact.png',
+    imageAlt: 'Jurgen',
   },
 };
