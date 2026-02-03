@@ -1,119 +1,198 @@
 .footer {
-  background: #1a1a1a;
+  background: #141f3d;
   color: #fff;
-  padding: 4rem 0 2rem;
+  padding: 8rem 8vw 0;
+  font-family: 'Inter', sans-serif;
 }
 
-.footer__container {
+.footer__grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 4rem;
+  padding-bottom: 6rem;
+  border-bottom: 1px solid #222;
   max-width: 1440px;
   margin: 0 auto;
-  padding: 0 2rem;
 }
 
-.footer__top {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding-bottom: 3rem;
-  border-bottom: 1px solid rgba(255,255,255,0.1);
+.footer__col h4 {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  opacity: 0.4;
+  margin-bottom: 2rem;
+  margin-top: 0;
 }
 
-.footer__brand {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
+.footer__col--brand {
+  padding-right: 4rem;
 }
 
 .footer__logo {
-  width: 60px;
-  height: auto;
+  width: 31%;
+  max-width: 300px;
+  margin-bottom: 2rem;
 }
 
-.footer__name {
-  font-size: 1.2rem;
-  font-weight: 800;
+.footer__manifesto {
+  font-size: 1.5rem;
+  line-height: 1.4;
+  margin: 0;
+  color: #fff;
 }
 
-.footer__links {
-  display: flex;
-  gap: 2rem;
+.footer__manifesto span {
+  color: #c8202f;
+  font-weight: 700;
 }
 
 .footer__link {
-  color: rgba(255,255,255,0.6);
+  display: block;
+  color: #fff;
   text-decoration: none;
-  font-size: 0.95rem;
-  transition: color 0.3s ease;
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  transition: all 0.2s ease;
 }
 
 .footer__link:hover {
-  color: #fff;
+  color: #c8202f;
+  transform: translateX(10px);
 }
 
 .footer__bottom {
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
+  align-items: center;
   padding: 3rem 0;
+  max-width: 1440px;
+  margin: 0 auto;
 }
 
-.footer__locations {
-  display: flex;
-  gap: 4rem;
+.footer__stamp {
+  font-size: 0.75rem;
+  letter-spacing: 4px;
+  opacity: 0.3;
 }
 
-.footer__location {
-  display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
+.footer__copy {
+  font-size: 0.85rem;
+  opacity: 0.3;
 }
 
-.footer__location strong {
-  font-weight: 700;
-}
-
-.footer__location span {
-  opacity: 0.6;
-  font-size: 0.9rem;
-}
-
-.footer__contact a {
-  color: #c8202f;
-  text-decoration: none;
-  font-weight: 600;
-}
-
-.footer__contact a:hover {
-  text-decoration: underline;
-}
-
-.footer__copyright {
-  text-align: center;
-  padding-top: 2rem;
-  border-top: 1px solid rgba(255,255,255,0.1);
+.footer__signature {
   font-size: 0.85rem;
   opacity: 0.4;
 }
 
-@media (max-width: 768px) {
-  .footer__top {
-    flex-direction: column;
-    gap: 2rem;
+.footer__signature a {
+  color: #fff;
+  text-decoration: none;
+  transition: opacity 0.2s ease;
+}
+
+.footer__signature a:hover {
+  opacity: 1;
+  text-decoration: underline;
+}
+
+/* Ticker */
+.footer__ticker {
+  background: #2a4080;
+  margin: 0 -8vw;
+  padding: 1.5rem 0;
+  overflow: hidden;
+}
+
+.footer__ticker-track {
+  display: flex;
+  animation: footerTicker 20s linear infinite;
+  white-space: nowrap;
+}
+
+@keyframes footerTicker {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.footer__ticker-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0 1rem;
+  color: #fff;
+}
+
+.footer__ticker-team {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: #c8202f;
+  background: #fff;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+}
+
+.footer__ticker-badge {
+  font-size: 0.6rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  opacity: 0.5;
+}
+
+.footer__ticker-match {
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.footer__ticker-date {
+  font-size: 0.85rem;
+  opacity: 0.5;
+}
+
+.footer__ticker-divider {
+  font-size: 0.5rem;
+  opacity: 0.3;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .footer {
+    padding: 4rem 2rem 0;
+  }
+
+  .footer__grid {
+    grid-template-columns: 1fr;
+    gap: 3rem;
     text-align: center;
   }
 
-  .footer__links {
-    flex-wrap: wrap;
-    justify-content: center;
+  .footer__col--brand {
+    padding-right: 0;
+  }
+
+  .footer__link {
+    font-size: 1.1rem;
+  }
+
+  .footer__link:hover {
+    transform: none;
   }
 
   .footer__bottom {
     flex-direction: column;
-    gap: 2rem;
+    gap: 1rem;
+    text-align: center;
   }
 
-  .footer__locations {
-    flex-direction: column;
-    gap: 1.5rem;
+  .footer__ticker {
+    margin: 0 -2rem;
+  }
+
+  .footer__ticker-track {
+    animation: footerTicker 10s linear infinite;
   }
 }
