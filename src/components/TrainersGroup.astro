@@ -1,0 +1,85 @@
+---
+import TrainerCard from './TrainerCard.astro';
+
+interface Trainer {
+  team: string;
+  name: string;
+  phone: string;
+}
+
+interface Props {
+  title: string;
+  ageRange: string;
+  color: 'green' | 'orange' | 'red' | 'navy';
+  trainers: Trainer[];
+  featured?: boolean;
+}
+
+const { title, ageRange, color, trainers, featured = false } = Astro.props;
+---
+
+<div class="trainers-group">
+  <div class={`trainers-group__header trainers-group__header--${color}`}>
+    <h2>{title}</h2>
+    <span>{ageRange}</span>
+  </div>
+  <div class="trainers-group__grid">
+    {trainers.map(trainer => (
+      <TrainerCard
+        team={trainer.team}
+        name={trainer.name}
+        phone={trainer.phone}
+        featured={featured}
+      />
+    ))}
+  </div>
+</div>
+
+<style>
+  .trainers-group {
+    background: #fff;
+    border-radius: 1rem;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  }
+
+  .trainers-group__header {
+    padding: 1.5rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #fff;
+  }
+
+  .trainers-group__header h2 {
+    font-size: 1.3rem;
+    font-weight: 800;
+    margin: 0;
+  }
+
+  .trainers-group__header span {
+    font-size: 0.9rem;
+    opacity: 0.8;
+    font-weight: 600;
+  }
+
+  .trainers-group__header--green { background: #4ade80; }
+  .trainers-group__header--orange { background: #f59e0b; }
+  .trainers-group__header--red { background: #c8202f; }
+  .trainers-group__header--navy { background: #1e3264; }
+
+  .trainers-group__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1px;
+    background: #eee;
+  }
+
+  @media (max-width: 600px) {
+    .trainers-group__header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.25rem;
+    }
+  }
+</style>

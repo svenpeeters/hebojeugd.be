@@ -1,0 +1,56 @@
+---
+interface Props {
+  label: string;
+  age: string;
+  price: string;
+  accent?: boolean;
+}
+
+const { label, age, price, accent = false } = Astro.props;
+---
+
+<div class:list={["pricing-card", { "pricing-card--accent": accent }]}>
+  <span class="pricing-card__label">{label}</span>
+  <span class="pricing-card__age">{age}</span>
+  <span class="pricing-card__price">{price}</span>
+</div>
+
+<style>
+  .pricing-card {
+    background: #fff;
+    padding: 1.5rem;
+    border-radius: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    min-width: 200px;
+  }
+
+  .pricing-card--accent {
+    background: #1e3264;
+    color: #fff;
+  }
+
+  .pricing-card__label {
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #c8202f;
+  }
+
+  .pricing-card--accent .pricing-card__label {
+    color: rgba(255,255,255,0.7);
+  }
+
+  .pricing-card__age {
+    font-size: 1.1rem;
+    font-weight: 700;
+  }
+
+  .pricing-card__price {
+    font-size: 2rem;
+    font-weight: 900;
+  }
+</style>

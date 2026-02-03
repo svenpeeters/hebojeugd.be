@@ -1,0 +1,56 @@
+---
+interface Props {
+  team: string;
+  name: string;
+  phone: string;
+  featured?: boolean;
+}
+
+const { team, name, phone, featured = false } = Astro.props;
+const phoneClean = phone.replace(/\s/g, '');
+---
+
+<div class:list={["trainer-card", { "trainer-card--featured": featured }]}>
+  <span class="trainer-card__team">{team}</span>
+  <span class="trainer-card__name">{name}</span>
+  <a href={`tel:${phoneClean}`} class="trainer-card__phone">{phone}</a>
+</div>
+
+<style>
+  .trainer-card {
+    background: #fff;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .trainer-card--featured {
+    background: #f8fafc;
+  }
+
+  .trainer-card__team {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: #c8202f;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  .trainer-card__name {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #1e3264;
+  }
+
+  .trainer-card__phone {
+    font-size: 0.95rem;
+    color: #666;
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+
+  .trainer-card__phone:hover {
+    color: #c8202f;
+  }
+</style>

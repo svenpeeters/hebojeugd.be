@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import PricingCard from '../components/PricingCard.astro';
 ---
 
 <BaseLayout title="Lid worden | VC HEBO Jeugd">
@@ -28,26 +29,10 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         <div class="pricing__group">
           <h3 class="pricing__group-title">Actieve leden</h3>
           <div class="pricing__grid">
-            <div class="pricing__card pricing__card--accent">
-              <span class="pricing__label">Kleuters (U5)</span>
-              <span class="pricing__age">Vanaf 3,5 jaar</span>
-              <span class="pricing__price">€ 75</span>
-            </div>
-            <div class="pricing__card">
-              <span class="pricing__label">Onderbouw</span>
-              <span class="pricing__age">U6, U7, U8, U9</span>
-              <span class="pricing__price">€ 250</span>
-            </div>
-            <div class="pricing__card">
-              <span class="pricing__label">Middenbouw</span>
-              <span class="pricing__age">U10, U11, U12, U13</span>
-              <span class="pricing__price">€ 250</span>
-            </div>
-            <div class="pricing__card">
-              <span class="pricing__label">Bovenbouw</span>
-              <span class="pricing__age">U14, U15, U17</span>
-              <span class="pricing__price">€ 275</span>
-            </div>
+            <PricingCard label="Kleuters (U5)" age="Vanaf 3,5 jaar" price="€ 75" accent />
+            <PricingCard label="Onderbouw" age="U6, U7, U8, U9" price="€ 250" />
+            <PricingCard label="Middenbouw" age="U10, U11, U12, U13" price="€ 250" />
+            <PricingCard label="Bovenbouw" age="U14, U15, U17" price="€ 275" />
           </div>
           <div class="pricing__discount">-€25 voor 2e kind</div>
         </div>
@@ -55,26 +40,10 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         <div class="pricing__group">
           <h3 class="pricing__group-title">Nieuwe leden</h3>
           <div class="pricing__grid">
-            <div class="pricing__card pricing__card--accent">
-              <span class="pricing__label">Kleuters (U5)</span>
-              <span class="pricing__age">Vanaf 3,5 jaar</span>
-              <span class="pricing__price">€ 75</span>
-            </div>
-            <div class="pricing__card">
-              <span class="pricing__label">Onderbouw</span>
-              <span class="pricing__age">U6, U7, U8, U9</span>
-              <span class="pricing__price">€ 275</span>
-            </div>
-            <div class="pricing__card">
-              <span class="pricing__label">Middenbouw</span>
-              <span class="pricing__age">U10, U11, U12, U13</span>
-              <span class="pricing__price">€ 275</span>
-            </div>
-            <div class="pricing__card">
-              <span class="pricing__label">Bovenbouw</span>
-              <span class="pricing__age">U14, U15, U17</span>
-              <span class="pricing__price">€ 300</span>
-            </div>
+            <PricingCard label="Kleuters (U5)" age="Vanaf 3,5 jaar" price="€ 75" accent />
+            <PricingCard label="Onderbouw" age="U6, U7, U8, U9" price="€ 275" />
+            <PricingCard label="Middenbouw" age="U10, U11, U12, U13" price="€ 275" />
+            <PricingCard label="Bovenbouw" age="U14, U15, U17" price="€ 300" />
           </div>
           <div class="pricing__discount">-€25 voor 2e kind</div>
         </div>
@@ -232,43 +201,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     gap: 1rem;
   }
 
-  .pricing__card {
-    background: #fff;
-    padding: 1.5rem;
-    border-radius: 1rem;
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-  }
-
-  .pricing__card--accent {
-    background: #1e3264;
-    color: #fff;
-  }
-
-  .pricing__label {
-    font-size: 0.8rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    color: #c8202f;
-  }
-
-  .pricing__card--accent .pricing__label {
-    color: rgba(255,255,255,0.7);
-  }
-
-  .pricing__age {
-    font-size: 1.1rem;
-    font-weight: 700;
-  }
-
-  .pricing__price {
-    font-size: 2rem;
-    font-weight: 900;
-  }
-
   .pricing__discount {
     margin-top: 1rem;
     padding: 1rem;
@@ -348,10 +280,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     box-shadow: 0 2px 10px rgba(0,0,0,0.05);
   }
 
-  .needed__item--required {
-    border: 2px solid #c8202f;
-  }
-
   .needed__icon {
     font-size: 1.5rem;
   }
@@ -359,16 +287,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   .needed__text {
     font-weight: 600;
     flex: 1;
-  }
-
-  .needed__badge {
-    background: #c8202f;
-    color: #fff;
-    padding: 0.25rem 0.75rem;
-    border-radius: 100px;
-    font-size: 0.7rem;
-    font-weight: 700;
-    text-transform: uppercase;
   }
 
   /* CTA */

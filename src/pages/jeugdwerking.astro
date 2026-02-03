@@ -1,5 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import PhaseCard from '../components/PhaseCard.astro';
+import ContactCard from '../components/ContactCard.astro';
 ---
 
 <BaseLayout title="Jeugdwerking | VC HEBO Jeugd">
@@ -16,74 +18,46 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     <!-- Structuur -->
     <section class="structure">
       <div class="structure__container">
-        <div class="phase phase--onderbouw">
-          <div class="phase__header">
-            <span class="phase__label">Fase 1</span>
-            <h2 class="phase__title">Onderbouw</h2>
-            <span class="phase__ages">U5 - U9</span>
-          </div>
-          <div class="phase__content">
-            <p>De basis van het voetbalplezier. Hier leren de jongste spelers spelenderwijs de bal kennen en maken ze hun eerste vriendjes op het veld.</p>
-            <div class="phase__teams">
-              <span>U5 (Kleuters)</span>
-              <span>U6</span>
-              <span>U7</span>
-              <span>U8</span>
-              <span>U9</span>
-            </div>
-          </div>
-        </div>
+        <PhaseCard
+          phase="onderbouw"
+          label="Fase 1"
+          title="Onderbouw"
+          ages="U5 - U9"
+          description="De basis van het voetbalplezier. Hier leren de jongste spelers spelenderwijs de bal kennen en maken ze hun eerste vriendjes op het veld."
+          teams={['U5 (Kleuters)', 'U6', 'U7', 'U8', 'U9']}
+        />
 
-        <div class="phase phase--middenbouw">
-          <div class="phase__header">
-            <span class="phase__label">Fase 2</span>
-            <h2 class="phase__title">Middenbouw</h2>
-            <span class="phase__ages">U10 - U13</span>
-          </div>
-          <div class="phase__content">
-            <p>De ontwikkelfase. Techniek, tactiek en teamplay worden verder uitgebouwd. Spelers groeien als individu én als team.</p>
-            <div class="phase__teams">
-              <span>U10</span>
-              <span>U11</span>
-              <span>U12</span>
-              <span>U13</span>
-            </div>
-          </div>
-        </div>
+        <PhaseCard
+          phase="middenbouw"
+          label="Fase 2"
+          title="Middenbouw"
+          ages="U10 - U13"
+          description="De ontwikkelfase. Techniek, tactiek en teamplay worden verder uitgebouwd. Spelers groeien als individu én als team."
+          teams={['U10', 'U11', 'U12', 'U13']}
+        />
 
-        <div class="phase phase--bovenbouw">
-          <div class="phase__header">
-            <span class="phase__label">Fase 3</span>
-            <h2 class="phase__title">Bovenbouw</h2>
-            <span class="phase__ages">U14 - U17</span>
-          </div>
-          <div class="phase__content">
-            <p>De perfectioneringsfase. Fysieke en mentale ontwikkeling, wedstrijdmentaliteit en voorbereiding op het volwassen voetbal.</p>
-            <div class="phase__teams">
-              <span>U14</span>
-              <span>U15</span>
-              <span>U17</span>
-            </div>
-          </div>
-        </div>
+        <PhaseCard
+          phase="bovenbouw"
+          label="Fase 3"
+          title="Bovenbouw"
+          ages="U14 - U17"
+          description="De perfectioneringsfase. Fysieke en mentale ontwikkeling, wedstrijdmentaliteit en voorbereiding op het volwassen voetbal."
+          teams={['U14', 'U15', 'U17']}
+        />
       </div>
     </section>
 
     <!-- Contact -->
     <section class="contact">
       <div class="contact__container">
-        <div class="contact__card">
-          <div class="contact__info">
-            <h3 class="contact__title">Vragen over de sportieve werking?</h3>
-            <p class="contact__text">Timothy en de leden van de sportieve cel helpen je graag verder!</p>
-            <a href="mailto:timothy@hebojeugd.be" class="contact__button">timothy@hebojeugd.be</a>
-          </div>
-          <div class="contact__figure">
-            <div class="contact__figure-inner">
-              <img src="/images/jeugdwerking-contact.png" alt="Timothy" class="contact__avatar" />
-            </div>
-          </div>
-        </div>
+        <ContactCard
+          title="Vragen over de sportieve werking?"
+          description="Timothy en de leden van de sportieve cel helpen je graag verder!"
+          buttonText="timothy@hebojeugd.be"
+          buttonHref="mailto:timothy@hebojeugd.be"
+          imageSrc="/images/jeugdwerking-contact.png"
+          imageAlt="Timothy"
+        />
       </div>
     </section>
 
@@ -143,88 +117,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     gap: 2rem;
   }
 
-  .phase {
-    background: #fff;
-    border-radius: 1.5rem;
-    overflow: hidden;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-    display: grid;
-    grid-template-columns: 300px 1fr;
-  }
-
-  .phase__header {
-    padding: 2.5rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
-
-  .phase--onderbouw .phase__header {
-    background: #4ade80;
-    color: #fff;
-  }
-
-  .phase--middenbouw .phase__header {
-    background: #f59e0b;
-    color: #fff;
-  }
-
-  .phase--bovenbouw .phase__header {
-    background: #c8202f;
-    color: #fff;
-  }
-
-  .phase__label {
-    font-size: 0.75rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    opacity: 0.8;
-    margin-bottom: 0.5rem;
-  }
-
-  .phase__title {
-    font-size: 2rem;
-    font-weight: 900;
-    margin: 0;
-  }
-
-  .phase__ages {
-    font-size: 1.2rem;
-    font-weight: 700;
-    margin-top: 0.5rem;
-    opacity: 0.9;
-  }
-
-  .phase__content {
-    padding: 2.5rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
-
-  .phase__content p {
-    font-size: 1.1rem;
-    line-height: 1.7;
-    color: #333;
-    margin: 0 0 1.5rem;
-  }
-
-  .phase__teams {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-  }
-
-  .phase__teams span {
-    background: #f5f5f5;
-    color: #1e3264;
-    padding: 0.5rem 1rem;
-    border-radius: 100px;
-    font-size: 0.85rem;
-    font-weight: 700;
-  }
-
   /* Contact */
   .contact {
     padding: 6rem 2rem 4rem;
@@ -234,74 +126,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   .contact__container {
     max-width: 700px;
     margin: 0 auto;
-  }
-
-  .contact__card {
-    background: #f5f5f5;
-    color: #1a1a1a;
-    padding: 2.5rem;
-    border-radius: 1.5rem;
-    display: grid;
-    grid-template-columns: 1fr auto;
-    gap: 2rem;
-    align-items: center;
-  }
-
-  .contact__info {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 1rem 0;
-  }
-
-  .contact__title {
-    font-size: 1.3rem;
-    font-weight: 800;
-    color: #c8202f;
-    margin: 0 0 0.75rem;
-  }
-
-  .contact__text {
-    font-size: 1rem;
-    color: #666;
-    margin: 0 0 1.25rem;
-    line-height: 1.6;
-  }
-
-  .contact__button {
-    display: inline-block;
-    background: #1e3264;
-    color: #fff;
-    padding: 0.75rem 1.5rem;
-    text-decoration: none;
-    font-weight: 700;
-    border-radius: 4px;
-    transition: all 0.3s ease;
-    align-self: flex-start;
-  }
-
-  .contact__button:hover {
-    background: #c8202f;
-  }
-
-  .contact__figure {
-    align-self: stretch;
-    overflow: visible;
-    margin: -2.5rem -2.5rem -2.5rem 0;
-    display: flex;
-    align-items: flex-end;
-  }
-
-  .contact__figure-inner {
-    overflow: hidden;
-    margin-top: -60px;
-  }
-
-  .contact__avatar {
-    height: 340px;
-    width: auto;
-    object-fit: contain;
-    display: block;
   }
 
   /* CTA */
@@ -346,30 +170,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   }
 
   @media (max-width: 768px) {
-    .phase {
-      grid-template-columns: 1fr;
-    }
-
-    .phase__header {
-      padding: 2rem;
-    }
-
-    .phase__content {
-      padding: 2rem;
-    }
-
     .hero {
       padding: 6rem 1.5rem 3rem;
-    }
-
-    .contact__card {
-      grid-template-columns: 1fr;
-      text-align: center;
-    }
-
-    .contact__figure {
-      margin-top: 0;
-      justify-self: center;
     }
   }
 </style>
