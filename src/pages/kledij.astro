@@ -371,17 +371,20 @@ const items = [
   }
 
   .contact__figure {
+    position: relative;
+    align-self: stretch;
     display: flex;
     align-items: flex-end;
-    justify-content: center;
-    margin-bottom: -2.5rem;
+    margin-right: -1rem;
   }
 
   .contact__avatar {
-    height: 220px;
+    height: 200px;
     width: auto;
     object-fit: contain;
-    margin-top: -100px;
+    position: relative;
+    bottom: 0;
+    margin-top: -80px;
   }
 
   @media (max-width: 600px) {
