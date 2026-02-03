@@ -1,7 +1,5 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import NavbarAlt from '../components/NavbarAlt.astro';
-import Footer from '../components/Footer.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
 
 const items = [
   'Wedstrijd-shirt',
@@ -16,9 +14,7 @@ const items = [
 ];
 ---
 
-<Layout title="Kledij & Uitrusting | VC HEBO Jeugd">
-  <main>
-    <NavbarAlt />
+<BaseLayout title="Kledij & Uitrusting | VC HEBO Jeugd">
 
     <!-- Hero -->
     <section class="hero">
@@ -117,9 +113,7 @@ const items = [
       </div>
     </section>
 
-    <Footer />
-  </main>
-</Layout>
+</BaseLayout>
 
 <style>
   main {

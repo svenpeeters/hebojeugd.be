@@ -1,7 +1,5 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import NavbarAlt from '../components/NavbarAlt.astro';
-import Footer from '../components/Footer.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
 
 const trainers = [
   { num: '01', team: 'U5', name: 'Claudine Hartjesveld', role: 'Trainer', group: 'Onderbouw', color: '#7dd3c0' },
@@ -19,9 +17,8 @@ const trainers = [
 ];
 ---
 
-<Layout title="Trainersstaf | VC HEBO Jeugd">
-  <main>
-    <NavbarAlt />
+<BaseLayout title="Trainersstaf | VC HEBO Jeugd">
+  
 
     <section class="header">
       <h1>Trainersstaf</h1>
@@ -67,9 +64,8 @@ const trainers = [
       </div>
     </section>
 
-    <Footer />
-  </main>
-</Layout>
+  
+</BaseLayout>
 
 <style>
   main {

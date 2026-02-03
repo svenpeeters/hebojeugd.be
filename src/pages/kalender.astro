@@ -1,7 +1,5 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import NavbarAlt from '../components/NavbarAlt.astro';
-import Footer from '../components/Footer.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
 
 const events = [
   { date: '30 juli', title: 'Start trainingen', type: 'start' },
@@ -18,9 +16,8 @@ const events = [
 ];
 ---
 
-<Layout title="Kalender | VC HEBO Jeugd">
-  <main>
-    <NavbarAlt />
+<BaseLayout title="Kalender | VC HEBO Jeugd">
+  
 
     <!-- Hero -->
     <section class="hero">
@@ -60,9 +57,8 @@ const events = [
       </div>
     </section>
 
-    <Footer />
-  </main>
-</Layout>
+  
+</BaseLayout>
 
 <style>
   main {

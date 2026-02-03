@@ -1,8 +1,6 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import NavbarAlt from '../components/NavbarAlt.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
 import PaastoernooiTicker from '../components/PaastoernooiTicker.astro';
-import Footer from '../components/Footer.astro';
 import matches from '../data/matches.json';
 
 // Get all upcoming matches for ticker
@@ -24,10 +22,7 @@ const weekendMatches = matches.filter(m => {
 });
 ---
 
-<Layout title="VC HEBO Jeugd">
-  <main>
-    <NavbarAlt />
-    
+<BaseLayout title="VC HEBO Jeugd">
     <!-- Paastoernooi Promo -->
     <PaastoernooiTicker />
 
@@ -140,10 +135,7 @@ const weekendMatches = matches.filter(m => {
       </div>
     </section>
 
-    <!-- Footer -->
-    <Footer />
-  </main>
-</Layout>
+</BaseLayout>
 
 <style>
   /* Reset & Base */

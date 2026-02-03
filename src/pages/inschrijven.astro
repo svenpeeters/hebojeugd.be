@@ -1,12 +1,9 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import NavbarAlt from '../components/NavbarAlt.astro';
-import Footer from '../components/Footer.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 
-<Layout title="Lid worden | VC HEBO Jeugd">
-  <main>
-    <NavbarAlt />
+<BaseLayout title="Lid worden | VC HEBO Jeugd">
+  
 
     <!-- Hero -->
     <section class="hero">
@@ -148,9 +145,8 @@ import Footer from '../components/Footer.astro';
       </div>
     </section>
 
-    <Footer />
-  </main>
-</Layout>
+  
+</BaseLayout>
 
 <style>
   main {
