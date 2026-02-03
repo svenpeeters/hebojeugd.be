@@ -107,7 +107,9 @@ const items = [
             <a href="mailto:jurgen@hebojeugd.be" class="contact__button">jurgen@hebojeugd.be</a>
           </div>
           <div class="contact__figure">
-            <img src="/images/kledij-contact.png" alt="Jurgen" class="contact__avatar" />
+            <div class="contact__figure-inner">
+              <img src="/images/kledij-contact.png" alt="Jurgen" class="contact__avatar" />
+            </div>
           </div>
         </div>
       </div>
@@ -332,18 +334,14 @@ const items = [
     color: #1a1a1a;
     padding: 2.5rem;
     border-radius: 1.5rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
+    display: grid;
+    grid-template-columns: 1fr auto;
     gap: 2rem;
-    overflow: hidden;
-    position: relative;
+    align-items: center;
   }
 
   .contact__info {
-    max-width: 60%;
-    position: relative;
-    z-index: 1;
+    
   }
 
   .contact__title {
@@ -376,15 +374,21 @@ const items = [
   }
 
   .contact__figure {
-    position: absolute;
-    right: 0;
-    bottom: -50%;
+    height: 120px;
+    overflow: hidden;
+    align-self: flex-start;
+    margin-top: -80px;
+  }
+
+  .contact__figure-inner {
+    
   }
 
   .contact__avatar {
     height: 280px;
     width: auto;
     object-fit: contain;
+    display: block;
   }
 
   @media (max-width: 600px) {
@@ -393,12 +397,13 @@ const items = [
     }
 
     .contact__card {
-      flex-direction: column;
+      grid-template-columns: 1fr;
       text-align: center;
     }
 
     .contact__figure {
-      margin-top: 1rem;
+      margin-top: 0;
+      justify-self: center;
     }
 
     .bring__item {
