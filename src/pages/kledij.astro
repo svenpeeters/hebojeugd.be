@@ -106,8 +106,8 @@ const items = [
             <p class="contact__text">Spreek gerust Jurgen aan of stuur een mailtje. Hij helpt je graag verder!</p>
             <a href="mailto:jurgen@hebojeugd.be" class="contact__button">jurgen@hebojeugd.be</a>
           </div>
-          <div class="contact__signature">
-            <span class="contact__name">Jurgen</span>
+          <div class="contact__figure">
+            <img src="/images/kledij-contact.png" alt="Jurgen" class="contact__avatar" />
           </div>
         </div>
       </div>
@@ -368,14 +368,16 @@ const items = [
     color: #c8202f;
   }
 
-  .contact__signature {
-    text-align: right;
+  .contact__figure {
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
-  .contact__name {
-    font-size: 2rem;
-    font-family: 'Brush Script MT', cursive;
-    opacity: 0.7;
+  .contact__avatar {
+    height: 180px;
+    width: auto;
+    object-fit: contain;
   }
 
   @media (max-width: 600px) {
@@ -388,8 +390,8 @@ const items = [
       text-align: center;
     }
 
-    .contact__signature {
-      text-align: center;
+    .contact__figure {
+      margin-top: 1rem;
     }
 
     .bring__item {
