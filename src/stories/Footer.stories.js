@@ -5,6 +5,9 @@ export default {
   tags: ['autodocs'],
   parameters: {
     layout: 'fullscreen',
+    viewport: {
+      defaultViewport: 'responsive',
+    },
   },
 };
 
