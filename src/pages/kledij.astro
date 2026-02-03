@@ -375,14 +375,15 @@ const items = [
 
   .contact__figure {
     align-self: stretch;
-    overflow: hidden;
+    overflow: visible;
     margin: -2.5rem -2.5rem -2.5rem 0;
     display: flex;
-    align-items: flex-start;
+    align-items: flex-end;
   }
 
   .contact__figure-inner {
-    
+    overflow: hidden;
+    margin-top: -60px;
   }
 
   .contact__avatar {
@@ -390,7 +391,6 @@ const items = [
     width: auto;
     object-fit: contain;
     display: block;
-    margin-top: -40px;
   }
 
   @media (max-width: 600px) {
