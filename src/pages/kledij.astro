@@ -374,10 +374,11 @@ const items = [
   }
 
   .contact__figure {
-    height: 120px;
+    align-self: stretch;
     overflow: hidden;
-    align-self: flex-start;
-    margin-top: -80px;
+    margin: -2.5rem -2.5rem -2.5rem 0;
+    display: flex;
+    align-items: flex-start;
   }
 
   .contact__figure-inner {
@@ -389,6 +390,7 @@ const items = [
     width: auto;
     object-fit: contain;
     display: block;
+    margin-top: -40px;
   }
 
   @media (max-width: 600px) {
