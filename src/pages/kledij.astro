@@ -319,7 +319,7 @@ const items = [
 
   /* Contact */
   .contact {
-    padding: 4rem 2rem;
+    padding: 6rem 2rem 4rem;
   }
 
   .contact__container {
@@ -334,8 +334,10 @@ const items = [
     border-radius: 1.5rem;
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-end;
     gap: 2rem;
+    overflow: visible;
+    position: relative;
   }
 
   .contact__title {
@@ -370,14 +372,16 @@ const items = [
 
   .contact__figure {
     display: flex;
-    align-items: center;
+    align-items: flex-end;
     justify-content: center;
+    margin-bottom: -2.5rem;
   }
 
   .contact__avatar {
-    height: 180px;
+    height: 220px;
     width: auto;
     object-fit: contain;
+    margin-top: -100px;
   }
 
   @media (max-width: 600px) {
