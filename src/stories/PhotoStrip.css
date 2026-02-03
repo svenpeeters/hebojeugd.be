@@ -1,0 +1,31 @@
+.photo-strip {
+  overflow: hidden;
+  background: #1e3264;
+  padding: 0.75rem 0;
+}
+
+.photo-strip__track {
+  display: flex;
+  gap: 1rem;
+  animation: photoStripScroll 20s linear infinite;
+}
+
+@keyframes photoStripScroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.photo-strip__track img {
+  width: 160px;
+  height: 110px;
+  object-fit: cover;
+  border-radius: 6px;
+  flex-shrink: 0;
+}
+
+@media (max-width: 600px) {
+  .photo-strip__track img {
+    width: 120px;
+    height: 85px;
+  }
+}

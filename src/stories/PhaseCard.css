@@ -1,0 +1,96 @@
+.phase {
+  background: #fff;
+  border-radius: 1.5rem;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  max-width: 900px;
+}
+
+.phase__header {
+  padding: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.phase--onderbouw .phase__header {
+  background: #4ade80;
+  color: #fff;
+}
+
+.phase--middenbouw .phase__header {
+  background: #f59e0b;
+  color: #fff;
+}
+
+.phase--bovenbouw .phase__header {
+  background: #c8202f;
+  color: #fff;
+}
+
+.phase__label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  opacity: 0.8;
+  margin-bottom: 0.5rem;
+}
+
+.phase__title {
+  font-size: 2rem;
+  font-weight: 900;
+  margin: 0;
+}
+
+.phase__ages {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-top: 0.5rem;
+  opacity: 0.9;
+}
+
+.phase__content {
+  padding: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.phase__content p {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: #333;
+  margin: 0 0 1.5rem;
+}
+
+.phase__teams {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.phase__teams span {
+  background: #f5f5f5;
+  color: #1e3264;
+  padding: 0.5rem 1rem;
+  border-radius: 100px;
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+@media (max-width: 768px) {
+  .phase {
+    grid-template-columns: 1fr;
+  }
+
+  .phase__header {
+    padding: 2rem;
+  }
+
+  .phase__content {
+    padding: 2rem;
+  }
+}

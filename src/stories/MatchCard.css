@@ -1,0 +1,106 @@
+.matches-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  background: #e0e0e0;
+  max-width: 800px;
+}
+
+.match-card {
+  display: flex;
+  align-items: center;
+  gap: clamp(1.5rem, 4vw, 3rem);
+  background: #fafafa;
+  padding: clamp(2rem, 5vw, 4rem);
+  transition: all 0.3s ease;
+}
+
+.match-card:hover {
+  background: #f0f0f0;
+}
+
+.match-card__num {
+  font-size: clamp(2rem, 8vw, 4rem);
+  font-weight: 900;
+  color: #e0e0e0;
+  line-height: 1;
+  flex-shrink: 0;
+  width: clamp(4rem, 12vw, 6rem);
+  text-align: right;
+}
+
+.match-card--home .match-card__num {
+  color: #fde0e0;
+}
+
+.match-card__content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.5rem;
+  flex: 1;
+  min-width: 0;
+}
+
+.match-card__team {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: #c8202f;
+}
+
+.match-card__opponent {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #1a1a1a;
+}
+
+.match-card__meta {
+  display: flex;
+  gap: 2rem;
+  font-size: 0.9rem;
+  opacity: 0.5;
+}
+
+.match-card__badge {
+  align-self: center;
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 3px;
+  padding: 0.5rem 1rem;
+  background: #1e3264;
+  color: #fff;
+}
+
+.match-card--home .match-card__badge {
+  background: #c8202f;
+}
+
+@media (max-width: 600px) {
+  .match-card {
+    padding: 2rem;
+    position: relative;
+  }
+
+  .match-card__num {
+    display: none;
+  }
+
+  .match-card__badge {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    font-size: 0.6rem;
+    padding: 0.3rem 0.6rem;
+  }
+
+  .match-card__opponent {
+    font-size: 1.1rem;
+  }
+
+  .match-card__meta {
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+}

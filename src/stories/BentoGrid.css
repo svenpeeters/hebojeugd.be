@@ -1,0 +1,151 @@
+.bento-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  grid-template-rows: auto auto;
+  gap: 1rem;
+  max-width: 900px;
+}
+
+.bento-card {
+  background: #fff;
+  padding: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 1.5rem;
+  border-radius: 1.5rem;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  min-height: 220px;
+}
+
+.bento-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(30,50,100,0.12);
+}
+
+.bento-card--large {
+  grid-row: span 2;
+  min-height: 100%;
+}
+
+.bento-card--navy {
+  background: #1e3264;
+  color: #fff;
+}
+
+.bento-card--red {
+  background: #c8202f;
+  color: #fff;
+}
+
+.bento-card--default {
+  background: #fff;
+  color: #1a1a1a;
+}
+
+.bento-card__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.bento-card__date {
+  display: flex;
+  flex-direction: column;
+}
+
+.bento-card__day {
+  font-size: 5rem;
+  font-weight: 900;
+  line-height: 0.85;
+  letter-spacing: -3px;
+}
+
+.bento-card--large .bento-card__day {
+  font-size: 7rem;
+}
+
+.bento-card__month {
+  font-size: 1.1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  opacity: 0.5;
+  margin-top: 0.25rem;
+}
+
+.bento-card__weekday {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  opacity: 0.4;
+  padding: 0.4rem 0.8rem;
+  background: rgba(255,255,255,0.1);
+  border-radius: 2rem;
+}
+
+.bento-card--default .bento-card__weekday {
+  background: rgba(30,50,100,0.08);
+  color: #1e3264;
+}
+
+.bento-card__time {
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  opacity: 0.6;
+  margin-bottom: 0.75rem;
+}
+
+.bento-card__categories {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.bento-card__badge {
+  background: rgba(255,255,255,0.15);
+  color: inherit;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  font-weight: 800;
+  border-radius: 0.5rem;
+  backdrop-filter: blur(4px);
+}
+
+.bento-card--default .bento-card__badge {
+  background: #1e3264;
+  color: #fff;
+}
+
+.bento-card__formats {
+  display: flex;
+  gap: 1.5rem;
+  font-size: 0.85rem;
+  opacity: 0.5;
+  font-weight: 500;
+  margin-top: 0.5rem;
+}
+
+@media (max-width: 900px) {
+  .bento-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .bento-card {
+    min-height: auto;
+    padding: 2rem;
+  }
+
+  .bento-card--large {
+    grid-row: span 1;
+  }
+
+  .bento-card__day,
+  .bento-card--large .bento-card__day {
+    font-size: 4rem;
+  }
+}

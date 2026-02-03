@@ -1,0 +1,62 @@
+.match-ticker {
+  background: #1e3264;
+  color: #fff;
+  overflow: hidden;
+  padding: 0.75rem 0;
+  font-size: 0.85rem;
+}
+
+.match-ticker__track {
+  display: flex;
+  gap: 2rem;
+  white-space: nowrap;
+  animation: tickerScroll 30s linear infinite;
+}
+
+@keyframes tickerScroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.match-ticker__item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.match-ticker__team {
+  font-weight: 800;
+  color: #c8202f;
+}
+
+.match-ticker__vs {
+  opacity: 0.5;
+  font-size: 0.75rem;
+}
+
+.match-ticker__opponent {
+  font-weight: 600;
+}
+
+.match-ticker__badge {
+  background: rgba(255,255,255,0.2);
+  padding: 0.2rem 0.5rem;
+  border-radius: 3px;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.match-ticker__badge--home {
+  background: #c8202f;
+}
+
+.match-ticker__date {
+  opacity: 0.6;
+  font-size: 0.8rem;
+}
+
+.match-ticker__separator {
+  opacity: 0.3;
+  font-size: 1.2rem;
+}

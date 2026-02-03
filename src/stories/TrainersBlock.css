@@ -1,0 +1,84 @@
+.trainers-block {
+  background: #fff;
+  border-radius: 1rem;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  max-width: 900px;
+}
+
+.trainers-block__header {
+  padding: 1.5rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #fff;
+}
+
+.trainers-block__header h2 {
+  font-size: 1.3rem;
+  font-weight: 800;
+  margin: 0;
+}
+
+.trainers-block__header span {
+  font-size: 0.9rem;
+  opacity: 0.8;
+  font-weight: 600;
+}
+
+.trainers-block__header--green { background: #4ade80; }
+.trainers-block__header--orange { background: #f59e0b; }
+.trainers-block__header--red { background: #c8202f; }
+.trainers-block__header--navy { background: #1e3264; }
+
+.trainers-block__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1px;
+  background: #eee;
+}
+
+.trainer-card {
+  background: #fff;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.trainer-card--featured {
+  background: #f8fafc;
+}
+
+.trainer-card__team {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #c8202f;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.trainer-card__name {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #1e3264;
+}
+
+.trainer-card__phone {
+  font-size: 0.95rem;
+  color: #666;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.trainer-card__phone:hover {
+  color: #c8202f;
+}
+
+@media (max-width: 600px) {
+  .trainers-block__header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.25rem;
+  }
+}
