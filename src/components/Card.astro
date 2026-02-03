@@ -9,8 +9,8 @@ const { variant = 'default', class: className = '', href } = Astro.props;
 
 const variantClasses = {
   default: '',
-  dark: 'card-dark',
-  red: 'card-red'
+  dark: 'card--dark',
+  red: 'card--red'
 };
 
 const Element = href ? 'a' : 'div';
@@ -38,12 +38,12 @@ const Element = href ? 'a' : 'div';
   .card:hover {
     transform: scale(1.02);
   }
-  .card-dark {
+  .card--dark {
     background: var(--navy);
     color: var(--white);
     border: 1px solid #3a4a7a;
   }
-  .card-red {
+  .card--red {
     background: var(--red);
     color: var(--white);
   }

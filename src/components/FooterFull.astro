@@ -65,23 +65,23 @@ const legalLinks = [
 ---
 
 <footer class="footer-full">
-  <div class="footer-container">
+  <div class="footer-full__container">
     <!-- Left Section -->
-    <div class="footer-left">
+    <div class="footer-full__left">
       <!-- Brand -->
-      <div class="footer-brand">
-        <img src="/logo.png" alt="HEBO Jeugd" class="footer-logo" />
-        <div class="footer-info">
-          <p class="club-name">VC HEBO Jeugd</p>
-          <p class="club-address">Raes van Heerslaan</p>
-          <p class="club-address">3870 Heers</p>
+      <div class="footer-full__brand">
+        <img src="/logo.png" alt="HEBO Jeugd" class="footer-full__logo" />
+        <div class="footer-full__info">
+          <p class="footer-full__club-name">VC HEBO Jeugd</p>
+          <p class="footer-full__club-address">Raes van Heerslaan</p>
+          <p class="footer-full__club-address">3870 Heers</p>
         </div>
       </div>
 
       <!-- Link Columns -->
-      <div class="footer-columns">
+      <div class="footer-full__columns">
         {footerColumns.map(column => (
-          <div class="footer-column">
+          <div class="footer-full__column">
             <h4>{column.title}</h4>
             <ul>
               {column.links.map(link => (
@@ -93,9 +93,9 @@ const legalLinks = [
       </div>
 
       <!-- Socials -->
-      <div class="footer-social-section">
-        <p class="social-label">Volg ons</p>
-        <div class="social-icons">
+      <div class="footer-full__social-section">
+        <p class="footer-full__social-label">Volg ons</p>
+        <div class="footer-full__social-icons">
           <a href="#" aria-label="Facebook">
             <svg viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
           </a>
@@ -116,20 +116,20 @@ const legalLinks = [
     </div>
 
     <!-- Right Section - Newsletter -->
-    <div class="footer-right">
-      <div class="newsletter-content">
+    <div class="footer-full__right">
+      <div class="footer-full__newsletter-content">
         <h3>Blijf op de hoogte</h3>
         <p>Ontvang nieuws, wedstrijdinfo en updates rechtstreeks in je mailbox.</p>
-        <a href="#" class="newsletter-btn">Inschrijven</a>
+        <a href="#" class="footer-full__newsletter-btn">Inschrijven</a>
       </div>
-      <div class="newsletter-pattern"></div>
+      <div class="footer-full__newsletter-pattern"></div>
     </div>
   </div>
 
   <!-- Bottom Bar -->
-  <div class="footer-bottom">
-    <p class="copyright">© 2026 VC HEBO Jeugd</p>
-    <div class="legal-links">
+  <div class="footer-full__bottom">
+    <p class="footer-full__copyright">© 2026 VC HEBO Jeugd</p>
+    <div class="footer-full__legal-links">
       {legalLinks.map((link, i) => (
         <>
           <a href={link.href}>{link.label}</a>
@@ -149,40 +149,40 @@ const legalLinks = [
     overflow: hidden;
   }
 
-  .footer-container {
+  .footer-full__container {
     display: grid;
     grid-template-columns: 1fr 400px;
   }
 
   /* Left Section */
-  .footer-left {
+  .footer-full__left {
     padding: 3rem;
   }
 
-  .footer-brand {
+  .footer-full__brand {
     display: flex;
     align-items: flex-start;
     gap: 1rem;
     margin-bottom: 2.5rem;
   }
 
-  .footer-logo {
+  .footer-full__logo {
     width: 70px;
     height: auto;
   }
 
-  .footer-info {
+  .footer-full__info {
     padding-top: 0.25rem;
   }
 
-  .club-name {
+  .footer-full__club-name {
     font-weight: 600;
     font-size: 0.9rem;
     color: var(--white);
     margin-bottom: 0.25rem;
   }
 
-  .club-address {
+  .footer-full__club-address {
     font-size: 0.8rem;
     color: var(--white);
     opacity: 0.5;
@@ -190,14 +190,14 @@ const legalLinks = [
   }
 
   /* Columns */
-  .footer-columns {
+  .footer-full__columns {
     display: grid;
     grid-template-columns: repeat(6, 1fr);
     gap: 1.5rem;
     margin-bottom: 2.5rem;
   }
 
-  .footer-column h4 {
+  .footer-full__column h4 {
     font-size: 0.8rem;
     font-weight: 600;
     color: var(--white);
@@ -206,15 +206,15 @@ const legalLinks = [
     letter-spacing: 0.5px;
   }
 
-  .footer-column ul {
+  .footer-full__column ul {
     list-style: none;
   }
 
-  .footer-column li {
+  .footer-full__column li {
     margin-bottom: 0.4rem;
   }
 
-  .footer-column a {
+  .footer-full__column a {
     font-size: 0.8rem;
     color: var(--white);
     opacity: 0.5;
@@ -222,29 +222,29 @@ const legalLinks = [
     transition: opacity 0.2s;
   }
 
-  .footer-column a:hover {
+  .footer-full__column a:hover {
     opacity: 1;
   }
 
   /* Social Section */
-  .footer-social-section {
+  .footer-full__social-section {
     display: flex;
     align-items: center;
     gap: 1rem;
   }
 
-  .social-label {
+  .footer-full__social-label {
     font-size: 0.75rem;
     color: var(--white);
     opacity: 0.5;
   }
 
-  .social-icons {
+  .footer-full__social-icons {
     display: flex;
     gap: 0.75rem;
   }
 
-  .social-icons a {
+  .footer-full__social-icons a {
     width: 32px;
     height: 32px;
     display: flex;
@@ -255,17 +255,17 @@ const legalLinks = [
     transition: opacity 0.2s;
   }
 
-  .social-icons a:hover {
+  .footer-full__social-icons a:hover {
     opacity: 1;
   }
 
-  .social-icons svg {
+  .footer-full__social-icons svg {
     width: 18px;
     height: 18px;
   }
 
   /* Right Section - Newsletter */
-  .footer-right {
+  .footer-full__right {
     background: var(--red);
     position: relative;
     display: flex;
@@ -275,21 +275,21 @@ const legalLinks = [
     overflow: hidden;
   }
 
-  .newsletter-pattern {
+  .footer-full__newsletter-pattern {
     position: absolute;
     inset: 0;
     background: rgba(0,0,0,0.03);
     pointer-events: none;
   }
 
-  .newsletter-content {
+  .footer-full__newsletter-content {
     position: relative;
     z-index: 1;
     text-align: center;
     max-width: 280px;
   }
 
-  .newsletter-content h3 {
+  .footer-full__newsletter-content h3 {
     font-family: 'Bebas Neue', sans-serif;
     font-size: 2rem;
     color: var(--white);
@@ -299,7 +299,7 @@ const legalLinks = [
     margin-bottom: 1rem;
   }
 
-  .newsletter-content p {
+  .footer-full__newsletter-content p {
     font-size: 0.85rem;
     color: var(--white);
     opacity: 0.7;
@@ -307,7 +307,7 @@ const legalLinks = [
     margin-bottom: 1.5rem;
   }
 
-  .newsletter-btn {
+  .footer-full__newsletter-btn {
     display: inline-block;
     background: transparent;
     color: var(--white);
@@ -321,13 +321,13 @@ const legalLinks = [
     transition: all 0.2s;
   }
 
-  .newsletter-btn:hover {
+  .footer-full__newsletter-btn:hover {
     background: var(--white);
     color: var(--red);
   }
 
   /* Bottom Bar */
-  .footer-bottom {
+  .footer-full__bottom {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -337,54 +337,54 @@ const legalLinks = [
     color: var(--white);
   }
 
-  .copyright {
+  .footer-full__copyright {
     opacity: 0.4;
   }
 
-  .legal-links {
+  .footer-full__legal-links {
     display: flex;
     gap: 0.5rem;
     opacity: 0.4;
   }
 
-  .legal-links a {
+  .footer-full__legal-links a {
     color: var(--white);
     text-decoration: none;
   }
 
-  .legal-links a:hover {
+  .footer-full__legal-links a:hover {
     text-decoration: underline;
   }
 
-  .legal-links span {
+  .footer-full__legal-links span {
     opacity: 0.5;
   }
 
   /* Responsive */
   @media (max-width: 1100px) {
-    .footer-container {
+    .footer-full__container {
       grid-template-columns: 1fr;
     }
 
-    .footer-columns {
+    .footer-full__columns {
       grid-template-columns: repeat(3, 1fr);
     }
 
-    .footer-right {
+    .footer-full__right {
       padding: 2.5rem;
     }
   }
 
   @media (max-width: 700px) {
-    .footer-left {
+    .footer-full__left {
       padding: 2rem 1.5rem;
     }
 
-    .footer-columns {
+    .footer-full__columns {
       grid-template-columns: repeat(2, 1fr);
     }
 
-    .footer-bottom {
+    .footer-full__bottom {
       flex-direction: column;
       gap: 0.5rem;
       padding: 1rem 1.5rem;

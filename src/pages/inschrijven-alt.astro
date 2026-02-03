@@ -34,8 +34,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
     <!-- Section 2: Age + Price Combined -->
     <section class="section section--select">
-      <div class="select-container">
-        <h2 class="select-title">Kies je team</h2>
+      <div class="select__container">
+        <h2 class="select__title">Kies je team</h2>
         
         <div class="age-grid">
           <button class="age-card" data-price="75" data-price-new="75">
@@ -76,7 +76,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           </button>
         </div>
 
-        <div class="discount-badge">
+        <div class="select__discount">
           <span>🎉</span>
           <span>2e kind? -€25 korting!</span>
         </div>
@@ -85,64 +85,64 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
     <!-- Section 3: What You Get -->
     <section class="section section--stuff">
-      <div class="stuff-container">
-        <div class="stuff-header">
-          <h2 class="stuff-title">Volledig uitgerust<br/>vanaf dag één</h2>
-          <p class="stuff-subtitle">Elk lid krijgt een compleet kledijpakket. Alles wat je nodig hebt om er als een echte HEBO-speler uit te zien.</p>
+      <div class="stuff__container">
+        <div class="stuff__header">
+          <h2 class="stuff__title">Volledig uitgerust<br/>vanaf dag één</h2>
+          <p class="stuff__subtitle">Elk lid krijgt een compleet kledijpakket. Alles wat je nodig hebt om er als een echte HEBO-speler uit te zien.</p>
         </div>
         
-        <div class="stuff-grid">
-          <div class="stuff-item" style="--delay: 0">
-            <span class="stuff-item__icon">👕</span>
-            <span class="stuff-item__name">Wedstrijd-shirt</span>
+        <div class="stuff__grid">
+          <div class="stuff__item" style="--delay: 0">
+            <span class="stuff__item-icon">👕</span>
+            <span class="stuff__item-name">Wedstrijd-shirt</span>
           </div>
-          <div class="stuff-item" style="--delay: 1">
-            <span class="stuff-item__icon">🩳</span>
-            <span class="stuff-item__name">Wedstrijd-short</span>
+          <div class="stuff__item" style="--delay: 1">
+            <span class="stuff__item-icon">🩳</span>
+            <span class="stuff__item-name">Wedstrijd-short</span>
           </div>
-          <div class="stuff-item" style="--delay: 2">
-            <span class="stuff-item__icon">👔</span>
-            <span class="stuff-item__name">Wedstrijd-polo</span>
+          <div class="stuff__item" style="--delay: 2">
+            <span class="stuff__item-icon">👔</span>
+            <span class="stuff__item-name">Wedstrijd-polo</span>
           </div>
-          <div class="stuff-item" style="--delay: 3">
-            <span class="stuff-item__icon">🧦</span>
-            <span class="stuff-item__name">2× Kousen</span>
+          <div class="stuff__item" style="--delay: 3">
+            <span class="stuff__item-icon">🧦</span>
+            <span class="stuff__item-name">2× Kousen</span>
           </div>
-          <div class="stuff-item" style="--delay: 4">
-            <span class="stuff-item__icon">🦺</span>
-            <span class="stuff-item__name">Trainingsvest</span>
+          <div class="stuff__item" style="--delay: 4">
+            <span class="stuff__item-icon">🦺</span>
+            <span class="stuff__item-name">Trainingsvest</span>
           </div>
-          <div class="stuff-item" style="--delay: 5">
-            <span class="stuff-item__icon">👖</span>
-            <span class="stuff-item__name">Trainingsbroek</span>
+          <div class="stuff__item" style="--delay: 5">
+            <span class="stuff__item-icon">👖</span>
+            <span class="stuff__item-name">Trainingsbroek</span>
           </div>
-          <div class="stuff-item" style="--delay: 6">
-            <span class="stuff-item__icon">🧥</span>
-            <span class="stuff-item__name">Regenjas</span>
+          <div class="stuff__item" style="--delay: 6">
+            <span class="stuff__item-icon">🧥</span>
+            <span class="stuff__item-name">Regenjas</span>
           </div>
-          <div class="stuff-item" style="--delay: 7">
-            <span class="stuff-item__icon">⚽</span>
-            <span class="stuff-item__name">Voetbal</span>
+          <div class="stuff__item" style="--delay: 7">
+            <span class="stuff__item-icon">⚽</span>
+            <span class="stuff__item-name">Voetbal</span>
           </div>
-          <div class="stuff-item" style="--delay: 8">
-            <span class="stuff-item__icon">🥤</span>
-            <span class="stuff-item__name">Drinkbus</span>
+          <div class="stuff__item" style="--delay: 8">
+            <span class="stuff__item-icon">🥤</span>
+            <span class="stuff__item-name">Drinkbus</span>
           </div>
         </div>
 
-        <div class="stuff-bonus">
-          <span class="stuff-bonus__badge">NIEUW LID?</span>
-          <span class="stuff-bonus__text">Je krijgt er een voetbaltas bij! 🎒</span>
+        <div class="stuff__bonus">
+          <span class="stuff__bonus-badge">NIEUW LID?</span>
+          <span class="stuff__bonus-text">Je krijgt er een voetbaltas bij! 🎒</span>
         </div>
       </div>
     </section>
 
     <!-- Section 4: Checklist -->
     <section class="section section--checklist">
-      <div class="checklist-container">
-        <h2 class="checklist-title">Ben je er klaar voor?</h2>
+      <div class="checklist__container">
+        <h2 class="checklist__title">Ben je er klaar voor?</h2>
         
-        <div class="checklist-items">
+        <div class="checklist__items">
           <label class="check-item">
             <input type="checkbox" />
             <span class="check-item__box"></span>
@@ -166,7 +166,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           </label>
         </div>
         
-        <div class="checklist-note">
+        <div class="checklist__note">
           <span>💡</span>
           <span>Indoorschoenen nodig voor indoortrainingen</span>
         </div>
@@ -175,15 +175,15 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
     <!-- Section 5: Final CTA -->
     <section class="section section--cta">
-      <div class="cta-container">
-        <div class="cta-text">
-          <span class="cta-line">DOE</span>
-          <span class="cta-line cta-line--accent">MEE</span>
+      <div class="cta__container">
+        <div class="cta__text">
+          <span class="cta__line">DOE</span>
+          <span class="cta__line cta__line--accent">MEE</span>
         </div>
-        <p class="cta-subtitle">Word lid van VC HEBO Jeugd</p>
-        <a href="mailto:info@hebojeugd.be" class="cta-button">
+        <p class="cta__subtitle">Word lid van VC HEBO Jeugd</p>
+        <a href="mailto:info@hebojeugd.be" class="cta__button">
           <span>Contact opnemen</span>
-          <span class="cta-arrow">→</span>
+          <span class="cta__arrow">→</span>
         </a>
       </div>
     </section>
@@ -325,13 +325,13 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     padding: 6rem 2rem;
   }
 
-  .select-container {
+  .select__container {
     max-width: 1000px;
     width: 100%;
     text-align: center;
   }
 
-  .select-title {
+  .select__title {
     font-size: clamp(2rem, 5vw, 3.5rem);
     font-weight: 900;
     margin-bottom: 3rem;
@@ -410,7 +410,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     font-weight: 900;
   }
 
-  .discount-badge {
+  .select__discount {
     margin-top: 2rem;
     display: inline-flex;
     align-items: center;
@@ -427,24 +427,24 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     padding: 6rem 2rem;
   }
 
-  .stuff-container {
+  .stuff__container {
     max-width: 900px;
     width: 100%;
   }
 
-  .stuff-header {
+  .stuff__header {
     text-align: center;
     margin-bottom: 3rem;
   }
 
-  .stuff-title {
+  .stuff__title {
     font-size: clamp(2rem, 5vw, 3.5rem);
     font-weight: 900;
     line-height: 1.1;
     margin-bottom: 1rem;
   }
 
-  .stuff-subtitle {
+  .stuff__subtitle {
     font-size: 1.1rem;
     opacity: 0.7;
     max-width: 500px;
@@ -452,13 +452,13 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     line-height: 1.6;
   }
 
-  .stuff-grid {
+  .stuff__grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
     gap: 1rem;
   }
 
-  .stuff-item {
+  .stuff__item {
     background: rgba(255,255,255,0.1);
     padding: 1.5rem;
     border-radius: 1rem;
@@ -473,21 +473,21 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     transition-delay: calc(var(--delay) * 0.08s);
   }
 
-  .section--stuff.in-view .stuff-item {
+  .section--stuff.in-view .stuff__item {
     opacity: 1;
     transform: translateY(0);
   }
 
-  .stuff-item__icon {
+  .stuff__item-icon {
     font-size: 2rem;
   }
 
-  .stuff-item__name {
+  .stuff__item-name {
     font-size: 0.9rem;
     font-weight: 600;
   }
 
-  .stuff-bonus {
+  .stuff__bonus {
     margin-top: 3rem;
     text-align: center;
     display: flex;
@@ -496,7 +496,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     gap: 0.75rem;
   }
 
-  .stuff-bonus__badge {
+  .stuff__bonus-badge {
     background: #c8202f;
     padding: 0.5rem 1.5rem;
     border-radius: 100px;
@@ -505,7 +505,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     letter-spacing: 1px;
   }
 
-  .stuff-bonus__text {
+  .stuff__bonus-text {
     font-size: 1.3rem;
     font-weight: 700;
   }
@@ -517,12 +517,12 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     padding: 6rem 2rem;
   }
 
-  .checklist-container {
+  .checklist__container {
     max-width: 600px;
     width: 100%;
   }
 
-  .checklist-title {
+  .checklist__title {
     font-size: clamp(2rem, 5vw, 3rem);
     font-weight: 900;
     margin-bottom: 2rem;
@@ -530,7 +530,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     color: #1e3264;
   }
 
-  .checklist-items {
+  .checklist__items {
     display: flex;
     flex-direction: column;
     gap: 0.75rem;
@@ -601,7 +601,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     font-weight: 700;
   }
 
-  .checklist-note {
+  .checklist__note {
     margin-top: 2rem;
     display: flex;
     align-items: center;
@@ -618,32 +618,32 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     padding: 6rem 2rem;
   }
 
-  .cta-container {
+  .cta__container {
     text-align: center;
   }
 
-  .cta-text {
+  .cta__text {
     display: flex;
     flex-direction: column;
   }
 
-  .cta-line {
+  .cta__line {
     font-size: clamp(5rem, 22vw, 16rem);
     font-weight: 900;
     line-height: 0.85;
   }
 
-  .cta-line--accent {
+  .cta__line--accent {
     color: #c8202f;
   }
 
-  .cta-subtitle {
+  .cta__subtitle {
     font-size: 1.2rem;
     opacity: 0.7;
     margin: 1.5rem 0 2.5rem;
   }
 
-  .cta-button {
+  .cta__button {
     display: inline-flex;
     align-items: center;
     gap: 1rem;
@@ -657,18 +657,18 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     transition: all 0.3s ease;
   }
 
-  .cta-button:hover {
+  .cta__button:hover {
     background: #fff;
     color: #c8202f;
     transform: scale(1.05);
   }
 
-  .cta-arrow {
+  .cta__arrow {
     font-size: 1.3rem;
     transition: transform 0.3s ease;
   }
 
-  .cta-button:hover .cta-arrow {
+  .cta__button:hover .cta__arrow {
     transform: translateX(5px);
   }
 
@@ -700,20 +700,20 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       font-size: 2.5rem;
     }
 
-    .stuff-grid {
+    .stuff__grid {
       grid-template-columns: repeat(3, 1fr);
       gap: 0.75rem;
     }
 
-    .stuff-item {
+    .stuff__item {
       padding: 1rem;
     }
 
-    .stuff-item__icon {
+    .stuff__item-icon {
       font-size: 1.5rem;
     }
 
-    .stuff-item__name {
+    .stuff__item-name {
       font-size: 0.75rem;
     }
 

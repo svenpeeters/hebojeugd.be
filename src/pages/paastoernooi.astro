@@ -71,66 +71,66 @@ import PaastoernooiTicker from '../components/PaastoernooiTicker.astro';
         <div class="matches__header">
           <h2 class="matches__title">Programma</h2>
         </div>
-        <div class="bento-grid">
-          <div class="bento-card">
-            <div class="bento-card__header">
-              <div class="bento-card__date">
-                <span class="bento-card__day">7</span>
-                <span class="bento-card__month">april</span>
+        <div class="bento__grid">
+          <div class="bento__card">
+            <div class="bento__card-header">
+              <div class="bento__card-date">
+                <span class="bento__card-day">7</span>
+                <span class="bento__card-month">april</span>
               </div>
-              <span class="bento-card__weekday">Dinsdag</span>
+              <span class="bento__card-weekday">Dinsdag</span>
             </div>
-            <div class="bento-card__info">
-              <div class="bento-card__time">18:00 — 20:30</div>
-              <div class="bento-card__categories">
-                <span class="bento-badge">U6</span>
-                <span class="bento-badge">U8</span>
-                <span class="bento-badge">U10</span>
+            <div class="bento__card-info">
+              <div class="bento__card-time">18:00 — 20:30</div>
+              <div class="bento__card-categories">
+                <span class="bento__badge">U6</span>
+                <span class="bento__badge">U8</span>
+                <span class="bento__badge">U10</span>
               </div>
-              <div class="bento-card__formats">
+              <div class="bento__card-formats">
                 <span>2vs2</span>
                 <span>5vs5</span>
                 <span>8vs8</span>
               </div>
             </div>
           </div>
-          <div class="bento-card">
-            <div class="bento-card__header">
-              <div class="bento-card__date">
-                <span class="bento-card__day">8</span>
-                <span class="bento-card__month">april</span>
+          <div class="bento__card">
+            <div class="bento__card-header">
+              <div class="bento__card-date">
+                <span class="bento__card-day">8</span>
+                <span class="bento__card-month">april</span>
               </div>
-              <span class="bento-card__weekday">Woensdag</span>
+              <span class="bento__card-weekday">Woensdag</span>
             </div>
-            <div class="bento-card__info">
-              <div class="bento-card__time">18:00 — 20:30</div>
-              <div class="bento-card__categories">
-                <span class="bento-badge">U7</span>
-                <span class="bento-badge">U9</span>
-                <span class="bento-badge">U11</span>
+            <div class="bento__card-info">
+              <div class="bento__card-time">18:00 — 20:30</div>
+              <div class="bento__card-categories">
+                <span class="bento__badge">U7</span>
+                <span class="bento__badge">U9</span>
+                <span class="bento__badge">U11</span>
               </div>
-              <div class="bento-card__formats">
+              <div class="bento__card-formats">
                 <span>3vs3</span>
                 <span>5vs5</span>
                 <span>8vs8</span>
               </div>
             </div>
           </div>
-          <div class="bento-card">
-            <div class="bento-card__header">
-              <div class="bento-card__date">
-                <span class="bento-card__day">9</span>
-                <span class="bento-card__month">april</span>
+          <div class="bento__card">
+            <div class="bento__card-header">
+              <div class="bento__card-date">
+                <span class="bento__card-day">9</span>
+                <span class="bento__card-month">april</span>
               </div>
-              <span class="bento-card__weekday">Donderdag</span>
+              <span class="bento__card-weekday">Donderdag</span>
             </div>
-            <div class="bento-card__info">
-              <div class="bento-card__time">18:00 — 21:00</div>
-              <div class="bento-card__categories">
-                <span class="bento-badge">U12</span>
-                <span class="bento-badge">U13</span>
+            <div class="bento__card-info">
+              <div class="bento__card-time">18:00 — 21:00</div>
+              <div class="bento__card-categories">
+                <span class="bento__badge">U12</span>
+                <span class="bento__badge">U13</span>
               </div>
-              <div class="bento-card__formats">
+              <div class="bento__card-formats">
                 <span>8vs8 formaat</span>
               </div>
             </div>
@@ -353,14 +353,14 @@ import PaastoernooiTicker from '../components/PaastoernooiTicker.astro';
   }
 
   /* Bento Grid */
-  .bento-grid {
+  .bento__grid {
     display: grid;
     grid-template-columns: 1.2fr 1fr;
     grid-template-rows: auto auto;
     gap: 1rem;
   }
 
-  .bento-card {
+  .bento__card {
     background: #fff;
     padding: 2.5rem;
     display: flex;
@@ -373,50 +373,50 @@ import PaastoernooiTicker from '../components/PaastoernooiTicker.astro';
     min-height: 220px;
   }
 
-  .bento-card:hover {
+  .bento__card:hover {
     transform: translateY(-4px);
     box-shadow: 0 12px 40px rgba(30,50,100,0.12);
   }
 
-  .bento-card:nth-child(1) {
+  .bento__card:nth-child(1) {
     grid-row: span 2;
     background: #1e3264;
     color: #fff;
     min-height: 100%;
   }
 
-  .bento-card:nth-child(2) {
+  .bento__card:nth-child(2) {
     background: #fff;
   }
 
-  .bento-card:nth-child(3) {
+  .bento__card:nth-child(3) {
     background: #c8202f;
     color: #fff;
   }
 
-  .bento-card__header {
+  .bento__card-header {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
   }
 
-  .bento-card__date {
+  .bento__card-date {
     display: flex;
     flex-direction: column;
   }
 
-  .bento-card__day {
+  .bento__card-day {
     font-size: 5rem;
     font-weight: 900;
     line-height: 0.85;
     letter-spacing: -3px;
   }
 
-  .bento-card:nth-child(1) .bento-card__day {
+  .bento__card:nth-child(1) .bento__card-day {
     font-size: 7rem;
   }
 
-  .bento-card__month {
+  .bento__card-month {
     font-size: 1.1rem;
     font-weight: 700;
     text-transform: uppercase;
@@ -425,7 +425,7 @@ import PaastoernooiTicker from '../components/PaastoernooiTicker.astro';
     margin-top: 0.25rem;
   }
 
-  .bento-card__weekday {
+  .bento__card-weekday {
     font-size: 0.75rem;
     font-weight: 600;
     text-transform: uppercase;
@@ -436,12 +436,12 @@ import PaastoernooiTicker from '../components/PaastoernooiTicker.astro';
     border-radius: 2rem;
   }
 
-  .bento-card:nth-child(2) .bento-card__weekday {
+  .bento__card:nth-child(2) .bento__card-weekday {
     background: rgba(30,50,100,0.08);
     color: #1e3264;
   }
 
-  .bento-card__time {
+  .bento__card-time {
     font-size: 0.8rem;
     font-weight: 700;
     text-transform: uppercase;
@@ -450,13 +450,13 @@ import PaastoernooiTicker from '../components/PaastoernooiTicker.astro';
     margin-bottom: 0.75rem;
   }
 
-  .bento-card__categories {
+  .bento__card-categories {
     display: flex;
     gap: 0.5rem;
     flex-wrap: wrap;
   }
 
-  .bento-badge {
+  .bento__badge {
     background: rgba(255,255,255,0.15);
     color: inherit;
     padding: 0.5rem 1rem;
@@ -466,12 +466,12 @@ import PaastoernooiTicker from '../components/PaastoernooiTicker.astro';
     backdrop-filter: blur(4px);
   }
 
-  .bento-card:nth-child(2) .bento-badge {
+  .bento__card:nth-child(2) .bento__badge {
     background: #1e3264;
     color: #fff;
   }
 
-  .bento-card__formats {
+  .bento__card-formats {
     display: flex;
     gap: 1.5rem;
     font-size: 0.85rem;
@@ -482,21 +482,21 @@ import PaastoernooiTicker from '../components/PaastoernooiTicker.astro';
 
   /* Responsive */
   @media (max-width: 900px) {
-    .bento-grid {
+    .bento__grid {
       grid-template-columns: 1fr;
     }
 
-    .bento-card {
+    .bento__card {
       min-height: auto;
       padding: 2rem;
     }
 
-    .bento-card:nth-child(1) {
+    .bento__card:nth-child(1) {
       grid-row: span 1;
     }
 
-    .bento-card__day,
-    .bento-card:nth-child(1) .bento-card__day {
+    .bento__card-day,
+    .bento__card:nth-child(1) .bento__card-day {
       font-size: 4rem;
     }
 
