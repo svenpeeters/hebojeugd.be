@@ -124,8 +124,12 @@ import ContactCard from '../components/ContactCard.astro';
   }
 
   .contact__container {
-    max-width: 700px;
+    max-width: 1000px;
     margin: 0 auto;
+  }
+
+  .contact__container :global(.contact-card) {
+    max-width: 100%;
   }
 
   /* CTA */

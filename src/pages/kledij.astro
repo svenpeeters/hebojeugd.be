@@ -15,12 +15,12 @@ const items = [
 ];
 ---
 
-<BaseLayout title="Kledij & Uitrusting | VC HEBO Jeugd">
+<BaseLayout title="Kledij & uitrusting | VC HEBO Jeugd">
 
     <!-- Hero -->
     <section class="hero">
       <div class="hero__container">
-        <h1 class="hero__title">Kledij & Uitrusting</h1>
+        <h1 class="hero__title">Kledij & uitrusting</h1>
         <p class="hero__subtitle">Alles wat je nodig hebt om er als een echte HEBO-speler uit te zien</p>
       </div>
     </section>
@@ -34,7 +34,6 @@ const items = [
         <div class="package__grid">
           {items.map(item => (
             <div class="package__item">
-              <span class="package__check">✓</span>
               <span class="package__name">{item}</span>
             </div>
           ))}
@@ -183,12 +182,8 @@ const items = [
     border-radius: 100px;
     display: flex;
     align-items: center;
-    gap: 0.75rem;
-  }
-
-  .package__check {
-    color: #22c55e;
-    font-weight: 700;
+    justify-content: center;
+    text-align: center;
   }
 
   .package__name {
@@ -305,8 +300,12 @@ const items = [
   }
 
   .contact__container {
-    max-width: 700px;
+    max-width: 800px;
     margin: 0 auto;
+  }
+
+  .contact__container :global(.contact-card) {
+    max-width: 100%;
   }
 
   @media (max-width: 600px) {
