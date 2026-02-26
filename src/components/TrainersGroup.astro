@@ -4,7 +4,6 @@ import TrainerCard from './TrainerCard.astro';
 interface Trainer {
   team: string;
   name: string;
-  phone: string;
 }
 
 interface Props {
@@ -28,7 +27,6 @@ const { title, ageRange, color, trainers, featured = false } = Astro.props;
       <TrainerCard
         team={trainer.team}
         name={trainer.name}
-        phone={trainer.phone}
         featured={featured}
       />
     ))}

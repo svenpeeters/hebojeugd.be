@@ -2,18 +2,15 @@
 interface Props {
   team: string;
   name: string;
-  phone: string;
   featured?: boolean;
 }
 
-const { team, name, phone, featured = false } = Astro.props;
-const phoneClean = phone.replace(/\s/g, '');
+const { team, name, featured = false } = Astro.props;
 ---
 
 <div class:list={["trainer-card", { "trainer-card--featured": featured }]}>
   <span class="trainer-card__team">{team}</span>
   <span class="trainer-card__name">{name}</span>
-  <a href={`tel:${phoneClean}`} class="trainer-card__phone">{phone}</a>
 </div>
 
 <style>
@@ -43,14 +40,4 @@ const phoneClean = phone.replace(/\s/g, '');
     color: #1e3264;
   }
 
-  .trainer-card__phone {
-    font-size: 0.95rem;
-    color: #666;
-    text-decoration: none;
-    transition: color 0.2s ease;
-  }
-
-  .trainer-card__phone:hover {
-    color: #c8202f;
-  }
 </style>
