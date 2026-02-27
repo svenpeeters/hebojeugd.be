@@ -13,7 +13,7 @@ export const GET: APIRoute = () => {
   return new Response(JSON.stringify({ matches: sorted }, null, 2), {
     headers: {
       'Content-Type': 'application/json; charset=utf-8',
-      'Cache-Control': 'public, max-age=300',
+      'Cache-Control': 'no-store',
     },
   });
 };
