@@ -4,7 +4,58 @@ import PaastoernooiTicker from '../components/PaastoernooiTicker.astro';
 import { getMatchesSafe } from '../lib/matches';
 
 const matches = await getMatchesSafe();
-const weekendMatches = matches.slice(0, 6);
+
+const weekendMatches = (() => {
+  if (!matches.length) return [];
+
+  const first = new Date(`${matches[0].date}T00:00:00`);
+  const end = new Date(first);
+  end.setDate(first.getDate() + 6); // first upcoming week window
+
+  return matches.filter((m: any) => {
+    const d = new Date(`${m.date}T00:00:00`);
+    return d >= first && d <= end;
+  });
+})();
+
+const displayMatches = (() => {
+  const result: any[] = [];
+  const veteranByDate = new Map<string, any>();
+
+  for (const m of weekendMatches as any[]) {
+    if (m.team === '35+ Veteranen') {
+      const key = m.date;
+      const existing = veteranByDate.get(key);
+
+      if (!existing) {
+        const grouped = {
+          ...m,
+          opponent: 'Tornooivorm (meerdere tegenstanders)',
+          timeStart: m.time,
+          timeEnd: m.time,
+          badge: 'TORNOOI',
+        };
+        veteranByDate.set(key, grouped);
+        result.push(grouped);
+      } else {
+        existing.timeStart = existing.timeStart < m.time ? existing.timeStart : m.time;
+        existing.timeEnd = existing.timeEnd > m.time ? existing.timeEnd : m.time;
+      }
+      continue;
+    }
+
+    result.push({
+      ...m,
+      opponent: m.isHome ? m.away : m.home,
+      badge: m.isHome ? 'THUIS' : 'UIT',
+    });
+  }
+
+  return result.map((m) => ({
+    ...m,
+    time: m.timeStart ? (m.timeStart === m.timeEnd ? m.timeStart : `${m.timeStart} - ${m.timeEnd}`) : m.time,
+  }));
+})();
 
 ---
 
@@ -71,18 +122,18 @@ const weekendMatches = matches.slice(0, 6);
           <a href="https://www.voetbalvlaanderen.be/club/9732/komende-wedstrijden" target="_blank" class="matches__link">Alle wedstrijden →</a>
         </div>
         <div class="matches__list">
-          {weekendMatches.map((match, i) => (
+          {displayMatches.map((match, i) => (
             <div class={`match-card ${match.isHome ? 'match-card--home' : 'match-card--away'}`}>
               <div class="match-card__num">{match.team}</div>
               <div class="match-card__content">
                 <div class="match-card__team">{match.team}</div>
-                <div class="match-card__opponent">{match.isHome ? match.away : match.home}</div>
+                <div class="match-card__opponent">{match.opponent}</div>
                 <div class="match-card__meta">
                   <span class="match-card__date">{new Date(match.date).toLocaleDateString('nl-BE', { weekday: 'long', day: 'numeric', month: 'long' })}</span>
                   <span class="match-card__time">{match.time}</span>
                 </div>
               </div>
-              <div class="match-card__badge">{match.isHome ? 'THUIS' : 'UIT'}</div>
+              <div class="match-card__badge">{match.badge}</div>
             </div>
           ))}
         </div>
