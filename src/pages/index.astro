@@ -23,21 +23,23 @@ const displayMatches = (() => {
   const veteranByDate = new Map<string, any>();
 
   for (const m of weekendMatches as any[]) {
-    if (m.team === '35+ Veteranen') {
+    if (m.team === '35+') {
       const key = m.date;
       const existing = veteranByDate.get(key);
+      const opponent = m.isHome ? m.away : m.home;
 
       if (!existing) {
         const grouped = {
           ...m,
-          opponent: 'Tornooivorm (meerdere tegenstanders)',
+          opponents: [opponent],
           timeStart: m.time,
           timeEnd: m.time,
-          badge: 'TORNOOI',
+          badge: '8-A-SIDE',
         };
         veteranByDate.set(key, grouped);
         result.push(grouped);
       } else {
+        if (!existing.opponents.includes(opponent)) existing.opponents.push(opponent);
         existing.timeStart = existing.timeStart < m.time ? existing.timeStart : m.time;
         existing.timeEnd = existing.timeEnd > m.time ? existing.timeEnd : m.time;
       }
@@ -53,6 +55,7 @@ const displayMatches = (() => {
 
   return result.map((m) => ({
     ...m,
+    opponent: m.opponents ? m.opponents.join(' • ') : m.opponent,
     time: m.timeStart ? (m.timeStart === m.timeEnd ? m.timeStart : `${m.timeStart} - ${m.timeEnd}`) : m.time,
   }));
 })();

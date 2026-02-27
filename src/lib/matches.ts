@@ -88,7 +88,7 @@ async function fetchUpstreamMatches() {
         .filter(Boolean)
         .join(', ');
 
-      const teamLabel = (m?.ageGroup || m?.title || 'Onbekend').replace('Recrea Veteran', '35+ Veteranen');
+      const teamLabel = (m?.ageGroup || m?.title || 'Onbekend').replace('Recrea Veteran', '35+');
 
       return {
         date,
