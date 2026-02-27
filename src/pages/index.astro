@@ -23,7 +23,7 @@ const displayMatches = (() => {
   const veteranByDate = new Map<string, any>();
 
   for (const m of weekendMatches as any[]) {
-    if (m.team === '35+') {
+    if (m.team === '35+ Veteranen') {
       const key = m.date;
       const existing = veteranByDate.get(key);
       const opponent = m.isHome ? m.away : m.home;
@@ -31,6 +31,7 @@ const displayMatches = (() => {
       if (!existing) {
         const grouped = {
           ...m,
+          num: '35+',
           opponents: [opponent],
           timeStart: m.time,
           timeEnd: m.time,
@@ -55,7 +56,6 @@ const displayMatches = (() => {
 
   return result.map((m) => ({
     ...m,
-    opponent: m.opponents ? m.opponents.join(' • ') : m.opponent,
     time: m.timeStart ? (m.timeStart === m.timeEnd ? m.timeStart : `${m.timeStart} - ${m.timeEnd}`) : m.time,
   }));
 })();
@@ -127,10 +127,14 @@ const displayMatches = (() => {
         <div class="matches__list">
           {displayMatches.map((match, i) => (
             <div class={`match-card ${match.isHome ? 'match-card--home' : 'match-card--away'}`}>
-              <div class="match-card__num">{match.team}</div>
+              <div class="match-card__num">{match.num || match.team}</div>
               <div class="match-card__content">
                 <div class="match-card__team">{match.team}</div>
-                <div class="match-card__opponent">{match.opponent}</div>
+                <div class="match-card__opponent">
+                  {match.opponents
+                    ? match.opponents.map((op: string) => <div>{op}</div>)
+                    : match.opponent}
+                </div>
                 <div class="match-card__meta">
                   <span class="match-card__date">{new Date(match.date).toLocaleDateString('nl-BE', { weekday: 'long', day: 'numeric', month: 'long' })}</span>
                   <span class="match-card__time">{match.time}</span>
