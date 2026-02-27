@@ -93,10 +93,13 @@ async function fetchUpstreamMatches() {
         .filter(Boolean)
         .join(', ');
 
+      const teamLabel = (m?.ageGroup || m?.title || 'Onbekend')
+        .replace('Recrea Veteran', '35+ Veteranen');
+
       return {
         date,
         time: (time || '').slice(0, 5),
-        team: m?.ageGroup || m?.title || 'Onbekend',
+        team: teamLabel,
         home: m?.homeTeam?.name || '',
         away: m?.awayTeam?.name || '',
         location,
