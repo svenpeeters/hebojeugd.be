@@ -4,13 +4,15 @@
   "version": "0.0.1",
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build && storybook build -o dist/storybook",
+    "build": "astro build",
+    "start": "node ./dist/server/entry.mjs",
     "preview": "astro preview",
     "astro": "astro",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build -o dist/storybook"
   },
   "dependencies": {
+    "@astrojs/node": "^9.5.4",
     "astro": "^5.17.1"
   },
   "devDependencies": {
