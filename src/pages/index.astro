@@ -1,25 +1,11 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PaastoernooiTicker from '../components/PaastoernooiTicker.astro';
-import matches from '../data/matches.json';
+import { getMatchesSafe } from '../lib/matches';
 
-// Get all upcoming matches for ticker
-const upcomingMatches = matches;
+const matches = await getMatchesSafe();
+const weekendMatches = matches.slice(0, 6);
 
-// Get weekend matches (Saturday + Sunday of the first match's weekend)
-const firstMatchDate = new Date(matches[0]?.date);
-const saturday = new Date(firstMatchDate);
-saturday.setDate(firstMatchDate.getDate() - firstMatchDate.getDay() + 6); // Get Saturday
-const sunday = new Date(saturday);
-sunday.setDate(saturday.getDate() + 1); // Get Sunday
-
-const weekendMatches = matches.filter(m => {
-  const d = new Date(m.date);
-  const dateStr = d.toISOString().split('T')[0];
-  const satStr = saturday.toISOString().split('T')[0];
-  const sunStr = sunday.toISOString().split('T')[0];
-  return dateStr === satStr || dateStr === sunStr;
-});
 ---
 
 <BaseLayout title="VC HEBO Jeugd">
