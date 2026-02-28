@@ -64,7 +64,7 @@ import ContactCard from '../components/ContactCard.astro';
     <!-- Link naar trainers -->
     <section class="cta">
       <div class="cta__container">
-        <h2 class="cta__title">Ontmoet onze trainers</h2>
+        <h2 class="cta__title">Ontmoet<br class="desktop-break"/>onze trainers</h2>
         <p class="cta__text">Bekijk wie er voor jouw team klaarstaat</p>
         <a href="/trainers" class="cta__button">
           <span>Trainersstaf bekijken</span>
@@ -137,7 +137,7 @@ import ContactCard from '../components/ContactCard.astro';
 
   /* CTA */
   .cta {
-    padding: 10rem 0;
+    padding: 10rem 8vw;
     background: #c8202f;
     color: #fff;
     position: relative;
@@ -147,7 +147,7 @@ import ContactCard from '../components/ContactCard.astro';
   .cta__container {
     max-width: 1440px;
     margin: 0 auto;
-    padding: 0 2rem;
+    padding: 0;
   }
 
   .cta__title {
@@ -155,6 +155,16 @@ import ContactCard from '../components/ContactCard.astro';
     font-weight: 800;
     line-height: 1;
     margin: 0 0 1rem 0;
+  }
+
+  .desktop-break {
+    display: none;
+  }
+
+  @media (min-width: 901px) {
+    .desktop-break {
+      display: inline;
+    }
   }
 
   .cta__text {

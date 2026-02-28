@@ -34,7 +34,6 @@ import PricingCard from '../components/PricingCard.astro';
             <PricingCard label="Middenbouw" age="U10, U11, U12, U13" price="€ 250" />
             <PricingCard label="Bovenbouw" age="U14, U15, U17" price="€ 275" />
           </div>
-          <div class="pricing__discount">-€25 voor 2e kind</div>
         </div>
 
         <div class="pricing__group">
@@ -45,7 +44,12 @@ import PricingCard from '../components/PricingCard.astro';
             <PricingCard label="Middenbouw" age="U10, U11, U12, U13" price="€ 275" />
             <PricingCard label="Bovenbouw" age="U14, U15, U17" price="€ 300" />
           </div>
-          <div class="pricing__discount">-€25 voor 2e kind</div>
+        </div>
+
+        <div class="pricing__variants">
+          <div class="pricing__variant pricing__variant--c">
+            <p>Gezinsvoordeel: €25 korting op het lidgeld van het 2e kind uit hetzelfde gezin.</p>
+          </div>
         </div>
       </div>
     </section>
@@ -58,7 +62,7 @@ import PricingCard from '../components/PricingCard.astro';
         <div class="included__group">
           <h3 class="included__group-title">Kleuters (U5) ontvangen</h3>
           <div class="included__grid">
-            <div class="included__item">Shirtje</div>
+            <div class="included__item">HEBO-shirt</div>
             <div class="included__item">Voetbal</div>
             <div class="included__item">Drinkbus</div>
           </div>
@@ -112,7 +116,7 @@ import PricingCard from '../components/PricingCard.astro';
     <!-- CTA -->
     <section class="cta">
       <div class="cta__container">
-        <h2 class="cta__title">Klaar om te starten?</h2>
+        <h2 class="cta__title">Klaar om<br class="desktop-break"/>te starten?</h2>
         <p class="cta__text">Neem contact op voor meer informatie of om in te schrijven.</p>
         <a href="mailto:info@hebojeugd.be" class="cta__button">
           <span>Contact opnemen</span>
@@ -209,15 +213,33 @@ import PricingCard from '../components/PricingCard.astro';
     gap: 1rem;
   }
 
-  .pricing__discount {
+  .pricing__note {
     margin-top: 1rem;
-    padding: 1rem;
-    background: #c8202f;
+    font-size: 0.98rem;
+    color: #4b5563;
+    line-height: 1.6;
+  }
+
+  .pricing__variants {
+    margin-top: 2.5rem;
+    display: grid;
+    gap: 1rem;
+  }
+
+  .pricing__variant {
+    border-radius: 14px;
+    padding: 1rem 1.25rem;
+  }
+
+  .pricing__variant p {
+    margin: 0.35rem 0 0;
+    font-weight: 600;
+    line-height: 1.5;
+  }
+
+  .pricing__variant--c {
+    background: linear-gradient(90deg, #c8202f 0%, #ef4444 100%);
     color: #fff;
-    border-radius: 100px;
-    text-align: center;
-    font-weight: 700;
-    display: inline-block;
   }
 
   /* Included */
@@ -294,7 +316,7 @@ import PricingCard from '../components/PricingCard.astro';
 
   /* CTA */
   .cta {
-    padding: 10rem 0;
+    padding: 10rem 8vw;
     background: #c8202f;
     color: #fff;
     position: relative;
@@ -304,7 +326,7 @@ import PricingCard from '../components/PricingCard.astro';
   .cta__container {
     max-width: 1440px;
     margin: 0 auto;
-    padding: 0 2rem;
+    padding: 0;
   }
 
   .cta__title {
@@ -312,6 +334,16 @@ import PricingCard from '../components/PricingCard.astro';
     font-weight: 800;
     line-height: 1;
     margin: 0 0 1rem 0;
+  }
+
+  .desktop-break {
+    display: none;
+  }
+
+  @media (min-width: 901px) {
+    .desktop-break {
+      display: inline;
+    }
   }
 
   .cta__text {

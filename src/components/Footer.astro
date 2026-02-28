@@ -1,7 +1,7 @@
 ---
-import matches from '../data/matches.json';
+import { getMatchesSafe } from '../lib/matches';
 
-const upcomingMatches = matches;
+const upcomingMatches = await getMatchesSafe();
 ---
 
 <footer class="footer">
