@@ -1,0 +1,260 @@
+---
+interface ActionItem {
+  types: string[];
+  name: string;
+  damage: string;
+  description: string;
+}
+
+interface TrainerCardData {
+  card_type: string;
+  trainer_name: string;
+  corner_symbol: string;
+  image: string;
+  actions: ActionItem[];
+  flavor_text: string;
+  copyright: string;
+  collector_info: string;
+}
+
+interface Props {
+  data: TrainerCardData;
+}
+
+const { data } = Astro.props;
+
+const iconLabel = (type: string) => {
+  switch (type.toLowerCase()) {
+    case 'grass':
+      return '🌿';
+    case 'leaf':
+      return '🍃';
+    case 'star':
+      return '★';
+    default:
+      return '•';
+  }
+};
+---
+
+<article class="trainer-card-wrap">
+  <div class="trainer-card" role="img" aria-label={`${data.card_type} kaart van ${data.trainer_name}`}>
+    <div class="trainer-card__foil"></div>
+
+    <header class="trainer-card__header">
+      <span class="trainer-card__type">{data.card_type}</span>
+      <h2 class="trainer-card__name">{data.trainer_name}</h2>
+      <span class="trainer-card__corner">{data.corner_symbol}</span>
+    </header>
+
+    <div class="trainer-card__image-frame">
+      <img src={data.image} alt={data.trainer_name} loading="lazy" />
+    </div>
+
+    <section class="trainer-card__actions">
+      {data.actions.map((action) => (
+        <div class="trainer-card__action">
+          <div class="trainer-card__action-top">
+            <div class="trainer-card__icons" aria-hidden="true">
+              {action.types.map((t) => <span class={`icon icon--${t.toLowerCase()}`}>{iconLabel(t)}</span>)}
+            </div>
+            <h3>{action.name}</h3>
+            <strong>{action.damage}</strong>
+          </div>
+          <p>{action.description}</p>
+        </div>
+      ))}
+    </section>
+
+    <div class="trainer-card__flavor">{data.flavor_text}</div>
+
+    <footer class="trainer-card__footer">
+      <small>{data.copyright}</small>
+      <small>{data.collector_info}</small>
+    </footer>
+  </div>
+</article>
+
+<style>
+  .trainer-card-wrap {
+    display: grid;
+    place-items: center;
+    padding: 3rem 1rem;
+  }
+
+  .trainer-card {
+    width: min(100%, 440px);
+    border-radius: 24px;
+    padding: 14px;
+    background:
+      linear-gradient(130deg, #f7f9fb 0%, #cfd6dd 16%, #f8fafc 34%, #b8c0c9 52%, #f8fafc 70%, #c5cdd6 100%);
+    box-shadow:
+      0 18px 40px rgba(0, 0, 0, 0.25),
+      inset 0 1px 0 rgba(255, 255, 255, 0.7),
+      inset 0 -2px 8px rgba(0, 0, 0, 0.14);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .trainer-card::before {
+    content: '';
+    position: absolute;
+    inset: 12px;
+    border-radius: 16px;
+    pointer-events: none;
+    background:
+      repeating-linear-gradient(
+        115deg,
+        rgba(255, 255, 255, 0.05) 0,
+        rgba(255, 255, 255, 0.05) 2px,
+        rgba(0, 0, 0, 0.03) 2px,
+        rgba(0, 0, 0, 0.03) 4px
+      );
+    mix-blend-mode: soft-light;
+  }
+
+  .trainer-card__foil {
+    position: absolute;
+    inset: -30% -50%;
+    background: radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.35), transparent 40%);
+    pointer-events: none;
+    transform: rotate(-9deg);
+  }
+
+  .trainer-card__header,
+  .trainer-card__image-frame,
+  .trainer-card__actions,
+  .trainer-card__flavor,
+  .trainer-card__footer {
+    position: relative;
+    z-index: 2;
+  }
+
+  .trainer-card__header {
+    background: linear-gradient(180deg, #2a8a61, #1f6f4e);
+    border-radius: 12px;
+    color: #fff;
+    padding: 0.85rem 1rem;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .trainer-card__type {
+    font-size: 0.75rem;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    font-weight: 800;
+  }
+
+  .trainer-card__name {
+    margin: 0;
+    font-size: 1.3rem;
+    font-weight: 900;
+  }
+
+  .trainer-card__corner {
+    font-weight: 800;
+    font-size: 0.8rem;
+    background: rgba(255, 255, 255, 0.18);
+    padding: 0.2rem 0.45rem;
+    border-radius: 999px;
+  }
+
+  .trainer-card__image-frame {
+    margin-top: 0.75rem;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 2px solid rgba(255, 255, 255, 0.7);
+    background: #f2f5f7;
+    box-shadow: inset 0 0 0 1px rgba(0,0,0,.1);
+  }
+
+  .trainer-card__image-frame img {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    display: block;
+  }
+
+  .trainer-card__actions {
+    margin-top: 0.75rem;
+    display: grid;
+    gap: 0.7rem;
+  }
+
+  .trainer-card__action {
+    background: rgba(255, 255, 255, 0.72);
+    border-radius: 10px;
+    padding: 0.7rem 0.8rem;
+  }
+
+  .trainer-card__action-top {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 0.55rem;
+  }
+
+  .trainer-card__icons {
+    display: inline-flex;
+    gap: 0.3rem;
+  }
+
+  .icon {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    display: inline-grid;
+    place-items: center;
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: #fff;
+    box-shadow: inset 0 -1px 2px rgba(0,0,0,.25);
+  }
+
+  .icon--grass { background: #2ba84a; }
+  .icon--leaf { background: #56bf72; }
+  .icon--star { background: #0f172a; }
+
+  .trainer-card__action h3 {
+    margin: 0;
+    font-size: 0.95rem;
+    font-weight: 800;
+    color: #132b22;
+  }
+
+  .trainer-card__action strong {
+    font-size: 1rem;
+    color: #111827;
+  }
+
+  .trainer-card__action p {
+    margin: 0.4rem 0 0;
+    font-size: 0.78rem;
+    line-height: 1.45;
+    color: #243640;
+  }
+
+  .trainer-card__flavor {
+    margin-top: 0.7rem;
+    background: linear-gradient(180deg, #4fa75f, #2f7f43);
+    color: #ecfdf3;
+    padding: 0.65rem 0.85rem;
+    border-radius: 999px;
+    font-size: 0.74rem;
+    line-height: 1.35;
+    text-align: center;
+  }
+
+  .trainer-card__footer {
+    margin-top: 0.7rem;
+    display: flex;
+    justify-content: space-between;
+    gap: 0.8rem;
+    font-size: 0.62rem;
+    color: #1f2937;
+    opacity: 0.9;
+  }
+</style>
