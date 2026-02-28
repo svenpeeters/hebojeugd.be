@@ -19,9 +19,10 @@ interface TrainerCardData {
 
 interface Props {
   data: TrainerCardData;
+  compact?: boolean;
 }
 
-const { data } = Astro.props;
+const { data, compact = false } = Astro.props;
 
 const iconLabel = (type: string) => {
   switch (type.toLowerCase()) {
@@ -37,8 +38,8 @@ const iconLabel = (type: string) => {
 };
 ---
 
-<article class="trainer-card-wrap">
-  <div class="trainer-card" role="img" aria-label={`${data.card_type} kaart van ${data.trainer_name}`}>
+<article class:list={["trainer-card-wrap", compact && "trainer-card-wrap--compact"]}>
+  <div class:list={["trainer-card", compact && "trainer-card--compact"]} role="img" aria-label={`${data.card_type} kaart van ${data.trainer_name}`}>
     <div class="trainer-card__foil"></div>
 
     <header class="trainer-card__header">
@@ -82,6 +83,10 @@ const iconLabel = (type: string) => {
     padding: 3rem 1rem;
   }
 
+  .trainer-card-wrap--compact {
+    padding: 0;
+  }
+
   .trainer-card {
     width: min(100%, 440px);
     border-radius: 24px;
@@ -94,6 +99,11 @@ const iconLabel = (type: string) => {
       inset 0 -2px 8px rgba(0, 0, 0, 0.14);
     position: relative;
     overflow: hidden;
+  }
+
+  .trainer-card--compact {
+    width: 100%;
+    max-width: 340px;
   }
 
   .trainer-card::before {
