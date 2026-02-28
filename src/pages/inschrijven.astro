@@ -56,7 +56,16 @@ import PricingCard from '../components/PricingCard.astro';
         <h2 class="included__section-title">Wat krijg ik?</h2>
         
         <div class="included__group">
-          <h3 class="included__group-title">Alle leden ontvangen</h3>
+          <h3 class="included__group-title">Kleuters (U5) ontvangen</h3>
+          <div class="included__grid">
+            <div class="included__item">Shirtje</div>
+            <div class="included__item">Voetbal</div>
+            <div class="included__item">Drinkbus</div>
+          </div>
+        </div>
+
+        <div class="included__group">
+          <h3 class="included__group-title">U6 t/m U17 ontvangen</h3>
           <div class="included__grid">
             <div class="included__item">Wedstrijd-shirt</div>
             <div class="included__item">Wedstrijd-short</div>
@@ -105,7 +114,10 @@ import PricingCard from '../components/PricingCard.astro';
       <div class="cta__container">
         <h2 class="cta__title">Klaar om te starten?</h2>
         <p class="cta__text">Neem contact op voor meer informatie of om in te schrijven.</p>
-        <a href="mailto:info@hebojeugd.be" class="cta__button">Contact opnemen →</a>
+        <a href="mailto:info@hebojeugd.be" class="cta__button">
+          <span>Contact opnemen</span>
+          <span class="cta__arrow">→</span>
+        </a>
       </div>
     </section>
 
@@ -282,43 +294,58 @@ import PricingCard from '../components/PricingCard.astro';
 
   /* CTA */
   .cta {
-    padding: 6rem 2rem;
+    padding: 10rem 0;
     background: #c8202f;
     color: #fff;
-    text-align: center;
+    position: relative;
+    overflow: hidden;
   }
 
   .cta__container {
-    max-width: 600px;
+    max-width: 1440px;
     margin: 0 auto;
+    padding: 0 2rem;
   }
 
   .cta__title {
-    font-size: 2.5rem;
-    font-weight: 900;
-    margin: 0 0 1rem;
+    font-size: clamp(3rem, 8vw, 7rem);
+    font-weight: 800;
+    line-height: 1;
+    margin: 0 0 1rem 0;
   }
 
   .cta__text {
     font-size: 1.1rem;
     opacity: 0.9;
     margin: 0 0 2rem;
+    max-width: 650px;
   }
 
   .cta__button {
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    gap: 1rem;
     background: #fff;
     color: #c8202f;
-    padding: 1rem 2.5rem;
+    padding: 1.2rem 2.5rem;
     text-decoration: none;
     font-weight: 700;
-    border-radius: 4px;
+    font-size: 1rem;
     transition: all 0.3s ease;
   }
 
   .cta__button:hover {
-    background: #1e3264;
+    background: #1a1a1a;
     color: #fff;
+    gap: 1.5rem;
+  }
+
+  .cta__arrow {
+    transition: transform 0.3s ease;
+  }
+
+  .cta__button:hover .cta__arrow {
+    transform: translateX(5px);
   }
 
   @media (max-width: 600px) {

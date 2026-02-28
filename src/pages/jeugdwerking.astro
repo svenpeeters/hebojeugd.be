@@ -66,7 +66,10 @@ import ContactCard from '../components/ContactCard.astro';
       <div class="cta__container">
         <h2 class="cta__title">Ontmoet onze trainers</h2>
         <p class="cta__text">Bekijk wie er voor jouw team klaarstaat</p>
-        <a href="/trainers" class="cta__button">Trainersstaf bekijken →</a>
+        <a href="/trainers" class="cta__button">
+          <span>Trainersstaf bekijken</span>
+          <span class="cta__arrow">→</span>
+        </a>
       </div>
     </section>
 
@@ -134,43 +137,58 @@ import ContactCard from '../components/ContactCard.astro';
 
   /* CTA */
   .cta {
-    padding: 6rem 2rem;
-    background: #1e3264;
+    padding: 10rem 0;
+    background: #c8202f;
     color: #fff;
-    text-align: center;
+    position: relative;
+    overflow: hidden;
   }
 
   .cta__container {
-    max-width: 600px;
+    max-width: 1440px;
     margin: 0 auto;
+    padding: 0 2rem;
   }
 
   .cta__title {
-    font-size: 2.5rem;
-    font-weight: 900;
-    margin: 0 0 1rem;
+    font-size: clamp(3rem, 8vw, 7rem);
+    font-weight: 800;
+    line-height: 1;
+    margin: 0 0 1rem 0;
   }
 
   .cta__text {
     font-size: 1.1rem;
-    opacity: 0.8;
+    opacity: 0.9;
     margin: 0 0 2rem;
+    max-width: 650px;
   }
 
   .cta__button {
-    display: inline-block;
-    background: #c8202f;
-    color: #fff;
-    padding: 1rem 2.5rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 1rem;
+    background: #fff;
+    color: #c8202f;
+    padding: 1.2rem 2.5rem;
     text-decoration: none;
     font-weight: 700;
-    border-radius: 4px;
+    font-size: 1rem;
     transition: all 0.3s ease;
   }
 
   .cta__button:hover {
-    background: #fff;
-    color: #c8202f;
+    background: #1a1a1a;
+    color: #fff;
+    gap: 1.5rem;
+  }
+
+  .cta__arrow {
+    transition: transform 0.3s ease;
+  }
+
+  .cta__button:hover .cta__arrow {
+    transform: translateX(5px);
   }
 
   @media (max-width: 768px) {

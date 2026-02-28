@@ -528,21 +528,23 @@ import PaastoernooiTicker from '../components/PaastoernooiTicker.astro';
 
   /* CTA */
   .cta {
-    padding: 6rem 0;
+    padding: 10rem 0;
     background: #c8202f;
     color: #fff;
+    position: relative;
+    overflow: hidden;
   }
 
   .cta__container {
-    max-width: 900px;
+    max-width: 1440px;
     margin: 0 auto;
     padding: 0 2rem;
   }
 
   .cta__title {
-    font-size: clamp(2rem, 5vw, 4rem);
+    font-size: clamp(3rem, 8vw, 7rem);
     font-weight: 800;
-    line-height: 1.1;
+    line-height: 1;
     margin: 0 0 2rem 0;
   }
 
@@ -562,6 +564,7 @@ import PaastoernooiTicker from '../components/PaastoernooiTicker.astro';
   .cta__button:hover {
     background: #1a1a1a;
     color: #fff;
+    gap: 1.5rem;
   }
 
   .cta__arrow {
