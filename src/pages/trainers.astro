@@ -1,69 +1,88 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import TrainerTradingCard from '../components/TrainerTradingCard.astro';
+import TrainersGroup from '../components/TrainersGroup.astro';
 
-const trainers = [
-  { team: 'U5', name: 'Amber Frison' },
-  { team: 'U5', name: 'Nicky Berwaerts' },
-  { team: 'U6', name: 'Kenji Jossa' },
-  { team: 'U7', name: 'Timothy Fontaine' },
-  { team: 'U9', name: 'Dave Daniels' },
-  { team: 'U9', name: 'Kevin Castro' },
-  { team: 'U10', name: 'Willy Missotten' },
-  { team: 'U10', name: 'Jurgen Polders' },
-  { team: 'U11/12', name: 'Andy Bex' },
-  { team: 'U11/12', name: 'Frank Missotten' },
-  { team: 'U15', name: 'Jean-Marie Cloesen' },
-  { team: 'U15', name: 'Roger Vanhaeren' },
-  { team: 'U17', name: 'Joeri Fontaine' },
-  { team: 'Alle teams', name: 'Gilles Vanswijgenhoven' },
-];
-
-const buildCardData = (trainer: { team: string; name: string }) => ({
-  card_type: 'Trainer',
-  trainer_name: trainer.name,
-  corner_symbol: trainer.team,
-  image: '/images/trainers/timothy-fontaine.png',
-  actions: [
-    {
-      types: ['Grass', 'Leaf'],
-      name: 'Team Coaching',
-      damage: '20',
-      description: `Focus op ${trainer.team}. Verbetert passing en positiespel met duidelijke coaching vanop de zijlijn.`,
-    },
-    {
-      types: ['Grass', 'Leaf', 'Star'],
-      name: 'Match Focus',
-      damage: '50-',
-      description: 'Bij sterke samenwerking stijgt het rendement van deze actie. Teamdiscipline zorgt voor extra impact.',
-    },
+const trainers = {
+  onderbouw: [
+    { team: 'U5', name: 'Amber Frison' },
+    { team: 'U5', name: 'Nicky Berwaerts' },
+    { team: 'U6', name: 'Kenji Jossa' },
+    { team: 'U7', name: 'Timothy Fontaine' },
+    { team: 'U9', name: 'Dave Daniels' },
+    { team: 'U9', name: 'Kevin Castro' },
   ],
-  flavor_text: `${trainer.name} begeleidt ${trainer.team} met rust, structuur en enthousiasme.`,
-  copyright: '©2026 Pokémon / VC HEBO Jeugd / Art Team',
-  collector_info: `${trainer.team} • HEBO`,
-});
+  middenbouw: [
+    { team: 'U10', name: 'Willy Missotten' },
+    { team: 'U10', name: 'Jurgen Polders' },
+    { team: 'U11/12', name: 'Andy Bex' },
+    { team: 'U11/12', name: 'Frank Missotten' },
+  ],
+  bovenbouw: [
+    { team: 'U15', name: 'Jean-Marie Cloesen' },
+    { team: 'U15', name: 'Roger Vanhaeren' },
+    { team: 'U17', name: 'Joeri Fontaine' },
+  ],
+  keepers: [
+    { team: '🧤 Alle teams', name: 'Gilles Vanswijgenhoven' },
+  ],
+};
 ---
 
-<BaseLayout title="Trainers cards | VC HEBO Jeugd">
-  <section class="hero">
-    <div class="hero__container">
-      <h1 class="hero__title">Trainersstaf</h1>
-      <p class="hero__subtitle">Alle trainers als cards, netjes naast elkaar.</p>
-    </div>
-  </section>
+<BaseLayout title="Trainersstaf | VC HEBO Jeugd">
+  
 
-  <section class="cards-stage">
-    <div class="cards-stage__pitch"></div>
-    <div class="cards-grid">
-      {trainers.map((trainer) => (
-        <TrainerTradingCard data={buildCardData(trainer)} compact />
-      ))}
-    </div>
-  </section>
+    <!-- Hero -->
+    <section class="hero">
+      <div class="hero__container">
+        <h1 class="hero__title">Trainersstaf</h1>
+        <p class="hero__subtitle">De mensen die elke week het beste uit onze spelers halen</p>
+      </div>
+    </section>
+
+    <!-- Trainers -->
+    <section class="trainers">
+      <div class="trainers__container">
+        
+        <TrainersGroup
+          title="Onderbouw"
+          ageRange="U5 - U9"
+          color="green"
+          trainers={trainers.onderbouw}
+        />
+
+        <TrainersGroup
+          title="Middenbouw"
+          ageRange="U10 - U13"
+          color="orange"
+          trainers={trainers.middenbouw}
+        />
+
+        <TrainersGroup
+          title="Bovenbouw"
+          ageRange="U14 - U17"
+          color="red"
+          trainers={trainers.bovenbouw}
+        />
+
+        <TrainersGroup
+          title="Keeperstrainer"
+          ageRange="Alle teams"
+          color="navy"
+          trainers={trainers.keepers}
+          featured
+        />
+
+      </div>
+    </section>
+
+  
 </BaseLayout>
 
 <style>
-  main { background: #f3f6f2; }
+  main {
+    background: #fafafa;
+    color: #1a1a1a;
+  }
 
   .hero {
     background: #1e3264;
@@ -72,33 +91,40 @@ const buildCardData = (trainer: { team: string; name: string }) => ({
     text-align: center;
   }
 
-  .hero__container { max-width: 900px; margin: 0 auto; }
-  .hero__title { font-size: clamp(2.5rem, 6vw, 4rem); margin: 0; font-weight: 900; }
-  .hero__subtitle { margin: .9rem 0 0; opacity: .85; }
-
-  .cards-stage {
-    position: relative;
-    padding: 4rem 2rem 5rem;
-    overflow: hidden;
-  }
-
-  .cards-stage__pitch {
-    position: absolute;
-    inset: 0;
-    background:
-      radial-gradient(circle at 20% 20%, rgba(255,255,255,.3), transparent 40%),
-      repeating-linear-gradient(0deg, rgba(255,255,255,.07), rgba(255,255,255,.07) 2px, transparent 2px, transparent 22px),
-      linear-gradient(180deg, #bdd8b0 0%, #9ac08d 50%, #7ea975 100%);
-  }
-
-  .cards-grid {
-    position: relative;
-    z-index: 2;
-    max-width: 1440px;
+  .hero__container {
+    max-width: 800px;
     margin: 0 auto;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 1.25rem;
-    align-items: start;
+  }
+
+  .hero__title {
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    font-weight: 900;
+    margin: 0 0 1rem;
+  }
+
+  .hero__subtitle {
+    font-size: 1.2rem;
+    opacity: 0.8;
+    margin: 0;
+  }
+
+  /* Trainers */
+  .trainers {
+    padding: 4rem 2rem;
+    background: #fff;
+  }
+
+  .trainers__container {
+    max-width: 1000px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+  }
+
+  @media (max-width: 600px) {
+    .hero {
+      padding: 6rem 1.5rem 3rem;
+    }
   }
 </style>

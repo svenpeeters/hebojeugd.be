@@ -2,65 +2,83 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import TrainerTradingCard from '../components/TrainerTradingCard.astro';
 
-const amberCard = {
+const trainers = [
+  { team: 'U5', name: 'Amber Frison' },
+  { team: 'U5', name: 'Nicky Berwaerts' },
+  { team: 'U6', name: 'Kenji Jossa' },
+  { team: 'U7', name: 'Timothy Fontaine' },
+  { team: 'U9', name: 'Dave Daniels' },
+  { team: 'U9', name: 'Kevin Castro' },
+  { team: 'U10', name: 'Willy Missotten' },
+  { team: 'U10', name: 'Jurgen Polders' },
+  { team: 'U11/12', name: 'Andy Bex' },
+  { team: 'U11/12', name: 'Frank Missotten' },
+  { team: 'U15', name: 'Jean-Marie Cloesen' },
+  { team: 'U15', name: 'Roger Vanhaeren' },
+  { team: 'U17', name: 'Joeri Fontaine' },
+  { team: 'Alle teams', name: 'Gilles Vanswijgenhoven' },
+];
+
+const buildCardData = (trainer: { team: string; name: string }) => ({
   card_type: 'Trainer',
-  trainer_name: 'Amber Frison',
-  corner_symbol: 'Coar ⛨',
+  trainer_name: trainer.name,
+  corner_symbol: trainer.team,
   image: '/images/trainers/timothy-fontaine.png',
   actions: [
     {
       types: ['Grass', 'Leaf'],
-      name: 'Feas Kick',
+      name: 'Team Coaching',
       damage: '20',
-      description:
-        'Kies 1 tegenstander. Die kan tijdens de volgende beurt geen extra sprintactie doen. Als je deze actie op gras uitvoert, trek 1 extra kaart.',
+      description: `Focus op ${trainer.team}. Verbetert passing en positiespel met duidelijke coaching vanop de zijlijn.`,
     },
     {
       types: ['Grass', 'Leaf', 'Star'],
-      name: 'Nurturing Growth',
+      name: 'Match Focus',
       damage: '50-',
-      description:
-        'Als er minstens 2 teamgenoten in steunpositie staan, doet deze actie 50 extra. Genees daarna 20 van een willekeurige bondgenoot.',
+      description: 'Bij sterke samenwerking stijgt het rendement van deze actie. Teamdiscipline zorgt voor extra impact.',
     },
   ],
-  flavor_text:
-    'Amber coacht met rust, ritme en overzicht. Zelfs onder druk blijft het team groeien en geloven in het plan.',
+  flavor_text: `${trainer.name} begeleidt ${trainer.team} met rust, structuur en enthousiasme.`,
   copyright: '©2026 Pokémon / VC HEBO Jeugd / Art Team',
-  collector_info: '032/115 U',
-};
+  collector_info: `${trainer.team} • HEBO`,
+});
 ---
 
 <BaseLayout title="Trainers cards | VC HEBO Jeugd">
-  <section class="cards-hero">
-    <div class="cards-hero__container">
-      <h1>Trainers Cards</h1>
-      <p>Alternatieve kaartweergave voor de trainerspagina.</p>
+  <section class="hero">
+    <div class="hero__container">
+      <h1 class="hero__title">Trainersstaf</h1>
+      <p class="hero__subtitle">Alle trainers als cards, netjes naast elkaar.</p>
     </div>
   </section>
 
   <section class="cards-stage">
     <div class="cards-stage__pitch"></div>
-    <TrainerTradingCard data={amberCard} />
+    <div class="cards-grid">
+      {trainers.map((trainer) => (
+        <TrainerTradingCard data={buildCardData(trainer)} compact />
+      ))}
+    </div>
   </section>
 </BaseLayout>
 
 <style>
-  .cards-hero {
+  main { background: #f3f6f2; }
+
+  .hero {
     background: #1e3264;
     color: #fff;
-    padding: 7rem 2rem 3rem;
+    padding: 8rem 2rem 4rem;
     text-align: center;
   }
 
-  .cards-hero__container { max-width: 900px; margin: 0 auto; }
-  .cards-hero h1 { margin: 0; font-size: clamp(2.2rem, 5vw, 3.6rem); }
-  .cards-hero p { margin: .8rem 0 0; opacity: .85; }
+  .hero__container { max-width: 900px; margin: 0 auto; }
+  .hero__title { font-size: clamp(2.5rem, 6vw, 4rem); margin: 0; font-weight: 900; }
+  .hero__subtitle { margin: .9rem 0 0; opacity: .85; }
 
   .cards-stage {
     position: relative;
-    min-height: 70vh;
-    padding: 4rem 1.5rem 6rem;
-    background: #dce8d9;
+    padding: 4rem 2rem 5rem;
     overflow: hidden;
   }
 
@@ -68,9 +86,19 @@ const amberCard = {
     position: absolute;
     inset: 0;
     background:
-      radial-gradient(circle at 20% 20%, rgba(255,255,255,.35), transparent 40%),
-      repeating-linear-gradient(0deg, rgba(255,255,255,.08), rgba(255,255,255,.08) 2px, transparent 2px, transparent 22px),
+      radial-gradient(circle at 20% 20%, rgba(255,255,255,.3), transparent 40%),
+      repeating-linear-gradient(0deg, rgba(255,255,255,.07), rgba(255,255,255,.07) 2px, transparent 2px, transparent 22px),
       linear-gradient(180deg, #bdd8b0 0%, #9ac08d 50%, #7ea975 100%);
-    filter: saturate(0.9);
+  }
+
+  .cards-grid {
+    position: relative;
+    z-index: 2;
+    max-width: 1440px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.25rem;
+    align-items: start;
   }
 </style>
