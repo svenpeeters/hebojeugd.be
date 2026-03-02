@@ -2,44 +2,96 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import TrainerTradingCard from '../components/TrainerTradingCard.astro';
 
-const trainers = [
-  { team: 'U5', name: 'Amber Frison' },
-  { team: 'U5', name: 'Nicky Berwaerts' },
-  { team: 'U6', name: 'Kenji Jossa' },
-  { team: 'U7', name: 'Timothy Fontaine' },
-  { team: 'U9', name: 'Dave Daniels' },
-  { team: 'U9', name: 'Kevin Castro' },
-  { team: 'U10', name: 'Willy Missotten' },
-  { team: 'U10', name: 'Jurgen Polders' },
-  { team: 'U11/12', name: 'Andy Bex' },
-  { team: 'U11/12', name: 'Frank Missotten' },
-  { team: 'U15', name: 'Jean-Marie Cloesen' },
-  { team: 'U15', name: 'Roger Vanhaeren' },
-  { team: 'U17', name: 'Joeri Fontaine' },
-  { team: 'Alle teams', name: 'Gilles Vanswijgenhoven' },
+const trainerGroups = [
+  {
+    title: 'Onderbouw',
+    ageRange: 'U5 - U9',
+    color: 'green',
+    trainers: [
+      { team: 'U5', name: 'Amber Frison' },
+      { team: 'U5', name: 'Nicky Berwaerts' },
+      { team: 'U6', name: 'Kenji Jossa' },
+      { team: 'U7', name: 'Timothy Fontaine' },
+      { team: 'U9', name: 'Dave Daniels' },
+      { team: 'U9', name: 'Kevin Castro' },
+    ],
+  },
+  {
+    title: 'Middenbouw',
+    ageRange: 'U10 - U13',
+    color: 'orange',
+    trainers: [
+      { team: 'U10', name: 'Willy Missotten' },
+      { team: 'U10', name: 'Jurgen Polders' },
+      { team: 'U11/12', name: 'Andy Bex' },
+      { team: 'U11/12', name: 'Frank Missotten' },
+    ],
+  },
+  {
+    title: 'Bovenbouw',
+    ageRange: 'U14 - U17',
+    color: 'red',
+    trainers: [
+      { team: 'U15', name: 'Jean-Marie Cloesen' },
+      { team: 'U15', name: 'Roger Vanhaeren' },
+      { team: 'U17', name: 'Joeri Fontaine' },
+    ],
+  },
+  {
+    title: 'Keeperstrainer',
+    ageRange: 'Alle teams',
+    color: 'navy',
+    trainers: [{ team: 'Alle teams', name: 'Gilles Vanswijgenhoven' }],
+  },
 ];
+
+const padToLength = (text: string, target = 112) => {
+  if (text.length === target) return text;
+  if (text.length > target) return `${text.slice(0, target - 1)}…`;
+  return text.padEnd(target, ' ');
+};
+
+const buildDescription = (trainer: { team: string; name: string }) => {
+  const firstName = trainer.name.split(' ')[0];
+  const variants = [
+    `Trainer van ${trainer.team}. ${firstName} leest het spel slim, scherpt passing aan en zet iedereen perfect in positie.`,
+    `Trainer van ${trainer.team}. ${firstName} brengt tempo, strakke passing en slim positiespel met duidelijke coaching.`,
+    `Trainer van ${trainer.team}. ${firstName} bouwt rust in het spel, laat passing tikken en houdt de linies compact.`,
+    `Trainer van ${trainer.team}. ${firstName} stuurt met flair, slijpt passing bij en zet het positiespel messcherp neer.`,
+  ];
+
+  const index = trainer.name.length % variants.length;
+  return padToLength(variants[index]);
+};
 
 const buildCardData = (trainer: { team: string; name: string }) => ({
   card_type: 'Trainer',
   trainer_name: trainer.name,
   corner_symbol: trainer.team,
-  image: '/images/trainers/timothy-fontaine.png',
+  image:
+    trainer.name === 'Gilles Vanswijgenhoven'
+      ? '/images/trainers/keeperstrainer-example.png'
+      : trainer.name === 'Willy Missotten'
+        ? '/images/trainers/willy-missotten.png'
+        : trainer.name === 'Jurgen Polders'
+          ? '/images/trainers/jurgen-polders.png'
+          : trainer.name === 'Andy Bex'
+            ? '/images/trainers/andy-bex.png'
+            : trainer.name === 'Frank Missotten'
+              ? '/images/trainers/frank-missotten.png'
+              : trainer.name === 'Kenji Jossa'
+                ? '/images/trainers/kenji-jossa.png'
+                : '/images/trainers/timothy-fontaine.png',
   actions: [
     {
       types: ['Grass', 'Leaf'],
       name: 'Team Coaching',
       damage: '20',
-      description: `Focus op ${trainer.team}. Verbetert passing en positiespel met duidelijke coaching vanop de zijlijn.`,
-    },
-    {
-      types: ['Grass', 'Leaf', 'Star'],
-      name: 'Match Focus',
-      damage: '50-',
-      description: 'Bij sterke samenwerking stijgt het rendement van deze actie. Teamdiscipline zorgt voor extra impact.',
+      description: buildDescription(trainer),
     },
   ],
   flavor_text: `${trainer.name} begeleidt ${trainer.team} met rust, structuur en enthousiasme.`,
-  copyright: '©2026 Pokémon / VC HEBO Jeugd / Art Team',
+  copyright: '©2026 VC HEBO Jeugd',
   collector_info: `${trainer.team} • HEBO`,
 });
 ---
@@ -52,18 +104,28 @@ const buildCardData = (trainer: { team: string; name: string }) => ({
     </div>
   </section>
 
-  <section class="cards-stage">
-    <div class="cards-stage__pitch"></div>
-    <div class="cards-grid">
-      {trainers.map((trainer) => (
-        <TrainerTradingCard data={buildCardData(trainer)} compact />
+  <section class="trainers-cards">
+    <div class="trainers-cards__container">
+      {trainerGroups.map((group) => (
+        <section class="cards-group">
+          <div class="cards-group__header">
+            <h2 class="cards-group__title">{group.title}</h2>
+            <span class="cards-group__range">{group.ageRange}</span>
+          </div>
+
+          <div class="cards-grid">
+            {group.trainers.map((trainer) => (
+              <TrainerTradingCard data={buildCardData(trainer)} accent={group.color as any} compact />
+            ))}
+          </div>
+        </section>
       ))}
     </div>
   </section>
 </BaseLayout>
 
 <style>
-  main { background: #f3f6f2; }
+  main { background: #fafafa; }
 
   .hero {
     background: #1e3264;
@@ -76,29 +138,54 @@ const buildCardData = (trainer: { team: string; name: string }) => ({
   .hero__title { font-size: clamp(2.5rem, 6vw, 4rem); margin: 0; font-weight: 900; }
   .hero__subtitle { margin: .9rem 0 0; opacity: .85; }
 
-  .cards-stage {
-    position: relative;
-    padding: 4rem 2rem 5rem;
-    overflow: hidden;
+  .trainers-cards {
+    padding: 4rem 2rem;
+    background: #fff;
   }
 
-  .cards-stage__pitch {
-    position: absolute;
-    inset: 0;
-    background:
-      radial-gradient(circle at 20% 20%, rgba(255,255,255,.3), transparent 40%),
-      repeating-linear-gradient(0deg, rgba(255,255,255,.07), rgba(255,255,255,.07) 2px, transparent 2px, transparent 22px),
-      linear-gradient(180deg, #bdd8b0 0%, #9ac08d 50%, #7ea975 100%);
+  .trainers-cards__container {
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  .cards-group {
+    margin-bottom: 3rem;
+  }
+
+  .cards-group__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 1rem;
+  }
+
+  .cards-group__title {
+    margin: 0;
+    color: #1e3264;
+    font-size: 1.6rem;
+    font-weight: 900;
+  }
+
+  .cards-group__range {
+    font-size: 0.8rem;
+    letter-spacing: 1.8px;
+    text-transform: uppercase;
+    color: #64748b;
+    font-weight: 700;
   }
 
   .cards-grid {
-    position: relative;
-    z-index: 2;
-    max-width: 1440px;
-    margin: 0 auto;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
     gap: 1.25rem;
     align-items: start;
+  }
+
+  @media (max-width: 700px) {
+    .cards-group__header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.25rem;
+    }
   }
 </style>

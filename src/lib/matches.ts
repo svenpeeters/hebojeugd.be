@@ -37,6 +37,18 @@ function toYmd(date: Date) {
   return `${y}/${m}/${d}`;
 }
 
+function cleanClubName(name: string) {
+  if (!name) return '';
+
+  return name
+    .replace(/\s+[A-Z]\s+\d+$/u, '') // e.g. "B 1", "C 3"
+    .replace(/\s+[A-Z]$/u, '') // e.g. "A", "B", "C"
+    .replace(/\s+\d+-\d+$/u, '') // e.g. "2-1"
+    .replace(/\s+\d+$/u, '') // trailing number
+    .replace(/\s{2,}/g, ' ')
+    .trim();
+}
+
 async function readCache() {
   try {
     const raw = await fs.readFile(CACHE_FILE, 'utf-8');
@@ -90,12 +102,17 @@ async function fetchUpstreamMatches() {
 
       const teamLabel = (m?.ageGroup || m?.title || 'Onbekend').replace('Recrea Veteran', '35+ Veteranen');
 
+      const homeRaw = m?.homeTeam?.name || '';
+      const awayRaw = m?.awayTeam?.name || '';
+
       return {
         date,
         time: (time || '').slice(0, 5),
         team: teamLabel,
-        home: m?.homeTeam?.name || '',
-        away: m?.awayTeam?.name || '',
+        home: cleanClubName(homeRaw),
+        away: cleanClubName(awayRaw),
+        homeRaw,
+        awayRaw,
         location,
         isHome: String(m?.homeTeam?.clubId || '') === CLUB_ID,
       };
