@@ -5,59 +5,65 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 <BaseLayout title="Open trainingsdagen | VC HEBO Jeugd">
   <section class="hero">
     <div class="hero__container">
-      <span class="hero__eyebrow">Seizoen 2026-2027</span>
+      <span class="hero__eyebrow">Testdagen bij VC HEBO Jeugd ⚽</span>
       <h1 class="hero__title">Open trainingsdagen</h1>
-      <p class="hero__subtitle">Kom proeven van voetbal bij VC HEBO Jeugd (3 t.e.m. 17 jaar)</p>
+      <p class="hero__subtitle">Van vrijdag 1 mei 2026 t.e.m. zondag 31 mei 2026</p>
       <div class="hero__meta">
-        <span>📅 1 mei 2026 — 31 mei 2026</span>
-        <span>⏰ Woensdag & vrijdag • 18:00 — 20:00</span>
+        <span>⏰ Woensdag van 18:00 tot 20:00</span>
+        <span>⏰ Vrijdag van 18:00 tot 20:00</span>
       </div>
     </div>
   </section>
 
   <section class="intro">
-    <div class="intro__container">
+    <div class="intro__container prose">
       <p>
-        Wil jouw kind graag eens proeven van voetbal? Dan zijn onze open testmomenten de perfecte kans.
-        Alle kinderen zijn welkom, ongeacht ervaring of niveau.
+        Wil jouw kind graag eens proeven van voetbal? Dan zijn onze testdagen de perfecte kans!
       </p>
+      <p>
+        Met het oog op het seizoen 2026-2027 organiseert VC HEBO Jeugd open testmomenten voor jonge
+        voetballers en voetballiefhebbers. Alle kinderen zijn welkom, ongeacht ervaring of niveau.
+        Of je nu voor het eerst tegen een bal trapt of al enkele jaren speelt – iedereen krijgt de kans
+        om zich te tonen in een leuke en sportieve omgeving.
+      </p>
+
+      <h2 class="section-title">Tijdens de testdagen maken de kinderen kennis met:</h2>
+      <ul class="bullets">
+        <li>Onze trainers en begeleiders</li>
+        <li>De werking en visie van de club</li>
+        <li>Leeftijdsgerichte en speelse trainingsvormen</li>
+        <li>Plezier, fair play en teamspirit</li>
+      </ul>
+
+      <p>
+        Bij VC HEBO Jeugd staan ontwikkeling, plezier en respect centraal. We willen elk kind de kans geven
+        om te groeien op zijn of haar eigen tempo.
+      </p>
+
+      <p>
+        Heb je interesse om deel te nemen of wens je meer informatie?
+        Neem gerust contact met ons op – we verwelkomen jullie graag op het veld!
+      </p>
+
+      <p class="emphasis">Samen bouwen we aan een sportief seizoen 2026-2027! 💙❤️</p>
     </div>
   </section>
 
-  <section class="highlights">
-    <div class="highlights__container">
-      <h2 class="section-title">Wat mag je verwachten?</h2>
-      <div class="highlights__grid">
-        <article class="card">
-          <h3>Onze trainers & begeleiders</h3>
-          <p>Maak kennis met de staf en manier van werken binnen de club.</p>
-        </article>
-        <article class="card">
-          <h3>Leeftijdsgerichte trainingen</h3>
-          <p>Speelse oefeningen aangepast aan niveau en leeftijd.</p>
-        </article>
-        <article class="card">
-          <h3>Clubvisie in actie</h3>
-          <p>Ontwikkeling, plezier, fair play en teamspirit staan centraal.</p>
-        </article>
+  <section class="values">
+    <div class="values__container">
+      <div class="values__card">
+        <h3 class="values__title">Wanneer</h3>
+        <p class="values__desc">
+          Vrijdag 1 mei t.e.m. zondag 31 mei 2026<br/>
+          Woensdag & vrijdag<br/>
+          <strong>18:00 — 20:00</strong>
+        </p>
       </div>
-    </div>
-  </section>
-
-  <section class="locations">
-    <div class="locations__container">
-      <h2 class="section-title">Locaties</h2>
-      <div class="locations__grid">
-        <article class="location">
-          <h3>K. Heers VV</h3>
-          <p>Raes Van Heerslaan, 3870 Heers</p>
-        </article>
-        <article class="location">
-          <h3>EMBO</h3>
-          <p>Gelindenstraat, 3870 Heers</p>
-        </article>
+      <div class="values__card values__card--featured">
+        <h3 class="values__title">Waar</h3>
+        <p class="values__desc"><strong>K. Heers VV</strong><br/>Raes Van Heerslaan, 3870 Heers</p>
+        <p class="values__desc"><strong>EMBO</strong><br/>Gelindenstraat, 3870 Heers</p>
       </div>
-      <p class="locations__note">Neem contact op voor het juiste trainingsschema per leeftijdsgroep.</p>
     </div>
   </section>
 
@@ -89,10 +95,24 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   .hero__subtitle { margin: 0; opacity: .9; font-size: 1.1rem; }
   .hero__meta { margin-top: 1.4rem; display: grid; gap: .45rem; font-weight: 600; }
 
-  .intro, .highlights, .locations { padding: 3.5rem 2rem; }
-  .intro__container, .highlights__container, .locations__container { max-width: 1000px; margin: 0 auto; }
+  .intro { padding: 3.5rem 2rem; }
+  .intro__container { max-width: 1000px; margin: 0 auto; }
 
-  .intro p { font-size: 1.08rem; line-height: 1.7; color: #1f2937; max-width: 780px; }
+  .intro p { font-size: 1.08rem; line-height: 1.7; color: #1f2937; max-width: 860px; }
+
+  .prose { display: grid; gap: .8rem; }
+
+  .bullets {
+    margin: .25rem 0 .6rem 1.25rem;
+    display: grid;
+    gap: .35rem;
+    color: #1f2937;
+  }
+
+  .emphasis {
+    font-weight: 700;
+    color: #1e3264;
+  }
 
   .section-title {
     margin: 0 0 1.1rem;
@@ -101,26 +121,193 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     font-weight: 900;
   }
 
-  .highlights__grid, .locations__grid {
+  .values {
+    padding: 1rem 2rem 3rem;
+    background: #fff;
+  }
+
+  .values__container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    grid-template-columns: repeat(2, 1fr);
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .values__card {
+    padding: 2.2rem;
+    display: flex;
+    flex-direction: column;
+    background: #fff;
+    border-right: 1px solid #eee;
+  }
+
+  .values__card:last-child { border-right: none; }
+
+  .values__card--featured {
+    background: #1e3264;
+    color: #fff;
+  }
+
+  .values__title {
+    font-size: 1.2rem;
+    font-weight: 800;
+    margin: 0 0 .8rem;
+    color: #1e3264;
+  }
+
+  .values__desc {
+    margin: 0 0 .6rem;
+    line-height: 1.65;
+    color: #334155;
+    opacity: .88;
+  }
+
+  .values__card--featured .values__title,
+  .values__card--featured .values__desc { color: #fff; opacity: .95; }
+
+  .matches {
+    padding: 0 2rem 3.5rem;
+    background: #fff;
+  }
+
+  .matches__container {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .matches__header { margin-bottom: 1.25rem; }
+
+  .matches__title {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    opacity: 0.5;
+    margin: 0;
+    color: #1e3264;
+    font-weight: 700;
+  }
+
+  .bento__grid {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    grid-template-rows: auto auto;
     gap: 1rem;
   }
 
-  .card, .location {
+  .bento__card {
     background: #fff;
-    border: 1px solid #e5e7eb;
-    border-radius: 14px;
-    padding: 1.1rem 1.2rem;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 1rem;
+    border-radius: 1.25rem;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    min-height: 220px;
   }
 
-  .card h3, .location h3 { margin: 0 0 .45rem; color: #1e3264; }
-  .card p, .location p { margin: 0; color: #374151; line-height: 1.55; }
+  .bento__card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(30,50,100,0.12);
+  }
 
-  .locations__note {
-    margin-top: 1rem;
-    color: #475569;
+  .bento__card:nth-child(1) {
+    grid-row: span 2;
+    background: #1e3264;
+    color: #fff;
+    min-height: 100%;
+  }
+
+  .bento__card:nth-child(2) { background: #fff; }
+  .bento__card:nth-child(3) {
+    background: #c8202f;
+    color: #fff;
+  }
+
+  .bento__card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+
+  .bento__card-date {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .bento__card-day {
+    font-size: 4.2rem;
+    font-weight: 900;
+    line-height: 0.85;
+    letter-spacing: -2px;
+  }
+
+  .bento__card:nth-child(1) .bento__card-day {
+    font-size: 6rem;
+  }
+
+  .bento__card-month {
+    font-size: 0.95rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    opacity: 0.55;
+    margin-top: 0.25rem;
+  }
+
+  .bento__card-weekday {
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    opacity: 0.5;
+    padding: 0.4rem 0.8rem;
+    background: rgba(255,255,255,0.1);
+    border-radius: 2rem;
+  }
+
+  .bento__card:nth-child(2) .bento__card-weekday {
+    background: rgba(30,50,100,0.08);
+    color: #1e3264;
+  }
+
+  .bento__card-time {
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    opacity: 0.65;
+    margin-bottom: 0.7rem;
+  }
+
+  .bento__card-categories {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+
+  .bento__badge {
+    background: rgba(255,255,255,0.15);
+    color: inherit;
+    padding: 0.45rem 0.85rem;
+    font-size: 0.86rem;
+    font-weight: 800;
+    border-radius: 0.5rem;
+  }
+
+  .bento__card:nth-child(2) .bento__badge {
+    background: #1e3264;
+    color: #fff;
+  }
+
+  .bento__card-formats {
+    display: flex;
+    gap: 1rem;
+    font-size: 0.84rem;
+    opacity: 0.65;
     font-weight: 600;
+    margin-top: 0.5rem;
   }
 
   .cta {
@@ -170,4 +357,16 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
   .cta__arrow { transition: transform 0.3s ease; }
   .cta__button:hover .cta__arrow { transform: translateX(5px); }
+
+  @media (max-width: 900px) {
+    .values__container { grid-template-columns: 1fr; }
+    .values__card { border-right: none; border-bottom: 1px solid #eee; }
+    .values__card:last-child { border-bottom: none; }
+
+    .bento__grid { grid-template-columns: 1fr; }
+    .bento__card { min-height: auto; padding: 1.5rem; }
+    .bento__card:nth-child(1) { grid-row: span 1; }
+    .bento__card-day,
+    .bento__card:nth-child(1) .bento__card-day { font-size: 3.4rem; }
+  }
 </style>
