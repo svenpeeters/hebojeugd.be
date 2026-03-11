@@ -1,88 +1,147 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { readFileSync } from 'node:fs';
+
+const raw = readFileSync(new URL('../data/huishoudelijk-reglement.txt', import.meta.url), 'utf-8');
+
+const lines = raw.split('\n').map((l) => l.trimRight());
+
+const content: Array<{ type: string; text: string; id?: string }> = [];
+const toc: Array<{ id: string; label: string }> = [];
+
+const romanRe = /^(I|II|III|IV|V|VI)\.\s+(.+)/;
+
+for (const line of lines) {
+  const t = line.trim();
+  if (!t) {
+    content.push({ type: 'space', text: '' });
+    continue;
+  }
+
+  if (t === 'REGLEMENT JEUGD' || t === 'INHOUDSOPGAVE') {
+    continue;
+  }
+
+  const roman = t.match(romanRe);
+  if (roman) {
+    const id = `sec-${roman[1].toLowerCase()}`;
+    content.push({ type: 'h2', text: t, id });
+    toc.push({ id, label: t });
+    continue;
+  }
+
+  if (t.startsWith('Artikel ')) {
+    content.push({ type: 'h3', text: t });
+    continue;
+  }
+
+  if (/^[0-9]+\./.test(t)) {
+    content.push({ type: 'li-main', text: t });
+    continue;
+  }
+
+  if (/^[a-z]\./.test(t)) {
+    content.push({ type: 'li-sub', text: t });
+    continue;
+  }
+
+  content.push({ type: 'p', text: t });
+}
 ---
 
 <BaseLayout title="Huishoudelijk reglement | VC HEBO Jeugd">
   <section class="hero">
     <div class="hero__container">
       <h1 class="hero__title">Huishoudelijk reglement</h1>
-      <p class="hero__subtitle">Officiële versie van het reglement (PDF)</p>
-      <a class="hero__download" href="/docs/huishoudelijk-reglement.pdf" target="_blank" rel="noopener noreferrer">
-        Open / download PDF
-      </a>
+      <p class="hero__subtitle">Officiële clubtekst in leesbare typografische vorm.</p>
     </div>
   </section>
 
   <section class="doc">
     <div class="doc__container">
-      <iframe
-        src="/docs/huishoudelijk-reglement.pdf"
-        title="Huishoudelijk reglement VC HEBO Jeugd"
-        class="doc__frame"
-      ></iframe>
+      <aside class="toc">
+        <h2>Inhoud</h2>
+        <ul>
+          {toc.map((item) => (
+            <li><a href={`#${item.id}`}>{item.label}</a></li>
+          ))}
+        </ul>
+      </aside>
+
+      <article class="content">
+        {content.map((row) => (
+          row.type === 'h2' ? <h2 id={row.id}>{row.text}</h2>
+          : row.type === 'h3' ? <h3>{row.text}</h3>
+          : row.type === 'li-main' ? <p class="li-main">{row.text}</p>
+          : row.type === 'li-sub' ? <p class="li-sub">{row.text}</p>
+          : row.type === 'space' ? <div class="spacer"></div>
+          : <p>{row.text}</p>
+        ))}
+      </article>
     </div>
   </section>
 </BaseLayout>
 
 <style>
-  main {
-    background: #fafafa;
-  }
-
+  main { background: #f7f8fb; }
   .hero {
     background: #1e3264;
     color: #fff;
     padding: 8rem 2rem 3rem;
     text-align: center;
   }
+  .hero__container { max-width: 980px; margin: 0 auto; }
+  .hero__title { margin: 0; font-size: clamp(2.3rem, 5vw, 3.6rem); font-weight: 900; }
+  .hero__subtitle { margin: .8rem 0 0; opacity: .86; }
 
-  .hero__container {
-    max-width: 900px;
-    margin: 0 auto;
-  }
-
-  .hero__title {
-    margin: 0;
-    font-size: clamp(2.4rem, 5.8vw, 4rem);
-    font-weight: 900;
-  }
-
-  .hero__subtitle {
-    margin: 0.8rem 0 1.5rem;
-    opacity: 0.85;
-  }
-
-  .hero__download {
-    display: inline-block;
-    background: #fff;
-    color: #1e3264;
-    padding: 0.8rem 1.3rem;
-    border-radius: 8px;
-    text-decoration: none;
-    font-weight: 700;
-  }
-
-  .doc {
-    padding: 2rem;
-    background: #fff;
-  }
-
+  .doc { padding: 2rem; }
   .doc__container {
-    max-width: 1100px;
+    max-width: 1200px;
     margin: 0 auto;
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 1.5rem;
+    align-items: start;
   }
 
-  .doc__frame {
-    width: 100%;
-    height: 80vh;
+  .toc {
+    position: sticky;
+    top: 88px;
+    background: #fff;
     border: 1px solid #e5e7eb;
     border-radius: 12px;
-    background: #fff;
+    padding: 1rem;
+    max-height: calc(100vh - 110px);
+    overflow: auto;
   }
+  .toc h2 { margin: 0 0 .8rem; font-size: 1rem; color: #1e3264; }
+  .toc ul { list-style: none; margin: 0; padding: 0; display: grid; gap: .55rem; }
+  .toc a { color: #334155; text-decoration: none; font-size: .88rem; line-height: 1.35; }
+  .toc a:hover { color: #c8202f; }
 
-  @media (max-width: 700px) {
-    .hero { padding: 6rem 1rem 2.5rem; }
+  .content {
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 1.4rem 1.5rem;
+  }
+  .content h2 {
+    margin: 1.5rem 0 .8rem;
+    color: #1e3264;
+    font-size: 1.25rem;
+    border-top: 1px solid #eef1f4;
+    padding-top: 1.1rem;
+  }
+  .content h2:first-child { margin-top: 0; border-top: 0; padding-top: 0; }
+  .content h3 { margin: 1rem 0 .5rem; color: #c8202f; font-size: 1rem; }
+  .content p { margin: .3rem 0; color: #1f2937; line-height: 1.55; font-size: .96rem; }
+  .content .li-main { font-weight: 600; margin-top: .65rem; }
+  .content .li-sub { padding-left: 1.2rem; color: #334155; }
+  .spacer { height: .35rem; }
+
+  @media (max-width: 980px) {
     .doc { padding: 1rem; }
-    .doc__frame { height: 72vh; }
+    .doc__container { grid-template-columns: 1fr; }
+    .toc { position: static; max-height: none; }
   }
 </style>
