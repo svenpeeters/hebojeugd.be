@@ -8,45 +8,134 @@ const raw = readFileSync(path.join(process.cwd(), 'public/docs/huishoudelijk-reg
 const lines = raw.split('\n').map((l) => l.trimRight());
 
 const content: Array<{ type: string; text: string; id?: string }> = [];
-const toc: Array<{ id: string; label: string }> = [];
 
 const romanRe = /^(I|II|III|IV|V|VI)\.\s+(.+)/;
+let inRealContent = false;
 
-for (const line of lines) {
-  const t = line.trim();
+const isTocLike = (text: string) => /p\.?\s*\d+/i.test(text);
+
+const ACRONYMS = ['VZW', 'HEBO', 'KBVB', 'API', 'VLAAMS', 'VTS'];
+
+const toSentenceCase = (value: string) => {
+  const lower = value.toLowerCase();
+  return lower.charAt(0).toUpperCase() + lower.slice(1);
+};
+
+const normalizeHeading = (value: string) => {
+  const cleaned = value.replace(/\s+/g, ' ').trim();
+  const parts = cleaned.split(' ');
+
+  return parts
+    .map((part) => {
+      const plain = part.replace(/[^A-Za-zÀ-ÿ]/g, '');
+      if (!plain) return part;
+
+      if (ACRONYMS.includes(plain.toUpperCase())) {
+        return part.replace(plain, plain.toUpperCase());
+      }
+
+      return part.replace(plain, toSentenceCase(plain));
+    })
+    .join(' ')
+    .replace(/\s+([,.;:!?])/g, '$1');
+};
+
+const normalizeBodyText = (value: string) => {
+  const cleaned = value.replace(/\s+/g, ' ').trim();
+  const letters = cleaned.match(/[A-Za-zÀ-ÿ]/g) || [];
+  const uppercase = cleaned.match(/[A-ZÀ-Ý]/g) || [];
+  const isMostlyUppercase = letters.length > 0 && uppercase.length / letters.length > 0.65;
+
+  if (!isMostlyUppercase) return cleaned;
+
+  const lowered = cleaned.toLowerCase();
+  const sentenceFixed = lowered.replace(/(^|[.!?]\s+)([a-zà-ÿ])/g, (_, p1, p2) => `${p1}${p2.toUpperCase()}`);
+
+  return sentenceFixed
+    .split(' ')
+    .map((part) => {
+      const plain = part.replace(/[^A-Za-zÀ-ÿ]/g, '');
+      if (!plain) return part;
+      if (ACRONYMS.includes(plain.toUpperCase())) {
+        return part.replace(plain, plain.toUpperCase());
+      }
+      return part;
+    })
+    .join(' ');
+};
+
+for (let i = 0; i < lines.length; i++) {
+  const t = lines[i].trim();
+  const normalized = t.replace(/\s+/g, ' ');
+
+  if (!inRealContent) {
+    const startsRealDoc = normalized.includes('INTERN REGLEMENT VZW HEBO') && !isTocLike(normalized);
+    if (startsRealDoc) {
+      inRealContent = true;
+    } else {
+      continue;
+    }
+  }
+
   if (!t) {
     content.push({ type: 'space', text: '' });
     continue;
   }
 
-  if (t === 'REGLEMENT JEUGD' || t === 'INHOUDSOPGAVE') {
+  if (normalized === 'REGLEMENT JEUGD' || normalized === 'INHOUDSOPGAVE') {
     continue;
   }
 
-  const roman = t.match(romanRe);
+  const roman = normalized.match(romanRe);
   if (roman) {
+    if (isTocLike(normalized)) continue;
+
+    let headingText = normalized;
+    while (i + 1 < lines.length) {
+      const next = lines[i + 1].trim().replace(/\s+/g, ' ');
+      if (!next) break;
+      if (/^Artikel\s+/i.test(next) || romanRe.test(next) || /^[0-9]+\./.test(next) || /^[a-z]\./.test(next)) break;
+      if (/^[A-Z0-9()\s\-–]+$/.test(next)) {
+        headingText += ` ${next}`;
+        i++;
+        continue;
+      }
+      break;
+    }
+
     const id = `sec-${roman[1].toLowerCase()}`;
-    content.push({ type: 'h2', text: t, id });
-    toc.push({ id, label: t });
+    content.push({ type: 'h2', text: normalizeHeading(headingText), id });
     continue;
   }
 
-  if (t.startsWith('Artikel ')) {
-    content.push({ type: 'h3', text: t });
+  if (normalized.startsWith('Artikel ')) {
+    let normalizedArtikel = normalized.replace(/^Artikel\s+(\d+)\s*[-–]\s*/i, 'Artikel $1. ');
+    while (i + 1 < lines.length) {
+      const next = lines[i + 1].trim().replace(/\s+/g, ' ');
+      if (!next) break;
+      if (/^Artikel\s+/i.test(next) || romanRe.test(next) || /^[0-9]+\./.test(next) || /^[a-z]\./.test(next)) break;
+      if (/^[A-ZÀ-ÿa-z0-9(),\s\-–]+$/.test(next)) {
+        normalizedArtikel += ` ${next}`;
+        i++;
+        continue;
+      }
+      break;
+    }
+    content.push({ type: 'h3', text: normalizeHeading(normalizedArtikel) });
     continue;
   }
 
   if (/^[0-9]+\./.test(t)) {
-    content.push({ type: 'li-main', text: t });
+    content.push({ type: 'li-main', text: normalizeBodyText(t) });
     continue;
   }
 
   if (/^[a-z]\./.test(t)) {
-    content.push({ type: 'li-sub', text: t });
+    content.push({ type: 'li-sub', text: normalizeBodyText(t) });
     continue;
   }
 
-  content.push({ type: 'p', text: t });
+  content.push({ type: 'p', text: normalizeBodyText(t) });
 }
 ---
 
@@ -54,21 +143,12 @@ for (const line of lines) {
   <section class="hero">
     <div class="hero__container">
       <h1 class="hero__title">Huishoudelijk reglement</h1>
-      <p class="hero__subtitle">Officiële clubtekst in leesbare typografische vorm.</p>
+
     </div>
   </section>
 
   <section class="doc">
     <div class="doc__container">
-      <aside class="toc">
-        <h2>Inhoud</h2>
-        <ul>
-          {toc.map((item) => (
-            <li><a href={`#${item.id}`}>{item.label}</a></li>
-          ))}
-        </ul>
-      </aside>
-
       <article class="content">
         {content.map((row) => (
           row.type === 'h2' ? <h2 id={row.id}>{row.text}</h2>
@@ -95,54 +175,65 @@ for (const line of lines) {
   .hero__title { margin: 0; font-size: clamp(2.3rem, 5vw, 3.6rem); font-weight: 900; }
   .hero__subtitle { margin: .8rem 0 0; opacity: .86; }
 
-  .doc { padding: 2rem; }
+  .doc { padding: 3rem 1.5rem 4rem; }
   .doc__container {
-    max-width: 1200px;
+    max-width: 860px;
     margin: 0 auto;
-    display: grid;
-    grid-template-columns: 280px 1fr;
-    gap: 1.5rem;
-    align-items: start;
   }
-
-  .toc {
-    position: sticky;
-    top: 88px;
-    background: #fff;
-    border: 1px solid #e5e7eb;
-    border-radius: 12px;
-    padding: 1rem;
-    max-height: calc(100vh - 110px);
-    overflow: auto;
-  }
-  .toc h2 { margin: 0 0 .8rem; font-size: 1rem; color: #1e3264; }
-  .toc ul { list-style: none; margin: 0; padding: 0; display: grid; gap: .55rem; }
-  .toc a { color: #334155; text-decoration: none; font-size: .88rem; line-height: 1.35; }
-  .toc a:hover { color: #c8202f; }
 
   .content {
     background: #fff;
-    border: 1px solid #e5e7eb;
-    border-radius: 12px;
-    padding: 1.4rem 1.5rem;
+    border: 1px solid #e6e9ef;
+    border-radius: 16px;
+    padding: 2rem 2.2rem;
+    box-shadow: 0 8px 28px rgba(15, 23, 42, 0.05);
   }
+
   .content h2 {
-    margin: 1.5rem 0 .8rem;
+    margin: 2.1rem 0 0.9rem;
     color: #1e3264;
-    font-size: 1.25rem;
+    font-size: 1.35rem;
+    font-weight: 900;
+    letter-spacing: 0.2px;
     border-top: 1px solid #eef1f4;
-    padding-top: 1.1rem;
+    padding-top: 1.35rem;
   }
-  .content h2:first-child { margin-top: 0; border-top: 0; padding-top: 0; }
-  .content h3 { margin: 1rem 0 .5rem; color: #c8202f; font-size: 1rem; }
-  .content p { margin: .3rem 0; color: #1f2937; line-height: 1.55; font-size: .96rem; }
-  .content .li-main { font-weight: 600; margin-top: .65rem; }
-  .content .li-sub { padding-left: 1.2rem; color: #334155; }
-  .spacer { height: .35rem; }
+
+  .content h2:first-child {
+    margin-top: 0;
+    border-top: 0;
+    padding-top: 0;
+  }
+
+  .content h3 {
+    margin: 1.15rem 0 0.55rem;
+    color: #c8202f;
+    font-size: 1.03rem;
+    font-weight: 800;
+  }
+
+  .content p {
+    margin: 0.42rem 0;
+    color: #1f2937;
+    line-height: 1.72;
+    font-size: 1rem;
+  }
+
+  .content .li-main {
+    font-weight: 700;
+    margin-top: 0.8rem;
+  }
+
+  .content .li-sub {
+    padding-left: 1.2rem;
+    color: #334155;
+  }
+
+  .spacer { height: 0.45rem; }
 
   @media (max-width: 980px) {
     .doc { padding: 1rem; }
-    .doc__container { grid-template-columns: 1fr; }
-    .toc { position: static; max-height: none; }
+    .content { padding: 1.35rem 1.1rem; border-radius: 12px; }
+    .content p { font-size: 0.97rem; line-height: 1.65; }
   }
 </style>

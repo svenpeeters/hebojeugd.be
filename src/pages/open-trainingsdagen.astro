@@ -1,0 +1,173 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Open trainingsdagen | VC HEBO Jeugd">
+  <section class="hero">
+    <div class="hero__container">
+      <span class="hero__eyebrow">Seizoen 2026-2027</span>
+      <h1 class="hero__title">Open trainingsdagen</h1>
+      <p class="hero__subtitle">Kom proeven van voetbal bij VC HEBO Jeugd (3 t.e.m. 17 jaar)</p>
+      <div class="hero__meta">
+        <span>📅 1 mei 2026 — 31 mei 2026</span>
+        <span>⏰ Woensdag & vrijdag • 18:00 — 20:00</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="intro">
+    <div class="intro__container">
+      <p>
+        Wil jouw kind graag eens proeven van voetbal? Dan zijn onze open testmomenten de perfecte kans.
+        Alle kinderen zijn welkom, ongeacht ervaring of niveau.
+      </p>
+    </div>
+  </section>
+
+  <section class="highlights">
+    <div class="highlights__container">
+      <h2 class="section-title">Wat mag je verwachten?</h2>
+      <div class="highlights__grid">
+        <article class="card">
+          <h3>Onze trainers & begeleiders</h3>
+          <p>Maak kennis met de staf en manier van werken binnen de club.</p>
+        </article>
+        <article class="card">
+          <h3>Leeftijdsgerichte trainingen</h3>
+          <p>Speelse oefeningen aangepast aan niveau en leeftijd.</p>
+        </article>
+        <article class="card">
+          <h3>Clubvisie in actie</h3>
+          <p>Ontwikkeling, plezier, fair play en teamspirit staan centraal.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="locations">
+    <div class="locations__container">
+      <h2 class="section-title">Locaties</h2>
+      <div class="locations__grid">
+        <article class="location">
+          <h3>K. Heers VV</h3>
+          <p>Raes Van Heerslaan, 3870 Heers</p>
+        </article>
+        <article class="location">
+          <h3>EMBO</h3>
+          <p>Gelindenstraat, 3870 Heers</p>
+        </article>
+      </div>
+      <p class="locations__note">Neem contact op voor het juiste trainingsschema per leeftijdsgroep.</p>
+    </div>
+  </section>
+
+  <section class="cta">
+    <div class="cta__container">
+      <h2 class="cta__title">Interesse om deel te nemen?</h2>
+      <p class="cta__text">Stuur ons een mailtje en we helpen je meteen met het juiste testmoment.</p>
+      <a href="mailto:info@hebojeugd.be" class="cta__button">
+        <span>Contacteer ons</span>
+        <span class="cta__arrow">→</span>
+      </a>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  main { background: #fafafa; }
+
+  .hero {
+    background: linear-gradient(135deg, #1e3264 0%, #142347 100%);
+    color: #fff;
+    padding: 8rem 2rem 4rem;
+    text-align: center;
+  }
+
+  .hero__container { max-width: 980px; margin: 0 auto; }
+  .hero__eyebrow { letter-spacing: 2px; font-size: .8rem; text-transform: uppercase; opacity: .8; }
+  .hero__title { margin: .6rem 0; font-size: clamp(2.4rem, 6vw, 4.3rem); font-weight: 900; }
+  .hero__subtitle { margin: 0; opacity: .9; font-size: 1.1rem; }
+  .hero__meta { margin-top: 1.4rem; display: grid; gap: .45rem; font-weight: 600; }
+
+  .intro, .highlights, .locations { padding: 3.5rem 2rem; }
+  .intro__container, .highlights__container, .locations__container { max-width: 1000px; margin: 0 auto; }
+
+  .intro p { font-size: 1.08rem; line-height: 1.7; color: #1f2937; max-width: 780px; }
+
+  .section-title {
+    margin: 0 0 1.1rem;
+    color: #1e3264;
+    font-size: 1.6rem;
+    font-weight: 900;
+  }
+
+  .highlights__grid, .locations__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1rem;
+  }
+
+  .card, .location {
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 14px;
+    padding: 1.1rem 1.2rem;
+  }
+
+  .card h3, .location h3 { margin: 0 0 .45rem; color: #1e3264; }
+  .card p, .location p { margin: 0; color: #374151; line-height: 1.55; }
+
+  .locations__note {
+    margin-top: 1rem;
+    color: #475569;
+    font-weight: 600;
+  }
+
+  .cta {
+    padding: 10rem 8vw;
+    background: #c8202f;
+    color: #fff;
+  }
+
+  .cta__container {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0;
+  }
+
+  .cta__title {
+    font-size: clamp(3rem, 8vw, 7rem);
+    font-weight: 800;
+    line-height: 1;
+    margin: 0 0 1rem 0;
+  }
+
+  .cta__text {
+    font-size: 1.1rem;
+    opacity: 0.9;
+    margin: 0 0 2rem;
+    max-width: 650px;
+  }
+
+  .cta__button {
+    display: inline-flex;
+    align-items: center;
+    gap: 1rem;
+    background: #fff;
+    color: #c8202f;
+    padding: 1.2rem 2.5rem;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+  }
+
+  .cta__button:hover {
+    background: #1a1a1a;
+    color: #fff;
+    gap: 1.5rem;
+  }
+
+  .cta__arrow { transition: transform 0.3s ease; }
+  .cta__button:hover .cta__arrow { transform: translateX(5px); }
+</style>
