@@ -91,16 +91,32 @@ const organizationLd = {
         }
       };
 
+      const slugify = (value = '') => value
+        .toLowerCase()
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '')
+        .replace(/[^a-z0-9]+/g, '_')
+        .replace(/^_+|_+$/g, '')
+        .slice(0, 40);
+
+      const pageKey = window.location.pathname.replace(/^\//, '').replace(/\//g, '_') || 'home';
+
       document.addEventListener('click', (event) => {
         const target = event.target instanceof Element ? event.target.closest('a, button') : null;
         if (!target) return;
 
         const href = target.getAttribute('href') || '';
-        const text = (target.textContent || '').trim().slice(0, 120);
+        const text = (target.textContent || '').trim().replace(/\s+/g, ' ').slice(0, 120);
         const page_path = window.location.pathname;
+        const linkKey = slugify(text) || slugify(href) || 'unknown';
 
         if (href.startsWith('mailto:')) {
           trackEvent('mailto_click', {
+            email_address: href.replace('mailto:', ''),
+            link_text: text,
+            page_path,
+          });
+          trackEvent(`${pageKey}_mailto_click`, {
             email_address: href.replace('mailto:', ''),
             link_text: text,
             page_path,
@@ -114,6 +130,11 @@ const organizationLd = {
             link_text: text,
             page_path,
           });
+          trackEvent(`${pageKey}_outbound_click`, {
+            destination: href,
+            link_text: text,
+            page_path,
+          });
           return;
         }
 
@@ -122,6 +143,12 @@ const organizationLd = {
           trackEvent('cta_click', {
             destination: href || text,
             link_text: text,
+            page_path,
+          });
+          trackEvent(`${pageKey}_cta_click`, {
+            destination: href || text,
+            link_text: text,
+            link_key: linkKey,
             page_path,
           });
         }
@@ -137,6 +164,7 @@ const organizationLd = {
           if (!scrollTracked[mark] && pct >= mark) {
             scrollTracked[mark] = true;
             trackEvent('scroll_depth', { percent_scrolled: mark, page_path: window.location.pathname });
+            trackEvent(`${pageKey}_scroll_depth`, { percent_scrolled: mark, page_path: window.location.pathname });
           }
         });
       }, { passive: true });
