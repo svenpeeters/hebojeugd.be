@@ -6,13 +6,37 @@ interface Props {
   title: string;
   description?: string;
   transparentNav?: boolean;
+  ogImage?: string;
+  noindex?: boolean;
 }
 
-const { 
-  title, 
+const {
+  title,
   description = "VC HEBO Jeugd - Jeugdvoetbal in Heers-Bovelingen",
-  transparentNav = false 
+  transparentNav = false,
+  ogImage = '/logo.png',
+  noindex = false,
 } = Astro.props;
+
+const siteUrl = Astro.site ?? new URL('https://www.hebojeugd.be');
+const canonicalUrl = new URL(Astro.url.pathname, siteUrl).toString();
+const ogImageUrl = new URL(ogImage, siteUrl).toString();
+const robotsContent = noindex ? 'noindex, nofollow' : 'index, follow';
+const organizationLd = {
+  '@context': 'https://schema.org',
+  '@type': 'SportsClub',
+  name: 'VC HEBO Jeugd',
+  url: siteUrl.toString(),
+  logo: new URL('/logo.png', siteUrl).toString(),
+  sport: 'Football',
+  email: 'info@hebojeugd.be',
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: 'Heers',
+    postalCode: '3870',
+    addressCountry: 'BE',
+  },
+};
 ---
 
 <!doctype html>
@@ -20,12 +44,29 @@ const {
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
     <meta name="description" content={description} />
+    <meta name="robots" content={robotsContent} />
+    <link rel="canonical" href={canonicalUrl} />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="VC HEBO Jeugd" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:image" content={ogImageUrl} />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageUrl} />
+
     <link rel="icon" type="image/png" href="/logo.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
-    <title>{title}</title>
+
+    <script type="application/ld+json" set:html={JSON.stringify(organizationLd)}></script>
 
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-JYL4TFX370"></script>
