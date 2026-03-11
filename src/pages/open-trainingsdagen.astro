@@ -5,13 +5,10 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 <BaseLayout title="Open trainingsdagen | VC HEBO Jeugd">
   <section class="hero">
     <div class="hero__container">
-      <span class="hero__eyebrow">Testdagen bij VC HEBO Jeugd ⚽</span>
+      <span class="hero__eyebrow">Testdagen bij VC HEBO Jeugd</span>
       <h1 class="hero__title">Open trainingsdagen</h1>
       <p class="hero__subtitle">Van vrijdag 1 mei 2026 t.e.m. zondag 31 mei 2026</p>
-      <div class="hero__meta">
-        <span>⏰ Woensdag van 18:00 tot 20:00</span>
-        <span>⏰ Vrijdag van 18:00 tot 20:00</span>
-      </div>
+
     </div>
   </section>
 
@@ -69,9 +66,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
   <section class="cta">
     <div class="cta__container">
-      <h2 class="cta__title">Interesse om deel te nemen?</h2>
-      <p class="cta__text">Stuur ons een mailtje en we helpen je meteen met het juiste testmoment.</p>
-      <a href="mailto:info@hebojeugd.be" class="cta__button">
+      <h2 class="cta__title">Interesse?</h2>
+      <p class="cta__text">Mail ons voor het juiste testmoment.</p>
+      <a href="mailto:sportief@hebojeugd.be" class="cta__button">
         <span>Contacteer ons</span>
         <span class="cta__arrow">→</span>
       </a>
@@ -93,7 +90,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   .hero__eyebrow { letter-spacing: 2px; font-size: .8rem; text-transform: uppercase; opacity: .8; }
   .hero__title { margin: .6rem 0; font-size: clamp(2.4rem, 6vw, 4.3rem); font-weight: 900; }
   .hero__subtitle { margin: 0; opacity: .9; font-size: 1.1rem; }
-  .hero__meta { margin-top: 1.4rem; display: grid; gap: .45rem; font-weight: 600; }
 
   .intro { padding: 3.5rem 2rem; }
   .intro__container { max-width: 1000px; margin: 0 auto; }
@@ -123,7 +119,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
   .values {
     padding: 1rem 2rem 3rem;
-    background: #fff;
+    background: transparent;
   }
 
   .values__container {
@@ -167,7 +163,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
   .matches {
     padding: 0 2rem 3.5rem;
-    background: #fff;
+    background: transparent;
   }
 
   .matches__container {

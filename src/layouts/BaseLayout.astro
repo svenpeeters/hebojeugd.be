@@ -73,6 +73,7 @@ const organizationLd = {
     <script is:inline>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
+      window.gtag = gtag;
       gtag('js', new Date());
       gtag('config', 'G-JYL4TFX370');
     </script>
@@ -83,6 +84,63 @@ const organizationLd = {
       <slot />
     </main>
     <Footer />
+    <script is:inline>
+      const trackEvent = (eventName, params = {}) => {
+        if (typeof window.gtag === 'function') {
+          window.gtag('event', eventName, params);
+        }
+      };
+
+      document.addEventListener('click', (event) => {
+        const target = event.target instanceof Element ? event.target.closest('a, button') : null;
+        if (!target) return;
+
+        const href = target.getAttribute('href') || '';
+        const text = (target.textContent || '').trim().slice(0, 120);
+        const page_path = window.location.pathname;
+
+        if (href.startsWith('mailto:')) {
+          trackEvent('mailto_click', {
+            email_address: href.replace('mailto:', ''),
+            link_text: text,
+            page_path,
+          });
+          return;
+        }
+
+        if (href.startsWith('http') && !href.includes(window.location.hostname)) {
+          trackEvent('outbound_click', {
+            destination: href,
+            link_text: text,
+            page_path,
+          });
+          return;
+        }
+
+        const cta = target.closest('.cta__button, .hero__button, .nav-fullscreen__link, .footer__link');
+        if (cta) {
+          trackEvent('cta_click', {
+            destination: href || text,
+            link_text: text,
+            page_path,
+          });
+        }
+      }, { passive: true });
+
+      let scrollTracked = {25:false, 50:false, 75:false, 90:false};
+      document.addEventListener('scroll', () => {
+        const scrollTop = window.scrollY;
+        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        if (docHeight <= 0) return;
+        const pct = Math.round((scrollTop / docHeight) * 100);
+        [25, 50, 75, 90].forEach((mark) => {
+          if (!scrollTracked[mark] && pct >= mark) {
+            scrollTracked[mark] = true;
+            trackEvent('scroll_depth', { percent_scrolled: mark, page_path: window.location.pathname });
+          }
+        });
+      }, { passive: true });
+    </script>
   </body>
 </html>
 
