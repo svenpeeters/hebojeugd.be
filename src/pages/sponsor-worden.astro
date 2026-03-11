@@ -1,0 +1,228 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  name: 'Sponsor worden | VC HEBO Jeugd',
+  description: 'Ontdek de sponsormogelijkheden van VC HEBO Jeugd en versterk je zichtbaarheid bij een lokaal en geëngageerd jeugdvoetbalpubliek.',
+  url: 'https://www.hebojeugd.be/sponsor-worden',
+};
+
+const packages = [
+  {
+    title: 'Kledijsponsor',
+    eyebrow: 'Uw merk op het veld',
+    intro: 'Week na week zichtbaar op het shirt van onze jeugdploegen.',
+    items: [
+      'Logo op wedstrijdshirts (voorkant, achterkant of mouw afhankelijk van formule)',
+      'Zichtbaarheid op teamfoto’s en social media',
+      'Duurzame zichtbaarheid op wedstrijden, tornooien en events',
+      'Sterke link met jeugd, sportiviteit en lokaal engagement',
+    ],
+    price: 'Vanaf €500/jaar',
+  },
+  {
+    title: 'Terreinplakkaat',
+    eyebrow: 'Dubbele lokale zichtbaarheid',
+    intro: 'Aanwezig op onze twee speel- en trainingslocaties, pal in het hart van de club.',
+    items: [
+      'Logo op stevig sponsorbord',
+      'Zichtbaarheid op twee locaties',
+      'Opvallende plaatsing aan de ingang van de kantine',
+      'Jaarlijks verlengbaar',
+    ],
+    price: '€400/jaar',
+  },
+  {
+    title: 'Online zichtbaarheid',
+    eyebrow: 'Zichtbaar waar onze community leeft',
+    intro: 'Een digitaal pakket voor bedrijven die online mee in beeld willen komen.',
+    items: [
+      'Logo met link op de officiële clubwebsite',
+      'Vermelding via social media',
+      'Jaarlijks dankbericht voor alle sponsors',
+      'Perfect combineerbaar met andere pakketten',
+    ],
+    price: '€250/jaar',
+  },
+  {
+    title: 'Matchbal sponsoring',
+    eyebrow: 'Mee aan de aftrap',
+    intro: 'Koppel je naam aan onze wekelijkse wedstrijden en verschijn herkenbaar in onze posts.',
+    items: [
+      'Vermelding in de wekelijkse wedstrijdpost',
+      'Logo of naam zichtbaar in visuele matchbal-posts',
+      'Promotie in een positieve, sportieve context',
+      'Flexibel inzetbaar per week of per reeks',
+    ],
+    price: '€50/week of €150/4 vermeldingen',
+  },
+];
+---
+
+<BaseLayout
+  title="Sponsor worden | VC HEBO Jeugd"
+  description="Ontdek de sponsormogelijkheden van VC HEBO Jeugd en zet je merk in de kijker bij een lokaal en geëngageerd jeugdvoetbalpubliek."
+  jsonLd={jsonLd}
+>
+  <section class="hero">
+    <div class="hero__container">
+      <span class="hero__eyebrow">Partner van VC HEBO Jeugd</span>
+      <h1 class="hero__title">Sponsor worden</h1>
+      <p class="hero__subtitle">
+        Steun meer dan 150 jeugdspelers én zet je merk zichtbaar neer in een warme, sportieve en lokale omgeving.
+      </p>
+    </div>
+  </section>
+
+  <section class="pitch">
+    <div class="pitch__container">
+      <p class="pitch__lead">
+        VC HEBO Jeugd bouwt elke week aan een sterke jeugdwerking waarin ontwikkeling, plezier en respect centraal staan.
+        Met de steun van lokale partners geven we kinderen de kans om te groeien — op én naast het veld.
+      </p>
+      <p class="pitch__text">
+        Als sponsor kies je niet alleen voor zichtbaarheid, maar ook voor betrokkenheid bij een club met energie, bereik en toekomst.
+        We bieden formules die passen bij bedrijven die lokaal willen opvallen en tegelijk een positief verschil willen maken.
+      </p>
+    </div>
+  </section>
+
+  <section class="why">
+    <div class="why__container">
+      <div class="why__card">
+        <h2>Waarom partner worden?</h2>
+        <ul>
+          <li>Zichtbaarheid bij spelers, ouders, supporters en sympathisanten</li>
+          <li>Een sterk lokaal verhaal met échte community-impact</li>
+          <li>Combinatie van fysieke én online zichtbaarheid</li>
+          <li>Flexibele formules voor klein en groot engagement</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="packages">
+    <div class="packages__container">
+      <div class="packages__header">
+        <h2 class="packages__title">Onze sponsorpakketten</h2>
+        <p class="packages__subtitle">Helder, lokaal en direct inzetbaar.</p>
+      </div>
+
+      <div class="packages__grid">
+        {packages.map((pkg) => (
+          <article class="package-card">
+            <span class="package-card__eyebrow">{pkg.eyebrow}</span>
+            <h3 class="package-card__title">{pkg.title}</h3>
+            <p class="package-card__intro">{pkg.intro}</p>
+            <ul class="package-card__list">
+              {pkg.items.map((item) => <li>{item}</li>)}
+            </ul>
+            <div class="package-card__price">{pkg.price}</div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="cta">
+    <div class="cta__container">
+      <h2 class="cta__title">Zin om mee te bouwen?</h2>
+      <p class="cta__text">We bekijken graag samen welk pakket het best bij jouw bedrijf past.</p>
+      <a href="mailto:info@hebojeugd.be?subject=Sponsoring%20VC%20HEBO%20Jeugd" class="cta__button">
+        <span>Contacteer ons</span>
+        <span class="cta__arrow">→</span>
+      </a>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  main { background: #fafafa; }
+
+  .hero {
+    background: linear-gradient(135deg, #1e3264 0%, #142347 100%);
+    color: #fff;
+    padding: 8rem 2rem 4rem;
+    text-align: center;
+  }
+
+  .hero__container { max-width: 960px; margin: 0 auto; }
+  .hero__eyebrow { font-size: .8rem; letter-spacing: 2px; text-transform: uppercase; opacity: .8; }
+  .hero__title { margin: .6rem 0 1rem; font-size: clamp(2.6rem, 6vw, 4.4rem); font-weight: 900; }
+  .hero__subtitle { max-width: 760px; margin: 0 auto; font-size: 1.1rem; line-height: 1.7; opacity: .92; }
+
+  .pitch, .why, .packages { padding: 3.5rem 2rem; }
+  .pitch__container, .why__container, .packages__container { max-width: 1040px; margin: 0 auto; }
+
+  .pitch__lead { font-size: 1.25rem; line-height: 1.7; color: #1e3264; font-weight: 700; margin: 0 0 1rem; }
+  .pitch__text { font-size: 1.04rem; line-height: 1.75; color: #334155; margin: 0; max-width: 860px; }
+
+  .why__card {
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 18px;
+    padding: 1.5rem 1.6rem;
+    box-shadow: 0 8px 28px rgba(15,23,42,.05);
+  }
+  .why__card h2 { margin: 0 0 1rem; color: #1e3264; font-size: 1.5rem; }
+  .why__card ul { margin: 0; padding-left: 1.25rem; display: grid; gap: .5rem; color: #334155; line-height: 1.6; }
+
+  .packages__header { margin-bottom: 1.4rem; }
+  .packages__title { margin: 0; color: #1e3264; font-size: 1.8rem; font-weight: 900; }
+  .packages__subtitle { margin: .35rem 0 0; color: #64748b; }
+
+  .packages__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1rem;
+  }
+
+  .package-card {
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 18px;
+    padding: 1.35rem;
+    display: flex;
+    flex-direction: column;
+    gap: .9rem;
+    box-shadow: 0 8px 28px rgba(15,23,42,.05);
+  }
+
+  .package-card__eyebrow {
+    font-size: .74rem;
+    letter-spacing: 1.6px;
+    text-transform: uppercase;
+    color: #c8202f;
+    font-weight: 800;
+  }
+
+  .package-card__title { margin: 0; font-size: 1.4rem; color: #1e3264; }
+  .package-card__intro { margin: 0; color: #334155; line-height: 1.6; }
+  .package-card__list { margin: 0; padding-left: 1.2rem; color: #475569; display: grid; gap: .45rem; line-height: 1.55; }
+  .package-card__price { margin-top: auto; font-size: 1rem; font-weight: 900; color: #c8202f; }
+
+  .cta {
+    padding: 10rem 8vw;
+    background: #c8202f;
+    color: #fff;
+  }
+  .cta__container { max-width: 1440px; margin: 0 auto; }
+  .cta__title { font-size: clamp(3rem, 8vw, 7rem); font-weight: 800; line-height: 1; margin: 0 0 1rem; }
+  .cta__text { font-size: 1.1rem; opacity: .9; margin: 0 0 2rem; max-width: 640px; }
+  .cta__button {
+    display: inline-flex;
+    align-items: center;
+    gap: 1rem;
+    background: #fff;
+    color: #c8202f;
+    padding: 1.2rem 2.5rem;
+    text-decoration: none;
+    font-weight: 700;
+    transition: all .3s ease;
+  }
+  .cta__button:hover { background: #1a1a1a; color: #fff; gap: 1.5rem; }
+  .cta__arrow { transition: transform .3s ease; }
+  .cta__button:hover .cta__arrow { transform: translateX(5px); }
+</style>
