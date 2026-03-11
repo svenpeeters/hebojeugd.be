@@ -1,9 +1,36 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PaastoernooiTicker from '../components/PaastoernooiTicker.astro';
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Event',
+  name: 'Paastoernooi VC HEBO Jeugd 2026',
+  eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
+  eventStatus: 'https://schema.org/EventScheduled',
+  startDate: '2026-04-07T18:00:00+02:00',
+  endDate: '2026-04-09T21:00:00+02:00',
+  description: 'Paastoernooi van VC HEBO Jeugd voor U6 t.e.m. U13 in Heers, met drie avonden voetbalplezier.',
+  organizer: {
+    '@type': 'SportsClub',
+    name: 'VC HEBO Jeugd',
+    url: 'https://www.hebojeugd.be',
+  },
+  location: {
+    '@type': 'Place',
+    name: 'EMBO',
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: 'Gelindenstraat',
+      postalCode: '3870',
+      addressLocality: 'Heers',
+      addressCountry: 'BE',
+    },
+  },
+};
 ---
 
-<BaseLayout title="Paastoernooi 2026 | VC HEBO Jeugd">
+<BaseLayout title="Paastoernooi 2026 | VC HEBO Jeugd" description="Paastoernooi van VC HEBO Jeugd in Heers voor U6 t.e.m. U13. Bekijk programma, info en inschrijving." jsonLd={jsonLd}>
   <main class="paastoernooi">
     <!-- Navbar -->
     

@@ -1,8 +1,50 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Event',
+  name: 'Open trainingsdagen VC HEBO Jeugd',
+  eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
+  eventStatus: 'https://schema.org/EventScheduled',
+  startDate: '2026-05-01T18:00:00+02:00',
+  endDate: '2026-05-31T20:00:00+02:00',
+  description:
+    'Open testmomenten voor jonge voetballers en voetballiefhebbers van 3 t.e.m. 17 jaar bij VC HEBO Jeugd in Heers.',
+  organizer: {
+    '@type': 'SportsClub',
+    name: 'VC HEBO Jeugd',
+    url: 'https://www.hebojeugd.be',
+    email: 'sportief@hebojeugd.be',
+  },
+  location: [
+    {
+      '@type': 'Place',
+      name: 'K. Heers VV',
+      address: {
+        '@type': 'PostalAddress',
+        streetAddress: 'Raes Van Heerslaan',
+        postalCode: '3870',
+        addressLocality: 'Heers',
+        addressCountry: 'BE',
+      },
+    },
+    {
+      '@type': 'Place',
+      name: 'EMBO',
+      address: {
+        '@type': 'PostalAddress',
+        streetAddress: 'Gelindenstraat',
+        postalCode: '3870',
+        addressLocality: 'Heers',
+        addressCountry: 'BE',
+      },
+    },
+  ],
+};
 ---
 
-<BaseLayout title="Open trainingsdagen | VC HEBO Jeugd">
+<BaseLayout title="Open trainingsdagen | VC HEBO Jeugd" description="Open trainingsdagen en testmomenten bij VC HEBO Jeugd in Heers voor kinderen en jongeren van 3 t.e.m. 17 jaar." jsonLd={jsonLd}>
   <section class="hero">
     <div class="hero__container">
       <span class="hero__eyebrow">Testdagen bij VC HEBO Jeugd</span>

@@ -8,6 +8,7 @@ interface Props {
   transparentNav?: boolean;
   ogImage?: string;
   noindex?: boolean;
+  jsonLd?: object | object[];
 }
 
 const {
@@ -16,6 +17,7 @@ const {
   transparentNav = false,
   ogImage = '/logo.png',
   noindex = false,
+  jsonLd,
 } = Astro.props;
 
 const siteUrl = Astro.site ?? new URL('https://www.hebojeugd.be');
@@ -37,6 +39,8 @@ const organizationLd = {
     addressCountry: 'BE',
   },
 };
+
+const jsonLdPayload = [organizationLd, ...(jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [])];
 ---
 
 <!doctype html>
@@ -66,7 +70,9 @@ const organizationLd = {
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
 
-    <script type="application/ld+json" set:html={JSON.stringify(organizationLd)}></script>
+    {jsonLdPayload.map((entry) => (
+      <script type="application/ld+json" set:html={JSON.stringify(entry)}></script>
+    ))}
 
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-JYL4TFX370"></script>
