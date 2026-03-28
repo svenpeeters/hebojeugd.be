@@ -10,7 +10,6 @@ const pages = [
   '/paastoernooi',
   '/open-trainingsdagen',
   '/huishoudelijk-reglement',
-  '/trainers-cards',
 ];
 
 export const GET: APIRoute = () => {

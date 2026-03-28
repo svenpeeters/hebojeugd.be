@@ -12,51 +12,56 @@ const jsonLd = {
 const packages = [
   {
     title: 'Kledijsponsor',
+    icon: '',
     eyebrow: 'Uw merk op het veld',
-    intro: 'Week na week zichtbaar op het shirt van onze jeugdploegen.',
+    intro: 'Zichtbaar op de shirts van onze jeugdploegen.',
     items: [
-      'Logo op wedstrijdshirts (voorkant, achterkant of mouw afhankelijk van formule)',
-      'Zichtbaarheid op teamfoto’s en social media',
-      'Duurzame zichtbaarheid op wedstrijden, tornooien en events',
-      'Sterke link met jeugd, sportiviteit en lokaal engagement',
+      'Logo op shirt, rug of mouw',
+      'Zichtbaar op teamfoto\'s en socials',
+      'Aanwezig op tornooien en events',
+      'Sterke lokale uitstraling',
     ],
-    price: 'Vanaf €500/jaar',
+    price: 'Vanaf €500 / jaar',
+    featured: true,
   },
   {
     title: 'Terreinplakkaat',
-    eyebrow: 'Dubbele lokale zichtbaarheid',
-    intro: 'Aanwezig op onze twee speel- en trainingslocaties, pal in het hart van de club.',
+    icon: '',
+    eyebrow: 'Dubbel lokaal zichtbaar',
+    intro: 'Aanwezig op onze speel- en trainingslocaties.',
     items: [
       'Logo op stevig sponsorbord',
-      'Zichtbaarheid op twee locaties',
-      'Opvallende plaatsing aan de ingang van de kantine',
+      'Zichtbaar op 2 terreinen',
+      'In het zicht van spelers en ouders',
       'Jaarlijks verlengbaar',
     ],
-    price: '€400/jaar',
+    price: '€400 / jaar',
   },
   {
     title: 'Online zichtbaarheid',
-    eyebrow: 'Zichtbaar waar onze community leeft',
-    intro: 'Een digitaal pakket voor bedrijven die online mee in beeld willen komen.',
+    icon: '',
+    eyebrow: 'Waar onze community leeft',
+    intro: 'Digitale zichtbaarheid voor lokale bedrijven.',
     items: [
-      'Logo met link op de officiële clubwebsite',
-      'Vermelding via social media',
-      'Jaarlijks dankbericht voor alle sponsors',
-      'Perfect combineerbaar met andere pakketten',
+      'Logo met link op clubwebsite',
+      'Vermelding op social media',
+      'Jaarlijks dankbericht',
+      'Perfect combineerbaar',
     ],
-    price: '€250/jaar',
+    price: '€250 / jaar',
   },
   {
     title: 'Matchbal sponsoring',
+    icon: '',
     eyebrow: 'Mee aan de aftrap',
-    intro: 'Koppel je naam aan onze wekelijkse wedstrijden en verschijn herkenbaar in onze posts.',
+    intro: 'Koppel je naam aan een wedstrijddag.',
     items: [
-      'Vermelding in de wekelijkse wedstrijdpost',
-      'Logo of naam zichtbaar in visuele matchbal-posts',
-      'Promotie in een positieve, sportieve context',
-      'Flexibel inzetbaar per week of per reeks',
+      'Vermelding in wedstrijdaankondiging',
+      'Naam of logo in visual',
+      'Promotie in sportieve context',
+      'Flexibel inzetbaar',
     ],
-    price: '€50/week of €150/4 vermeldingen',
+    price: '€50 / week of €150 / 4 weken',
   },
 ];
 ---
@@ -80,7 +85,7 @@ const packages = [
     <div class="pitch__container">
       <p class="pitch__lead">
         VC HEBO Jeugd bouwt elke week aan een sterke jeugdwerking waarin ontwikkeling, plezier en respect centraal staan.
-        Met de steun van lokale partners geven we kinderen de kans om te groeien — op én naast het veld.
+        Met de steun van lokale partners geven we kinderen de kans om te groeien, op én naast het veld.
       </p>
       <p class="pitch__text">
         Als sponsor kies je niet alleen voor zichtbaarheid, maar ook voor betrokkenheid bij een club met energie, bereik en toekomst.
@@ -112,23 +117,35 @@ const packages = [
 
       <div class="packages__grid">
         {packages.map((pkg) => (
-          <article class="package-card">
-            <span class="package-card__eyebrow">{pkg.eyebrow}</span>
-            <h3 class="package-card__title">{pkg.title}</h3>
+          <article class:list={["package-card", pkg.featured && "package-card--featured"]}>
+            <div class="package-card__top">
+              <div class="package-card__icon" aria-hidden="true"></div>
+              <div>
+                <span class="package-card__eyebrow">{pkg.eyebrow}</span>
+                <h3 class="package-card__title">{pkg.title}</h3>
+              </div>
+              {pkg.featured && <span class="package-card__popular">Populair</span>}
+            </div>
             <p class="package-card__intro">{pkg.intro}</p>
             <ul class="package-card__list">
               {pkg.items.map((item) => <li>{item}</li>)}
             </ul>
-            <div class="package-card__price">{pkg.price}</div>
+            <div class="package-card__price"><span>{pkg.price}</span></div>
           </article>
         ))}
+      </div>
+
+      <div class="trust-metrics">
+        <div class="trust-metrics__item"><strong>150+</strong><span>jeugdspelers</span></div>
+        <div class="trust-metrics__item"><strong>100+</strong><span>gezinnen</span></div>
+        <div class="trust-metrics__item"><strong>2</strong><span>locaties</span></div>
       </div>
     </div>
   </section>
 
   <section class="cta">
     <div class="cta__container">
-      <h2 class="cta__title">Zin om mee te bouwen?</h2>
+      <h2 class="cta__title">Sponsor worden<br/> van jeugd?</h2>
       <p class="cta__text">We bekijken graag samen welk pakket het best bij jouw bedrijf past.</p>
       <a href="mailto:info@hebojeugd.be?subject=Sponsoring%20VC%20HEBO%20Jeugd" class="cta__button">
         <span>Contacteer ons</span>
@@ -175,33 +192,123 @@ const packages = [
 
   .packages__grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    gap: 1rem;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 40px;
   }
 
   .package-card {
     background: #fff;
     border: 1px solid #e5e7eb;
-    border-radius: 18px;
-    padding: 1.35rem;
+    border-radius: 16px;
+    padding: 32px;
     display: flex;
     flex-direction: column;
-    gap: .9rem;
+    gap: 16px;
+    min-height: 100%;
     box-shadow: 0 8px 28px rgba(15,23,42,.05);
   }
 
-  .package-card__eyebrow {
-    font-size: .74rem;
-    letter-spacing: 1.6px;
-    text-transform: uppercase;
-    color: #c8202f;
-    font-weight: 800;
+  .package-card--featured {
+    border-color: #fecdd3;
+    background: #fff8f8;
+    box-shadow: 0 10px 30px rgba(200,32,47,.08);
   }
 
-  .package-card__title { margin: 0; font-size: 1.4rem; color: #1e3264; }
-  .package-card__intro { margin: 0; color: #334155; line-height: 1.6; }
-  .package-card__list { margin: 0; padding-left: 1.2rem; color: #475569; display: grid; gap: .45rem; line-height: 1.55; }
-  .package-card__price { margin-top: auto; font-size: 1rem; font-weight: 900; color: #c8202f; }
+  .package-card__top {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: start;
+    gap: 14px;
+    min-height: 72px;
+  }
+
+  .package-card__icon {
+    width: 0;
+    height: 0;
+    display: none;
+  }
+
+  .package-card__eyebrow {
+    display: block;
+    font-size: .56rem;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    color: #1e3264;
+    font-weight: 800;
+    margin-bottom: 4px;
+  }
+
+  .package-card__title { margin: 0; font-size: 24px; color: #1e3264; line-height: 1.15; }
+  .package-card__intro {
+    margin: 0;
+    color: #334155;
+    line-height: 1.6;
+    font-size: 16px;
+    min-height: 52px;
+  }
+  .package-card__list {
+    margin: 0;
+    padding-left: 1.2rem;
+    color: #475569;
+    display: grid;
+    gap: .55rem;
+    line-height: 1.6;
+    font-size: 15px;
+    flex: 1;
+  }
+  .package-card__popular {
+    background: #c8202f;
+    color: #fff;
+    border-radius: 999px;
+    padding: 6px 10px;
+    font-size: 12px;
+    font-weight: 800;
+    white-space: nowrap;
+  }
+  .package-card__price {
+    margin-top: auto;
+    padding-top: 4px;
+  }
+  .package-card__price span {
+    display: inline-block;
+    background: #fee2e2;
+    color: #c8202f;
+    border-radius: 999px;
+    padding: 10px 16px;
+    font-size: 28px;
+    font-weight: 900;
+    line-height: 1;
+  }
+
+  .trust-metrics {
+    margin-top: 48px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+
+  .trust-metrics__item {
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 16px;
+    padding: 20px;
+    text-align: center;
+  }
+
+  .trust-metrics__item strong {
+    display: block;
+    color: #1e3264;
+    font-size: 28px;
+    font-weight: 900;
+  }
+
+  .trust-metrics__item span {
+    display: block;
+    margin-top: 4px;
+    color: #64748b;
+    font-size: 14px;
+    font-weight: 600;
+  }
 
   .cta {
     padding: 10rem 8vw;
@@ -225,4 +332,9 @@ const packages = [
   .cta__button:hover { background: #1a1a1a; color: #fff; gap: 1.5rem; }
   .cta__arrow { transition: transform .3s ease; }
   .cta__button:hover .cta__arrow { transform: translateX(5px); }
+
+  @media (max-width: 900px) {
+    .packages__grid { grid-template-columns: 1fr; }
+    .trust-metrics { grid-template-columns: 1fr; }
+  }
 </style>
