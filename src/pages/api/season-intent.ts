@@ -101,6 +101,9 @@ export const POST: APIRoute = async ({ request }) => {
       });
     }
 
+    // Small delay between Convex calls to avoid rate limiting (5 req/s limit)
+    await new Promise((resolve) => setTimeout(resolve, 500));
+
     // Deduplication: remove recipients that were already sent in a previous campaign
     const sentKeys = await loadSentRecipientKeys();
     const sentKeySet = new Set(sentKeys.map(sentRecipientKeyString));
@@ -178,21 +181,47 @@ export const POST: APIRoute = async ({ request }) => {
       baseUrl,
     });
 
-    await appendCampaign(
-      {
-        externalId: sent.campaignId,
-        mode,
-        createdAt: sent.sentAt,
-        recipientCount: sent.records.length,
-        filter: filterSummary,
-      },
-      sent.records,
-    );
+    // Delay before Convex write to avoid rate limiting
+    await new Promise((resolve) => setTimeout(resolve, 500));
+
+    // Persist campaign to Convex — retry once on failure since emails are already sent
+    let storageFailed = false;
+    let storageError = '';
+    try {
+      await appendCampaign(
+        {
+          externalId: sent.campaignId,
+          mode,
+          createdAt: sent.sentAt,
+          recipientCount: sent.records.length,
+          filter: filterSummary,
+        },
+        sent.records,
+      );
+    } catch (err: any) {
+      // Retry once after a short delay
+      try {
+        await new Promise((resolve) => setTimeout(resolve, 1500));
+        await appendCampaign(
+          {
+            externalId: sent.campaignId,
+            mode,
+            createdAt: sent.sentAt,
+            recipientCount: sent.records.length,
+            filter: filterSummary,
+          },
+          sent.records,
+        );
+      } catch (retryErr: any) {
+        storageFailed = true;
+        storageError = String(retryErr?.message || retryErr);
+      }
+    }
 
     return new Response(
       JSON.stringify(
         {
-          ok: true,
+          ok: !storageFailed,
           mode,
           campaignId: sent.campaignId,
           totalRecipientCount: result.recipients.length,
@@ -201,13 +230,17 @@ export const POST: APIRoute = async ({ request }) => {
           deduplicatedCount: deduplicatedRecipients.length,
           filter: filterSummary,
           recipientCount: sent.records.length,
-          preview: sent.records.slice(0, 10),
+          records: sent.records,
+          ...(storageFailed && {
+            warning: 'Emails were sent but campaign storage to Convex failed. Records are included in this response for manual recovery.',
+            storageError,
+          }),
         },
         null,
         2,
       ),
       {
-        status: 200,
+        status: storageFailed ? 207 : 200,
         headers: jsonHeaders(),
       },
     );
