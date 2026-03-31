@@ -102,7 +102,7 @@ export const POST: APIRoute = async ({ request }) => {
     }
 
     // Small delay between Convex calls to avoid rate limiting (5 req/s limit)
-    await new Promise((resolve) => setTimeout(resolve, 500));
+    await new Promise((resolve) => setTimeout(resolve, 1000));
 
     // Deduplication: remove recipients that were already sent in a previous campaign
     const sentKeys = await loadSentRecipientKeys();
@@ -182,7 +182,7 @@ export const POST: APIRoute = async ({ request }) => {
     });
 
     // Delay before Convex write to avoid rate limiting
-    await new Promise((resolve) => setTimeout(resolve, 500));
+    await new Promise((resolve) => setTimeout(resolve, 1000));
 
     // Persist campaign to Convex — retry once on failure since emails are already sent
     let storageFailed = false;

@@ -1,6 +1,6 @@
-import { ConvexHttpClient } from 'convex/browser';
 import { anyApi } from 'convex/server';
 import type { SeasonIntentCampaignRecord, SeasonIntentResponseRecord } from './shared.js';
+import { getConvexClient } from '../convex-client.js';
 
 export interface SentRecipientKey {
   to: string;
@@ -104,20 +104,3 @@ export async function saveResponse(response: SeasonIntentResponseRecord) {
   };
 }
 
-function getConvexClient() {
-  const importMetaEnv = (import.meta as ImportMeta & {
-    env?: Record<string, string | undefined>;
-  }).env;
-
-  const convexUrl =
-    process.env.CONVEX_URL?.trim() ||
-    process.env.PUBLIC_CONVEX_URL?.trim() ||
-    importMetaEnv?.CONVEX_URL?.trim() ||
-    importMetaEnv?.PUBLIC_CONVEX_URL?.trim();
-
-  if (!convexUrl) {
-    throw new Error('Missing CONVEX_URL');
-  }
-
-  return new ConvexHttpClient(convexUrl);
-}
