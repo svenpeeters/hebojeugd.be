@@ -197,8 +197,23 @@ Filters zijn combineerbaar:
 - stuurt mails naar de echte ontvangers
 - ondersteunt optioneel `filter.childNames`, `filter.parentRoles` en `filter.teams` voor een gerichte verzending
 - schrijft campagne- en recipient-data weg
+- deduplicatie: ontvangers die al een mail kregen in een eerdere `send`-campaign worden automatisch overgeslagen
 
 Alle modi zijn operationeel. Gebruik `dry-run` om eerst te controleren welke recipients geselecteerd worden.
+
+### Deduplicatie
+
+Bij elke `dry-run`, `test` of `send` call wordt automatisch gecontroleerd welke ontvangers al een mail ontvingen in een eerdere `send`-campaign. De dedup-sleutel is de combinatie van `email + childName + parentRole`.
+
+Het response bevat altijd:
+
+- `newRecipientCount`: aantal ontvangers die effectief (zouden) worden gemaild
+- `deduplicatedCount`: aantal ontvangers die overgeslagen worden
+- `deduplicatedRecipients`: lijst van overgeslagen ontvangers (met `to`, `childName`, `parentRole`, `ploeg`)
+
+In `dry-run` mode toont `selectedRecipients` alleen de nieuwe ontvangers (na deduplicatie).
+
+In `send` mode: als alle geselecteerde ontvangers al gemaild werden, wordt er niets verstuurd en bevat het response een `message` veld.
 
 ### 2. GET `/api/season-intent/respond/[id]`
 
