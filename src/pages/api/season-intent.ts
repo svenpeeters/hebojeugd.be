@@ -3,13 +3,14 @@ import { buildSeasonIntentRecipients } from '../../lib/members.js';
 import { loadActiveMembers } from '../../lib/members-storage.js';
 import { sendSeasonIntentEmails } from '../../lib/season-intent/email.js';
 import { appendCampaign } from '../../lib/season-intent/storage.js';
-import { isSeasonIntentMode, jsonHeaders, type SeasonIntentMode } from '../../lib/season-intent/shared.js';
+import { ALLOWED_YOUTH_TEAMS, isSeasonIntentMode, jsonHeaders, type SeasonIntentMode } from '../../lib/season-intent/shared.js';
 
 interface RequestBody {
   mode?: string;
   filter?: {
     childNames?: unknown;
     parentRoles?: unknown;
+    teams?: unknown;
   };
 }
 
@@ -48,6 +49,7 @@ export const POST: APIRoute = async ({ request }) => {
   let mode: SeasonIntentMode = 'dry-run';
   let filterChildNames: string[] = [];
   let filterParentRoles: ParentRoleFilter[] = [];
+  let filterTeams: string[] = [];
 
   try {
     const body = (await request.json().catch(() => ({}))) as RequestBody;
@@ -62,6 +64,11 @@ export const POST: APIRoute = async ({ request }) => {
           .map((value) => String(value).trim().toLowerCase())
           .filter(isParentRoleFilter)
       : [];
+    filterTeams = Array.isArray(body?.filter?.teams)
+      ? body.filter.teams
+          .map((value) => String(value).trim().toUpperCase())
+          .filter((value) => ALLOWED_YOUTH_TEAMS.has(value))
+      : [];
   } catch {
     return badRequest('Invalid JSON body');
   }
@@ -73,22 +80,24 @@ export const POST: APIRoute = async ({ request }) => {
   try {
     const members = await loadActiveMembers();
     const result = buildSeasonIntentRecipients(members);
-    const selectedRecipients =
-      filterChildNames.length === 0 && filterParentRoles.length === 0
-        ? result.recipients
-        : result.recipients.filter((recipient) => {
-            const childNameMatches = filterChildNames.length === 0 || filterChildNames.includes(recipient.childName);
-            const parentRoleMatches =
-              filterParentRoles.length === 0 || filterParentRoles.includes(recipient.parentRole);
-            return childNameMatches && parentRoleMatches;
-          });
+    const hasFilter = filterChildNames.length > 0 || filterParentRoles.length > 0 || filterTeams.length > 0;
+    const filterSummary = hasFilter
+      ? { childNames: filterChildNames, parentRoles: filterParentRoles, teams: filterTeams }
+      : null;
 
-    if ((filterChildNames.length > 0 || filterParentRoles.length > 0) && selectedRecipients.length === 0) {
+    const selectedRecipients = !hasFilter
+      ? result.recipients
+      : result.recipients.filter((recipient) => {
+          const childNameMatches = filterChildNames.length === 0 || filterChildNames.includes(recipient.childName);
+          const parentRoleMatches =
+            filterParentRoles.length === 0 || filterParentRoles.includes(recipient.parentRole);
+          const teamMatches = filterTeams.length === 0 || filterTeams.includes(recipient.ploeg);
+          return childNameMatches && parentRoleMatches && teamMatches;
+        });
+
+    if (hasFilter && selectedRecipients.length === 0) {
       return badRequest('No recipients matched the provided filter', {
-        filter: {
-          childNames: filterChildNames,
-          parentRoles: filterParentRoles,
-        },
+        filter: filterSummary,
       });
     }
 
@@ -102,13 +111,7 @@ export const POST: APIRoute = async ({ request }) => {
             summary: result.summary,
             totalRecipientCount: result.recipients.length,
             selectedRecipientCount: selectedRecipients.length,
-            filter:
-              filterChildNames.length > 0 || filterParentRoles.length > 0
-                ? {
-                    childNames: filterChildNames,
-                    parentRoles: filterParentRoles,
-                  }
-                : null,
+            filter: filterSummary,
             recipients: result.recipients,
             selectedRecipients,
             skippedRecords: result.skippedRecords,
@@ -141,13 +144,7 @@ export const POST: APIRoute = async ({ request }) => {
         mode,
         createdAt: sent.sentAt,
         recipientCount: sent.records.length,
-        filter:
-          filterChildNames.length > 0 || filterParentRoles.length > 0
-            ? {
-                childNames: filterChildNames,
-                parentRoles: filterParentRoles,
-              }
-            : null,
+        filter: filterSummary,
       },
       sent.records,
     );
@@ -160,13 +157,7 @@ export const POST: APIRoute = async ({ request }) => {
           campaignId: sent.campaignId,
           totalRecipientCount: result.recipients.length,
           selectedRecipientCount: selectedRecipients.length,
-          filter:
-            filterChildNames.length > 0 || filterParentRoles.length > 0
-              ? {
-                  childNames: filterChildNames,
-                  parentRoles: filterParentRoles,
-                }
-              : null,
+          filter: filterSummary,
           recipientCount: sent.records.length,
           preview: sent.records.slice(0, 10),
         },

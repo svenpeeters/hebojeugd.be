@@ -10,6 +10,7 @@ interface CampaignMetadata {
   filter: {
     childNames: string[];
     parentRoles: Array<'mama' | 'papa'>;
+    teams: string[];
   } | null;
 }
 
