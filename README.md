@@ -22,6 +22,23 @@ npm run dev
 npm run build
 ```
 
+## Season Intent
+
+Het `season-intent` mailsysteem en het veilige testplan staan in:
+
+- `docs/season-intent.md`
+
+Persistente opslag voor deze flow loopt via Convex. De Convex backendcode staat in `convex/`.
+
+Een voorbeeld van de nodige environment variables staat in `.env.example`.
+
+Leden importeren naar Convex:
+
+```bash
+npm run members:import:dry-run
+npm run members:import
+```
+
 ## Club info
 
 | | |
