@@ -30,6 +30,9 @@ export async function loadActiveMembers(): Promise<MemberRecord[]> {
     throw new Error('No active member import found in Convex');
   }
 
+  // Delay between Convex queries to respect rate limit (5 req/s)
+  await new Promise((resolve) => setTimeout(resolve, 300));
+
   const members = await client.query(anyApi.members.getMembersForImport, {
     importExternalId: activeImport.externalId,
   });
