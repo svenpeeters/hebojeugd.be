@@ -1,11 +1,8 @@
-import { promises as fs } from 'node:fs';
-import path from 'node:path';
-
 const CLUB_ID = '9732';
 const GRAPHQL_URL = 'https://datalake-prod2018.rbfa.be/graphql';
-const CACHE_TTL_MS = 24 * 60 * 60 * 1000;
-const CACHE_DIR = path.join(process.cwd(), '.cache');
-const CACHE_FILE = path.join(CACHE_DIR, 'matches.json');
+const CACHE_TTL_MS = 2 * 60 * 60 * 1000;
+
+let memoryCache: { fetchedAt: string; matches: any[] } | null = null;
 
 const QUERY = `
   query clubMatchesAssignations($clubId: ID!, $language: Language!, $startDate: String!, $endDate: String!, $hasLocation: Boolean!) {
@@ -47,26 +44,6 @@ function cleanClubName(name: string) {
     .replace(/\s+\d+$/u, '') // trailing number
     .replace(/\s{2,}/g, ' ')
     .trim();
-}
-
-async function readCache() {
-  try {
-    const raw = await fs.readFile(CACHE_FILE, 'utf-8');
-    const parsed = JSON.parse(raw);
-    if (!parsed?.fetchedAt || !Array.isArray(parsed?.matches)) return null;
-    return parsed;
-  } catch {
-    return null;
-  }
-}
-
-async function writeCache(matches: any[]) {
-  await fs.mkdir(CACHE_DIR, { recursive: true });
-  await fs.writeFile(
-    CACHE_FILE,
-    JSON.stringify({ fetchedAt: new Date().toISOString(), matches }, null, 2),
-    'utf-8',
-  );
 }
 
 async function fetchUpstreamMatches() {
@@ -121,16 +98,13 @@ async function fetchUpstreamMatches() {
 }
 
 export async function getMatches() {
-  const cached = await readCache();
-  const now = Date.now();
-
-  if (cached) {
-    const age = now - new Date(cached.fetchedAt).getTime();
-    if (age < CACHE_TTL_MS) return cached.matches;
+  if (memoryCache) {
+    const age = Date.now() - new Date(memoryCache.fetchedAt).getTime();
+    if (age < CACHE_TTL_MS) return memoryCache.matches;
   }
 
   const matches = await fetchUpstreamMatches();
-  await writeCache(matches);
+  memoryCache = { fetchedAt: new Date().toISOString(), matches };
   return matches;
 }
 
@@ -138,7 +112,6 @@ export async function getMatchesSafe() {
   try {
     return await getMatches();
   } catch {
-    const cached = await readCache();
-    return cached?.matches ?? [];
+    return memoryCache?.matches ?? [];
   }
 }
