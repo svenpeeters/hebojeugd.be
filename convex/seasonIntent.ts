@@ -13,6 +13,7 @@ export const createCampaign = mutationGeneric({
         v.object({
           childNames: v.array(v.string()),
           parentRoles: v.array(v.union(v.literal('mama'), v.literal('papa'))),
+          teams: v.array(v.string()),
         }),
       ),
     }),
