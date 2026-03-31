@@ -1,8 +1,9 @@
 import type { APIRoute } from 'astro';
+import { anyApi } from 'convex/server';
 import { buildSeasonIntentRecipients } from '../../lib/members.js';
-import { loadActiveMembers } from '../../lib/members-storage.js';
+import { getConvexClient } from '../../lib/convex-client.js';
 import { sendSeasonIntentEmails } from '../../lib/season-intent/email.js';
-import { appendCampaign, loadSentRecipientKeys, sentRecipientKeyString } from '../../lib/season-intent/storage.js';
+import { sentRecipientKeyString } from '../../lib/season-intent/storage.js';
 import { ALLOWED_YOUTH_TEAMS, isSeasonIntentMode, jsonHeaders, type SeasonIntentMode } from '../../lib/season-intent/shared.js';
 
 interface RequestBody {
@@ -78,7 +79,14 @@ export const POST: APIRoute = async ({ request }) => {
   }
 
   try {
-    const members = await loadActiveMembers();
+    // Single Convex query: fetch members + sent keys in one call to avoid rate limiting
+    const convex = getConvexClient();
+    const { members, sentKeys } = await convex.query(anyApi.seasonIntent.getActiveMembersAndSentKeys, {});
+
+    if (members.length === 0) {
+      return badRequest('No active member import found in Convex');
+    }
+
     const result = buildSeasonIntentRecipients(members);
     const hasFilter = filterChildNames.length > 0 || filterParentRoles.length > 0 || filterTeams.length > 0;
     const filterSummary = hasFilter
@@ -101,11 +109,7 @@ export const POST: APIRoute = async ({ request }) => {
       });
     }
 
-    // Small delay between Convex calls to avoid rate limiting (5 req/s limit)
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-
     // Deduplication: remove recipients that were already sent in a previous campaign
-    const sentKeys = await loadSentRecipientKeys();
     const sentKeySet = new Set(sentKeys.map(sentRecipientKeyString));
     const deduplicatedRecipients = selectedRecipients.filter(
       (r) => sentKeySet.has(sentRecipientKeyString({ to: r.to, childName: r.childName, parentRole: r.parentRole })),
@@ -181,37 +185,40 @@ export const POST: APIRoute = async ({ request }) => {
       baseUrl,
     });
 
-    // Delay before Convex write to avoid rate limiting
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-
     // Persist campaign to Convex — retry once on failure since emails are already sent
+    const campaignPayload = {
+      campaign: {
+        externalId: sent.campaignId,
+        mode,
+        createdAt: sent.sentAt,
+        recipientCount: sent.records.length,
+        filter: filterSummary,
+      },
+      recipients: sent.records.map((r) => ({
+        externalId: r.id,
+        campaignExternalId: r.campaignId,
+        mode: r.mode,
+        to: r.to,
+        originalTo: r.originalTo,
+        effectiveTo: r.effectiveTo,
+        parentRole: r.parentRole,
+        childName: r.childName,
+        ploeg: r.ploeg,
+        club: r.club,
+        sentAt: r.sentAt,
+        resendEmailId: r.resendEmailId,
+      })),
+    };
+
     let storageFailed = false;
     let storageError = '';
     try {
-      await appendCampaign(
-        {
-          externalId: sent.campaignId,
-          mode,
-          createdAt: sent.sentAt,
-          recipientCount: sent.records.length,
-          filter: filterSummary,
-        },
-        sent.records,
-      );
+      await convex.mutation(anyApi.seasonIntent.createCampaign, campaignPayload);
     } catch (err: any) {
-      // Retry once after a short delay
+      // Retry once after a delay
       try {
-        await new Promise((resolve) => setTimeout(resolve, 1500));
-        await appendCampaign(
-          {
-            externalId: sent.campaignId,
-            mode,
-            createdAt: sent.sentAt,
-            recipientCount: sent.records.length,
-            filter: filterSummary,
-          },
-          sent.records,
-        );
+        await new Promise((resolve) => setTimeout(resolve, 2000));
+        await convex.mutation(anyApi.seasonIntent.createCampaign, campaignPayload);
       } catch (retryErr: any) {
         storageFailed = true;
         storageError = String(retryErr?.message || retryErr);

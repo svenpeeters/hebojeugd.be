@@ -61,6 +61,58 @@ export const getSentRecipientKeys = queryGeneric({
   },
 });
 
+// Combined query: returns active members + sent recipient keys in a single call
+export const getActiveMembersAndSentKeys = queryGeneric({
+  args: {},
+  handler: async (ctx) => {
+    // Get active import
+    const [activeImport] = await ctx.db
+      .query('memberImports')
+      .withIndex('by_is_active_and_created_at', (q) => q.eq('isActive', true))
+      .order('desc')
+      .take(1);
+
+    if (!activeImport) {
+      return { members: [], sentKeys: [] };
+    }
+
+    // Get members for active import
+    const members = await ctx.db
+      .query('members')
+      .withIndex('by_import_external_id', (q) => q.eq('importExternalId', activeImport.externalId))
+      .take(512);
+
+    // Get sent recipient keys
+    const sentRecipients = await ctx.db
+      .query('seasonIntentRecipients')
+      .filter((q) => q.eq(q.field('mode'), 'send'))
+      .collect();
+
+    return {
+      members: members.map((m) => ({
+        sourceRowNumber: m.sourceRowNumber,
+        naam: m.naam,
+        adres: m.adres,
+        postcode: m.postcode,
+        woonplaats: m.woonplaats,
+        geboortedatum: m.geboortedatum,
+        telefoonMama: m.telefoonMama,
+        telefoonPapa: m.telefoonPapa,
+        emailMama: m.emailMama,
+        emailPapa: m.emailPapa,
+        ploeg: m.ploeg,
+        club: m.club,
+        rawDataJson: m.rawDataJson,
+      })),
+      sentKeys: sentRecipients.map((r) => ({
+        to: r.to,
+        childName: r.childName,
+        parentRole: r.parentRole,
+      })),
+    };
+  },
+});
+
 export const getRecipientByExternalId = queryGeneric({
   args: {
     externalId: v.string(),
