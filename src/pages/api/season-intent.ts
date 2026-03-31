@@ -112,7 +112,6 @@ export const POST: APIRoute = async ({ request }) => {
             totalRecipientCount: result.recipients.length,
             selectedRecipientCount: selectedRecipients.length,
             filter: filterSummary,
-            recipients: result.recipients,
             selectedRecipients,
             skippedRecords: result.skippedRecords,
           },
