@@ -6,5 +6,8 @@ import node from '@astrojs/node';
 export default defineConfig({
   site: 'https://www.hebojeugd.be',
   output: 'server',
+  security: {
+    checkOrigin: false,
+  },
   adapter: node({ mode: 'standalone' }),
 });
