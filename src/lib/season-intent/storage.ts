@@ -2,6 +2,21 @@ import { ConvexHttpClient } from 'convex/browser';
 import { anyApi } from 'convex/server';
 import type { SeasonIntentCampaignRecord, SeasonIntentResponseRecord } from './shared.js';
 
+export interface SentRecipientKey {
+  to: string;
+  childName: string;
+  parentRole: 'mama' | 'papa';
+}
+
+export function sentRecipientKeyString(key: SentRecipientKey): string {
+  return `${key.to}|${key.childName}|${key.parentRole}`;
+}
+
+export async function loadSentRecipientKeys(): Promise<SentRecipientKey[]> {
+  const client = getConvexClient();
+  return await client.query(anyApi.seasonIntent.getSentRecipientKeys, {});
+}
+
 interface CampaignMetadata {
   externalId: string;
   mode: 'test' | 'send';

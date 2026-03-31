@@ -44,6 +44,22 @@ export const createCampaign = mutationGeneric({
   },
 });
 
+export const getSentRecipientKeys = queryGeneric({
+  args: {},
+  handler: async (ctx) => {
+    const recipients = await ctx.db
+      .query('seasonIntentRecipients')
+      .filter((q) => q.eq(q.field('mode'), 'send'))
+      .collect();
+
+    return recipients.map((r) => ({
+      to: r.to,
+      childName: r.childName,
+      parentRole: r.parentRole,
+    }));
+  },
+});
+
 export const getRecipientByExternalId = queryGeneric({
   args: {
     externalId: v.string(),

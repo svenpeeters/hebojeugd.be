@@ -2,7 +2,7 @@ import type { APIRoute } from 'astro';
 import { buildSeasonIntentRecipients } from '../../lib/members.js';
 import { loadActiveMembers } from '../../lib/members-storage.js';
 import { sendSeasonIntentEmails } from '../../lib/season-intent/email.js';
-import { appendCampaign } from '../../lib/season-intent/storage.js';
+import { appendCampaign, loadSentRecipientKeys, sentRecipientKeyString } from '../../lib/season-intent/storage.js';
 import { ALLOWED_YOUTH_TEAMS, isSeasonIntentMode, jsonHeaders, type SeasonIntentMode } from '../../lib/season-intent/shared.js';
 
 interface RequestBody {
@@ -101,6 +101,16 @@ export const POST: APIRoute = async ({ request }) => {
       });
     }
 
+    // Deduplication: remove recipients that were already sent in a previous campaign
+    const sentKeys = await loadSentRecipientKeys();
+    const sentKeySet = new Set(sentKeys.map(sentRecipientKeyString));
+    const deduplicatedRecipients = selectedRecipients.filter(
+      (r) => sentKeySet.has(sentRecipientKeyString({ to: r.to, childName: r.childName, parentRole: r.parentRole })),
+    );
+    const newRecipients = selectedRecipients.filter(
+      (r) => !sentKeySet.has(sentRecipientKeyString({ to: r.to, childName: r.childName, parentRole: r.parentRole })),
+    );
+
     if (mode === 'dry-run') {
       return new Response(
         JSON.stringify(
@@ -111,9 +121,40 @@ export const POST: APIRoute = async ({ request }) => {
             summary: result.summary,
             totalRecipientCount: result.recipients.length,
             selectedRecipientCount: selectedRecipients.length,
+            newRecipientCount: newRecipients.length,
+            deduplicatedCount: deduplicatedRecipients.length,
             filter: filterSummary,
-            selectedRecipients,
+            selectedRecipients: newRecipients,
+            deduplicatedRecipients: deduplicatedRecipients.map((r) => ({
+              to: r.to,
+              childName: r.childName,
+              parentRole: r.parentRole,
+              ploeg: r.ploeg,
+            })),
             skippedRecords: result.skippedRecords,
+          },
+          null,
+          2,
+        ),
+        {
+          status: 200,
+          headers: jsonHeaders(),
+        },
+      );
+    }
+
+    if (newRecipients.length === 0) {
+      return new Response(
+        JSON.stringify(
+          {
+            ok: true,
+            mode,
+            totalRecipientCount: result.recipients.length,
+            selectedRecipientCount: selectedRecipients.length,
+            newRecipientCount: 0,
+            deduplicatedCount: deduplicatedRecipients.length,
+            filter: filterSummary,
+            message: 'All selected recipients were already sent in a previous campaign',
           },
           null,
           2,
@@ -130,7 +171,7 @@ export const POST: APIRoute = async ({ request }) => {
     const replyTo = import.meta.env.RESEND_REPLY_TO?.trim() || undefined;
 
     const sent = await sendSeasonIntentEmails({
-      recipients: selectedRecipients,
+      recipients: newRecipients,
       mode,
       from,
       replyTo,
@@ -156,6 +197,8 @@ export const POST: APIRoute = async ({ request }) => {
           campaignId: sent.campaignId,
           totalRecipientCount: result.recipients.length,
           selectedRecipientCount: selectedRecipients.length,
+          newRecipientCount: newRecipients.length,
+          deduplicatedCount: deduplicatedRecipients.length,
           filter: filterSummary,
           recipientCount: sent.records.length,
           preview: sent.records.slice(0, 10),
