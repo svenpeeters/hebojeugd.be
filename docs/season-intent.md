@@ -6,8 +6,8 @@ Dit document beschrijft hoe het huidige `season-intent` systeem werkt in deze re
 
 - Er is momenteel niets verstuurd.
 - `dry-run` verstuurt niets.
-- `test` en `send` bestaan technisch, maar mogen voorlopig niet gebruikt worden.
-- Voor echte verzending moet de gedeelde Resend API key eerst geroteerd worden.
+- `test` en `send` zijn operationeel.
+- Verzending kan per ploeg gefilterd worden via `filter.teams`.
 - Persistente opslag loopt nu via Convex, niet meer via lokale JSON-bestanden.
 
 ## Doel
@@ -136,13 +136,37 @@ Je kan ook gericht alleen naar mama of alleen naar papa sturen:
 }
 ```
 
-Voor een gerichte `send`:
+Voor een gerichte `send` per ploeg:
 
 ```json
 {
   "mode": "send",
   "filter": {
-    "childNames": ["Peeters Juul", "Peeters Charel"]
+    "teams": ["U11"]
+  }
+}
+```
+
+Meerdere ploegen tegelijk:
+
+```json
+{
+  "mode": "send",
+  "filter": {
+    "teams": ["U11", "U12"]
+  }
+}
+```
+
+Filters zijn combineerbaar:
+
+```json
+{
+  "mode": "send",
+  "filter": {
+    "teams": ["U11"],
+    "childNames": ["Peeters Juul"],
+    "parentRoles": ["mama"]
   }
 }
 ```
@@ -154,10 +178,8 @@ Voor een gerichte `send`:
 - leest actieve `members` uit Convex
 - filtert en normaliseert recipients
 - genereert UUIDs
-- kan optioneel een `filter.childNames` toepassen op de output
-- kan optioneel een `filter.parentRoles` toepassen op de output
-- geeft de volledige genormaliseerde recipient-lijst terug
-- geeft ook `selectedRecipients` terug op basis van de filter
+- kan optioneel filteren op `filter.childNames`, `filter.parentRoles` en `filter.teams`
+- geeft `selectedRecipients` terug op basis van de filter
 - geeft de volledige lijst met uitgesloten records terug
 - schrijft niets weg
 - verstuurt niets
@@ -165,18 +187,18 @@ Voor een gerichte `send`:
 #### `test`
 
 - vereist `filter.childNames`
-- ondersteunt optioneel `filter.parentRoles`
+- ondersteunt optioneel `filter.parentRoles` en `filter.teams`
 - verstuurt alleen naar de echte adressen van de geselecteerde kinderen
 - bewaart de gebruikte filter in de campagne-metadata
 - schrijft campagne- en recipient-data weg
 
 #### `send`
 
-- zou mails naar de echte ontvangers sturen
-- ondersteunt optioneel `filter.childNames` en `filter.parentRoles` voor een gerichte verzending
+- stuurt mails naar de echte ontvangers
+- ondersteunt optioneel `filter.childNames`, `filter.parentRoles` en `filter.teams` voor een gerichte verzending
 - schrijft campagne- en recipient-data weg
 
-Op dit moment gebruiken we alleen `dry-run`.
+Alle modi zijn operationeel. Gebruik `dry-run` om eerst te controleren welke recipients geselecteerd worden.
 
 ### 2. GET `/api/season-intent/respond/[id]`
 
@@ -335,10 +357,19 @@ curl -X POST http://localhost:4321/api/season-intent \
   -d '{"mode":"dry-run"}'
 ```
 
+Of met een team-filter:
+
+```bash
+curl -X POST http://localhost:4321/api/season-intent \
+  -H "Authorization: Bearer <SEASON_INTENT_TOKEN>" \
+  -H "Content-Type: application/json" \
+  -d '{"mode":"dry-run","filter":{"teams":["U11"]}}'
+```
+
 Controleren:
 
 - totaal aantal recipients
-- volledige lijst van recipients
+- selectedRecipients klopt met de filter
 - UUIDs aanwezig
 - skipped redenen logisch
 - uitgesloten records volledig nalopen
@@ -434,11 +465,9 @@ Pas dan `mode: send` gebruiken.
 
 ## Belangrijke veiligheidsregels
 
-- Gebruik voorlopig alleen `dry-run`.
-- Gebruik `test` pas nadat de API key geroteerd is.
-- Gebruik `send` pas na expliciete finale goedkeuring.
+- Gebruik altijd eerst `dry-run` met dezelfde filter om te controleren wie geselecteerd wordt.
 - Sla API keys nooit op in de repo op.
-- Deel API keys niet opnieuw in chat of code.
+- Deel API keys niet in chat of code.
 
 ## Eerste Convex setup
 
