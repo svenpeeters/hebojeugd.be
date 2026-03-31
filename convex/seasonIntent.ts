@@ -113,6 +113,36 @@ export const getActiveMembersAndSentKeys = queryGeneric({
   },
 });
 
+export const getResults = queryGeneric({
+  args: {},
+  handler: async (ctx) => {
+    // Get all send-mode recipients
+    const recipients = await ctx.db
+      .query('seasonIntentRecipients')
+      .filter((q) => q.eq(q.field('mode'), 'send'))
+      .collect();
+
+    // Get all responses
+    const responses = await ctx.db.query('seasonIntentResponses').collect();
+    const responseByRecipientId = new Map(
+      responses.map((r) => [r.recipientExternalId, r]),
+    );
+
+    return recipients.map((r) => {
+      const response = responseByRecipientId.get(r.externalId);
+      return {
+        childName: r.childName,
+        parentRole: r.parentRole,
+        ploeg: r.ploeg,
+        to: r.to,
+        sentAt: r.sentAt,
+        choice: response?.choice ?? null,
+        respondedAt: response?.respondedAt ?? null,
+      };
+    });
+  },
+});
+
 export const getRecipientByExternalId = queryGeneric({
   args: {
     externalId: v.string(),
