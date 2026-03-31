@@ -20,10 +20,17 @@ export const GET: APIRoute = async ({ request }) => {
 
     const url = new URL(request.url);
     const teamFilter = url.searchParams.get('team')?.toUpperCase();
+    const statusFilter = url.searchParams.get('status'); // 'responded' or 'pending'
 
-    const filtered = teamFilter
+    let filtered = teamFilter
       ? results.filter((r: any) => r.ploeg === teamFilter)
       : results;
+
+    if (statusFilter === 'responded') {
+      filtered = filtered.filter((r: any) => r.choice !== null);
+    } else if (statusFilter === 'pending') {
+      filtered = filtered.filter((r: any) => r.choice === null);
+    }
 
     const responded = filtered.filter((r: any) => r.choice !== null);
     const pending = filtered.filter((r: any) => r.choice === null);
